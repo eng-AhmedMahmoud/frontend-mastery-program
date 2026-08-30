@@ -216,7 +216,7 @@
   <!-- 3 · THE APP -->
   <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>03</b> / 17</div><!--/catalyst-brand:chrome-->
     <span class="tag">Rasmi · the product</span>
-    <img class="shot" src="assets/01-overview.jpg" alt="The Rasmi job board: filter rail, job listings and a detail panel">
+    <img class="shot" src="../assets/01-overview.jpg" alt="The Rasmi job board: filter rail, job listings and a detail panel">
     <p class="cap"><b>Rasmi</b> — a frontend job board for Egypt &amp; the Gulf. Filter rail, listings feed, detail panel, optimistic apply. Every part of it is somebody's homework.</p>
     <aside class="notes"><div class="t">The app</div><p>The domain was chosen deliberately: a feed that needs virtualization, search that needs debounce and race handling, filters that belong in the URL, public pages that need SEO and a dashboard that needs auth. It is also the exact shape of the news-feed and e-commerce system design questions in module 11.</p></aside>
   </section>
@@ -314,7 +314,7 @@
   <!-- 10 · AUTOCOMPLETE GIF -->
   <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>10</b> / 17</div><!--/catalyst-brand:chrome-->
     <span class="tag">Stage · module-7/autocomplete</span>
-    <img class="shot" src="assets/rasmi-autocomplete.gif" alt="Typing in the search box, arrowing through suggestions and selecting one with Enter">
+    <img class="shot" src="../assets/rasmi-autocomplete.gif" alt="Typing in the search box, arrowing through suggestions and selecting one with Enter">
     <p class="cap">Type → debounce → suggestions → <b>arrow keys</b> → Enter. Focus never leaves the input; <code>aria-activedescendant</code> does the moving.</p>
     <aside class="notes"><div class="t">The gauntlet</div><p>This is the single most-asked "build this live, no libraries" question in frontend interviews. Five skills collide in it and most candidates get three.</p></aside>
   </section>
@@ -358,7 +358,7 @@
   <!-- 13 · KEYBOARD SHOT -->
   <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>13</b> / 17</div><!--/catalyst-brand:chrome-->
     <span class="tag">Accessibility</span>
-    <img class="shot" src="assets/03-keyboard-nav.jpg" alt="The suggestion list with the second option highlighted via aria-activedescendant">
+    <img class="shot" src="../assets/03-keyboard-nav.jpg" alt="The suggestion list with the second option highlighted via aria-activedescendant">
     <p class="cap">The highlighted option is <code>aria-selected</code>; the input points at it with <code>aria-activedescendant</code>. Nothing about this needs a mouse.</p>
     <aside class="notes"><div class="t">A11y</div><p>Point out what is NOT happening: focus hasn't moved. That single decision is what separates a real combobox from a div with a dropdown, and it's the detail interviewers check first.</p></aside>
   </section>
@@ -366,7 +366,7 @@
   <!-- 14 · FILTERS GIF -->
   <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>14</b> / 17</div><!--/catalyst-brand:chrome-->
     <span class="tag">Filters &amp; optimistic apply</span>
-    <img class="shot" src="assets/rasmi-filters-apply.gif" alt="Toggling filters, the list narrowing, then applying to a job and seeing the applied state">
+    <img class="shot" src="../assets/rasmi-filters-apply.gif" alt="Toggling filters, the list narrowing, then applying to a job and seeing the applied state">
     <p class="cap">Filter → the list refetches and stale requests abort → <b>Apply</b> flips instantly, then confirms. Optimistic UI, without lying to the user.</p>
     <aside class="notes"><div class="t">Data layer</div><p>Right now this is hand-rolled fetching with an AbortController and a sequence number. In module 8 it is replaced by TanStack Query and the filters move into the URL — and the students can diff the two and see exactly what a data library is actually doing for them.</p></aside>
   </section>
