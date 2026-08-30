@@ -160,11 +160,24 @@
     font:600 12.5px/1 var(--mono); letter-spacing:1.6px; color:var(--grey3)}
   .cx-page b{color:#94A3B8; font-weight:700}
 
+  /* An image is the one element that will happily grow past the slide. Cap it against
+     the chrome band so a screenshot can never slide under the module chip or push its
+     own caption off the bottom. Aspect ratio is preserved by letting width follow. */
+  .slide img{max-height:calc(100vh - 230px); width:auto; max-width:100%}
+
   /* Titles carry no rule or underline — contrast does the work. */
   h1,h2,h3,.big{border-bottom:none !important; text-decoration:none !important}
 
   /* ---- deck chrome that would collide with the brand chrome ----------------------- */
-  #navToggle{top:auto !important; bottom:18px; left:18px}
+  /* The slide menu sits directly under the module chip, sharing its left edge and its
+     type scale, so the two read as one stack of chrome instead of two loose buttons at
+     opposite corners. Kept small deliberately: it lives in the band above the content,
+     and .slide's minimum top padding is what keeps it clear of the first line. */
+  #navToggle{top:56px !important; bottom:auto !important; left:34px !important;
+    font:700 11px/1 var(--mono) !important; letter-spacing:1.3px; padding:6px 12px !important;
+    border-radius:999px !important; border:1px solid var(--line2) !important;
+    background:var(--panel2) !important; color:var(--grey3) !important; opacity:1}
+  #navToggle:hover{color:var(--cy); border-color:var(--cy) !important}
   #codeToggle{right:112px !important; bottom:16px !important}
   #dots{bottom:20px}
   #bar{background:var(--cy)}
@@ -186,6 +199,9 @@
     html,body{background:#070A14 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
     .slide{position:relative !important; border-bottom:1px solid #1E293B !important}
     .cx-logo,.cx-chip,.cx-page{position:absolute !important}
+    /* Presenter controls are not part of the deck. Now that the slide menu sits beside
+       the chip, leaving it in would stamp it on every printed page. */
+    #navToggle,#nav,#scrim,#codeToggle{display:none !important}
   }
 </style>
 <!--/catalyst-brand:style-->
@@ -448,9 +464,9 @@
   <!-- 15 · CAPSTONE -->
   <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">CATALYST · CURRICULUM</div><div class="cx-page"><b>15</b> / 24</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The through-line · modules 2 → 12</div>
-    <h2>Twelve slices. One job board.</h2>
+    <h2 style="font-size:min(4.3vw,49px)">Twelve slices. One job board.</h2>
     <style>.jb{display:grid; grid-auto-flow:column; grid-template-rows:repeat(6,auto); grid-template-columns:1fr 1fr; gap:2px 34px; width:100%; max-width:1160px; margin-top:14px; list-style:none}
-      .jb li{display:grid; grid-template-columns:30px 1fr auto; align-items:baseline; gap:10px; padding:7px 0; border-bottom:1px solid var(--line); font:600 min(1.52vw,16.5px)/1.35 var(--sans); color:var(--ink)}
+      .jb li{display:grid; grid-template-columns:30px 1fr auto; align-items:baseline; gap:10px; padding:5px 0; border-bottom:1px solid var(--line); font:600 min(1.42vw,15.5px)/1.3 var(--sans); color:var(--ink)}
       .jb li b.n{font:700 min(1.3vw,14px)/1 var(--mono); color:var(--coral)}
       .jb li span.br{font:500 min(1.22vw,13px)/1 var(--mono); color:var(--muted); white-space:nowrap}
       .jb li.done b.n{color:var(--olive)}
@@ -469,7 +485,7 @@
       <li class="frag"><b class="n">M10</b>Baseline → budget → fix, with Vitest + Playwright + MSW in CI<span class="br">module-10/perf-and-tests</span></li>
       <li class="frag"><b class="n">M12</b>Assemble everything, wire auth, deploy, defend the architecture<span class="br">module-12/capstone</span></li>
     </ul>
-    <p class="key frag">One repo, three branches per slice — <span class="mono">start</span> is failing tests with no hints, <span class="mono">guided</span> adds numbered TODOs, <span class="mono">solution</span> is green with the trade-offs written down. Nothing is a throwaway demo: every slice stays in the product.</p>
+    <p class="key frag" style="margin-top:12px; padding:10px 18px; font-size:min(1.72vw,19px)">One repo, three branches per slice — <span class="mono">start</span> is failing tests with no hints, <span class="mono">guided</span> adds numbered TODOs, <span class="mono">solution</span> is green with the trade-offs written down. Nothing is a throwaway demo: every slice stays in the product.</p>
     <aside class="notes"><div class="t">The through-line</div><p>This is the slide that separates us from a playlist. Twelve exercises, one product — the module 7 autocomplete is still in the app at module 12, and it still uses the debounce they wrote in module 3.</p><p>Two stages are built and verified today (module 3 and module 7 autocomplete, ticked). The remaining ten are ~1.5 hours of authoring each and they get built in the sprint that owns their module — the lesson is written against the failing test, not after it.</p><p>Modules 1, 11, 13 and 14 have no slice on purpose: module 1 just teaches the three-command workflow, module 11 uses the CommerceOS repo, and 13–14 drill against the stages that already exist.</p></aside>
   </section>
 

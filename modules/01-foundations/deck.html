@@ -156,11 +156,24 @@
     font:600 12.5px/1 var(--mono); letter-spacing:1.6px; color:var(--grey3)}
   .cx-page b{color:#94A3B8; font-weight:700}
 
+  /* An image is the one element that will happily grow past the slide. Cap it against
+     the chrome band so a screenshot can never slide under the module chip or push its
+     own caption off the bottom. Aspect ratio is preserved by letting width follow. */
+  .slide img{max-height:calc(100vh - 230px); width:auto; max-width:100%}
+
   /* Titles carry no rule or underline — contrast does the work. */
   h1,h2,h3,.big{border-bottom:none !important; text-decoration:none !important}
 
   /* ---- deck chrome that would collide with the brand chrome ----------------------- */
-  #navToggle{top:auto !important; bottom:18px; left:18px}
+  /* The slide menu sits directly under the module chip, sharing its left edge and its
+     type scale, so the two read as one stack of chrome instead of two loose buttons at
+     opposite corners. Kept small deliberately: it lives in the band above the content,
+     and .slide's minimum top padding is what keeps it clear of the first line. */
+  #navToggle{top:56px !important; bottom:auto !important; left:34px !important;
+    font:700 11px/1 var(--mono) !important; letter-spacing:1.3px; padding:6px 12px !important;
+    border-radius:999px !important; border:1px solid var(--line2) !important;
+    background:var(--panel2) !important; color:var(--grey3) !important; opacity:1}
+  #navToggle:hover{color:var(--cy); border-color:var(--cy) !important}
   #codeToggle{right:112px !important; bottom:16px !important}
   #dots{bottom:20px}
   #bar{background:var(--cy)}
@@ -182,6 +195,9 @@
     html,body{background:#070A14 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
     .slide{position:relative !important; border-bottom:1px solid #1E293B !important}
     .cx-logo,.cx-chip,.cx-page{position:absolute !important}
+    /* Presenter controls are not part of the deck. Now that the slide menu sits beside
+       the chip, leaving it in would stamp it on every printed page. */
+    #navToggle,#nav,#scrim,#codeToggle{display:none !important}
   }
 </style>
 <!--/catalyst-brand:style-->
@@ -207,8 +223,8 @@
 
   <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>02</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Before I introduce myself — watch this</div>
-    <h2>Type <span class="cy">"react engineer"</span>. Watch the results.</h2>
-    <div class="fig" style="max-width:900px; margin-top:14px">
+    <h2 style="font-size:min(4.4vw,50px)">Type <span class="cy">"react engineer"</span>. Watch the results.</h2>
+    <div class="fig" style="max-width:840px; margin-top:10px">
       <img class="shot" src="../../assets/rasmi-autocomplete.gif" alt="Search autocomplete returning results out of order">
       <div class="cap"><b>Rasmi</b> — the job board you will build. This is the search box in module 7.</div>
     </div>
@@ -799,8 +815,8 @@
 
   <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>22</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Where every slice ends up</div>
-    <h2>You assemble —<br>you do not restart</h2>
-    <div class="fig wide"><svg viewBox="0 0 940 420" role="img" aria-label="The job board capstone — each module ships one piece that converges into a single deployed product in module 12">
+    <h2 style="font-size:min(4.4vw,50px)">You assemble —<br>you do not restart</h2>
+    <div class="fig wide" style="margin-top:12px"><svg viewBox="0 0 940 420" role="img" aria-label="The job board capstone — each module ships one piece that converges into a single deployed product in module 12">
           <defs>
             <marker id="a4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#34D399" fill-opacity=".75"/></marker>
           </defs>
