@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en" data-catalyst-brand="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 02 · Video 1 — From HTML to Pixels · Frontend Mastery</title>
+<style>
+  :root{
+    --bg:#070A14; --panel:#0E1525; --panel2:#121C30; --code:#0B1220;
+    --ink:#FFFFFF; --ink2:#CBD5E1; --muted:#94A3B8; --grey3:#64748B;
+    --line:#1E293B; --line2:#243349;
+    --cy:#22D3EE; --blue:#2196F3; --deep:#0D47A1;
+    --good:#34D399; --bad:#F8717A; --ochre:#FBBF24; --plum:#A78BFA;
+    --shadow:0 16px 44px rgba(0,0,0,.55);
+    --serif:"Trebuchet MS","Lucida Grande",Tahoma,Verdana,sans-serif;
+    --sans:Calibri,"Segoe UI",Candara,"Trebuchet MS","Helvetica Neue",Arial,sans-serif;
+    --mono:Consolas,"SF Mono",Menlo,"Cascadia Mono",monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html,body{height:100%}
+  body{background:var(--bg); color:var(--ink); font:400 24px/1.5 var(--sans); -webkit-font-smoothing:antialiased; overflow:hidden}
+  #stage{position:fixed; inset:0}
+  .slide{position:absolute; inset:0; display:none; flex-direction:column; justify-content:center; align-items:flex-start; text-align:left; padding:7vh 8vw; opacity:0; transition:opacity .3s}
+  .slide.on{display:flex; opacity:1}
+  .slide .notes{display:none}
+
+  .kicker{color:var(--cy); font:700 14px/1 var(--mono); letter-spacing:2.4px; text-transform:uppercase; margin-bottom:16px}
+  h1{font-family:var(--serif); font-size:min(7.4vw,88px); line-height:1; letter-spacing:-1.5px; font-weight:700; text-wrap:balance}
+  h2{font-family:var(--serif); font-size:min(5.2vw,60px); line-height:1.04; letter-spacing:-1px; font-weight:700; text-wrap:balance; max-width:22ch}
+  h3{font-family:var(--serif); font-size:min(3vw,32px); line-height:1.15; font-weight:700; letter-spacing:-.4px}
+  .sub{color:var(--muted); font-size:min(2.5vw,27px); margin-top:16px; max-width:40ch; text-wrap:pretty}
+  .say{color:var(--ink2); font-size:min(2.05vw,22px); margin-top:14px; max-width:66ch; text-wrap:pretty}
+  .say b{color:var(--ink)}
+  .big{font-family:var(--serif); font-size:min(5vw,58px); font-weight:700; line-height:1.08; letter-spacing:-1px; max-width:24ch; text-wrap:balance}
+  .cy{color:var(--cy)} .g{color:var(--good)} .r{color:var(--bad)} .w{color:var(--ochre)}
+  .p{color:var(--plum)} .b{color:var(--blue)} .mono{font-family:var(--mono)}
+  .mut{color:var(--muted)}
+
+  .fig{margin:22px 0 4px; width:100%; max-width:1020px}
+  svg{width:100%; height:auto; display:block; overflow:visible}
+  .lbl{fill:var(--muted); font:13px/1 var(--sans)}
+  .lbl.s{font-size:11px} .lbl.b{fill:#fff; font-weight:700}
+
+  .row{display:flex; gap:16px; flex-wrap:wrap; margin-top:22px}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:22px; width:100%; max-width:1060px; margin-top:22px; align-items:start}
+  .three{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; width:100%; max-width:1060px; margin-top:22px; align-items:start}
+
+  .card{background:var(--panel2); border:1px solid var(--line2); border-radius:14px; padding:18px 20px}
+  .card h3{font-size:min(1.95vw,21px); margin-bottom:8px}
+  .card p{color:var(--muted); font-size:min(1.6vw,17.5px); line-height:1.5}
+  .card p b{color:var(--ink2)}
+  .card.a{border-top:3px solid var(--cy)} .card.g{border-top:3px solid var(--good)}
+  .card.r{border-top:3px solid var(--bad)} .card.w{border-top:3px solid var(--ochre)}
+  .card.p{border-top:3px solid var(--plum)} .card.b{border-top:3px solid var(--blue)}
+
+  .chip{background:var(--panel2); border:1px solid var(--line2); border-radius:12px; padding:12px 18px; font-size:min(1.8vw,20px); font-weight:600}
+  .chip small{display:block; color:var(--muted); font-weight:400; font-size:.72em; margin-top:4px}
+
+  code{background:var(--panel2); color:var(--cy); border:1px solid rgba(34,211,238,.22); padding:2px 7px; border-radius:6px; font:.82em var(--mono)}
+  pre{background:var(--code); color:var(--ink2); border:1px solid var(--line2); border-radius:12px; padding:18px 22px; margin-top:14px; font:min(1.5vw,16.5px)/1.7 var(--mono); text-align:left; overflow:auto; max-width:100%}
+  pre code{background:none; color:inherit; padding:0; border:none}
+  .cmt{color:var(--grey3)} .kw{color:var(--cy)} .st{color:var(--ochre)} .fn{color:var(--good)} .ty{color:var(--plum)}
+  .no{color:var(--bad)} .ok{color:var(--good)}
+
+  .key{background:rgba(34,211,238,.09); border-left:4px solid var(--cy); border-radius:0 12px 12px 0; padding:13px 20px; margin-top:22px; font-size:min(1.95vw,21px); max-width:64ch; text-wrap:pretty}
+  .key.w{background:rgba(251,191,36,.10); border-color:var(--ochre)}
+  .key.g{background:rgba(52,211,153,.10); border-color:var(--good)}
+  .key.r{background:rgba(248,113,122,.10); border-color:var(--bad)}
+
+  .plist{list-style:none; margin-top:10px; max-width:44ch}
+  .plist li{font:600 min(2vw,22px)/1.35 var(--sans); color:var(--ink); padding:9px 0 9px 32px; position:relative}
+  .plist li::before{content:"▷"; position:absolute; left:0; top:11px; color:var(--cy); font-size:15px}
+  .plist li small{display:block; color:var(--muted); font-weight:400; font-size:.72em; margin-top:3px}
+
+  table.grid{border-collapse:collapse; width:100%; max-width:1040px; margin-top:20px; font-size:min(1.6vw,17.5px)}
+  table.grid th{text-align:left; font:700 12px/1 var(--mono); letter-spacing:1.4px; text-transform:uppercase; color:var(--muted); padding:10px 12px; border-bottom:2px solid var(--line2)}
+  table.grid td{padding:10px 12px; border-bottom:1px solid var(--line); color:var(--muted); vertical-align:top}
+  table.grid td b{color:var(--ink)}
+
+  .num{font-family:var(--mono); font-weight:700; font-size:min(4.6vw,54px); line-height:1; letter-spacing:-1px}
+  .numlbl{color:var(--muted); font-size:min(1.5vw,16px); margin-top:8px; line-height:1.45}
+
+  .two.tight pre{font-size:min(1.35vw,15px); padding:14px 18px}
+  .two.tight table.grid{font-size:min(1.45vw,16px)}
+  .two.tight table.grid td{padding:7px 10px}
+  .two.tight table.grid th{padding:7px 10px}
+  .frag{opacity:0; transform:translateY(8px); transition:opacity .35s, transform .35s}
+  .frag.on{opacity:1; transform:none}
+  .slide .draw{stroke-dasharray:1; stroke-dashoffset:1}
+  .slide.on .draw{animation:draw 1.1s ease forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .flow{stroke-dasharray:6 7; animation:flow 1.1s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-13}}
+
+  #bar{position:fixed; left:0; top:0; height:5px; background:var(--cy); width:0; transition:width .3s; z-index:10}
+  #navToggle{position:fixed; top:15px; left:15px; z-index:31; background:var(--panel); border:1px solid var(--line2); color:var(--ink); font:600 13px/1 var(--mono); padding:9px 13px; border-radius:9px; cursor:pointer; opacity:.82}
+  #navToggle:hover{opacity:1}
+  #nav{position:fixed; top:0; left:0; bottom:0; width:320px; background:var(--panel); border-right:1px solid var(--line2); box-shadow:0 0 60px rgba(0,0,0,.7); transform:translateX(-104%); transition:transform .26s cubic-bezier(.4,0,.2,1); z-index:30; display:flex; flex-direction:column; padding-top:54px}
+  #nav.open{transform:none}
+  #nav h4{font:700 12px/1 var(--mono); letter-spacing:1.5px; text-transform:uppercase; color:var(--cy); padding:0 20px 10px}
+  #nav ol{list-style:none; margin:0; padding:0 8px 8px; overflow-y:auto; flex:1}
+  #nav li{display:flex; gap:11px; align-items:baseline; padding:9px 12px; border-radius:8px; cursor:pointer; font:500 14px/1.3 var(--sans); color:var(--ink2)}
+  #nav li:hover{background:rgba(34,211,238,.10)}
+  #nav li.cur{background:rgba(34,211,238,.16); color:var(--ink); font-weight:700}
+  #nav li b{font:700 12px/1 var(--mono); color:var(--muted); min-width:22px}
+  #nav li.cur b{color:var(--cy)}
+  #nav .navfoot{border-top:1px solid var(--line2); padding:12px 20px; font:11px/1.7 var(--mono); color:var(--muted)}
+  #nav .navfoot kbd{background:var(--panel2); border:1px solid var(--line2); border-radius:4px; padding:1px 5px}
+  #scrim{position:fixed; inset:0; background:rgba(3,7,20,.66); opacity:0; pointer-events:none; transition:opacity .26s; z-index:29}
+  #scrim.on{opacity:1; pointer-events:auto}
+  #dots{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:6px; z-index:10}
+  #dots i{width:7px; height:7px; border-radius:50%; background:var(--line2); transition:.2s}
+  #dots i.on{background:var(--cy); width:20px; border-radius:4px}
+  #notes{position:fixed; left:0; right:0; bottom:0; max-height:46vh; overflow:auto; background:var(--panel); border-top:2px solid var(--cy); padding:16px 26px 22px; transform:translateY(101%); transition:transform .25s; z-index:20; text-align:left; box-shadow:0 -8px 40px rgba(0,0,0,.6)}
+  #notes.show{transform:translateY(0)}
+  #notes h4{color:var(--cy); font:700 13px/1 var(--mono); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:8px}
+  #notes .t{color:var(--ochre); font-weight:700; margin-bottom:6px; font-size:15px}
+  #notes p{font-size:16.5px; line-height:1.5; color:var(--muted); max-width:100ch} #notes p+p{margin-top:6px}
+  @media print{
+    html,body{overflow:visible; background:var(--bg) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    #bar,#nav,#navToggle,#scrim,#notes,#dots{display:none}
+    #stage{position:static; display:block}
+    .slide{position:relative; display:flex !important; opacity:1 !important; page-break-after:always; min-height:100vh; border-bottom:1px solid var(--line)}
+    .frag{opacity:1 !important; transform:none !important}
+    .draw{stroke-dashoffset:0 !important}
+  }
+</style>
+<!--catalyst-brand:style-->
+<style id="catalyst-brand">
+  /* Catalyst slide brand system v1 — generated by brand/apply_brand.py.
+     Edit brand/apply_brand.py, not this block; it is regenerated on every run. */
+  :root{
+    --cy:#22D3EE; --blue:#2196F3; --deep:#0D47A1;
+    --panel2:#121C30; --line2:#243349; --grey3:#64748B;
+    --shadow:0 16px 44px rgba(0,0,0,.55);
+  }
+  body{
+    background-image:
+      radial-gradient(1100px 520px at 82% -16%, rgba(34,211,238,.10), transparent 70%),
+      radial-gradient(900px 520px at -8% 112%, rgba(33,150,243,.10), transparent 70%);
+  }
+  /* Room for the chrome on every slide, whatever the inline padding says. */
+  .slide{padding-top:max(6.5vh,88px) !important; padding-bottom:max(6.5vh,74px) !important}
+
+  /* ---- per-slide chrome ---------------------------------------------------------- */
+  .cx-logo{position:absolute; top:24px; right:34px; width:107px; height:26px; opacity:.9;
+    pointer-events:none; z-index:6; background:url(data:image/png;base64,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) no-repeat center/contain}
+  .cx-chip{position:absolute; top:22px; left:34px; z-index:6; pointer-events:none;
+    font:700 11.5px/1 var(--mono); letter-spacing:2.1px; text-transform:uppercase;
+    color:var(--grey3); background:var(--panel2); border:1px solid var(--line2);
+    border-radius:999px; padding:8px 15px; white-space:nowrap}
+  .cx-chip b{color:var(--cy); font-weight:700}
+  .cx-page{position:absolute; right:36px; bottom:20px; z-index:6; pointer-events:none;
+    font:600 12.5px/1 var(--mono); letter-spacing:1.6px; color:var(--grey3)}
+  .cx-page b{color:#94A3B8; font-weight:700}
+
+  /* Titles carry no rule or underline — contrast does the work. */
+  h1,h2,h3,.big{border-bottom:none !important; text-decoration:none !important}
+
+  /* ---- deck chrome that would collide with the brand chrome ----------------------- */
+  #navToggle{top:auto !important; bottom:18px; left:18px}
+  #codeToggle{right:112px !important; bottom:16px !important}
+  #dots{bottom:20px}
+  #bar{background:var(--cy)}
+  #scrim{background:rgba(3,7,20,.66)}
+
+  /* ---- dark-surface repairs the palette map can't infer -------------------------- */
+  .chip,.card{box-shadow:none; background:var(--panel2)}
+  pre{border:1px solid var(--line2)}
+  code{border:1px solid rgba(34,211,238,.22)}
+  .shot{box-shadow:0 20px 50px rgba(0,0,0,.6)}
+  .copy{color:#CBD5E1}
+  .copy:hover{background:#243349; color:#fff}
+  #nav,#notes,#code{box-shadow:0 0 60px rgba(0,0,0,.7)}
+  #nav li:hover{background:rgba(34,211,238,.10)}
+  #nav li.cur{background:rgba(34,211,238,.16)}
+
+  /* ---- print / PDF: keep the deck dark, keep the chrome on every page ------------- */
+  @media print{
+    html,body{background:#070A14 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+    .slide{position:relative !important; border-bottom:1px solid #1E293B !important}
+    .cx-logo,.cx-chip,.cx-page{position:absolute !important}
+  }
+</style>
+<!--/catalyst-brand:style-->
+</head>
+<body>
+
+<div id="bar"></div>
+<div id="stage">
+
+  <!-- 1 · TITLE -->
+  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>01</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Module 02 · The browser as a runtime</div>
+    <h1>From HTML<br>to pixels</h1>
+    <div class="sub">Five stages between the tag you wrote and the light on the screen. Two of them are where your app gets slow.</div>
+    <div class="fig" style="max-width:820px">
+      <svg viewBox="0 0 820 74" role="img" aria-label="Pipeline: HTML and CSS to style, layout, paint, composite">
+        <g>
+          <rect x="0" y="18" width="128" height="40" rx="9" fill="#121C30" stroke="#243349"/>
+          <text x="64" y="43" text-anchor="middle" class="lbl b" font-size="14">HTML + CSS</text>
+          <path class="draw" pathLength="1" d="M134 38 L166 38" stroke="#64748B" stroke-width="2"/>
+          <rect x="172" y="18" width="118" height="40" rx="9" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="231" y="43" text-anchor="middle" class="lbl b" font-size="14">Style</text>
+          <path class="draw" pathLength="1" d="M296 38 L328 38" stroke="#64748B" stroke-width="2"/>
+          <rect x="334" y="18" width="118" height="40" rx="9" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="393" y="43" text-anchor="middle" class="lbl b" font-size="14">Layout</text>
+          <path class="draw" pathLength="1" d="M458 38 L490 38" stroke="#64748B" stroke-width="2"/>
+          <rect x="496" y="18" width="118" height="40" rx="9" fill="#0C2A22" stroke="#34D399"/>
+          <text x="555" y="43" text-anchor="middle" class="lbl b" font-size="14">Paint</text>
+          <path class="draw" pathLength="1" d="M620 38 L652 38" stroke="#64748B" stroke-width="2"/>
+          <rect x="658" y="18" width="140" height="40" rx="9" fill="#0C2A22" stroke="#34D399"/>
+          <text x="728" y="43" text-anchor="middle" class="lbl b" font-size="14">Composite</text>
+          <text x="231" y="11" text-anchor="middle" class="lbl s" fill="#22D3EE">CPU</text>
+          <text x="393" y="11" text-anchor="middle" class="lbl s" fill="#22D3EE">CPU</text>
+          <text x="555" y="11" text-anchor="middle" class="lbl s" fill="#34D399">GPU</text>
+          <text x="728" y="11" text-anchor="middle" class="lbl s" fill="#34D399">GPU</text>
+        </g>
+      </svg>
+    </div>
+    <aside class="notes"><div class="t">Open</div><p>Frame the whole video in one line: every frontend performance problem you will ever debug lives in one of these five boxes. By the end you can name the box.</p><p>Say plainly that this is the module that makes the React modules make sense — React is a way of writing to this pipeline, nothing more.</p></aside>
+  </section>
+
+  <!-- 2 · WHY -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>02</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Why this video exists</div>
+    <h2>Two questions, one answer</h2>
+    <div class="two">
+      <div class="card r">
+        <h3 class="r">"Why does this list stutter?"</h3>
+        <p>The live-coding round. Something animates at 20fps and you have ten minutes to say why.</p>
+      </div>
+      <div class="card b">
+        <h3 class="b">"What happens after the browser gets the HTML?"</h3>
+        <p>The <b>why</b> round. Interviewers ask it because the answer separates people who use a framework from people who understand one.</p>
+      </div>
+    </div>
+    <div class="key">Both answers come from the same five boxes. Learn the pipeline once, answer both.</div>
+    <aside class="notes"><div class="t">Framing</div><p>Say the honest version: most candidates answer "the browser renders it" and stop. That is the answer that ends the interview. We are going to build the answer that continues it.</p></aside>
+  </section>
+
+  <!-- 3 · SECTION: THE BOX -->
+  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>03</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Part 1 of 4</div>
+    <h1 class="cy">Everything<br>is a box</h1>
+    <div class="sub">Before layout, before layers — the browser only knows rectangles.</div>
+    <aside class="notes"><div class="t">Section break</div><p>Short. Land the sentence, move on.</p></aside>
+  </section>
+
+  <!-- 4 · PROVE IT -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>04</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Prove it yourself</div>
+    <h2>One CSS rule shows the truth</h2>
+    <pre><code><span class="cmt">// paste this in the console on any website</span>
+<span class="kw">document</span>.querySelectorAll(<span class="st">'*'</span>).forEach(el =&gt;
+  el.style.outline = <span class="st">'1px solid #34D399'</span>
+)</code></pre>
+    <div class="fig" style="max-width:900px">
+      <svg viewBox="0 0 900 150" role="img" aria-label="A page outlined: every element is a rectangle">
+        <rect x="0" y="0" width="900" height="150" rx="10" fill="#0E1525" stroke="#1E293B"/>
+        <rect x="16" y="14" width="868" height="30" rx="5" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="26" y="21" width="120" height="16" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="600" y="21" width="70" height="16" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="686" y="21" width="70" height="16" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="772" y="21" width="100" height="16" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="16" y="56" width="560" height="80" rx="5" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="28" y="66" width="380" height="18" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="28" y="92" width="536" height="12" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="28" y="110" width="470" height="12" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="592" y="56" width="292" height="80" rx="5" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="604" y="66" width="120" height="14" rx="3" fill="none" stroke="#34D399" stroke-width="1.4"/>
+        <rect x="604" y="88" width="268" height="36" rx="4" fill="none" stroke="#34D399" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <div class="say">A "beautiful" landing page is a set of rectangles with different paddings. That is not a simplification — it is the browser's actual data model.</div>
+    <aside class="notes"><div class="t">Demo</div><p>Do this live on a site the students know. It gets a laugh and it never leaves their memory.</p></aside>
+  </section>
+
+  <!-- 5 · BOX ANATOMY -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>05</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Anatomy</div>
+    <h2>Four layers, from the inside out</h2>
+    <div class="fig" style="max-width:960px">
+      <svg viewBox="0 0 960 260" role="img" aria-label="Box model: content, padding, border, margin">
+        <rect x="20" y="14" width="500" height="232" rx="8" fill="#2A2213" stroke="#FBBF24" stroke-dasharray="6 5"/>
+        <rect x="70" y="46" width="400" height="168" rx="6" fill="#1A1832" stroke="#A78BFA" stroke-width="2.5"/>
+        <rect x="110" y="76" width="320" height="108" rx="5" fill="#0C2A22" stroke="#34D399"/>
+        <rect x="160" y="102" width="220" height="56" rx="4" fill="#0C2733" stroke="#22D3EE"/>
+        <text x="270" y="136" text-anchor="middle" class="lbl b" font-size="15">content</text>
+        <text x="270" y="94" text-anchor="middle" class="lbl s" fill="#34D399">padding</text>
+        <text x="270" y="64" text-anchor="middle" class="lbl s" fill="#A78BFA">border</text>
+        <text x="270" y="32" text-anchor="middle" class="lbl s" fill="#FBBF24">margin</text>
+        <g>
+          <text x="580" y="52" class="lbl b" font-size="15">content box</text>
+          <text x="580" y="72" class="lbl">the text or image itself</text>
+          <text x="580" y="106" class="lbl b" font-size="15">padding box</text>
+          <text x="580" y="126" class="lbl">breathing room inside the border</text>
+          <text x="580" y="160" class="lbl b" font-size="15">border box</text>
+          <text x="580" y="180" class="lbl">content + padding + border</text>
+          <text x="580" y="214" class="lbl b" font-size="15">margin box</text>
+          <text x="580" y="234" class="lbl">space outside — belongs to nobody</text>
+        </g>
+      </svg>
+    </div>
+    <div class="key">Every layer except content is optional. Most layout bugs are one of these four measured in the wrong place.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Stress that margin is outside the element. It is not part of the element's size — which is exactly why <code>getBoundingClientRect()</code> does not include it, and why students get the wrong number when they try to measure.</p></aside>
+  </section>
+
+  <!-- 6 · BOX SIZE -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>06</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Property 1 of 2 · size</div>
+    <h2>Who decides how big the box is?</h2>
+    <div class="two">
+      <div class="card g">
+        <h3 class="g">Intrinsic</h3>
+        <p>You set no rule. <b>The content decides.</b> Longer text → taller box. This is the default and it is what makes HTML resilient.</p>
+      </div>
+      <div class="card w">
+        <h3 class="w">Restricted</h3>
+        <p>You set a size, or the <b>parent</b> caps it. Parent shrinks → box shrinks. This is where overflow bugs are born.</p>
+      </div>
+    </div>
+    <div class="say">Most "why is my layout broken on mobile" bugs are an intrinsic box that someone made restricted, in one breakpoint, and forgot.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Give a concrete pair: a card that grows with its text vs a card with <code>height: 220px</code>. Ask which one survives a translated string. Arabic text is on average longer than English — this lands with this audience.</p></aside>
+  </section>
+
+  <!-- 7 · BOX MATH -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>07</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Property 1 of 2 · size</div>
+    <h2>The same box, two widths</h2>
+    <div class="two">
+      <div class="card">
+        <h3 class="r">box-sizing: content-box</h3>
+        <pre style="margin-top:10px"><code>width: <span class="ok">300</span>
+padding: 20 * 2
+border: 2 * 2
+<span class="cmt">------------------</span>
+on screen: <span class="no">344px</span></code></pre>
+        <p style="margin-top:10px">You must add the layers up yourself — in CSS <b>and</b> again in JavaScript.</p>
+      </div>
+      <div class="card">
+        <h3 class="g">box-sizing: border-box</h3>
+        <pre style="margin-top:10px"><code>width: <span class="ok">300</span>
+padding: <span class="cmt">included</span>
+border: <span class="cmt">included</span>
+<span class="cmt">------------------</span>
+on screen: <span class="ok">300px</span></code></pre>
+        <p style="margin-top:10px">The number you wrote is the number on screen. Only margins are still outside.</p>
+      </div>
+    </div>
+    <div class="key g">This is why every real codebase starts with <code>*{ box-sizing:border-box }</code>. It turns layout math into one number instead of five.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Say the interview version out loud: "content-box means width applies to the content only; border-box means width applies through the border. We set border-box globally so measurement in JS matches measurement in CSS."</p></aside>
+  </section>
+
+  <!-- 8 · BLOCK BOX -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>08</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Property 2 of 2 · type</div>
+    <h2>Block-level boxes</h2>
+    <div class="two">
+      <div>
+        <ul class="plist">
+          <li>Takes 100% of the parent's width<small>always — even with one short word in it</small></li>
+          <li>Height comes from the content<small>intrinsic, unless you restrict it</small></li>
+          <li>Stacks top to bottom</li>
+          <li>Creates or joins a <b class="cy">block formatting context</b></li>
+        </ul>
+      </div>
+      <div class="fig" style="margin-top:0">
+        <svg viewBox="0 0 420 220" role="img" aria-label="Block boxes stack vertically and fill the parent width">
+          <rect x="6" y="6" width="408" height="208" rx="8" fill="none" stroke="#243349" stroke-dasharray="5 5"/>
+          <rect x="22" y="24" width="376" height="44" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="210" y="51" text-anchor="middle" class="lbl b" font-size="13">&lt;h1&gt;</text>
+          <rect x="22" y="80" width="376" height="44" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="210" y="107" text-anchor="middle" class="lbl b" font-size="13">&lt;p&gt;</text>
+          <rect x="22" y="136" width="376" height="60" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="210" y="171" text-anchor="middle" class="lbl b" font-size="13">&lt;div&gt;</text>
+          <text x="210" y="212" text-anchor="middle" class="lbl s">parent width</text>
+        </svg>
+      </div>
+    </div>
+    <div class="key w">Loose text that is not inside a tag still gets a box — the browser wraps it in an <b>anonymous block box</b>. There is no such thing as unboxed content.</div>
+    <aside class="notes"><div class="t">Teach</div><p>The anonymous box is a great interview detail. It explains why a stray string inside a flex container becomes a flex item.</p></aside>
+  </section>
+
+  <!-- 9 · INLINE BOX -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>09</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Property 2 of 2 · type</div>
+    <h2>Inline boxes behave like text</h2>
+    <div class="three">
+      <div class="card r"><h3 class="r">width / height</h3><p><b>Ignored.</b> Setting them does nothing.</p></div>
+      <div class="card r"><h3 class="r">vertical margin</h3><p><b>Ignored.</b> Horizontal margin still works.</p></div>
+      <div class="card w"><h3 class="w">vertical padding</h3><p>Paints, but does <b>not</b> change the line's height.</p></div>
+    </div>
+    <div class="fig" style="max-width:900px">
+      <svg viewBox="0 0 900 118" role="img" aria-label="Inline padding paints outside the line box but does not add height">
+        <rect x="20" y="34" width="860" height="50" rx="4" fill="#0E1525" stroke="#243349" stroke-dasharray="5 4"/>
+        <text x="30" y="28" class="lbl s" fill="#94A3B8">line-height — the only height that counts</text>
+        <rect x="40" y="18" width="150" height="82" rx="4" fill="#0C2733" stroke="#22D3EE" stroke-width="1.6"/>
+        <text x="115" y="64" text-anchor="middle" class="lbl b" font-size="13">&lt;span&gt;</text>
+        <text x="230" y="64" class="lbl" font-size="13">flows left → right, then wraps — like a word does</text>
+        <path class="draw" pathLength="1" d="M40 18 L190 18" stroke="#F8717A" stroke-width="2"/>
+        <path class="draw" pathLength="1" d="M40 100 L190 100" stroke="#F8717A" stroke-width="2"/>
+        <text x="700" y="112" class="lbl s" fill="#F8717A">red = painted, but invisible to layout</text>
+      </svg>
+    </div>
+    <aside class="notes"><div class="t">Teach</div><p>This is the classic "my icon overlaps the line above" bug. The padding paints but the line box never grew, so the neighbour has no idea. Fix: <code>display:inline-block</code> or set a line-height.</p></aside>
+  </section>
+
+  <!-- 10 · SECTION: FORMATTING CONTEXT -->
+  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>10</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Part 2 of 4</div>
+    <h1 class="cy">Formatting<br>context</h1>
+    <div class="sub">A region with its own rules. Enter it and the outside stops applying to you.</div>
+    <aside class="notes"><div class="t">Section break</div><p>Warn them: the name sounds academic, the idea is simple, and it is the single best answer to "how does flex actually work".</p></aside>
+  </section>
+
+  <!-- 11 · WHAT IS A CONTEXT -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>11</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The idea</div>
+    <h2>A realm, and the rules inside it</h2>
+    <div class="fig" style="max-width:940px">
+      <svg viewBox="0 0 940 236" role="img" aria-label="Nested formatting contexts are isolated from each other">
+        <rect x="10" y="14" width="560" height="210" rx="12" fill="#0C2733" stroke="#22D3EE" stroke-dasharray="7 6"/>
+        <text x="28" y="40" class="lbl b" font-size="14" fill="#22D3EE">block formatting context</text>
+        <rect x="34" y="54" width="512" height="40" rx="6" fill="#121C30" stroke="#243349"/>
+        <text x="290" y="79" text-anchor="middle" class="lbl b" font-size="13">element 1 — fills the width</text>
+        <rect x="34" y="108" width="512" height="100" rx="10" fill="#1A1832" stroke="#A78BFA" stroke-dasharray="7 6"/>
+        <text x="52" y="132" class="lbl b" font-size="13" fill="#A78BFA">inline formatting context</text>
+        <rect x="56" y="146" width="150" height="42" rx="6" fill="#121C30" stroke="#243349"/>
+        <text x="131" y="172" text-anchor="middle" class="lbl b" font-size="12">element 3</text>
+        <rect x="216" y="146" width="150" height="42" rx="6" fill="#121C30" stroke="#243349"/>
+        <text x="291" y="172" text-anchor="middle" class="lbl b" font-size="12">element 4</text>
+        <text x="392" y="172" class="lbl s">side by side, width of their content</text>
+        <g>
+          <text x="606" y="60" class="lbl b" font-size="15">Isolation</text>
+          <text x="606" y="80" class="lbl">outer rules stop at the boundary</text>
+          <text x="606" y="118" class="lbl b" font-size="15">Scalability</text>
+          <text x="606" y="138" class="lbl">new layout feature = new context</text>
+          <text x="606" y="176" class="lbl b" font-size="15">Predictability</text>
+          <text x="606" y="196" class="lbl">fixed rules → you can place anything</text>
+        </g>
+      </svg>
+    </div>
+    <div class="key">Flexbox and Grid are not magic. They are two more sets of rules, applied to whoever enters the realm.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Say it plainly: when the CSS working group wants new layout behaviour they do not patch the old rules, they define a new context. Flex, grid, multicol, table — all the same move. Once students see the pattern they stop memorising and start reasoning.</p></aside>
+  </section>
+
+  <!-- 12 · BECOME THE BROWSER 1 -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>12</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Exercise · read it like the browser does</div>
+    <h2>Line by line, context by context</h2>
+    <div class="two tight" style="grid-template-columns:1.05fr 1fr">
+      <pre style="margin-top:0"><code><span class="ty">&lt;html&gt;</span>
+  <span class="ty">&lt;body&gt;</span>
+    <span class="ty">&lt;h1&gt;</span>Jobs<span class="ty">&lt;/h1&gt;</span>
+    <span class="ty">&lt;ol&gt;</span>
+      <span class="ty">&lt;li</span> <span class="kw">style</span>=<span class="st">"display:inline-block"</span><span class="ty">&gt;</span>…<span class="ty">&lt;/li&gt;</span>
+    <span class="ty">&lt;/ol&gt;</span>
+    <span class="ty">&lt;section</span> <span class="kw">style</span>=<span class="st">"display:flex"</span><span class="ty">&gt;</span>
+      <span class="ty">&lt;div&gt;</span><span class="ty">&lt;span&gt;</span>Cairo<span class="ty">&lt;/span&gt;</span><span class="ty">&lt;/div&gt;</span>
+    <span class="ty">&lt;/section&gt;</span>
+  <span class="ty">&lt;/body&gt;</span>
+<span class="ty">&lt;/html&gt;</span></code></pre>
+      <table class="grid" style="margin-top:0">
+        <tr><th>tag</th><th>what it does</th></tr>
+        <tr><td><b>html</b></td><td>creates the root <b class="cy">block</b> context</td></tr>
+        <tr><td><b>body</b></td><td><b>joins</b> it — no special display</td></tr>
+        <tr><td><b>h1 · ol</b></td><td>join it too</td></tr>
+        <tr><td><b>li</b></td><td><code>inline-block</code> → <b class="p">creates</b> a new block context</td></tr>
+        <tr><td><b>section</b></td><td><code>flex</code> → <b class="p">creates</b> a flex context</td></tr>
+        <tr><td><b>div</b></td><td>becomes a flex item, and creates a block context for its children</td></tr>
+        <tr><td><b>span</b></td><td><b class="p">creates</b> an inline context</td></tr>
+      </table>
+    </div>
+    <div class="key w">The rule: an explicit <code>display</code> creates a context. Everything else just joins the one it is standing in.</div>
+    <aside class="notes"><div class="t">Exercise</div><p>Do this on the whiteboard, not on the slide. Ask the room for each line before you reveal it. The <code>div</code> row is the one people miss — it is a flex item to its parent and a block container to its children at the same time.</p></aside>
+  </section>
+
+  <!-- 13 · SECTION: REFLOW -->
+  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>13</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Part 3 of 4</div>
+    <h1 class="cy">Reflow</h1>
+    <div class="sub">What it actually costs to change something after the page has loaded.</div>
+    <aside class="notes"><div class="t">Section break</div><p>This is the part that shows up in every performance conversation for the rest of their career.</p></aside>
+  </section>
+
+  <!-- 14 · TWO TREES -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>14</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Where the render tree comes from</div>
+    <h2>Two trees, merged</h2>
+    <div class="fig" style="max-width:900px">
+      <svg viewBox="0 0 900 180" role="img" aria-label="DOM plus CSSOM produce the render tree">
+        <rect x="30" y="16" width="230" height="58" rx="10" fill="#0C2733" stroke="#22D3EE"/>
+        <text x="145" y="42" text-anchor="middle" class="lbl b" font-size="15">DOM</text>
+        <text x="145" y="62" text-anchor="middle" class="lbl s">your HTML, as objects</text>
+        <rect x="30" y="104" width="230" height="58" rx="10" fill="#1A1832" stroke="#A78BFA"/>
+        <text x="145" y="130" text-anchor="middle" class="lbl b" font-size="15">CSSOM</text>
+        <text x="145" y="150" text-anchor="middle" class="lbl s">every rule that matched</text>
+        <path class="draw" pathLength="1" d="M266 45 L360 76" stroke="#64748B" stroke-width="2"/>
+        <path class="draw" pathLength="1" d="M266 133 L360 102" stroke="#64748B" stroke-width="2"/>
+        <rect x="368" y="60" width="250" height="58" rx="10" fill="#0C2A22" stroke="#34D399"/>
+        <text x="493" y="86" text-anchor="middle" class="lbl b" font-size="15">render tree</text>
+        <text x="493" y="106" text-anchor="middle" class="lbl s">only what is actually visible</text>
+        <path class="draw" pathLength="1" d="M624 89 L700 89" stroke="#64748B" stroke-width="2"/>
+        <rect x="708" y="60" width="170" height="58" rx="10" fill="#121C30" stroke="#243349"/>
+        <text x="793" y="94" text-anchor="middle" class="lbl b" font-size="15">pixels</text>
+      </svg>
+    </div>
+    <div class="say"><b>Reflow</b> is what happens when JavaScript changes the DOM or the styles after this is already built — a "load more" button, a React re-render, a class toggle. The browser has to redo the work.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Point out that <code>display:none</code> nodes are in the DOM but not in the render tree. That is the cheapest way to explain what the render tree is.</p></aside>
+  </section>
+
+  <!-- 15 · THE PIPELINE COST -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>15</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The five phases, and what they cost</div>
+    <h2>Where the frame budget goes</h2>
+    <table class="grid">
+      <tr><th>phase</th><th>what happens</th><th>runs on</th><th>blocks the main thread?</th></tr>
+      <tr><td><b>JavaScript</b></td><td>you change the DOM or a style</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
+      <tr><td><b>Style</b></td><td>re-match selectors, rebuild the subtree</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
+      <tr><td><b>Layout</b></td><td>recompute position and size of every affected box</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
+      <tr><td><b>Paint</b></td><td>draw pixels into bitmaps</td><td><b class="g">GPU</b></td><td>no</td></tr>
+      <tr><td><b>Composite</b></td><td>stack the bitmaps in the right order</td><td><b class="g">GPU</b></td><td>no</td></tr>
+    </table>
+    <div class="key r">You have ~16ms for a 60fps frame. Style and Layout are the two that spend it — and they are the two you can avoid.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Make the 16ms concrete: 1000ms / 60 frames. Everything in this module is about not spending those milliseconds on layout.</p></aside>
+  </section>
+
+  <!-- 16 · BEFORE / AFTER -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>16</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Same animation · two lines of CSS</div>
+    <h2>2,000 rectangles, moving</h2>
+    <div class="two">
+      <div class="card r">
+        <h3 class="r">margin-top</h3>
+        <pre style="margin-top:10px"><code><span class="no">margin-top:</span> 120px;</code></pre>
+        <p style="margin-top:12px">Position changed → <b>Layout runs again for all 2,000 boxes, every frame.</b></p>
+        <div class="num r" style="margin-top:14px">CPU pinned</div>
+        <div class="numlbl">frames drop the moment you throttle the CPU — and phones are throttled by default</div>
+      </div>
+      <div class="card g">
+        <h3 class="g">transform</h3>
+        <pre style="margin-top:10px"><code><span class="ok">transform:</span> translateY(120px);</code></pre>
+        <p style="margin-top:12px">No box changed size or position in the layout tree → <b>Composite only.</b></p>
+        <div class="num g" style="margin-top:14px">~0% CPU</div>
+        <div class="numlbl">a flat line in the performance panel, 60fps on the same machine</div>
+      </div>
+    </div>
+    <div class="key g">Identical motion on screen. The difference is which phase of the pipeline you woke up.</div>
+    <aside class="notes"><div class="t">Demo</div><p>Run both versions with the Performance tab open, then throttle the CPU 6× and run again. The throttled run is the one that sells it — most of our students' users are on mid-range Android.</p></aside>
+  </section>
+
+  <!-- 17 · RULE OF THUMB -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>17</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The rule to carry out of this video</div>
+    <h2>Animate <span class="cy">transform</span> and <span class="cy">opacity</span>. Nothing else.</h2>
+    <div class="three">
+      <div class="card g"><h3 class="g">composite only</h3><p><code>transform</code><br><code>opacity</code></p></div>
+      <div class="card w"><h3 class="w">paint too</h3><p><code>color</code><br><code>background-color</code><br><code>box-shadow</code></p></div>
+      <div class="card r"><h3 class="r">full pipeline</h3><p><code>width</code> · <code>height</code><br><code>top</code> · <code>left</code> · <code>margin</code><br><code>font-size</code></p></div>
+    </div>
+    <div class="say">Not sure about a property? <b class="cy">csstriggers.com</b> lists exactly which phases each one wakes. There is never a good reason to trigger the full pipeline sixty times a second.</div>
+    <aside class="notes"><div class="t">Teach</div><p>Have them bookmark csstriggers.com on camera. Then give the interview sentence: "I animate transform and opacity because they are composite-only; anything that changes geometry forces layout."</p></aside>
+  </section>
+
+  <!-- 18 · SECTION: LAYERS -->
+  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>18</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Part 4 of 4</div>
+    <h1 class="cy">Composition<br>layers</h1>
+    <div class="sub">How the browser hands work to the GPU — and what that costs you.</div>
+    <aside class="notes"><div class="t">Section break</div><p>Tell them this is the part almost nobody can explain in an interview, which is exactly why it is worth twelve minutes.</p></aside>
+  </section>
+
+  <!-- 19 · THREE TREES -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>19</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Three trees the DOM never shows you</div>
+    <h2>From one node to one bitmap</h2>
+    <div class="fig" style="max-width:1000px">
+      <svg viewBox="0 0 1000 214" role="img" aria-label="Render objects group into render layers, which group into graphic layers">
+        <rect x="8" y="24" width="220" height="170" rx="12" fill="#0E1525" stroke="#243349"/>
+        <text x="118" y="16" text-anchor="middle" class="lbl b" font-size="14" fill="#22D3EE">RenderObject</text>
+        <text x="118" y="48" text-anchor="middle" class="lbl s">one per DOM node</text>
+        <rect x="28" y="60" width="180" height="24" rx="5" fill="#121C30" stroke="#243349"/><text x="118" y="77" text-anchor="middle" class="lbl s">html</text>
+        <rect x="28" y="90" width="180" height="24" rx="5" fill="#121C30" stroke="#243349"/><text x="118" y="107" text-anchor="middle" class="lbl s">body · main</text>
+        <rect x="28" y="120" width="180" height="24" rx="5" fill="#121C30" stroke="#243349"/><text x="118" y="137" text-anchor="middle" class="lbl s">div ×4 (position:absolute)</text>
+        <rect x="28" y="150" width="180" height="24" rx="5" fill="#121C30" stroke="#243349"/><text x="118" y="167" text-anchor="middle" class="lbl s">knows how to draw itself</text>
+
+        <path class="draw" pathLength="1" d="M236 109 L286 109" stroke="#64748B" stroke-width="2"/>
+
+        <rect x="294" y="24" width="240" height="170" rx="12" fill="#0E1525" stroke="#243349"/>
+        <text x="414" y="16" text-anchor="middle" class="lbl b" font-size="14" fill="#A78BFA">RenderLayer</text>
+        <text x="414" y="48" text-anchor="middle" class="lbl s">one per stacking context</text>
+        <rect x="314" y="60" width="200" height="26" rx="5" fill="#1A1832" stroke="#A78BFA"/><text x="414" y="78" text-anchor="middle" class="lbl s">root layer (html)</text>
+        <rect x="330" y="94" width="184" height="22" rx="5" fill="#1A1832" stroke="#A78BFA"/><text x="422" y="110" text-anchor="middle" class="lbl s">absolute div 1</text>
+        <rect x="330" y="120" width="184" height="22" rx="5" fill="#1A1832" stroke="#A78BFA"/><text x="422" y="136" text-anchor="middle" class="lbl s">absolute div 2 · 3 · 4</text>
+        <text x="414" y="166" text-anchor="middle" class="lbl s">created by: position · z-index ·</text>
+        <text x="414" y="182" text-anchor="middle" class="lbl s">opacity · filter · canvas</text>
+
+        <path class="draw" pathLength="1" d="M542 109 L592 109" stroke="#64748B" stroke-width="2"/>
+
+        <rect x="600" y="24" width="240" height="170" rx="12" fill="#0E1525" stroke="#243349"/>
+        <text x="720" y="16" text-anchor="middle" class="lbl b" font-size="14" fill="#34D399">GraphicLayer</text>
+        <text x="720" y="48" text-anchor="middle" class="lbl s">one bitmap on the GPU</text>
+        <rect x="620" y="62" width="200" height="60" rx="6" fill="#0C2A22" stroke="#34D399"/>
+        <text x="720" y="88" text-anchor="middle" class="lbl b" font-size="13">root graphic layer</text>
+        <text x="720" y="108" text-anchor="middle" class="lbl s">all four layers land here</text>
+        <text x="720" y="146" text-anchor="middle" class="lbl s">created by: 3D transform ·</text>
+        <text x="720" y="162" text-anchor="middle" class="lbl s">will-change · video · canvas</text>
+
+        <text x="920" y="100" text-anchor="middle" class="lbl b" font-size="14">GPU</text>
+        <text x="920" y="122" text-anchor="middle" class="lbl s">draws many</text>
+        <text x="920" y="138" text-anchor="middle" class="lbl s">things at once</text>
+        <path class="draw" pathLength="1" d="M848 109 L888 109" stroke="#34D399" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="key">A hundred absolutely-positioned divs is a hundred render layers — and still <b>one</b> graphic layer, unless you ask for more.</div>
+    <aside class="notes"><div class="t">Teach</div><p>The one-line version: RenderObject = how to draw it, RenderLayer = what stacks on what, GraphicLayer = what the GPU actually holds in memory. Repeat that sentence twice; it is the interview answer.</p></aside>
+  </section>
+
+  <!-- 20 · LAYERS COST -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>20</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The bill · measured in Chrome DevTools · Layers panel</div>
+    <h2>Every promoted layer costs VRAM</h2>
+    <div class="three">
+      <div class="card"><div class="num cy">8.7<span style="font-size:.42em"> MB</span></div><div class="numlbl">the first graphic layer — you pay this once, on every page</div></div>
+      <div class="card"><div class="num w">+0.5<span style="font-size:.42em"> MB</span></div><div class="numlbl">each extra layer you promote with a 3D transform</div></div>
+      <div class="card"><div class="num r">~100<span style="font-size:.42em"> MB</span></div><div class="numlbl">a 200-item list where somebody promoted every row</div></div>
+    </div>
+    <div class="key r">GPU memory is not yours — it belongs to the whole system. Overrun it and the OS starts swapping, and the page you were "optimising" becomes the one that freezes.</div>
+    <div class="say">Add <code>will-change: transform</code> to a list item and it looks free in DevTools on a desktop. It is not free on the phone the student is being interviewed about.</div>
+    <aside class="notes"><div class="t">Demo</div><p>Open the Layers panel, promote one box, read the number out loud, then promote all four and read it again. Then say the mobile line — nobody in the room has an RTX in their pocket.</p></aside>
+  </section>
+
+  <!-- 21 · WHEN TO PROMOTE -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>21</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The judgement call</div>
+    <h2>Promote a widget. Never promote a page.</h2>
+    <div class="two">
+      <div class="card g">
+        <h3 class="g">Worth a layer</h3>
+        <p><b>One</b> element that moves constantly: a drag handle, a sticky header, a chart tooltip, a video, an open modal. High activity, small count, short-lived.</p>
+      </div>
+      <div class="card r">
+        <h3 class="r">Not worth a layer</h3>
+        <p>Every row of a list. Every card in a grid. Anything static. Anything you promoted "just in case" and never measured.</p>
+      </div>
+    </div>
+    <div class="key w">Both mistakes exist. Using the CPU when you could use the GPU drops frames instantly. Using the GPU everywhere runs you out of memory slowly. <b>Prefer the GPU — but count the layers.</b></div>
+    <aside class="notes"><div class="t">Teach</div><p>Answer the question a student always asks: "isn't transform always better?" Yes, for the animation. No, if you promoted 300 elements to get it. Measure in the Layers panel, then decide.</p></aside>
+  </section>
+
+  <!-- 22 · BECOME THE BROWSER 2 -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>22</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Exercise · everything at once</div>
+    <h2>One document, five trees</h2>
+    <table class="grid">
+      <tr><th>we render</th><th>DOM</th><th>RenderObject</th><th>RenderLayer</th><th>GraphicLayer</th><th>context created</th></tr>
+      <tr><td><b>&lt;html&gt;</b></td><td>+1</td><td>+1</td><td><b class="p">root</b></td><td><b class="g">root</b></td><td>root stacking + block</td></tr>
+      <tr><td><b>&lt;body&gt;</b></td><td>+1</td><td>+1</td><td>—</td><td>—</td><td>joins</td></tr>
+      <tr><td><b>&lt;section display:flex&gt;</b></td><td>+1</td><td>+1</td><td>—</td><td>—</td><td><b class="cy">flex</b>, and each child gets a block context</td></tr>
+      <tr><td><b>&lt;div position:absolute&gt;&lt;span&gt;</b></td><td>+2</td><td>+2</td><td><b class="p">+1</b></td><td>—</td><td>new stacking context, block + <b class="cy">inline</b></td></tr>
+      <tr><td><b>&lt;div display:inline-block&gt;</b></td><td>+1</td><td>+1</td><td>—</td><td>—</td><td><b class="cy">block</b> context</td></tr>
+      <tr><td><b>&lt;div absolute + translate3d&gt;</b></td><td>+1</td><td>+1</td><td><b class="p">+1</b></td><td><b class="g">+1</b></td><td>new stacking context + block</td></tr>
+    </table>
+    <div class="key">Read the last row again. <b>One extra CSS function</b> is the difference between sharing the page's bitmap and owning your own.</div>
+    <aside class="notes"><div class="t">Exercise</div><p>Walk the table row by row and make the room call out the columns before you reveal them. The two rows that teach the most are the flex row (a div can be an item and a container at once) and the last row (3D transform is the promotion trigger).</p></aside>
+  </section>
+
+  <!-- 23 · THE ANSWER -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>23</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Say this in the interview</div>
+    <h2>Four sentences that end the question</h2>
+    <div class="say" style="max-width:60ch; font-size:min(2.2vw,24px)">
+      <p style="margin-bottom:14px"><b class="cy">1 ·</b> The browser builds a DOM from HTML and a CSSOM from the stylesheets, and merges them into a render tree of everything that is visible.</p>
+      <p style="margin-bottom:14px"><b class="cy">2 ·</b> Changing the DOM or a geometric style forces a reflow — style and layout run again on the CPU, and that blocks the main thread.</p>
+      <p style="margin-bottom:14px"><b class="cy">3 ·</b> Paint and composite run on the GPU, so animating <code>transform</code> or <code>opacity</code> skips layout entirely.</p>
+      <p><b class="cy">4 ·</b> Elements can be promoted to their own graphic layer for that, but each one costs GPU memory — so I promote the widget that animates, not the list around it.</p>
+    </div>
+    <aside class="notes"><div class="t">Delivery</div><p>Record this slide slowly and in Arabic, then repeat the four sentences in English — this is the one paragraph students will memorise for the "why" round.</p></aside>
+  </section>
+
+  <!-- 24 · RECAP -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>24</b> / 24</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Video 1 of Module 02 · done</div>
+    <h2>What you can now explain</h2>
+    <div class="two">
+      <div>
+        <ul class="plist">
+          <li>Why every element is a box<small>and why border-box is not a preference</small></li>
+          <li>What a formatting context isolates<small>and why flex and grid are just two of them</small></li>
+          <li>What reflow costs<small>and which properties trigger it</small></li>
+          <li>What a graphic layer buys, and what it bills you<small>in megabytes, not opinions</small></li>
+        </ul>
+      </div>
+      <div class="card b">
+        <h3 class="b">Next · Video 2</h3>
+        <p><b>The DOM API, properly.</b> Querying without thrashing layout, batching writes, document fragments, and the measure-then-mutate rule that makes the pipeline in this video actually stay cheap.</p>
+      </div>
+    </div>
+    <aside class="notes"><div class="t">Close</div><p>Set up video 2 in one sentence: "You now know what reflow costs. Next video is how to touch the DOM without paying for it a thousand times."</p></aside>
+  </section>
+
+</div>
+
+<button id="navToggle" aria-label="Slide menu">☰ slides</button>
+<div id="scrim"></div>
+<nav id="nav"><h4>Slides</h4><ol id="navList"></ol>
+  <div class="navfoot"><kbd>←</kbd><kbd>→</kbd> move · <kbd>M</kbd> menu · <kbd>S</kbd> notes · <kbd>F</kbd> full · <kbd>P</kbd> print</div>
+</nav>
+<div id="dots"></div>
+<div id="notes"><h4>Speaker notes (press S to hide)</h4><div id="notesBody"></div></div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0, step=0, notesOn=false;
+  const bar=document.getElementById('bar'), notes=document.getElementById('notes'),
+        nb=document.getElementById('notesBody'), dots=document.getElementById('dots');
+  slides.forEach(()=>dots.appendChild(document.createElement('i')));
+  const dotEls=[...dots.children];
+  const nav=document.getElementById('nav'), scrim=document.getElementById('scrim'),
+        navToggle=document.getElementById('navToggle'), navList=document.getElementById('navList');
+  slides.forEach((s,x)=>{
+    const h=s.querySelector('h1,h2'); const t=((h&&(h.innerText||h.textContent))||('Slide '+(x+1))).replace(/\s+/g,' ').trim();
+    const li=document.createElement('li');
+    li.innerHTML='<b>'+String(x+1).padStart(2,'0')+'</b><span>'+t+'</span>';
+    li.addEventListener('click',()=>{ i=x; step=0; render(); closeNav(); });
+    navList.appendChild(li);
+  });
+  const navItems=[...navList.children];
+  function updateNavCur(){ navItems.forEach((li,x)=>li.classList.toggle('cur',x===i)); }
+  function openNav(){ nav.classList.add('open'); scrim.classList.add('on'); updateNavCur(); const c=navItems[i]; if(c) c.scrollIntoView({block:'nearest'}); }
+  function closeNav(){ nav.classList.remove('open'); scrim.classList.remove('on'); }
+  function toggleNav(){ nav.classList.contains('open')?closeNav():openNav(); }
+  navToggle.addEventListener('click',toggleNav); scrim.addEventListener('click',closeNav);
+  function frags(){ return [...slides[i].querySelectorAll('.frag')]; }
+  function applyFrags(){ frags().forEach((el,x)=> el.classList.toggle('on', x<step)); }
+  function render(){
+    slides.forEach((s,x)=>s.classList.toggle('on',x===i));
+    dotEls.forEach((d,x)=>d.classList.toggle('on',x===i));
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    applyFrags(); updateNavCur();
+    const n=slides[i].querySelector('.notes'); nb.innerHTML=n?n.innerHTML:'<p>—</p>';
+  }
+  function next(){ const f=frags(); if(step<f.length){ step++; applyFrags(); } else if(i<slides.length-1){ i++; step=0; render(); } }
+  function prev(){ if(step>0){ step--; applyFrags(); } else if(i>0){ i--; step=slides[i].querySelectorAll('.frag').length; render(); } }
+  document.addEventListener('keydown',e=>{
+    const k=e.key.toLowerCase();
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowLeft'||e.key==='Backspace'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){i=0;step=0;render();} else if(e.key==='End'){i=slides.length-1;step=frags().length;render();}
+    else if(k==='m'){toggleNav();}
+    else if(e.key==='Escape'){closeNav();}
+    else if(k==='s'){notesOn=!notesOn;notes.classList.toggle('show',notesOn);}
+    else if(k==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+    else if(k==='p'){slides.forEach(s=>s.querySelectorAll('.frag').forEach(el=>el.classList.add('on')));window.print();}
+  });
+  document.getElementById('stage').addEventListener('click',e=>{ e.clientX>innerWidth/2?next():prev(); });
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frontend Mastery — Program Page (Draft) · Catalyst</title>
+<style>
+  :root{
+    --bg:#070a12;
+    --bg2:#0a0e18;
+    --panel:#0d1220;
+    --panel2:#111726;
+    --line:rgba(255,255,255,.08);
+    --line2:rgba(255,255,255,.14);
+    --ink:#e9eefb;
+    --ink2:#b9c2d6;
+    --muted:#7f8aa3;
+    --blue:#3b82f6;
+    --blue2:#60a5fa;
+    --blue-dim:rgba(59,130,246,.14);
+    --green:#34d399;
+    --amber:#f59e0b;
+    --red:#f26d5b;
+    --sans:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --r:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(900px 500px at 80% -10%,rgba(59,130,246,.10),transparent 70%),radial-gradient(700px 420px at -5% 15%,rgba(59,130,246,.06),transparent 70%);
+    background-attachment:fixed}
+  a{color:inherit}
+  ::selection{background:rgba(59,130,246,.35)}
+
+  /* ---------- chrome ---------- */
+  header.top{position:sticky;top:0;z-index:40;background:rgba(7,10,18,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .top-in{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:700;letter-spacing:-.2px}
+  .logo i{width:16px;height:16px;border-radius:50%;background:conic-gradient(from 200deg,var(--blue),#8b5cf6,var(--blue));display:block}
+  .topnav{display:flex;gap:4px;flex-wrap:wrap}
+  .topnav a{font:600 12.5px/1 var(--sans);color:var(--muted);text-decoration:none;padding:8px 11px;border-radius:8px}
+  .topnav a:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+  .tag-draft{font:700 10.5px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--amber);border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.10);padding:6px 9px;border-radius:999px;white-space:nowrap}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{scroll-margin-top:74px}
+
+  /* ---------- shared ---------- */
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid var(--line);border-radius:var(--r)}
+  .sec-head{display:flex;align-items:center;gap:12px;margin:0 0 6px}
+  .sec-head b.bar{width:3px;height:17px;border-radius:2px;background:var(--blue);display:block}
+  .sec-head .num{font:700 11px/1 var(--mono);letter-spacing:2px;color:var(--muted)}
+  .sec-head h2{font:700 20px/1.2 var(--sans);letter-spacing:-.3px}
+  .sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 22px 15px}
+  .sec{padding:58px 0}
+  .kick{font:700 11px/1 var(--mono);letter-spacing:2.2px;text-transform:uppercase;color:var(--muted)}
+  .blue{color:var(--blue2)}
+  .mono{font-family:var(--mono)}
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  ul.check{list-style:none;margin-top:12px}
+  ul.check li{position:relative;padding:5px 0 5px 26px;color:var(--ink2);font-size:14.5px}
+  ul.check li::before{content:"";position:absolute;left:0;top:11px;width:13px;height:13px;border-radius:50%;border:1.5px solid var(--blue);background:radial-gradient(circle,var(--blue) 0 3px,transparent 3px)}
+  ul.arrow{list-style:none;margin-top:12px}
+  ul.arrow li{position:relative;padding:5px 0 5px 24px;color:var(--ink2);font-size:14.5px}
+  ul.arrow li::before{content:"→";position:absolute;left:0;color:var(--blue);font-weight:700}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;margin:26px 0 0;border:1px solid var(--line);border-radius:22px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(59,130,246,.08),rgba(255,255,255,.012) 40%)}
+  .hero::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,var(--blue),#8b5cf6,transparent)}
+  .hero-in{padding:40px 40px 30px;display:grid;grid-template-columns:1.25fr .95fr;gap:36px;align-items:center}
+  @media(max-width:900px){.hero-in{grid-template-columns:1fr;padding:28px 22px}}
+  .pill{display:inline-flex;align-items:center;gap:7px;font:700 10.5px/1 var(--mono);letter-spacing:1.6px;text-transform:uppercase;
+    color:var(--green);border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.09);padding:7px 11px;border-radius:999px}
+  .pill i{width:6px;height:6px;border-radius:50%;background:var(--green);display:block;box-shadow:0 0 0 3px rgba(52,211,153,.18)}
+  .metaline{font:700 11px/1.6 var(--mono);letter-spacing:1.7px;text-transform:uppercase;color:var(--muted);margin:16px 0 14px}
+  h1{font:800 clamp(30px,4.4vw,52px)/1.06 var(--sans);letter-spacing:-1.6px;text-wrap:balance}
+  .hero p.lede{color:var(--ink2);font-size:17px;margin-top:14px;max-width:48ch}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;font:600 14.5px/1 var(--sans);
+    padding:14px 20px;border-radius:11px;text-decoration:none;border:1px solid rgba(255,255,255,.14)}
+  .btn:hover{background:#2f6ee0}
+  .btn.ghost{background:rgba(255,255,255,.045);color:var(--ink)}
+  .btn.ghost:hover{background:rgba(255,255,255,.09)}
+  .heroart{border:1px solid var(--line);border-radius:16px;padding:26px;min-height:230px;position:relative;overflow:hidden;
+    background:radial-gradient(600px 260px at 70% 0%,rgba(59,130,246,.20),transparent),linear-gradient(180deg,#0b1020,#080c16)}
+  .heroart .k{font:700 10px/1 var(--mono);letter-spacing:2.4px;color:#7d8db3}
+  .heroart .t1{font:800 34px/1.02 var(--sans);letter-spacing:-1.2px;margin-top:14px}
+  .heroart .t2{font:800 34px/1.02 var(--sans);letter-spacing:-1.2px;color:var(--blue2)}
+  .heroart .spec{position:absolute;right:20px;top:20px;font:600 9.5px/1.9 var(--mono);color:#5b6c93;text-align:right}
+  .heroart .rule{margin-top:22px;height:1px;background:linear-gradient(90deg,rgba(59,130,246,.5),transparent)}
+  .heroart .foot{display:flex;gap:16px;margin-top:14px;font:600 10px/1 var(--mono);letter-spacing:1.4px;color:#5b6c93;flex-wrap:wrap}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+  @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stats div{padding:18px 22px;border-right:1px solid var(--line)}
+  .stats div:last-child{border-right:none}
+  .stats .l{font:700 10px/1 var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--muted)}
+  .stats .v{font:600 15px/1.4 var(--sans);margin-top:8px}
+  .stats .v s{color:var(--muted);font-weight:400;margin-left:6px}
+
+  /* ---------- master cards ---------- */
+  .mcard{padding:24px}
+  .mcard .ico{width:34px;height:34px;border-radius:10px;background:var(--blue-dim);border:1px solid rgba(59,130,246,.28);
+    display:grid;place-items:center;font-size:16px;margin-bottom:14px}
+  .mcard h3{font:700 17px/1.3 var(--sans);letter-spacing:-.2px}
+  .mcard p{color:var(--muted);font-size:14px;margin-top:7px}
+  .mcard .foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);color:var(--blue2);font:600 13px/1.5 var(--sans)}
+
+  /* ---------- solves ---------- */
+  .solve{padding:18px 20px;font-size:15px;color:var(--ink2)}
+  .solve b{color:var(--ink)}
+  .solve small{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+
+  /* ---------- curriculum ---------- */
+  .curr{padding:26px 26px 10px}
+  details.mod{border-bottom:1px solid var(--line)}
+  details.mod:last-of-type{border-bottom:none}
+  details.mod > summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px 4px;position:relative}
+  details.mod > summary::-webkit-details-marker{display:none}
+  details.mod > summary::after{content:"⌄";margin-left:auto;color:var(--muted);font-size:16px;transform:translateY(-3px);transition:transform .2s}
+  details.mod[open] > summary::after{transform:rotate(180deg) translateY(2px)}
+  details.mod > summary:hover{background:rgba(255,255,255,.02)}
+  .mnum{font:700 11.5px/1.7 var(--mono);color:var(--muted);min-width:24px}
+  .mttl{font:600 15.5px/1.5 var(--sans)}
+  .mttl em{font-style:normal;color:var(--muted);font-weight:400;font-size:13px;display:block;margin-top:3px}
+  .mbody{padding:2px 4px 20px 42px}
+  .mbody li{list-style:none;color:var(--ink2);font-size:14px;padding:4px 0 4px 16px;position:relative}
+  .mbody li::before{content:"–";position:absolute;left:0;color:var(--muted)}
+  .mbody .src{margin-top:12px;font:600 11.5px/1.6 var(--mono);letter-spacing:.6px;color:var(--muted);border-left:2px solid rgba(59,130,246,.5);padding-left:10px}
+  .mbody .src b{color:var(--blue2);font-weight:700}
+  .act-row{display:flex;align-items:center;gap:12px;padding:20px 4px 8px;border-bottom:1px solid var(--line)}
+  .act-row .t{font:700 11px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--blue2)}
+  .act-row .d{color:var(--muted);font-size:13px}
+
+  /* ---------- chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:10px;padding:10px 14px;font:600 13.5px/1 var(--sans);color:var(--ink2)}
+  .chip.hot{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.10);color:var(--blue2)}
+
+  /* ---------- offer ---------- */
+  .offer{padding:30px;text-align:center}
+  .price{font:800 40px/1 var(--sans);letter-spacing:-1.4px}
+  .price s{font-size:20px;color:var(--muted);font-weight:400;margin-left:10px;letter-spacing:0}
+  .save{display:inline-block;margin-top:10px;font:700 11px/1 var(--mono);letter-spacing:1.4px;color:var(--green);
+    border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.09);padding:6px 10px;border-radius:999px}
+  .offer ul{max-width:600px;margin:22px auto 0;text-align:left}
+
+  /* ---------- internal ---------- */
+  .internal{margin-top:12px;border:1px dashed rgba(245,158,11,.4);border-radius:var(--r);background:rgba(245,158,11,.035);padding:26px}
+  .internal .flag{font:700 10.5px/1 var(--mono);letter-spacing:1.8px;text-transform:uppercase;color:var(--amber);margin-bottom:14px;display:inline-block;
+    border:1px solid rgba(245,158,11,.35);padding:6px 9px;border-radius:999px}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  th{font:700 10.5px/1 var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+  td b{color:var(--ink)}
+  td.n{font-family:var(--mono);color:var(--blue2);white-space:nowrap}
+
+  /* ---------- faq ---------- */
+  details.faq{border-bottom:1px solid var(--line)}
+  details.faq summary{list-style:none;cursor:pointer;padding:16px 4px;font:600 15px/1.5 var(--sans);display:flex}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";margin-left:auto;color:var(--muted)}
+  details.faq[open] summary::after{content:"–"}
+  details.faq p{padding:0 4px 18px;color:var(--ink2);font-size:14.5px;max-width:80ch}
+
+  footer{border-top:1px solid var(--line);margin-top:50px;padding:30px 0 60px;color:var(--muted);font-size:13px}
+  @media print{
+    body{background:#fff;color:#111}
+    header.top{display:none}
+    .card,.hero,.internal{border-color:#ccc;background:#fff}
+    details .mbody{display:block!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap" style="padding-top:26px">
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="hero-in">
+      <div>
+        <span class="pill"><i></i> Pre-order</span>
+        <div class="metaline">14 modules · ~55–65 hours · React · TypeScript · Next.js · System design</div>
+        <h1>Become a Frontend Engineer.<br>Not just a React developer.</h1>
+        <p class="lede">From shaky fundamentals to senior-level frontend engineering — and into mid &amp; senior interviews ready to prove it.</p>
+        <div class="cta-row">
+          <a class="btn" href="#offer">Pre-order Now &nbsp;2,000 EGP <span>→</span></a>
+          <a class="btn ghost" href="#curriculum">See the curriculum</a>
+        </div>
+      </div>
+      <div class="heroart">
+        <div class="spec">01 RENDER<br>02 STATE<br>03 DESIGN</div>
+        <div class="k">CATALYST · TECH ARM · SENIOR</div>
+        <div class="t1">Frontend</div>
+        <div class="t2">Mastery</div>
+        <div class="rule"></div>
+        <div class="foot"><span>BROWSER</span><span>REACT</span><span>TYPESCRIPT</span><span>NEXT.JS</span><span>INTERVIEW</span></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div><div class="l">Price</div><div class="v">2,000 EGP <s>4,000 EGP</s></div></div>
+      <div><div class="l">Format</div><div class="v">Recorded — new modules weekly</div></div>
+      <div><div class="l">Modules</div><div class="v">14</div></div>
+      <div><div class="l">Language</div><div class="v">Arabic</div></div>
+    </div>
+  </div>
+
+  <!-- ================= WHAT YOU'LL MASTER ================= -->
+  <section class="sec" id="master">
+    <div class="sec-head"><b class="bar"></b><span class="num">01</span><h2>What you'll master</h2></div>
+    <p class="sec-sub">The things that separate you from everyone else.</p>
+    <div class="grid g3">
+      <div class="card mcard">
+        <div class="ico">🌐</div>
+        <h3>Engineer the browser</h3>
+        <p>Not "it works" — you know why it works.</p>
+        <ul class="check">
+          <li>Rendering pipeline, reflow &amp; compositing</li>
+          <li>Event loop, tasks &amp; microtasks</li>
+          <li>Closures, prototypes, memory &amp; leaks</li>
+        </ul>
+        <div class="foot">The "why" round is where mid becomes senior.</div>
+      </div>
+      <div class="card mcard">
+        <div class="ico">⚛️</div>
+        <h3>Architect the app</h3>
+        <p>React and Next.js at production depth.</p>
+        <ul class="check">
+          <li>Reconciliation, Fiber, lanes &amp; re-renders</li>
+          <li>Server vs client state — and who owns it</li>
+          <li>RSC, SSR, SSG, ISR: choosing, not guessing</li>
+        </ul>
+        <div class="foot">Typed end to end, tested, measured.</div>
+      </div>
+      <div class="card mcard">
+        <div class="ico">🎯</div>
+        <h3>Interview mastery</h3>
+        <p>We don't hand you answers. We train the rounds.</p>
+        <ul class="check">
+          <li>Live UI coding — build it, no libraries, on the clock</li>
+          <li>Frontend system design with the RADIO framework</li>
+          <li>Behavioral, CV &amp; salary negotiation</li>
+        </ul>
+        <div class="foot">+ A recorded mock interview, top-company style.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= IS THIS FOR YOU ================= -->
+  <section class="sec" id="fit">
+    <div class="sec-head"><b class="bar"></b><span class="num">02</span><h2>Is this for you?</h2></div>
+    <div class="grid g2">
+      <div class="card mcard">
+        <h3>Who is this for?</h3>
+        <ul class="check">
+          <li>You build React screens but can't explain what React does</li>
+          <li>Self-taught or bootcamp devs with gaps in fundamentals</li>
+          <li>Junior &amp; mid developers aiming at a senior title</li>
+          <li>CS students who want the frontend track done properly</li>
+          <li>Anyone who keeps failing the live-coding or design round</li>
+        </ul>
+        <div style="margin-top:16px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink2)">
+          <b style="color:var(--ink)">Only prerequisite:</b> solid knowledge of ANY programming language + basic HTML/CSS. No professional frontend experience needed.
+        </div>
+      </div>
+      <div>
+        <div class="card mcard" style="margin-bottom:16px">
+          <h3>Not for you if</h3>
+          <ul class="arrow">
+            <li>You've never programmed — start with Foundations of Tech</li>
+            <li>You want a "build 10 projects" tutorial marathon</li>
+            <li>You want the AI workflow — that's <b class="blue">AI for Frontend</b></li>
+          </ul>
+        </div>
+        <div class="card mcard">
+          <h3>After this program, you'll</h3>
+          <ul class="arrow">
+            <li>Explain what the browser and React actually do</li>
+            <li>Build accessible production components under time pressure</li>
+            <li>Own the data layer: caching, optimistic UI, routing</li>
+            <li>Design a frontend system out loud and defend trade-offs</li>
+            <li>Hit a performance budget and prove it with numbers</li>
+            <li>Walk into a senior interview — and negotiate the offer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT IT SOLVES ================= -->
+  <section class="sec" id="solves">
+    <div class="sec-head"><b class="bar" style="background:var(--red)"></b><span class="num">03</span><h2>What it solves</h2></div>
+    <div class="grid g2">
+      <div class="card solve">Your screen works — so why does it re-render forty times and drop frames?<small>You've never opened the profiler and read a flame chart.</small></div>
+      <div class="card solve">You use React every day — can you explain reconciliation, keys, and what a hook <b>is</b>?<small>"It just works" is a junior answer.</small></div>
+      <div class="card solve">"Build an autocomplete in 40 minutes. No libraries."<small>Debounce, keyboard nav, ARIA, race conditions, caching — on the clock.</small></div>
+      <div class="card solve">"Design the Facebook news feed frontend."<small>Most candidates freeze in the first two minutes because they have no framework.</small></div>
+    </div>
+  </section>
+
+  <!-- ================= CURRICULUM ================= -->
+  <section class="sec" id="curriculum">
+    <div class="card curr">
+      <div class="sec-head"><b class="bar"></b><span class="num">04</span><h2>Curriculum</h2></div>
+      <p class="sec-sub">14 modules · three acts · click any module to expand</p>
+
+      <div class="act-row"><span class="t">Act I · Modules 1–4</span><span class="d">The platform under the framework</span></div>
+
+      <details class="mod">
+        <summary><span class="mnum">01</span><span class="mttl">Foundations — What Companies Actually Test<em>The map before the journey</em></span></summary>
+        <div class="mbody"><ul>
+          <li>The frontend hiring map: who hires, for what, at which level</li>
+          <li>Junior vs mid vs senior — what actually changes in the questions</li>
+          <li>The five interview formats: quiz · JS utilities · UI coding · system design · behavioral</li>
+          <li>Diagnostic: 30 questions that show you what you don't know yet</li>
+          <li>How to study this program (and how not to)</li>
+          <li>Workspace, Git and repo conventions we'll use throughout</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">02</span><span class="mttl">The Browser as a Runtime<em>Everything a framework hides from you</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Semantic HTML and the accessibility tree</li>
+          <li>CSS box model, formatting contexts, positioning &amp; stacking</li>
+          <li>Flexbox, Grid, cascade layers, container queries</li>
+          <li>The rendering pipeline: parse → DOM/CSSOM → layout → paint → composite</li>
+          <li>Reflow vs repaint · compositing layers · what makes animation cheap</li>
+          <li>The event loop: call stack, tasks, microtasks, rendering frames</li>
+          <li>DOM APIs, querying cost, event delegation, capture &amp; bubble</li>
+          <li>HTTP/1 · 2 · 3, caching directives, CORS, cookies, storage</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">03</span><span class="mttl">JavaScript, Deeply<em>+ you rebuild the interview utility library from zero</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Execution contexts, scope chains, closures</li>
+          <li><code>this</code>, prototypes, classes and what they compile to</li>
+          <li>Modules, bundling and the import graph</li>
+          <li>Async: callbacks → promises → async/await · error handling</li>
+          <li>Memory, garbage collection, leak patterns, WeakMap</li>
+          <li>Patterns: module, singleton, proxy, observer, factory, prototype</li>
+          <li><b>Build from scratch:</b> debounce · throttle · deepClone · curry · EventEmitter · Promise.all</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">04</span><span class="mttl">TypeScript for Frontend Engineers<em>Types that make a codebase reviewable</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Structural vs nominal typing — why TS behaves the way it does</li>
+          <li>Generics, constraints and inference</li>
+          <li>Narrowing, type guards, discriminated unions, never</li>
+          <li>Utility, mapped, conditional and template literal types</li>
+          <li>Function overloads, variance, tuple types</li>
+          <li>Typing async data and public API surfaces</li>
+          <li><code>tsconfig</code> strictness — and when types stop paying for themselves</li>
+        </ul></div>
+      </details>
+
+      <div class="act-row"><span class="t">Act II · Modules 5–10</span><span class="d">From components to a product</span></div>
+
+      <details class="mod">
+        <summary><span class="mnum">05</span><span class="mttl">React, Deeply<em>The mental model, not the API tour</em></span></summary>
+        <div class="mbody"><ul>
+          <li>The render model: what triggers a render, what a render costs</li>
+          <li>Anatomy of a re-render · React Fiber · rendering phases · lanes</li>
+          <li>Reconciliation and keys — why lists break</li>
+          <li>Hooks: state, effects, refs, and the closure trap</li>
+          <li>Context and the re-render blast radius</li>
+          <li>Composition patterns: compound, provider, render props, HOC, hooks</li>
+          <li>Error boundaries, portals, Suspense, concurrent rendering</li>
+          <li>What React 19 changed: actions, <code>use()</code>, the compiler</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">06</span><span class="mttl">React + TypeScript in Production<em>The module a team lead will judge you on</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Typing props, children, refs and DOM events</li>
+          <li>Generic and polymorphic components · component variants</li>
+          <li>Typed hooks and reducers · discriminated action types</li>
+          <li>Discriminated state instead of five booleans</li>
+          <li>Typed forms and API layers · schema validation with Zod</li>
+          <li>Context and selector types · helpful type utilities</li>
+          <li><code>use()</code> hook and Suspense types</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">07</span><span class="mttl">UI Engineering: Components &amp; Accessibility<em>The component gauntlet</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Component API design: data · event · config · style · slot props</li>
+          <li>Controlled vs uncontrolled, and when each breaks</li>
+          <li>Design tokens and a small design system</li>
+          <li><b>Built from scratch, no libraries:</b> modal · dropdown · tabs · autocomplete · toast</li>
+          <li>Keyboard paths, focus management, ARIA roles &amp; live regions</li>
+          <li>Observer APIs: Intersection, Mutation, Resize · infinite scroll</li>
+          <li>List virtualization implemented by hand — pooling and recycling</li>
+          <li>Forms, validation and error UX · responsive behaviour</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">08</span><span class="mttl">Data, State &amp; Routing<em>The distinction that separates mid from senior</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Server state vs client state — who owns what</li>
+          <li>State anti-patterns: derived state, redundant state, cascading effects</li>
+          <li>Modeling state: finite states, state machines, step flows</li>
+          <li>TanStack Query: caching, invalidation, optimistic updates, race conditions</li>
+          <li>TanStack Router: type-safe routes, loaders, search params as state</li>
+          <li>Zustand / Redux Toolkit / atomic stores — and when each is the wrong choice</li>
+          <li>Data normalization, undo/redo, <code>useSyncExternalStore</code></li>
+          <li>Real-time: websockets, server-sent events, polling trade-offs</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">09</span><span class="mttl">Next.js &amp; Rendering Architecture<em>Choosing a rendering strategy, out loud</em></span></summary>
+        <div class="mbody"><ul>
+          <li>App Router: layouts, route groups, slots, default routes</li>
+          <li>Server Components vs Client Components — the boundary rules</li>
+          <li>CSR / SSR / SSG / ISR / streaming and how to choose</li>
+          <li>Server actions, forms, <code>useTransition</code>, non-blocking updates</li>
+          <li>The data access layer · per-request caching · revalidation tags</li>
+          <li>Route handlers, middleware, edge runtime</li>
+          <li>Auth and session patterns · protected routes</li>
+          <li>SEO, metadata, sitemaps — and when NOT to reach for Next.js</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">10</span><span class="mttl">Performance, Testing &amp; Security<em>The senior tax</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Core Web Vitals: LCP, INP, CLS · TTFB, FCP · legacy metrics and their traps</li>
+          <li>Measuring: Performance API, PerformanceObserver, Lighthouse, RUM, CrUX</li>
+          <li>Waterfalls and flame charts · setting a performance budget</li>
+          <li>Improving TTFB &amp; FCP: compression, protocols, preload, sequence chains</li>
+          <li>Improving LCP: image formats, responsive images, caching headers</li>
+          <li>Improving CLS &amp; INP: size hints, yielding the main thread</li>
+          <li>React tuning: memo, useMemo/useCallback, transitions, deferred values</li>
+          <li>Testing: Vitest, Testing Library, mocks &amp; spies, Playwright, MSW</li>
+          <li>Security: XSS, CSRF, CSP, referrer policy, token storage</li>
+        </ul></div>
+      </details>
+
+      <div class="act-row"><span class="t">Act III · Modules 11–14</span><span class="d">Design it. Ship it. Get the offer.</span></div>
+
+      <details class="mod">
+        <summary><span class="mnum">11</span><span class="mttl">Frontend System Design<em>The round nobody in Arabic teaches</em></span></summary>
+        <div class="mbody"><ul>
+          <li>The <b>RADIO</b> framework: Requirements → Architecture → Data model → Interface → Optimizations</li>
+          <li>The six evaluation axes interviewers actually score you on</li>
+          <li>Client architecture &amp; data flow · treating the server as a black box</li>
+          <li>API and component contract design</li>
+          <li>Optimization dimensions: performance, accessibility, i18n, security, SEO</li>
+          <li>Scaling a codebase: modular boundaries, monorepo, micro-frontends and their real cost</li>
+          <li><b>Drilled on:</b> news feed · autocomplete · chat · e-commerce · dashboard · collaborative editor</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">12</span><span class="mttl">The Capstone: Assemble &amp; Ship<em>Every mini-project becomes one product</em></span></summary>
+        <div class="mbody"><ul>
+          <li>You don't start from an empty folder — you assemble what you already built</li>
+          <li>The components from module 7, the data layer from module 8, the rendering strategy from module 9</li>
+          <li>Wire auth, protected routes and the application flow end to end</li>
+          <li>Hold the performance budget you set in module 10 — and prove it</li>
+          <li>Accessibility pass: keyboard paths, ARIA, contrast</li>
+          <li>Green CI: Vitest + Playwright, deployed to a live URL</li>
+          <li>Write the architecture story — the five-minute version you'll tell in module 14</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">13</span><span class="mttl">Interview Preparation<em>Trained by format, not by topic</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Quiz round: the 200-question "why" bank</li>
+          <li>JS utilities round: implement under time, then optimize</li>
+          <li>UI coding round: timed component builds with a rubric</li>
+          <li>System design round: RADIO rehearsals, out loud</li>
+          <li>Thinking out loud — narrating trade-offs without rambling</li>
+          <li>Behavioral answers with STAR and real trade-offs</li>
+          <li>Take-home strategy: scope, README, what to cut</li>
+        </ul></div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">14</span><span class="mttl">Mock Interviews &amp; Getting the Offer<em>Where the money is decided</em></span></summary>
+        <div class="mbody"><ul>
+          <li>Recorded mock interviews in top-company format, with written feedback</li>
+          <li>CV and LinkedIn for frontend engineers — what recruiters scan for</li>
+          <li>Portfolio review: what to show, what to delete</li>
+          <li>Reading a job description for the level it's really hiring</li>
+          <li>Salary bands and negotiation: Egypt → Gulf → remote</li>
+          <li>Offer comparison, counter-offers, and the first 90 days</li>
+        </ul></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= STACK ================= -->
+  <section class="sec" id="stack">
+    <div class="sec-head"><b class="bar"></b><span class="num">05</span><h2>Technologies you'll learn</h2></div>
+    <p class="sec-sub">Don't know them? Perfect. We teach everything.</p>
+    <div class="chips">
+      <div class="chip">HTML &amp; ARIA</div>
+      <div class="chip">Tailwind CSS</div>
+      <div class="chip">shadcn/ui</div>
+      <div class="chip hot">JavaScript</div>
+      <div class="chip hot">TypeScript</div>
+      <div class="chip hot">React 19</div>
+      <div class="chip hot">Next.js App Router</div>
+      <div class="chip">TanStack Router</div>
+      <div class="chip">TanStack Query</div>
+      <div class="chip">Zustand · Redux Toolkit</div>
+      <div class="chip">Zod</div>
+      <div class="chip">Vitest · Testing Library</div>
+      <div class="chip">Playwright · MSW</div>
+      <div class="chip">Chrome DevTools · Lighthouse</div>
+      <div class="chip">Git · CI · Vercel</div>
+    </div>
+  </section>
+
+  <!-- ================= WHAT YOU'LL BUILD ================= -->
+  <section class="sec" id="build">
+    <div class="sec-head"><b class="bar"></b><span class="num">06</span><h2>What you'll build</h2></div>
+    <p class="sec-sub">Twelve small builds that turn out to be one product.</p>
+
+    <div class="card mcard" style="margin-bottom:16px">
+      <h3 style="font-size:20px">The project: a job board, engineered</h3>
+      <p style="font-size:15px;max-width:74ch;color:var(--ink2)">Every module ships its own small, finishable piece — a utility library, a component, a data layer, a rendering strategy. They're not disconnected demos: each one is a slice of the same product, so by module 12 you assemble them into a real application instead of starting from an empty folder.</p>
+      <p style="font-size:14px;max-width:74ch;color:var(--muted);margin-top:10px">A job board earns its place: a listings feed that needs virtualization, search that needs debounce and autocomplete, filters that belong in the URL, applications that need optimistic updates, public pages that need SEO and a dashboard that needs auth. It's also the exact shape of the system-design questions in module 11.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card mcard">
+        <div class="kick">Ships along the way</div>
+        <ul class="check" style="margin-top:14px">
+          <li><b>M3</b> — a tested utility library: debounce, throttle, deepClone, curry, EventEmitter, Promise.all</li>
+          <li><b>M4</b> — the typed domain model: jobs, employers, applications, with schema validation</li>
+          <li><b>M5</b> — the listings feed in React, rendered and profiled</li>
+          <li><b>M6</b> — typed primitives: buttons, fields, variants, generic components</li>
+          <li><b>M7</b> — the gauntlet: search autocomplete, filter dropdown, apply modal, tabs, toasts, virtualized list</li>
+          <li><b>M8</b> — the data layer: caching, optimistic apply, filters as URL state</li>
+          <li><b>M9</b> — the Next.js version: public SEO pages vs authenticated dashboard</li>
+          <li><b>M10</b> — a measured before/after, plus a real test suite in CI</li>
+          <li><b>M11</b> — six system design write-ups, including one for this product</li>
+          <li><b>M12</b> — the assembled app, deployed, with the architecture story written</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card mcard" style="margin-bottom:16px">
+          <h3>Every exercise comes as three branches</h3>
+          <ul class="arrow" style="margin-top:12px">
+            <li><b>Starter</b> — the scaffold and the failing tests. Nothing else.</li>
+            <li><b>Guided</b> — the same, plus TODOs, hints and the reasoning, for when you're stuck.</li>
+            <li><b>Solution</b> — the finished implementation, so you can diff your work against mine.</li>
+          </ul>
+          <div class="foot">Struggle first, hint second, compare third — the order that actually builds recall.</div>
+        </div>
+        <div class="card mcard">
+          <h3>What you end up with</h3>
+          <ul class="check" style="margin-top:12px">
+            <li>A public repo with a clean commit history</li>
+            <li>A live URL that holds a performance budget</li>
+            <li>Ten standalone artifacts you can talk through in an interview</li>
+            <li>One product you can defend end to end</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="sec" id="faq">
+    <div class="sec-head"><b class="bar"></b><span class="num">07</span><h2>Questions</h2></div>
+    <div class="card" style="padding:8px 24px">
+      <details class="faq"><summary>Do I need frontend experience?</summary><p>No. You need solid knowledge of any programming language and basic HTML/CSS exposure. We rebuild the browser and JavaScript layer properly before React appears in module 5.</p></details>
+      <details class="faq"><summary>Isn't this just another React course?</summary><p>React is 2 of 14 modules. The program is the browser, JavaScript, TypeScript, data architecture, rendering strategy, performance, testing, security, system design and the interview itself. A React course teaches you to build a screen; this teaches you to be the engineer who owns it.</p></details>
+      <details class="faq"><summary>What about AI? Everyone says frontend is being automated.</summary><p>AI writes components. It doesn't decide where the boundary goes, which state is server state, or why your INP is 400ms — and interviewers know it. Catalyst teaches the AI workflow in its own program, <b>AI for Frontend</b>. This one builds the engineering judgment that makes that workflow safe.</p></details>
+      <details class="faq"><summary>What is the mock interview exactly?</summary><p>A recorded interview in the format top companies use — a live coding round and a frontend system design round — followed by written feedback on what to fix before the real thing.</p></details>
+      <details class="faq"><summary>Recorded or live?</summary><p>Recorded so you move at your own pace, with new modules dropping weekly during pre-order, plus a weekly live Q&amp;A session and a WhatsApp support group.</p></details>
+      <details class="faq"><summary>Why pay when YouTube is free?</summary><p>YouTube has every topic and no order, no rubric, no one grading whether your answer would pass. What you're buying is sequence, depth, and the interview layer — the drills, the question banks and the mock — which don't exist for free in Arabic.</p></details>
+      <details class="faq"><summary>What if I change my mind?</summary><p>7-day money-back guarantee. One WhatsApp message, no forms.</p></details>
+    </div>
+  </section>
+
+  <footer>
+    Frontend Mastery — curriculum draft.
+  </footer>
+</div>
+
+<script>
+  // one open module at a time inside each act, but allow free toggling elsewhere
+  document.querySelectorAll('details.mod').forEach(d=>{
+    d.addEventListener('toggle',()=>{
+      if(!d.open) return;
+      document.querySelectorAll('details.mod').forEach(o=>{ if(o!==d) o.open=false; });
+    });
+  });
+  // print: open everything
+  window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>d.open=true));
+</script>
+</body>
+</html>
