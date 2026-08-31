@@ -264,7 +264,7 @@
     <ul class="plist q wide" style="max-width:none">
       <li class="frag">Your screen works — so why does it re-render forty times and drop frames?<small>You've never opened the profiler and read a flame chart</small></li>
       <li class="frag">You use React every day — can you explain reconciliation, keys, and what a hook actually is?<small>"It just works" is a junior answer</small></li>
-      <li class="frag">"Build an autocomplete in 40 minutes. No libraries."<small>Debounce, keyboard nav, ARIA, race conditions, caching — under a timer</small></li>
+      <li class="frag">"Build an autocomplete. No libraries."<small>Debounce, keyboard nav, ARIA, race conditions, caching — under a timer</small></li>
       <li class="frag">"Design the Facebook news feed frontend."<small>Most candidates freeze in the first two minutes because they have no framework</small></li>
       <li class="frag">You got the interview — and the offer came in 30% under market.<small>Nobody taught you to negotiate with proof</small></li>
     </ul>
@@ -482,7 +482,7 @@
       <li class="frag"><b class="n">M12</b>Assemble everything, wire auth, deploy, defend the architecture<span class="br">module-12/capstone</span></li>
     </ul>
     <p class="key frag" style="margin-top:12px; padding:10px 18px; font-size:min(1.72vw,19px)">One repo, three branches per slice — <span class="mono">start</span> is failing tests with no hints, <span class="mono">guided</span> adds numbered TODOs, <span class="mono">solution</span> is green with the trade-offs written down. Nothing is a throwaway demo: every slice stays in the product.</p>
-    <aside class="notes"><div class="t">The through-line</div><p>This is the slide that separates us from a playlist. Twelve exercises, one product — the module 7 autocomplete is still in the app at module 12, and it still uses the debounce they wrote in module 3.</p><p>Two stages are built and verified today (module 3 and module 7 autocomplete, ticked). The remaining ten are ~1.5 hours of authoring each and they get built in the sprint that owns their module — the lesson is written against the failing test, not after it.</p><p>Modules 1, 11, 13 and 14 have no slice on purpose: module 1 just teaches the three-command workflow, module 11 uses the CommerceOS repo, and 13–14 drill against the stages that already exist.</p></aside>
+    <aside class="notes"><div class="t">The through-line</div><p>This is the slide that separates us from a playlist. Twelve exercises, one product — the module 7 autocomplete is still in the app at module 12, and it still uses the debounce they wrote in module 3.</p><p>Two stages are built and verified today (module 3 and module 7 autocomplete, ticked). The remaining ten get built in the sprint that owns their module — the lesson is written against the failing test, not after it.</p><p>Modules 1, 11, 13 and 14 have no slice on purpose: module 1 just teaches the three-command workflow, module 11 uses the CommerceOS repo, and 13–14 drill against the stages that already exist.</p></aside>
   </section>
 
   <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">CATALYST · CURRICULUM</div><div class="cx-page"><b>16</b> / 24</div><!--/catalyst-brand:chrome-->
@@ -506,7 +506,7 @@
     <h2>Catalyst house format</h2>
     <div class="stats">
       <div><b>14</b><span>Modules</span></div>
-      <div><b>~55–65 h</b><span>Recorded</span></div>
+      <div><b>129</b><span>Lessons</span></div>
       <div><b>Weekly</b><span>Live Q&amp;A</span></div>
       <div><b>Arabic</b><span>Language</span></div>
       <div><b>Lifetime</b><span>Access &amp; updates</span></div>
@@ -598,17 +598,17 @@
     <h2>The prep is scoped, not guessed</h2>
     <div class="stats">
       <div><b>12</b><span>Source courses</span></div>
-      <div><b>~57.5 h</b><span>Reference runtime</span></div>
+      <div><b>14</b><span>Modules mapped</span></div>
       <div><b>~60%</b><span>Technical spine sourced</span></div>
       <div><b>10</b><span>Topics built from zero</span></div>
     </div>
     <div class="row" style="margin-top:20px">
-      <div class="chip frag a" style="text-align:left; max-width:25ch">Heaviest feeds<small>Next.js ~11.5 h · React ~15 h · data &amp; state ~9 h · quality ~6 h</small></div>
+      <div class="chip frag a" style="text-align:left; max-width:25ch">Heaviest feeds<small>React and Next.js carry the most sourced material · data &amp; state next · quality mostly original</small></div>
       <div class="chip frag g" style="text-align:left; max-width:25ch">Best 1:1 match<small><b>React &amp; TypeScript v3</b> → our M6, almost lesson for lesson</small></div>
       <div class="chip frag w" style="text-align:left; max-width:25ch">Highest leverage asset<small><b>Advanced Web Dev Quiz</b>, 30 questions → M1 diagnostic <i>and</i> M13 drill bank</small></div>
     </div>
     <p class="key frag">Full module-by-module map lives in <span class="mono">curriculum/sources.md</span> — every section of every course, assigned to a module.</p>
-    <aside class="notes"><div class="t">Source map</div><p>I pulled the full table of contents of twelve master.dev courses and assigned every section to a module, so recording prep is a checklist rather than a guess. Roughly 57 hours of English reference behind a 55–65 hour Arabic program.</p><p>Three things the mapping surfaced. One: the TanStack course is Start-centric — server functions, middleware, hydration — so only about forty minutes of it applies if M8 teaches Router standalone; we decide whether to add a Start bonus. Two: we cut React Performance v2 and Web Performance Fundamentals v2 from the plan — that is ten source hours gone, and it moves React's render model into M5 and the whole measurement toolchain into M10 as original material. Three: the Advanced Web Development Quiz maps almost one-to-one onto the mid/senior "why" round, so it gets used twice — as the module 1 diagnostic and as the module 13 question bank.</p></aside>
+    <aside class="notes"><div class="t">Source map</div><p>I pulled the full table of contents of twelve master.dev courses and assigned every section to a module, so recording prep is a checklist rather than a guess. The English reference material sits behind a longer Arabic program — we cut their project scaffolding and add the interview framing.</p><p>Three things the mapping surfaced. One: the TanStack course is Start-centric — server functions, middleware, hydration — so only a small slice of it applies if M8 teaches Router standalone; we decide whether to add a Start bonus. Two: we cut React Performance v2 and Web Performance Fundamentals v2 from the plan — that is ten source hours gone, and it moves React's render model into M5 and the whole measurement toolchain into M10 as original material. Three: the Advanced Web Development Quiz maps almost one-to-one onto the mid/senior "why" round, so it gets used twice — as the module 1 diagnostic and as the module 13 question bank.</p></aside>
   </section>
 
   <!-- 22 · WHAT'S ORIGINAL -->
@@ -642,7 +642,7 @@
         </ul>
       </div>
     </div>
-    <p class="key t frag">The English market has <b>one 38-minute</b> frontend system design walkthrough. The interview layer is the moat — and it's the half nobody can copy off a syllabus.</p>
+    <p class="key t frag">The English market has <b>one</b> frontend system design walkthrough. The interview layer is the moat — and it's the half nobody can copy off a syllabus.</p>
     <aside class="notes"><div class="t">The gap list</div><p>These ten are the ones with no source course anywhere in the reference set — roughly 40% of the program, up from eight after we cut React Performance v2 and Web Performance Fundamentals v2. That's not a problem, it's the product. Anyone can re-record a React course. Nobody in Arabic has the interview layer: the utility library, the component gauntlet, RADIO with the six evaluation axes, and a real recorded mock. Sources for the pieces we do write: MDN and the WAI-ARIA authoring patterns for accessibility, GreatFrontEnd's question lists for the drills, and Backend Mastery's module 11–13 structure for the career block.</p></aside>
   </section>
 
