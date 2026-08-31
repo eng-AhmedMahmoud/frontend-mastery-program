@@ -11,6 +11,8 @@ frontend-mastery-program/
   curriculum/
     curriculum-deck.html    the 24-slide curriculum proposal
     sources.md              the 12 reference courses, mapped module by module
+    lms-structure.md        what the LMS expects per module and per lesson
+    lesson-map.md           all 14 modules broken into 129 lessons (draft)
   modules/
     01-foundations/
       deck.html             28 slides, chipped per lesson
@@ -24,6 +26,10 @@ frontend-mastery-program/
 ```
 
 ## Adding a module
+
+Start from `curriculum/lesson-map.md` — it already names the module's lessons and which one
+carries the exercise stage. `curriculum/lms-structure.md` is the content contract every
+lesson has to satisfy before it can be uploaded.
 
 1. `mkdir modules/<NN>-<slug>` — two-digit number so the folder list sorts into program
    order, then a slug that says what the module is about, not what number it is.
