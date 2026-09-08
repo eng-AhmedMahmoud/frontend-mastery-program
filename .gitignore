@@ -1,0 +1,9 @@
+# Text dumps some tooling drops beside a deck. Derived from the HTML, so they drift.
+modules/**/*.md
+!modules/**/README.md
+
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example

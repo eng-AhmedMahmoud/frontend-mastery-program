@@ -1,103 +1,184 @@
 # Frontend Mastery — program material
 
-Thirteen modules. Everything a module needs lives in one folder, so module 9 can be built
-without opening module 2.
+Thirteen modules that take a working frontend developer to an offer. This repository holds
+the **material**: the module decks, the program page and the shared assets. The code you
+write lives in a second repository, and the two are used side by side.
 
-```
-frontend-mastery-program/          tracked — everything here is safe to hand out
-  program/
-    program-page.html       the public program page
-  curriculum/
-    curriculum-page.html    the student-facing curriculum — all 123 lessons, no sourcing
-  modules/
-    01-foundations/
-      deck.html             28 slides, chipped per lesson
-      diagnostic-deck.html  50 slides — the twelve questions, answered and animated
-    02-browser-runtime/
-      deck.html
-    …                       one folder per module, added as it is written
-  repo/
-    jobboard-deck.html      the exercise repo, explained
-  assets/                   screenshots and recordings, shared by every deck
+| Repository | What it is |
+|---|---|
+| **this one** | Decks and pages — one folder per module. Read-only for students. |
+| [`frontend-mastery-jobboard`](https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard) | **Rasmi**, the job board you build across the whole program. Every exercise is a branch here. |
 
-_internal/                         gitignored — never leaves this machine
-  MAP.html                  the workspace index
-  program/internal-plan.html      pricing, margins, sprint plan
-  curriculum/
-    curriculum-deck.html    the 24-slide curriculum proposal
-    sources.md              the reference courses, mapped module by module
-    lms-structure.md        what the LMS expects per module and per lesson
-    lesson-map.md           all 13 modules broken into 123 lessons (draft)
-  modules/01-foundations/
-    script.html             the recording script — lesson map, figures, spoken text
-    deck-ar.html            how to explain module 1, slide by slide, in Egyptian Arabic
-```
+---
 
-Paths below are written from whichever tree the file lives in. A deck in
-`frontend-mastery-program/` never links into `_internal/`; the internal files link out
-across the boundary, not the other way round.
-
-## Sourcing stays internal
-
-Nothing a student can open ever names or links where the material came from — no source
-course, no platform, no author, no URL to one. That means `modules/*/deck.html`,
-`program/program-page.html`, `curriculum/curriculum-page.html`, `repo/jobboard-deck.html`,
-every workbook, and every LMS lesson block.
-
-- **Internal only:** everything under `_internal/`, which is gitignored. The source map
-  lives there and nowhere else.
-- **Student-facing references,** when a lesson needs one, point at primary material only —
-  MDN, web.dev, the spec, framework docs, our own repo. Never at a course.
-- Before shipping a module, run the check below; it must print nothing.
+## Quick start
 
 ```sh
-grep -rniE "master\.dev|frontend ?masters|greatfrontend|bigfrontend|epic ?react|frontendexpert|https?://" \
-  modules/*/deck.html program/program-page.html \
-  curriculum/curriculum-page.html repo/*.html
+# 1 · the material
+git clone https://github.com/eng-AhmedMahmoud/frontend-mastery-program.git
+
+# 2 · the exercise repo, cloned next to it
+git clone https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard.git
+cd frontend-mastery-jobboard && pnpm install
 ```
 
-## Adding a module
-
-Start from `_internal/curriculum/lesson-map.md` — it already names the module's lessons and
-which one carries the exercise stage. `_internal/curriculum/lms-structure.md` is the content
-contract every lesson has to satisfy before it can be uploaded.
-
-1. `mkdir modules/<NN>-<slug>` — two-digit number so the folder list sorts into program
-   order, then a slug that says what the module is about, not what number it is.
-2. Write `_internal/modules/<NN>-<slug>/script.html` first. The deck is built from it, not
-   the other way round: the lesson map, the runtime budget and the figures all start there.
-   Scripts are internal — they carry sourcing, timings and the words said off camera.
-3. Write `deck.html`. Lift the figures out of the script rather than redrawing them —
-   module 1's six figures moved across as inline SVG, recoloured by a five-line map.
-4. Register the deck with its chip in the brand generator and run it from the repo root.
-   The generator lives in `brand/`, which is local tooling and is not committed — decks are
-   committed already branded.
-
-Two files per module is the rule. A module that needs a third — a workbook, a diagram
-source — puts it in the same folder, never in a shared `misc/`.
-
-## Assets
-
-`assets/` is shared on purpose: the job board screenshots appear in the module 1 deck, the
-module 2 deck and the repo deck, and there should be exactly one copy of each. Decks
-reference them by relative path — `../../assets/…` from a module, `../assets/…` from
-`repo/` — so a deck only works while it sits next to this folder.
-
-Module-specific artwork that nothing else will ever use belongs in that module's folder.
-
-## Chips
-
-The brand generator gives every slide a `MODULE X · VIDEO Y` chip. Its registry sets a
-deck's default; a slide overrides it with `data-chip="MODULE 01 · VIDEO 4"`. Module 1's deck uses
-the override on every slide, because it is the only module with a confirmed lesson map — the
-chip tracks which of its seven lessons the slide belongs to.
-
-## Preview
-
-From the repo root:
+Open a deck by opening the `.html` file in a browser — no build, no server, no dependencies.
+If your browser blocks local files, serve the folder instead:
 
 ```sh
-portless catalyst-slides -- sh -c 'python3 -m http.server "$PORT"'
+python3 -m http.server 8000    # then open http://localhost:8000/modules/01-foundations/deck.html
 ```
 
-Then open `/frontend-mastery-program/modules/01-foundations/deck.html`.
+### Reading a deck
+
+| Key | What it does |
+|---|---|
+| `→` `←` | next / previous slide — and inside an animated figure, one step at a time |
+| `M` | slide menu |
+| `S` | speaker notes |
+| `F` | fullscreen |
+| `P` | print — flattens every animation step so the PDF shows the finished figure |
+
+---
+
+## What is in here
+
+```
+program/
+  program-page.html       the program at a glance
+modules/
+  01-foundations/
+    deck.html             what companies actually test — 28 slides
+    diagnostic-deck.html  the diagnostic, answered and animated — 50 slides
+  02-browser-runtime/
+    deck.html             from HTML to pixels — 24 slides
+  …                       one folder per module, added as it is written
+repo/
+  jobboard-deck.html      the exercise repo, explained end to end
+assets/                   screenshots and recordings, shared by every deck
+```
+
+Everything a module needs lives in its own folder, so module 9 can be built without opening
+module 2. Decks reference `assets/` by relative path — keep the tree intact rather than
+copying a single deck somewhere else.
+
+### The modules
+
+| # | Module | # | Module |
+|---:|---|---:|---|
+| 01 | Foundations — what companies actually test | 08 | Data, caching and the network layer |
+| 02 | The browser as a runtime | 09 | Rendering, routing and the meta-framework |
+| 03 | JavaScript, deeply | 10 | Performance, measured |
+| 04 | TypeScript for frontend engineers | 11 | Frontend system design |
+| 05 | React, properly | 12 | The capstone |
+| 06 | Typed UI components | 13 | Drills, the loop and the offer |
+| 07 | UI engineering — the hard components | | |
+
+---
+
+## How the program is worked
+
+**Module 1, lesson 5** is a twelve-question diagnostic. Every question you miss names the
+module that fixes it, so your score is a route through the program, not a grade.
+
+**Module 1, lesson 7** is the first exercise. From then on every module ships a slice of the
+job board, and the slices are the same product: the `debounce` written in module 3 is still
+running inside the autocomplete in module 7, and both are still in the app deployed in
+module 12.
+
+### The exercise loop
+
+Exercises live in the job board repo. Every stage exists **three times**, with byte-identical
+tests — only the amount of implementation changes.
+
+| Branch | What is in it |
+|---|---|
+| `<stage>/start` | Scaffold, types, fixtures and the **failing tests**. No hints. Start here. |
+| `<stage>/guided` | The same tests plus numbered `TODO` steps and the reasoning. An escape hatch, not an answer key. |
+| `<stage>/solution` | Green, plus `NOTES.md` on the trade-offs and what an interviewer pushes on. |
+
+```sh
+git checkout module-1/setup/start
+pnpm test:watch                              # red — that red is the deliverable
+
+# ...implement until green...
+
+git diff module-1/setup/solution -- src/     # compare your approach to mine
+```
+
+Stuck on one function? Pull the hints for that file only, never the answer:
+
+```sh
+git checkout module-1/setup/guided -- src/diagnostic/score.ts
+```
+
+**Twenty minutes stuck is the lesson; the hint is the reward.** The compare step at the end
+is where most of the learning happens — not in reaching green.
+
+Stages published so far: `module-1/setup/*` (tag `m1-v7-end`), `module-3/utils/*`,
+`module-7/autocomplete/*`. The rest arrive as their modules are recorded.
+
+---
+
+## Git conventions
+
+These are the conventions used by every repository in the program, and they are the same
+ones a reviewer on a real team expects. They exist so you can pause a video, run one command,
+and be looking at exactly what is on screen.
+
+### 1 · One branch per video
+
+```
+module-<N>/v<V>-<slug>          e.g. module-4/v2-identity-service
+```
+
+Module number first so the branch list sorts into program order; video number second so it
+sorts into recording order. The slug names what the video *builds*, not what it is about.
+
+In this material repository, `main` carries every module. A module-named branch
+(`module-<N>/<slug>`) is created only when a module genuinely needs one — a reworked deck, an
+alternative recording — and most modules never will.
+
+### 2 · A tag on each video's end state
+
+```
+m<N>-v<V>-end                   e.g. m4-v2-end
+```
+
+Fell behind? `git checkout m4-v2-end` and you are caught up. Tags are immutable and short on
+purpose — they get typed by hand, from a video, by someone already frustrated.
+
+### 3 · Exercise stages carry three branches
+
+The three variants nest **under** the stage name — `module-3/utils/start`, `/guided`,
+`/solution` — which means a bare `module-3/utils` branch can never exist; git cannot store a
+ref as both a file and a directory. The video's end state is the `solution` branch plus its
+tag.
+
+### 4 · Commits
+
+Conventional commits, one per milestone — the points where the video says "and now we…",
+not every save:
+
+```
+feat(search): debounce the query at 300ms
+fix(autocomplete): ignore responses that arrive out of order
+test(utils): cover the trailing-edge call
+```
+
+The type is your changelog, and your commit history is what an interviewer actually reads
+when you hand over the capstone.
+
+### 5 · Secrets never land
+
+`.env.example` is committed with dummy values; `.env` is not. A pre-commit hook stops you. If
+a real key ever lands in history, rotate it — deleting the commit is not enough.
+
+---
+
+## Questions and corrections
+
+Open an issue on this repository for anything in the material — a slide that is wrong, a
+figure that does not render, a lesson that needs a step spelled out. For the code, open it on
+the [job board repo](https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard) instead,
+and say which stage branch you are on.
