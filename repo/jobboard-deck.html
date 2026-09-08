@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Job Board Repo — Frontend Mastery</title>
+<title>Module 01 · Lesson 7 — The Repo: Rasmi, and thirty-seven branches · Frontend Mastery</title>
 <style>
   :root{
     --bg:#070A14; --panel:#0E1525; --ink:#FFFFFF; --ink2:#CBD5E1; --muted:#94A3B8; --line:#1E293B;
@@ -76,6 +76,10 @@
   #nav li.cur{background:rgba(34,211,238,.14); color:var(--ink); font-weight:700}
   #nav li b{font:700 12px/1 var(--mono); color:var(--muted); min-width:22px}
   #nav li.cur b{color:var(--coral)}
+  #nav li span{display:block}
+  #nav li em{display:block; font:700 10.5px/1.35 var(--mono); letter-spacing:1.1px;
+    text-transform:uppercase; color:var(--grey3); font-style:normal; margin-bottom:3px}
+  #nav li.cur em{color:var(--cy)}
   #nav .navfoot{border-top:1px solid var(--line); padding:12px 20px; font:11px/1.7 var(--mono); color:var(--muted)}
   #nav .navfoot kbd{background:var(--bg); border:1px solid var(--line); border-radius:4px; padding:1px 5px}
   #scrim{position:fixed; inset:0; background:rgba(3,7,20,.16); opacity:0; pointer-events:none; transition:opacity .26s; z-index:29}
@@ -95,6 +99,27 @@
     .slide{position:static; display:flex !important; opacity:1 !important; page-break-after:always; min-height:100vh; border-bottom:1px solid #1E293B}
     .frag{opacity:1 !important; transform:none !important}
   }
+
+  /* ---- cross-deck link ----------------------------------------------------
+     Module 01 is three decks. Every hand-off between them uses this component,
+     so a link out never looks like a slide the presenter forgot to finish. */
+  .decklink{display:grid; grid-template-columns:1fr auto; align-items:center; gap:18px;
+    text-decoration:none; width:100%; max-width:920px; margin-top:20px;
+    background:linear-gradient(180deg,rgba(34,211,238,.13),rgba(34,211,238,.05));
+    border:1px solid rgba(34,211,238,.40); border-radius:14px; padding:15px 22px;
+    transition:border-color .2s, transform .2s, box-shadow .2s}
+  .decklink:hover{border-color:var(--cy); transform:translateY(-2px);
+    box-shadow:0 14px 34px rgba(34,211,238,.16)}
+  .decklink .dl-n{display:block; font:700 min(1.15vw,12.5px)/1 var(--mono); letter-spacing:2px;
+    text-transform:uppercase; color:var(--cy); margin-bottom:7px}
+  .decklink .dl-t{display:block; font:700 min(2vw,22px)/1.15 var(--serif); color:var(--ink);
+    letter-spacing:-.4px}
+  .decklink .dl-s{display:block; font:400 min(1.35vw,15px)/1.45 var(--sans); color:var(--muted);
+    margin-top:6px; max-width:58ch}
+  .decklink .dl-go{font:700 min(2.3vw,26px)/1 var(--sans); color:var(--cy)}
+  .decklinks{display:grid; gap:13px; width:100%; max-width:920px; margin-top:20px}
+  .decklinks .decklink{margin-top:0}
+  @media print{ .decklink{break-inside:avoid} .decklink:hover{transform:none} }
 </style>
 <!--catalyst-brand:style-->
 <style id="catalyst-brand">
@@ -174,9 +199,10 @@
 
   <!-- 1 · TITLE -->
   <section class="slide center" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>01</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Frontend Mastery · the course repo</div>
+    <div class="kicker">Module 01 · lesson 7 — the companion deck</div>
     <h1>One repo.<br>Thirty-seven branches.</h1>
     <p class="sub" style="max-width:46ch">A job board the students build a slice at a time — and the tooling that keeps the starter, the hints and the answer from ever drifting apart.</p>
+    <p class="say" style="max-width:60ch; text-align:center">Lesson 7 of module 1 introduces this repo and stops. Everything past that introduction — the branch model, the CI rules and every stage of the product — is here, so the module deck never has to say it twice.</p>
     <div class="row" style="justify-content:center; margin-top:26px">
       <div class="chip a">12 stages</div>
       <div class="chip g">3 branches each</div>
@@ -416,6 +442,16 @@
     <h2 style="max-width:26ch">A repo that teaches, then proves it taught</h2>
     <p class="say" style="max-width:52ch">Three branches per exercise, one product at the end, and a machine that checks the starter still has work left in it.</p>
     <p class="say g frag" style="margin-top:12px">Open: publish as a public template repo, and which stage gets built next.</p>
+    <div class="decklinks" style="margin-left:auto; margin-right:auto; text-align:left">
+      <a class="decklink" href="../modules/01-foundations/deck.html">
+        <span><span class="dl-n">Back · Module 01</span><span class="dl-t">Foundations — what companies actually test</span><span class="dl-s">The seven lessons, the five interview formats, and the module map you are building against.</span></span>
+        <span class="dl-go">&#8599;</span>
+      </a>
+      <a class="decklink" href="../modules/01-foundations/diagnostic-deck.html">
+        <span><span class="dl-n">Module 01 · lesson 5</span><span class="dl-t">The diagnostic, answered out loud</span><span class="dl-s">Twelve questions and the mechanism behind each one — the deck that tells a student which module to open first.</span></span>
+        <span class="dl-go">&#8599;</span>
+      </a>
+    </div>
     <aside class="notes"><div class="t">Close</div><p>Two decisions to make: whether the repo goes public as a GitHub template now, so the free preview can link straight to it, and which stage to build next — my vote is the overlays, since the modal and dropdown round out the module 7 gauntlet.</p></aside>
   </section>
 
@@ -423,7 +459,7 @@
 
 <button id="navToggle" aria-label="Slide menu">☰ slides</button>
 <div id="scrim"></div>
-<nav id="nav"><h4>Slides</h4><ol id="navList"></ol>
+<nav id="nav"><h4>Module 01 · lesson 7 · the repo</h4><ol id="navList"></ol>
   <div class="navfoot"><kbd>←</kbd><kbd>→</kbd> move · <kbd>M</kbd> menu · <kbd>S</kbd> notes · <kbd>F</kbd> full · <kbd>P</kbd> print</div>
 </nav>
 <div id="dots"></div>
@@ -439,9 +475,18 @@
   const nav=document.getElementById('nav'), scrim=document.getElementById('scrim'),
         navToggle=document.getElementById('navToggle'), navList=document.getElementById('navList');
   slides.forEach((s,x)=>{
-    const h=s.querySelector('h1,h2'); const t=((h&&(h.innerText||h.textContent))||('Slide '+(x+1))).replace(/\s+/g,' ').trim();
+    const h=s.querySelector('h1,h2,.big');
+    let t=s.dataset.nav||'';
+    if(!t && h){ const c=h.cloneNode(true); c.querySelectorAll('br').forEach(br=>br.replaceWith(' ')); t=c.textContent; }
+    t=(t||('Slide '+(x+1))).replace(/\s+/g,' ').trim();
     const li=document.createElement('li');
-    li.innerHTML='<b>'+String(x+1).padStart(2,'0')+'</b><span>'+t+'</span>';
+    const kEl=s.querySelector('.kicker');
+    const k=(s.dataset.navKicker||(kEl?(kEl.innerText||kEl.textContent):'')).replace(/\s+/g,' ').trim();
+    const b=document.createElement('b'); b.textContent=String(x+1).padStart(2,'0');
+    const sp=document.createElement('span');
+    if(k && k.toLowerCase()!==t.toLowerCase()){ const em=document.createElement('em'); em.textContent=k; sp.appendChild(em); }
+    sp.appendChild(document.createTextNode(t));
+    li.append(b,sp);
     li.addEventListener('click',()=>{ i=x; step=0; render(); closeNav(); });
     navList.appendChild(li);
   });

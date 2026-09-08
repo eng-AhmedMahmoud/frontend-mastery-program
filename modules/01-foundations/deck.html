@@ -106,6 +106,10 @@
   #nav li.cur{background:rgba(34,211,238,.16); color:var(--ink); font-weight:700}
   #nav li b{font:700 12px/1 var(--mono); color:var(--muted); min-width:22px}
   #nav li.cur b{color:var(--cy)}
+  #nav li span{display:block}
+  #nav li em{display:block; font:700 10.5px/1.35 var(--mono); letter-spacing:1.1px;
+    text-transform:uppercase; color:var(--grey3); font-style:normal; margin-bottom:3px}
+  #nav li.cur em{color:var(--cy)}
   #nav .navfoot{border-top:1px solid var(--line2); padding:12px 20px; font:11px/1.7 var(--mono); color:var(--muted)}
   #nav .navfoot kbd{background:var(--panel2); border:1px solid var(--line2); border-radius:4px; padding:1px 5px}
   #scrim{position:fixed; inset:0; background:rgba(3,7,20,.66); opacity:0; pointer-events:none; transition:opacity .26s; z-index:29}
@@ -126,6 +130,27 @@
     .frag{opacity:1 !important; transform:none !important}
     .draw{stroke-dashoffset:0 !important}
   }
+
+  /* ---- cross-deck link ----------------------------------------------------
+     Module 01 is three decks. Every hand-off between them uses this component,
+     so a link out never looks like a slide the presenter forgot to finish. */
+  .decklink{display:grid; grid-template-columns:1fr auto; align-items:center; gap:18px;
+    text-decoration:none; width:100%; max-width:920px; margin-top:20px;
+    background:linear-gradient(180deg,rgba(34,211,238,.13),rgba(34,211,238,.05));
+    border:1px solid rgba(34,211,238,.40); border-radius:14px; padding:15px 22px;
+    transition:border-color .2s, transform .2s, box-shadow .2s}
+  .decklink:hover{border-color:var(--cy); transform:translateY(-2px);
+    box-shadow:0 14px 34px rgba(34,211,238,.16)}
+  .decklink .dl-n{display:block; font:700 min(1.15vw,12.5px)/1 var(--mono); letter-spacing:2px;
+    text-transform:uppercase; color:var(--cy); margin-bottom:7px}
+  .decklink .dl-t{display:block; font:700 min(2vw,22px)/1.15 var(--serif); color:var(--ink);
+    letter-spacing:-.4px}
+  .decklink .dl-s{display:block; font:400 min(1.35vw,15px)/1.45 var(--sans); color:var(--muted);
+    margin-top:6px; max-width:58ch}
+  .decklink .dl-go{font:700 min(2.3vw,26px)/1 var(--sans); color:var(--cy)}
+  .decklinks{display:grid; gap:13px; width:100%; max-width:920px; margin-top:20px}
+  .decklinks .decklink{margin-top:0}
+  @media print{ .decklink{break-inside:avoid} .decklink:hover{transform:none} }
 </style>
 <!--catalyst-brand:style-->
 <style id="catalyst-brand">
@@ -203,18 +228,19 @@
 <div id="bar"></div>
 <div id="stage">
 
-  <!-- ============ L1 · COLD OPEN ============ -->
+  <!-- ============ L1 · THE MAP BEFORE THE JOURNEY ============ -->
+
   <section class="slide" data-chip="MODULE 01 · VIDEO 1" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>01</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 01 · Act I — the platform under the framework</div>
     <h1>What companies<br>actually test</h1>
-    <div class="sub">Nine lessons. By the end you will know exactly which of the fourteen modules is yours — and why.</div>
+    <div class="sub">Seven lessons. By the end you will know exactly which of the thirteen modules is yours — and why.</div>
     <div class="row" style="margin-top:26px">
       <div class="card a" style="max-width:23ch"><h3 class="cy">The room</h3><p>Five interview formats, one real question from each.</p></div>
       <div class="card b" style="max-width:23ch"><h3 class="b">The ladder</h3><p>One question answered three ways: junior, mid, senior.</p></div>
       <div class="card w" style="max-width:23ch"><h3 class="w">The gap</h3><p>Twelve questions. Your score points at a module number.</p></div>
       <div class="card g" style="max-width:23ch"><h3 class="g">The method</h3><p>The repo, the three branches, and the twenty-minute rule.</p></div>
     </div>
-    <aside class="notes"><div class="t">Cold open — do not introduce yourself yet</div><p>The next slide runs before any introduction. Two minutes decide whether they stay; a talking head does not buy those two minutes, a broken search box does.</p></aside>
+    <aside class="notes"><div class="t">L1 · 0:00 — do not introduce yourself yet</div><p>Open on the title and move within eight seconds. The next slide runs before any introduction: two minutes decide whether they stay, and a talking head does not buy those two minutes — a broken search box does.</p><p>Say the module name once. Do not read the bullet list of what is coming; you are about to show it instead.</p></aside>
   </section>
 
   <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>02</b> / 28</div><!--/catalyst-brand:chrome-->
@@ -224,7 +250,7 @@
       <img class="shot" src="../../assets/rasmi-autocomplete.gif" alt="Search autocomplete returning results out of order">
       <div class="cap"><b>Rasmi</b> — the job board you will build. This is the search box in module 7.</div>
     </div>
-    <aside class="notes"><div class="t">L1 · 0:00–1:00</div><p>Say nothing over the first loop. Let them watch it twice. Then: "the last thing I typed was <em>engineer</em>. The list is showing results for <em>react</em>. Why?"</p></aside>
+    <aside class="notes"><div class="t">L1 · the cold open — let it be uncomfortable</div><p>Type the query live. Let the results arrive out of order on camera and say nothing for three full seconds. The silence is the hook — the moment they recognise a bug they have shipped themselves.</p><p>Do not name the cause yet. If you explain it here you spend the payoff of the next slide, and the module loses its opening.</p></aside>
   </section>
 
   <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>03</b> / 28</div><!--/catalyst-brand:chrome-->
@@ -254,7 +280,7 @@
       </svg>
     </div>
     <div class="key r">Debounce sends <b>fewer</b> requests. It does not stop them arriving in the <b>wrong order</b>.</div>
-    <aside class="notes"><div class="t">L1 · the payoff line</div><p>This is the line of the lesson. Say it once, slowly, and do not explain it further — the explanation is module 7. The point right now is that they did not know there were two separate problems.</p></aside>
+    <aside class="notes"><div class="t">L1 · the payoff line</div><p>This is the line of the lesson. Say it once, slowly, and do not explain further — the explanation is module 7. The point right now is only that they did not know there were two separate problems in what looked like one bug.</p><p>Common student reaction: 'that's just debounce.' Answer it out loud and immediately: debounce reduces the requests, it does not order the answers. Two problems, two fixes, two modules.</p></aside>
   </section>
 
   <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>04</b> / 28</div><!--/catalyst-brand:chrome-->
@@ -266,11 +292,29 @@
       <div class="card b"><h3 class="b">Why it happens at all</h3><p>The event loop, tasks and microtasks. Not React — the platform underneath it.</p><p style="margin-top:9px"><b class="b">→ Module 2</b></p></div>
     </div>
     <div class="key">Every lesson in this program is attached to something that breaks. That is the whole design.</div>
-    <aside class="notes"><div class="t">L1 · close</div><p>Now introduce yourself — thirty seconds, no CV recital. Then move.</p></aside>
+    <aside class="notes"><div class="t">L1 · three problems, three modules</div><p>Point at each card's module number as you say it. This is the first time the syllabus is attached to something that hurts, and that attachment is what makes the rest of the program feel like a route rather than a list.</p><p>Now introduce yourself — thirty seconds, no CV recital. Then move.</p></aside>
   </section>
 
-  <!-- ============ L2 · THE HIRING MAP ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>05</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>05</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Module 01 · the route through this module</div>
+    <h2>Seven lessons, and what<br>each one hands you</h2>
+    <ul class="lmap">
+      <li><b class="n">L1</b><span>The map before the journey</span><span class="m">you are here</span></li>
+      <li><b class="n">L2</b><span>The frontend hiring map — who hires, for what, at which level</span><span class="m">→ where to apply</span></li>
+      <li><b class="n">L3</b><span>Junior vs mid vs senior — what actually changes in the questions</span><span class="m">→ your band</span></li>
+      <li><b class="n">L4</b><span>The five interview formats</span><span class="m">→ what to drill</span></li>
+      <li><b class="n">L5</b><span>Diagnostic — twelve questions</span><span class="m">→ your score</span></li>
+      <li><b class="n">L6</b><span>How to study this program (and how not to)</span><span class="m">→ the loop</span></li>
+      <li><b class="n">L7</b><span>Workspace, Git and repo conventions</span><span class="m">→ red tests</span></li>
+    </ul>
+    <div class="key">You leave this module with three things: a number, the module that number points at, and a terminal full of failing tests you are about to fix.</div>
+    <aside class="notes"><div class="t">L1 · close · the route through the module</div><p>Read the seven lines fast; they are a promise, not content. Land hard on L5 and L7: the number they will get, and the red terminal they will produce. Those are the two things a student can actually check they did.</p><p>Say explicitly: 'lesson 5 gives you a score, lesson 7 gives you a repo with failing tests. If you finish this module without both, you skipped the module.'</p></aside>
+  </section>
+
+
+  <!-- ============ L2 · THE FRONTEND HIRING MAP ============ -->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>06</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Who hires frontend, and for what</div>
     <h2>Four companies.<br>Same job title.</h2>
     <div class="four">
@@ -280,17 +324,138 @@
       <div class="card"><h3 class="w">Agency / outsourcing</h3><p>Breadth over depth. <b>Quiz round</b> plus a take-home. Speed and range are the signal.</p></div>
     </div>
     <div class="key">Same title on the job ad. Four different interviews. Preparing for "frontend" in general prepares you for none of them.</div>
-    <aside class="notes"><div class="t">L2 · 6:00</div><p>Keep this concrete and local — name the kinds of company the room actually applies to, in Egypt and the Gulf, not abstract archetypes.</p></aside>
+    <aside class="notes"><div class="t">L2 · 0:00 — four companies, one job title</div><p>Walk the four cards left to right without editorialising, then stop and ask the question the slide is really about: which of these four is the student actually applying to? Most have been applying to all four with one CV and one preparation.</p><p>The useful reframe: 'Frontend Engineer' is not a job, it is four jobs that share a title. What is tested in each is different, and that difference is the whole reason this lesson exists.</p></aside>
   </section>
 
-  <section class="slide mid" data-chip="MODULE 01 · VIDEO 2" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>06</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>07</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">A job description is a test spec in disguise</div>
+    <h2>What each line<br>actually tests</h2>
+<pre><code><span class="cmt">Senior Frontend Engineer · Product          — a real posting, lightly trimmed</span>
+
+  <span class="ok">•</span> 5+ years with React and TypeScript        <span class="cmt">→ quiz round + the utilities round  (M3 · M4 · M5)</span>
+  <span class="ok">•</span> Own performance for the checkout flow    <span class="cmt">→ they will ask for numbers, not adjectives  (M10)</span>
+  <span class="ok">•</span> Partner with design on a component lib   <span class="cmt">→ UI round: keyboard, focus, ARIA  (M7)</span>
+  <span class="ok">•</span> Comfortable with SSR and edge rendering  <span class="cmt">→ system design round  (M9 · M11)</span>
+  <span class="ok">•</span> Mentor two mid-level engineers           <span class="cmt">→ behavioural round — the senior signal  (M13)</span>
+
+<span class="cmt">Nothing here says "knows React hooks". Every line names a round.</span></code></pre>
+    <div class="key">Read the posting backwards from the loop. Each bullet is a room you will sit in — and this program has a module for each one.</div>
+    <aside class="notes"><div class="t">L2 · the job description as a test spec</div><p>Read the posting aloud once as a student reads it — as a wish list. Then read it again line by line with the right-hand annotations. The second reading is the lesson: every bullet names a round, not a skill.</p><p>Give them the homework verbatim: take the last job posting you applied to, and annotate every line with the round it belongs to. If a line maps to no round, it is decoration.</p><p>Common mistake to name: filtering yourself out on the years-of-experience line. Say plainly that the bullet is a filter for recruiters, and the loop is what actually decides.</p></aside>
+  </section>
+
+  <section class="slide mid" data-chip="MODULE 01 · VIDEO 2" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>08</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="big">Your level is decided by <span class="cy">the loop</span>,<br>not by your CV.</div>
     <div class="sub" style="max-width:56ch; margin-top:22px">The same engineer gets a junior offer at one company and a senior one at another, because the two companies score different rounds. Learn the rounds.</div>
-    <aside class="notes"><div class="t">L2 · payoff</div><p>Land it and stop. No elaboration — the next lesson is the elaboration.</p></aside>
+    <aside class="notes"><div class="t">L2 · close — the line that reframes the module</div><p>Say it and stop. Do not soften it and do not add an example. Their level is decided by the loop, not by the CV, and that is good news — a CV takes years to change and a loop performance takes weeks.</p><p>This is the hand-off into lesson 3. End the take here.</p></aside>
   </section>
 
-  <!-- ============ L3 · THE FIVE FORMATS ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>07</b> / 28</div><!--/catalyst-brand:chrome-->
+
+  <!-- ============ L3 · JUNIOR vs MID vs SENIOR ============ -->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>09</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">One question, three levels</div>
+    <h2>"The search box feels slow.<br>What do you do?"</h2>
+    <div class="say" style="max-width:62ch">I am going to answer this three times. Same question, same candidate, same fifteen seconds. The only thing that changes is which layer the answer lives on — and that is what decides the offer.</div>
+    <aside class="notes"><div class="t">L3 · 0:00 — ask it, then wait</div><p>Read the question and count to five in your head before speaking again. Let them answer it silently. Almost everyone answers at the junior level, which is what makes the next two slides land.</p><p>Do not tell them the answer is coming. The value is in them committing to an answer first.</p></aside>
+  </section>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>10</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The same question, scored three ways</div>
+    <h2>The ladder</h2>
+    <div class="fig wide"><svg viewBox="0 0 940 412" role="img" aria-label="The junior, mid and senior ladder — the same question answered at three levels">
+          <text class="m" x="20" y="20" fill="#94A3B8" font-size="11" letter-spacing="2.2">ONE QUESTION, THREE LEVELS</text>
+
+          <rect x="20" y="32" rx="10" fill="rgba(59,130,246,.12)" stroke="rgba(59,130,246,.32)"/>
+          <text x="38" y="56" fill="#FFFFFF" font-size="13.5" font-weight="600">«The search box on the job board feels slow when you type. What do you do?»</text>
+          <text x="38" y="74" fill="#94A3B8" font-size="11">Same question at every level. The title is decided by the answer, not by the question.</text>
+
+          <!-- JUNIOR -->
+          <rect x="20" y="96" width="900" height="92" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(242,109,91,.28)"/>
+          <rect x="32" y="112" width="104" height="24" rx="12" fill="rgba(242,109,91,.14)" stroke="rgba(242,109,91,.4)"/>
+          <text class="m" x="84" y="128" fill="#F8717A" font-size="10" text-anchor="middle" letter-spacing="1.4">JUNIOR</text>
+          <text class="m" x="32" y="152" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">ANSWERS</text>
+          <text class="m" x="32" y="166" fill="#CBD5E1" font-size="10.5">WHAT</text>
+          <line x1="152" y1="110" x2="152" y2="174" stroke="rgba(255,255,255,.10)"/>
+          <text x="168" y="124" fill="#FFFFFF" font-size="11.5">“I'd add a debounce so it doesn't fire a request on every keystroke.”</text>
+          <text x="168" y="145" fill="#CBD5E1" font-size="11">Correct tool. No diagnosis. No measurement anywhere in the answer, and no</text>
+          <text x="168" y="162" fill="#CBD5E1" font-size="11">second sentence — the answer stops at the first fix that comes to mind.</text>
+          <line x1="676" y1="110" x2="676" y2="174" stroke="rgba(255,255,255,.10)"/>
+          <text class="m" x="692" y="124" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">WHAT IT SIGNALS</text>
+          <text x="692" y="144" fill="#CBD5E1" font-size="9.8">Has the vocabulary</text>
+          <text x="692" y="159" fill="#CBD5E1" font-size="9.8">Has never profiled</text>
+          <text x="692" y="174" fill="#CBD5E1" font-size="9.8">Stops at the first fix</text>
+
+          <!-- MID -->
+          <rect x="20" y="194" width="900" height="92" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(245,158,11,.28)"/>
+          <rect x="32" y="210" width="104" height="24" rx="12" fill="rgba(245,158,11,.13)" stroke="rgba(245,158,11,.4)"/>
+          <text class="m" x="84" y="226" fill="#FBBF24" font-size="10" text-anchor="middle" letter-spacing="1.4">MID</text>
+          <text class="m" x="32" y="250" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">ANSWERS</text>
+          <text class="m" x="32" y="264" fill="#CBD5E1" font-size="10.5">WHY + HOW WE KNOW</text>
+          <line x1="152" y1="208" x2="152" y2="272" stroke="rgba(255,255,255,.10)"/>
+          <text x="168" y="222" fill="#FFFFFF" font-size="11.5">“First I'd find out where the time goes — network or render.”</text>
+          <text x="168" y="243" fill="#CBD5E1" font-size="11">Records the Performance tab with 4× CPU throttling while typing. Points out</text>
+          <text x="168" y="260" fill="#CBD5E1" font-size="11">that debounce cuts request volume, not a 300 ms re-render. Different symptom,</text>
+          <text x="168" y="277" fill="#CBD5E1" font-size="11">different fix — and says which measurement would tell them which one it is.</text>
+          <line x1="676" y1="208" x2="676" y2="272" stroke="rgba(255,255,255,.10)"/>
+          <text class="m" x="692" y="222" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">WHAT IT SIGNALS</text>
+          <text x="692" y="242" fill="#CBD5E1" font-size="9.8">Measures before fixing</text>
+          <text x="692" y="257" fill="#CBD5E1" font-size="9.8">Separates the causes</text>
+          <text x="692" y="272" fill="#CBD5E1" font-size="9.8">Lives in the profiler</text>
+
+          <!-- SENIOR -->
+          <rect x="20" y="292" width="900" height="92" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(52,211,153,.30)"/>
+          <rect x="32" y="308" width="104" height="24" rx="12" fill="rgba(52,211,153,.13)" stroke="rgba(52,211,153,.42)"/>
+          <text class="m" x="84" y="324" fill="#34D399" font-size="10" text-anchor="middle" letter-spacing="1.4">SENIOR</text>
+          <text class="m" x="32" y="348" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">ANSWERS</text>
+          <text class="m" x="32" y="362" fill="#CBD5E1" font-size="10.5">WHAT IT COSTS</text>
+          <line x1="152" y1="306" x2="152" y2="370" stroke="rgba(255,255,255,.10)"/>
+          <text x="168" y="320" fill="#FFFFFF" font-size="11.5">“What does slow mean here — is INP over 200 ms in the field, or does it</text>
+          <text x="168" y="337" fill="#FFFFFF" font-size="11.5">just feel bad to you? I'd set the budget first.”</text>
+          <text x="168" y="356" fill="#CBD5E1" font-size="11">Then: keep the input responsive with useDeferredValue, key the request so a</text>
+          <text x="168" y="373" fill="#CBD5E1" font-size="11">stale response cannot overwrite a newer one, add a RUM metric so we find out</text>
+          <line x1="676" y1="306" x2="676" y2="370" stroke="rgba(255,255,255,.10)"/>
+          <text class="m" x="692" y="320" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">WHAT IT SIGNALS</text>
+          <text x="692" y="340" fill="#CBD5E1" font-size="9.8">Asks before answering</text>
+          <text x="692" y="355" fill="#CBD5E1" font-size="9.8">Names the budget</text>
+          <text x="692" y="370" fill="#CBD5E1" font-size="9.8">Owns the consequence</text>
+
+          <text x="20" y="402" fill="#94A3B8" font-size="11.5">Junior answers WHAT. Mid answers WHY and HOW WE'D KNOW. Senior answers WHAT IT COSTS and WHAT HAPPENS NEXT.</text>
+        </svg></div>
+    <aside class="notes"><div class="t">L3 · the ladder, one rung at a time</div><p>Reveal junior, mid and senior separately and read each answer in the voice of that engineer. The point is not that the senior answer is longer — it is that it names a cost. That is the actual boundary.</p><p>The sentence to repeat: junior answers what, mid answers why, senior answers what it costs. You will use this framing again in modules 11 and 14.</p></aside>
+  </section>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>11</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The same bug, answered at three levels</div>
+    <h2>One search box.<br>Three different engineers.</h2>
+<pre><code><span class="cmt">// JUNIOR — "add a debounce"</span>
+&lt;input onChange={<span class="fn">debounce</span>(handleSearch, <span class="st">300</span>)} /&gt;   <span class="no">// a brand-new debounce every render</span>
+
+<span class="cmt">// MID — "…and keep its identity stable across renders"</span>
+<span class="kw">const</span> search = <span class="fn">useMemo</span>(() =&gt; <span class="fn">debounce</span>(handleSearch, <span class="st">300</span>), [])
+<span class="fn">useEffect</span>(() =&gt; search.cancel, [search])        <span class="ok">// cancel the pending call on unmount</span>
+
+<span class="cmt">// SENIOR — "…and two responses can still land out of order"</span>
+<span class="kw">const</span> seq = <span class="fn">useRef</span>(<span class="st">0</span>)
+<span class="kw">async function</span> <span class="fn">run</span>(q) {
+  <span class="kw">const</span> id = ++seq.current
+  <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(`/api/jobs?q=${q}`, { signal })
+  <span class="kw">if</span> (id !== seq.current) <span class="kw">return</span>                  <span class="ok">// a stale answer — drop it</span>
+  <span class="fn">setResults</span>(<span class="kw">await</span> res.<span class="fn">json</span>())
+}</code></pre>
+    <div class="key w">All three "work" on a fast laptop. Only the third one survives a reviewer asking what happens on a slow connection.</div>
+    <aside class="notes"><div class="t">L3 · the ladder in code — the slide that proves it</div><p>Walk the three blocks slowly, and say out loud that all three work on your laptop. That is the trap: the junior version is not broken, it is unreviewed.</p><p>Point at the two annotations in the mid block — memoised identity and cleanup on unmount — and say that this pair is what most mid-level candidates are missing. Then point at the sequence check in the senior block: it is four lines, and it is the difference between an offer band.</p><p>Do not teach debounce here. If a student asks how it works, answer 'module 3, and you will write it yourself.' Protect the lesson's runtime.</p></aside>
+  </section>
+
+  <section class="slide mid" data-chip="MODULE 01 · VIDEO 3" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>12</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="big">Junior answers <span class="mut">what</span>.<br>Mid answers <span class="cy">why</span>.<br>Senior answers <span class="w">what it costs</span>.</div>
+    <div class="sub" style="max-width:58ch; margin-top:22px">Every module in this program is built to move one of your answers up a row.</div>
+    <aside class="notes"><div class="t">L3 · close</div><p>Three lines, said once, no elaboration. They have just seen it in code, so the abstraction now has something to attach to.</p><p>Tell them to write these three lines on the first page of the notebook, above the space where their diagnostic score will go.</p></aside>
+  </section>
+
+
+  <!-- ============ L4 · THE FIVE INTERVIEW FORMATS ============ -->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>13</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The mid / senior frontend loop</div>
     <h2 style="max-width:26ch">Five formats. We train all five.</h2>
     <div class="fig wide"><svg viewBox="0 0 940 330" role="img" aria-label="The five interview formats, each with a real example question and the module that trains it">
@@ -368,7 +533,7 @@
           <text x="768" y="174" fill="#CBD5E1" font-size="10.5">lost — and what you did.»</text>
           <line x1="768" y1="206" x2="908" y2="206" stroke="rgba(255,255,255,.09)"/>
           <text class="m" x="768" y="222" fill="#94A3B8" font-size="9">HIRING MANAGER</text>
-          <text class="m" x="768" y="242" fill="#22D3EE" font-size="9.5">→ M14</text>
+          <text class="m" x="768" y="242" fill="#22D3EE" font-size="9.5">→ M13</text>
 
           <!-- arrows down -->
           <line x1="102" y1="260" x2="102" y2="278" stroke="#2196F3" stroke-opacity=".55" marker-end="url(#a1)"/>
@@ -378,12 +543,81 @@
           <line x1="838" y1="260" x2="838" y2="278" stroke="#2196F3" stroke-opacity=".55" marker-end="url(#a1)"/>
 
           <rect x="20" y="284" width="900" height="34" rx="8" fill="rgba(59,130,246,.10)" stroke="rgba(59,130,246,.28)"/>
-          <text x="470" y="305" fill="#CBD5E1" font-size="11.5" text-anchor="middle">Modules 2–12 build the ability · Module 13 drills the formats · Module 14 runs the mock and scores it</text>
+          <text x="470" y="305" fill="#CBD5E1" font-size="11.5" text-anchor="middle">Modules 2–12 build the ability · Module 13 drills all five formats until they are routine</text>
         </svg></div>
-    <aside class="notes"><div class="t">L3 · 12:00 — the spine of the module</div><p>Show all five for five seconds each with no explanation, then walk them one at a time. Each card already carries the module it maps to; point at it every time — that is what turns a syllabus into a route.</p></aside>
+    <aside class="notes"><div class="t">L4 · 0:00 — the spine of the module</div><p>Show all five formats for about five seconds with no explanation, then walk them one at a time. Each card already carries the module it maps to; point at that number every single time. That is what turns a syllabus into a route.</p><p>Say the number that matters: most candidates prepare for one and a half of these five, and then are surprised by three rounds they never rehearsed.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>08</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>14</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Format 2 · the JavaScript utilities round</div>
+    <h2>Empty file.<br>Forty-five minutes.</h2>
+<pre><code><span class="cmt">// "Write debounce. Then add cancel. Then tell me what happens to `this`."
+// No library. No autocomplete. They watch you type.</span>
+
+<span class="kw">export function</span> <span class="fn">debounce</span>(fn, wait) {
+  <span class="kw">let</span> timer, lastArgs, lastThis
+
+  <span class="kw">function</span> <span class="fn">debounced</span>(...args) {
+    lastArgs = args; lastThis = <span class="kw">this</span>          <span class="cmt">// the follow-up they are waiting for</span>
+    <span class="fn">clearTimeout</span>(timer)
+    timer = <span class="fn">setTimeout</span>(() =&gt; fn.<span class="fn">apply</span>(lastThis, lastArgs), wait)
+  }
+  debounced.<span class="fn">cancel</span> = () =&gt; { <span class="fn">clearTimeout</span>(timer); timer = <span class="kw">undefined</span> }
+  debounced.<span class="fn">flush</span>  = () =&gt; { <span class="kw">if</span> (timer) { <span class="fn">clearTimeout</span>(timer); fn.<span class="fn">apply</span>(lastThis, lastArgs) } }
+  <span class="kw">return</span> debounced
+}</code></pre>
+    <div class="key g">This exact function is module 3, exercise 1. You will write it from an empty file with the tests already red — which is the only rehearsal that transfers.</div>
+    <aside class="notes"><div class="t">L4 · format 2 · run the empty file</div><p>If you can, type the first four lines of this live rather than revealing them. The lesson is not the implementation — it is that an empty file with someone watching is a different skill from writing the same code alone.</p><p>Point at the `lastThis` line and name the follow-up question by name: 'what happens to this?' Candidates who wrote an arrow function cannot answer it, and that is the entire purpose of the follow-up.</p><p>Close by connecting forward: this is module 3, exercise 1, with the tests already red.</p></aside>
+  </section>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>15</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Format 3 · the UI coding round</div>
+    <h2>They are not grading<br>the CSS</h2>
+<pre><code><span class="cmt">// "Build an autocomplete." Ninety minutes. Here is what is really scored:</span>
+
+&lt;input
+  role=<span class="st">"combobox"</span>
+  aria-expanded={open}                        <span class="ok">// 1. is it announced?</span>
+  aria-controls=<span class="st">"job-suggestions"</span>
+  aria-activedescendant={activeId}            <span class="ok">// 2. does the screen reader follow ↑ ↓ ?</span>
+  onKeyDown={onKey}                           <span class="ok">// 3. Escape closes. Enter selects. Tab does not trap.</span>
+/&gt;
+&lt;ul id=<span class="st">"job-suggestions"</span> role=<span class="st">"listbox"</span>&gt;
+  {items.<span class="fn">map</span>(it =&gt; &lt;li role=<span class="st">"option"</span> aria-selected={it.id === activeId}&gt;…&lt;/li&gt;)}
+&lt;/ul&gt;
+
+<span class="no">// Most candidates ship a div, a mouse click handler, and no keyboard path at all.</span>
+<span class="no">// It looks finished on screen. It fails the round silently.</span></code></pre>
+    <div class="key">Module 7 is this round, drilled: dropdown, tabs, filter drawer, toast, autocomplete — each one keyboard-first.</div>
+    <aside class="notes"><div class="t">L4 · format 3 · the round that fails silently</div><p>The heading is the message: they are not grading the CSS. Read the three numbered annotations as the three things actually being scored, then read the two red lines at the bottom without softening them.</p><p>Say the word 'silently' deliberately. Nobody tells the candidate they failed on keyboard access — the feedback comes back as 'not quite senior enough', which teaches them nothing.</p><p>Forward-link: module 7 is this round drilled five times, keyboard-first each time.</p></aside>
+  </section>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>16</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Formats 4 and 5 · the two rounds nobody rehearses</div>
+    <h2>Both are scored<br>on structure, out loud</h2>
+    <div class="two">
+      <div class="card p">
+        <h3 class="p">System design · RADIO</h3>
+        <p><b>R</b>equirements — who uses it, what breaks first, what "done" means.<br>
+        <b>A</b>rchitecture — the boxes, and the one you would build first.<br>
+        <b>D</b>ata model — what the client owns, what the server owns.<br>
+        <b>I</b>nterface — the API between them, named.<br>
+        <b>O</b>ptimisations — and what each one costs.</p>
+        <p style="margin-top:10px"><b class="p">→ Module 11</b> · forty-five minutes, a whiteboard, no code</p>
+      </div>
+      <div class="card w">
+        <h3 class="w">Behavioural · STAR, with numbers</h3>
+        <p><b>S</b>ituation · <b>T</b>ask · <b>A</b>ction · <b>R</b>esult — the result is the half candidates skip.</p>
+        <p style="margin-top:10px">"We had a slow page, I optimised it, it got faster" scores zero.<br>
+        "LCP was 4.1&nbsp;s on 3G, I moved the hero out of the JS bundle, it went to 1.8&nbsp;s, bounce dropped 9%" is the same story and a different offer.</p>
+        <p style="margin-top:10px"><b class="w">→ Module 13</b> · you write the four stories and drill them out loud</p>
+      </div>
+    </div>
+    <div class="key">Write four stories now, before you need them. You cannot invent a number under pressure — you can only recall one.</div>
+    <aside class="notes"><div class="t">L4 · formats 4 and 5 · the unrehearsed rounds</div><p>Two cards, two acronyms, ninety seconds total. Do not teach RADIO here — name it, say module 11 owns it, move.</p><p>Spend the time on the right-hand card instead. Read the vague version and the numeric version of the same story back to back. That contrast is the most actionable thing in the lesson and it costs twenty seconds.</p><p>Give the homework: four stories, written down this week, each with one number in it. You cannot invent a number under pressure — only recall one.</p></aside>
+  </section>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>17</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Where the preparation actually goes</div>
     <h2>React is tested in <span class="cy">one and a half</span> of these five</h2>
     <div class="fig" style="max-width:1020px">
@@ -409,318 +643,190 @@
       </svg>
     </div>
     <div class="key w">This is not an argument against React. It is the reason the first four modules are not about React.</div>
-    <aside class="notes"><div class="t">L3 · payoff</div><p>Expect pushback in the comments. Answer it here: React is how you build the answer in one round. It is not what is being scored in the other four.</p></aside>
+    <aside class="notes"><div class="t">L4 · close — where the preparation actually goes</div><p>This is the slide that reallocates their time. Say plainly that React is tested in one and a half of the five formats, and that most of their preparation so far has gone entirely into that one and a half.</p><p>Do not let this land as 'React does not matter'. The line is: React is necessary and it is not sufficient, and the other three and a half rounds are where offers are actually lost.</p></aside>
   </section>
 
-  <!-- ============ L4 · THE LADDER ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>09</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">One question, three levels</div>
-    <h2>"The search box feels slow.<br>What do you do?"</h2>
-    <div class="say" style="max-width:62ch">I am going to answer this three times. Same question, same candidate, same fifteen seconds. The only thing that changes is which layer the answer lives on — and that is what decides the offer.</div>
-    <aside class="notes"><div class="t">L4 · setup</div><p>Deliver all three answers in your own voice, back to back, without saying which is which. Ask the room to place them before you reveal FIG-2.</p></aside>
-  </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>10</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The same question, scored three ways</div>
-    <h2>The ladder</h2>
-    <div class="fig wide"><svg viewBox="0 0 940 412" role="img" aria-label="The junior, mid and senior ladder — the same question answered at three levels">
-          <text class="m" x="20" y="20" fill="#94A3B8" font-size="11" letter-spacing="2.2">ONE QUESTION, THREE LEVELS</text>
+  <!-- ============ L5 · DIAGNOSTIC — TWELVE QUESTIONS ============ -->
 
-          <rect x="20" y="32" rx="10" fill="rgba(59,130,246,.12)" stroke="rgba(59,130,246,.32)"/>
-          <text x="38" y="56" fill="#FFFFFF" font-size="13.5" font-weight="600">«The search box on the job board feels slow when you type. What do you do?»</text>
-          <text x="38" y="74" fill="#94A3B8" font-size="11">Same question at every level. The title is decided by the answer, not by the question.</text>
-
-          <!-- JUNIOR -->
-          <rect x="20" y="96" width="900" height="92" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(242,109,91,.28)"/>
-          <rect x="32" y="112" width="104" height="24" rx="12" fill="rgba(242,109,91,.14)" stroke="rgba(242,109,91,.4)"/>
-          <text class="m" x="84" y="128" fill="#F8717A" font-size="10" text-anchor="middle" letter-spacing="1.4">JUNIOR</text>
-          <text class="m" x="32" y="152" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">ANSWERS</text>
-          <text class="m" x="32" y="166" fill="#CBD5E1" font-size="10.5">WHAT</text>
-          <line x1="152" y1="110" x2="152" y2="174" stroke="rgba(255,255,255,.10)"/>
-          <text x="168" y="124" fill="#FFFFFF" font-size="11.5">“I'd add a debounce so it doesn't fire a request on every keystroke.”</text>
-          <text x="168" y="145" fill="#CBD5E1" font-size="11">Correct tool. No diagnosis. No measurement anywhere in the answer, and no</text>
-          <text x="168" y="162" fill="#CBD5E1" font-size="11">second sentence — the answer stops at the first fix that comes to mind.</text>
-          <line x1="676" y1="110" x2="676" y2="174" stroke="rgba(255,255,255,.10)"/>
-          <text class="m" x="692" y="124" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">WHAT IT SIGNALS</text>
-          <text x="692" y="144" fill="#CBD5E1" font-size="9.8">Has the vocabulary</text>
-          <text x="692" y="159" fill="#CBD5E1" font-size="9.8">Has never profiled</text>
-          <text x="692" y="174" fill="#CBD5E1" font-size="9.8">Stops at the first fix</text>
-
-          <!-- MID -->
-          <rect x="20" y="194" width="900" height="92" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(245,158,11,.28)"/>
-          <rect x="32" y="210" width="104" height="24" rx="12" fill="rgba(245,158,11,.13)" stroke="rgba(245,158,11,.4)"/>
-          <text class="m" x="84" y="226" fill="#FBBF24" font-size="10" text-anchor="middle" letter-spacing="1.4">MID</text>
-          <text class="m" x="32" y="250" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">ANSWERS</text>
-          <text class="m" x="32" y="264" fill="#CBD5E1" font-size="10.5">WHY + HOW WE KNOW</text>
-          <line x1="152" y1="208" x2="152" y2="272" stroke="rgba(255,255,255,.10)"/>
-          <text x="168" y="222" fill="#FFFFFF" font-size="11.5">“First I'd find out where the time goes — network or render.”</text>
-          <text x="168" y="243" fill="#CBD5E1" font-size="11">Records the Performance tab with 4× CPU throttling while typing. Points out</text>
-          <text x="168" y="260" fill="#CBD5E1" font-size="11">that debounce cuts request volume, not a 300 ms re-render. Different symptom,</text>
-          <text x="168" y="277" fill="#CBD5E1" font-size="11">different fix — and says which measurement would tell them which one it is.</text>
-          <line x1="676" y1="208" x2="676" y2="272" stroke="rgba(255,255,255,.10)"/>
-          <text class="m" x="692" y="222" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">WHAT IT SIGNALS</text>
-          <text x="692" y="242" fill="#CBD5E1" font-size="9.8">Measures before fixing</text>
-          <text x="692" y="257" fill="#CBD5E1" font-size="9.8">Separates the causes</text>
-          <text x="692" y="272" fill="#CBD5E1" font-size="9.8">Lives in the profiler</text>
-
-          <!-- SENIOR -->
-          <rect x="20" y="292" width="900" height="92" rx="12" fill="rgba(255,255,255,.03)" stroke="rgba(52,211,153,.30)"/>
-          <rect x="32" y="308" width="104" height="24" rx="12" fill="rgba(52,211,153,.13)" stroke="rgba(52,211,153,.42)"/>
-          <text class="m" x="84" y="324" fill="#34D399" font-size="10" text-anchor="middle" letter-spacing="1.4">SENIOR</text>
-          <text class="m" x="32" y="348" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">ANSWERS</text>
-          <text class="m" x="32" y="362" fill="#CBD5E1" font-size="10.5">WHAT IT COSTS</text>
-          <line x1="152" y1="306" x2="152" y2="370" stroke="rgba(255,255,255,.10)"/>
-          <text x="168" y="320" fill="#FFFFFF" font-size="11.5">“What does slow mean here — is INP over 200 ms in the field, or does it</text>
-          <text x="168" y="337" fill="#FFFFFF" font-size="11.5">just feel bad to you? I'd set the budget first.”</text>
-          <text x="168" y="356" fill="#CBD5E1" font-size="11">Then: keep the input responsive with useDeferredValue, key the request so a</text>
-          <text x="168" y="373" fill="#CBD5E1" font-size="11">stale response cannot overwrite a newer one, add a RUM metric so we find out</text>
-          <line x1="676" y1="306" x2="676" y2="370" stroke="rgba(255,255,255,.10)"/>
-          <text class="m" x="692" y="320" fill="#94A3B8" font-size="8.5" letter-spacing="1.2">WHAT IT SIGNALS</text>
-          <text x="692" y="340" fill="#CBD5E1" font-size="9.8">Asks before answering</text>
-          <text x="692" y="355" fill="#CBD5E1" font-size="9.8">Names the budget</text>
-          <text x="692" y="370" fill="#CBD5E1" font-size="9.8">Owns the consequence</text>
-
-          <text x="20" y="402" fill="#94A3B8" font-size="11.5">Junior answers WHAT. Mid answers WHY and HOW WE'D KNOW. Senior answers WHAT IT COSTS and WHAT HAPPENS NEXT.</text>
-        </svg></div>
-    <aside class="notes"><div class="t">L4 · build row by row</div><p>Reveal one row at a time. The junior row is not wrong — it is incomplete, and saying so keeps the room with you instead of defensive.</p></aside>
-  </section>
-
-  <section class="slide mid" data-chip="MODULE 01 · VIDEO 4" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>11</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="big">Junior answers <span class="mut">what</span>.<br>Mid answers <span class="cy">why</span>.<br>Senior answers <span class="w">what it costs</span>.</div>
-    <div class="sub" style="max-width:58ch; margin-top:22px">Every module in this program is built to move one of your answers up a row.</div>
-    <aside class="notes"><div class="t">L4 · payoff</div><p>This is the sentence students quote back. Say it slowly and let the slide sit.</p></aside>
-  </section>
-
-  <!-- ============ L5 · DIAGNOSTIC PART 1 ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>12</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The diagnostic — twelve questions</div>
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>18</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 5 · the diagnostic</div>
     <h2>Pen and paper.<br>No pausing to search.</h2>
     <div class="two">
       <div>
         <ul class="plist yes">
-          <li>Write down your answer before I give mine<small>a half-formed answer still counts as a mark</small></li>
-          <li>Score one point per question you got substantially right</li>
-          <li>Twelve questions, in two parts of six</li>
+          <li>Write your answer down before I give mine<small>a half-formed answer still counts as a mark</small></li>
+          <li>One point per question you got substantially right<small>generous about wording, strict about mechanism</small></li>
+          <li>Twelve questions, one sitting, nothing looked up<small>a question you can only answer with a search is one you cannot answer in an interview</small></li>
         </ul>
       </div>
       <div class="card w">
         <h3 class="w">Your score is not a verdict</h3>
         <p>It is an <b>address</b>. Every question you miss points at a specific module number — and that module already has a lesson written for exactly that gap.</p>
-        <p style="margin-top:10px">Most experienced React developers score between 4 and 6. That is the normal result, not the bad one.</p>
+        <p style="margin-top:10px">Most experienced React developers score between <b>4 and 7</b>. That is the normal result, not the bad one.</p>
       </div>
     </div>
-    <div class="key">Do not look anything up. A question you can only answer with a search is a question you cannot answer in an interview.</div>
-    <aside class="notes"><div class="t">L5 · rules first</div><p>Say the "score is not a verdict" line before the first question, not after. Students who think they are being judged stop answering honestly, and the diagnostic stops working.</p></aside>
+    <a class="decklink" href="diagnostic-deck.html">
+      <span><span class="dl-n">Sit the diagnostic · lesson 5, in full</span><span class="dl-t">The diagnostic, answered out loud</span><span class="dl-s">All twelve questions, then the mechanism behind each one — animated a step at a time. Take it before you come back here.</span></span>
+      <span class="dl-go">&#8599;</span>
+    </a>
+    <aside class="notes"><div class="t">L5 · rules first, then send them to the other deck</div><p>Say the 'your score is not a verdict, it is an address' line <b>before</b> the first question, never after. Students who think they are being judged stop answering honestly, and the diagnostic stops working.</p><p>Scoring is binary and generous: if they got the mechanism, it counts, even if the wording was loose. Say that out loud too.</p><p>Then hand over. The twelve questions and their animated answers live in the diagnostic deck — this deck does not repeat them. Open it, work through it, and come back to the next slide with a number written down.</p><p>Tell them to write the date next to their score. In module 13 they take the same twelve questions again, and the delta is the proof.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>13</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Part 1 · the browser and the language</div>
-    <h2>Questions 1 – 6</h2>
-    <ul class="qs">
-      <li class="frag"><b class="n">Q1</b>Three script tags, three behaviours<span class="to">M2 · M10</span><small><code>defer</code>, <code>async</code>, and neither — in what order do they run?</small></li>
-      <li class="frag"><b class="n">Q2</b>Two ways to move a card 200 pixels<span class="to">M2 · M10</span><small>Which one costs a layout, and which one only costs the compositor?</small></li>
-      <li class="frag"><b class="n">Q3</b>Output order inside a click handler<span class="to">M2 · M3</span><small>Tasks, microtasks, and the line everybody gets wrong.</small></li>
-      <li class="frag"><b class="n">Q4</b>Three good numbers and one bad one<span class="to">M5 · M7 · M10</span><small>Which Web Vital is the one your users actually feel?</small></li>
-      <li class="frag"><b class="n">Q5</b>Two loops, two outputs<span class="to">M3 · M5</span><small>Closures, and the loop variable everyone has been bitten by.</small></li>
-      <li class="frag"><b class="n">Q6</b>A method that loses its object<span class="to">M3 · M5</span><small><code>this</code>, and why the callback stopped working.</small></li>
-    </ul>
-    <aside class="notes"><div class="t">L5 · 11:00</div><p>Ten seconds of silence after each question, on camera. Resist filling it. The silence is what makes them commit to an answer instead of waiting for yours.</p></aside>
-  </section>
 
-  <!-- ============ L6 · DIAGNOSTIC PART 2 ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>14</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Part 2 · types, React, architecture</div>
-    <h2>Questions 7 – 12</h2>
-    <ul class="qs">
-      <li class="frag"><b class="n">Q7</b>Same object, two verdicts<span class="to">M4 · M6</span><small>Structural typing, and why TypeScript accepted something you did not expect.</small></li>
-      <li class="frag"><b class="n">Q8</b><code>memo</code> that does nothing<span class="to">M5 · M10</span><small>Referential equality, and the memo that never once prevented a render.</small></li>
-      <li class="frag"><b class="n">Q9</b>The note that moved to the wrong job<span class="to">M5 · M7</span><small>Keys, reconciliation, and state landing on the wrong row.</small></li>
-      <li class="frag"><b class="n">Q10</b>It works with a mouse<span class="to">M2 · M7</span><small>Focus, keyboard paths and ARIA — the round most candidates fail silently.</small></li>
-      <li class="frag"><b class="n">Q11</b>Whose state is it, and whose response is that<span class="to">M8</span><small>Server state vs client state — the distinction that decides mid or senior.</small></li>
-      <li class="frag"><b class="n">Q12</b>Four pages, four strategies<span class="to">M10 · M11 · M13 · M14</span><small>CSR, SSR, SSG, ISR — and defending the choice out loud.</small></li>
-    </ul>
-    <div class="key g">These six are the ones that decide whether you get the mid offer or the senior one.</div>
-    <aside class="notes"><div class="t">L6 · 11:00</div><p>Q11 and Q12 are the senior separators. If a take runs long, Q6 and Q10 move to the workbook — never these two.</p></aside>
-  </section>
 
-  <!-- ============ L7 · SCORE AND MAP ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>15</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Count your marks</div>
-    <h2>What your number means</h2>
-    <div class="fig wide"><svg viewBox="0 0 940 300" role="img" aria-label="Diagnostic score bands from zero to twelve and what each band prescribes">
-          <text class="m" x="30" y="20" fill="#94A3B8" font-size="11" letter-spacing="2.2">READING YOUR DIAGNOSTIC SCORE — 12 QUESTIONS</text>
-          <text x="30" y="44" fill="#CBD5E1" font-size="12">The score is an address, not a verdict. It tells you where to spend your attention, and nothing about whether you will make it.</text>
 
-          <g class="m" font-size="11" fill="#94A3B8" text-anchor="middle">
-            <text x="140" y="84">0 – 3</text><text x="360" y="84">4 – 6</text><text x="580" y="84">7 – 9</text><text x="800" y="84">10 – 12</text>
-          </g>
-          <rect x="30"  y="92" rx="8" fill="rgba(242,109,91,.14)" stroke="rgba(242,109,91,.38)"/>
-          <rect x="250" y="92" width="220" height="52" rx="8" fill="rgba(245,158,11,.14)" stroke="rgba(245,158,11,.38)"/>
-          <rect x="470" y="92" width="220" height="52" rx="8" fill="rgba(59,130,246,.16)" stroke="rgba(59,130,246,.40)"/>
-          <rect x="690" y="92" width="220" height="52" rx="8" fill="rgba(52,211,153,.14)" stroke="rgba(52,211,153,.40)"/>
-          <g font-size="13.5" font-weight="700" text-anchor="middle">
-            <text x="140" y="124" fill="#F8717A">Starting fresh</text>
-            <text x="360" y="124" fill="#FBBF24">The common score</text>
-            <text x="580" y="124" fill="#22D3EE">Mid-level shaped</text>
-            <text x="800" y="124" fill="#34D399">Senior shaped</text>
-          </g>
 
-          <line x1="30" y1="156" x2="910" y2="156" stroke="rgba(255,255,255,.14)"/>
-          <g stroke="rgba(255,255,255,.14)">
-            <line x1="30" y1="152" x2="30" y2="162"/><line x1="250" y1="152" x2="250" y2="162"/>
-            <line x1="470" y1="152" x2="470" y2="162"/><line x1="690" y1="152" x2="690" y2="162"/>
-            <line x1="910" y1="152" x2="910" y2="162"/>
-          </g>
-          <g class="m" font-size="9.5" fill="#94A3B8" text-anchor="middle">
-            <text x="30" y="176">0</text><text x="250" y="176">3</text><text x="470" y="176">6</text><text x="690" y="176">9</text><text x="910" y="176">12</text>
-          </g>
 
-          <g font-size="9.8" fill="#CBD5E1">
-            <text x="38" y="200">Nothing is wrong with you — you have</text>
-            <text x="38" y="214">been shipping features, not studying</text>
-            <text x="38" y="228">the platform. Do not skip Act I.</text>
-            <text x="38" y="242">Modules 2 and 3 are the whole gap.</text>
 
-            <text x="258" y="200">You know React; you do not yet know</text>
-            <text x="258" y="214">the browser underneath it. Act I will</text>
-            <text x="258" y="228">feel slow — and it is exactly why you</text>
-            <text x="258" y="242">will pass the quiz round.</text>
 
-            <text x="478" y="200">You could already survive a mid-level</text>
-            <text x="478" y="214">loop. Your gap is Act II and III: the</text>
-            <text x="478" y="228">data layer, the design round, and</text>
-            <text x="478" y="242">saying any of it out loud.</text>
 
-            <text x="698" y="200">Watch Act I at 1.5× — but still do the</text>
-            <text x="698" y="214">exercises. Spend your time in modules</text>
-            <text x="698" y="228">8, 11 and 13. Your gap is the</text>
-            <text x="698" y="242">interview, not the knowledge.</text>
-          </g>
-
-          <line x1="30" y1="258" x2="910" y2="258" stroke="rgba(255,255,255,.10)"/>
-          <text x="30" y="276" fill="#94A3B8" font-size="11">Most students land between 4 and 7 on day one. You take the same twelve questions again in module 13 — the delta is the proof, and that slide is the one</text>
-          <text x="30" y="290" fill="#94A3B8" font-size="11">students screenshot. Write your score and today's date on the first page of your notebook now, before you forget what you did not know.</text>
-        </svg></div>
-    <aside class="notes"><div class="t">L7 · 7:00</div><p>Read the band the room is actually in — 4 to 6 — out loud and in full. Everyone else is listening to hear whether you will insult them; you will not.</p></aside>
-  </section>
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>16</b> / 28</div><!--/catalyst-brand:chrome-->
-    <h2 style="font-size:min(3.6vw,41px); max-width:none; margin-bottom:4px">Fourteen modules, <span class="cy">twelve lines drawn</span></h2>
-    <div class="fig wide" style="margin-top:8px; max-width:1200px"><svg viewBox="0 0 1000 430" role="img" aria-label="The fourteen module map with act boundaries, module one highlighted, and a line from each diagnostic question to the module that answers it">
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>19</b> / 28</div><!--/catalyst-brand:chrome-->
+    <h2 style="font-size:min(3.6vw,41px); max-width:none; margin-bottom:4px">Thirteen modules, <span class="cy">twelve lines drawn</span></h2>
+    <div class="fig wide" style="margin-top:8px; max-width:1200px"><svg viewBox="0 0 1000 430" role="img" aria-label="The thirteen module map with act boundaries, module one highlighted, and a line from each diagnostic question to the module that answers it">
           <defs>
             <marker id="a3" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 z" fill="#2196F3" fill-opacity=".7"/></marker>
           </defs>
           <text class="m" x="30" y="20" fill="#94A3B8" font-size="11" letter-spacing="2.2">MODULE 1 IS THE MAP — EVERY DIAGNOSTIC QUESTION HAS AN ADDRESS</text>
-          <text class="m" x="30" y="46" fill="#22D3EE" font-size="9" letter-spacing="1.6">THE 12 DIAGNOSTIC QUESTIONS · LESSONS 5–6</text>
+          <text class="m" x="30" y="46" fill="#22D3EE" font-size="9" letter-spacing="1.6">THE 12 DIAGNOSTIC QUESTIONS · LESSON 5</text>
           <text class="m" x="961" y="46" fill="#94A3B8" font-size="9" letter-spacing="1.4" text-anchor="end">SOLID = PRIMARY MODULE · DASHED = SECONDARY</text>
 
           <!-- question chips -->
           <g fill="rgba(59,130,246,.13)" stroke="rgba(59,130,246,.34)">
-            <rect x="30" y="56" rx="8"/><rect x="109" y="56" width="60" height="26" rx="8"/>
-            <rect x="188" y="56" width="60" height="26" rx="8"/><rect x="268" y="56" width="60" height="26" rx="8"/>
-            <rect x="347" y="56" width="60" height="26" rx="8"/><rect x="426" y="56" width="60" height="26" rx="8"/>
-            <rect x="505" y="56" width="60" height="26" rx="8"/><rect x="585" y="56" width="60" height="26" rx="8"/>
-            <rect x="664" y="56" width="60" height="26" rx="8"/><rect x="743" y="56" width="60" height="26" rx="8"/>
-            <rect x="822" y="56" width="60" height="26" rx="8"/><rect x="901" y="56" width="60" height="26" rx="8"/>
+            <rect x="30" y="56" width="60" height="26" rx="8"/>
+            <rect x="109" y="56" width="60" height="26" rx="8"/>
+            <rect x="188" y="56" width="60" height="26" rx="8"/>
+            <rect x="268" y="56" width="60" height="26" rx="8"/>
+            <rect x="347" y="56" width="60" height="26" rx="8"/>
+            <rect x="426" y="56" width="60" height="26" rx="8"/>
+            <rect x="505" y="56" width="60" height="26" rx="8"/>
+            <rect x="585" y="56" width="60" height="26" rx="8"/>
+            <rect x="664" y="56" width="60" height="26" rx="8"/>
+            <rect x="743" y="56" width="60" height="26" rx="8"/>
+            <rect x="822" y="56" width="60" height="26" rx="8"/>
+            <rect x="901" y="56" width="60" height="26" rx="8"/>
           </g>
           <g class="m" fill="#22D3EE" font-size="11" text-anchor="middle">
-            <text x="60" y="73">Q1</text><text x="139" y="73">Q2</text><text x="218" y="73">Q3</text><text x="298" y="73">Q4</text>
-            <text x="377" y="73">Q5</text><text x="456" y="73">Q6</text><text x="535" y="73">Q7</text><text x="615" y="73">Q8</text>
-            <text x="694" y="73">Q9</text><text x="773" y="73">Q10</text><text x="852" y="73">Q11</text><text x="931" y="73">Q12</text>
+            <text x="60" y="73">Q1</text>
+            <text x="139" y="73">Q2</text>
+            <text x="218" y="73">Q3</text>
+            <text x="298" y="73">Q4</text>
+            <text x="377" y="73">Q5</text>
+            <text x="456" y="73">Q6</text>
+            <text x="535" y="73">Q7</text>
+            <text x="615" y="73">Q8</text>
+            <text x="694" y="73">Q9</text>
+            <text x="773" y="73">Q10</text>
+            <text x="852" y="73">Q11</text>
+            <text x="931" y="73">Q12</text>
           </g>
 
           <!-- connectors: chip -> module -->
           <g fill="none" stroke="#2196F3" stroke-opacity=".42" stroke-width="1.3" marker-end="url(#a3)">
-            <path d="M60 82 C60 150 127 185 127 248"/>
-            <path d="M139 82 C139 150 127 185 127 248"/>
-            <path d="M218 82 C218 150 127 185 127 248"/>
-            <path d="M298 82 C298 150 663 185 663 248"/>
-            <path d="M377 82 C377 150 194 185 194 248"/>
-            <path d="M456 82 C456 150 194 185 194 248"/>
-            <path d="M535 82 C535 150 261 185 261 248"/>
-            <path d="M615 82 C615 150 328 185 328 248"/>
-            <path d="M694 82 C694 150 328 185 328 248"/>
-            <path d="M773 82 C773 150 462 185 462 248"/>
-            <path d="M852 82 C852 150 529 185 529 248"/>
-            <path d="M931 82 C931 150 596 185 596 248"/>
+            <path d="M60 82 C60 150 134 185 134 248"/>
+            <path d="M139 82 C139 150 134 185 134 248"/>
+            <path d="M218 82 C218 150 134 185 134 248"/>
+            <path d="M298 82 C298 150 134 185 134 248"/>
+            <path d="M377 82 C377 150 134 185 134 248"/>
+            <path d="M456 82 C456 150 207 185 207 248"/>
+            <path d="M535 82 C535 150 134 185 134 248"/>
+            <path d="M615 82 C615 150 134 185 134 248"/>
+            <path d="M694 82 C694 150 207 185 207 248"/>
+            <path d="M773 82 C773 150 134 185 134 248"/>
+            <path d="M852 82 C852 150 134 185 134 248"/>
+            <path d="M931 82 C931 150 423 185 423 248"/>
           </g>
           <g fill="none" stroke="#FBBF24" stroke-opacity=".40" stroke-width="1.2" stroke-dasharray="4 4">
-            <path d="M535 82 C535 155 395 190 395 248"/>
-            <path d="M931 82 C931 155 730 190 730 248"/>
+            <path d="M298 82 C298 155 207 190 207 248"/>
+            <path d="M377 82 C377 155 712 190 712 248"/>
+            <path d="M535 82 C535 155 712 190 712 248"/>
+            <path d="M615 82 C615 155 712 190 712 248"/>
+            <path d="M773 82 C773 155 712 190 712 248"/>
+            <path d="M852 82 C852 155 351 190 351 248"/>
           </g>
 
           <!-- act separators -->
-          <line x1="294" y1="238" x2="294" y2="392" stroke="rgba(255,255,255,.16)" stroke-dasharray="5 5"/>
-          <line x1="696" y1="238" x2="696" y2="392" stroke="rgba(255,255,255,.16)" stroke-dasharray="5 5"/>
+          <line x1="315" y1="238" x2="315" y2="392" stroke="rgba(255,255,255,.16)" stroke-dasharray="5 5"/>
+          <line x1="748" y1="238" x2="748" y2="392" stroke="rgba(255,255,255,.16)" stroke-dasharray="5 5"/>
 
           <!-- module boxes -->
-          <rect x="30"  y="250" width="60" height="96" rx="9" fill="rgba(59,130,246,.20)" stroke="#2196F3" stroke-width="1.6"/>
+          <rect x="30"  y="250" width="64" height="96" rx="9" fill="rgba(59,130,246,.20)" stroke="#2196F3" stroke-width="1.6"/>
           <g fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.11)">
-            <rect x="97"  y="250" width="60" height="96" rx="9"/><rect x="164" y="250" width="60" height="96" rx="9"/>
-            <rect x="231" y="250" width="60" height="96" rx="9"/><rect x="298" y="250" width="60" height="96" rx="9"/>
-            <rect x="365" y="250" width="60" height="96" rx="9"/><rect x="432" y="250" width="60" height="96" rx="9"/>
-            <rect x="499" y="250" width="60" height="96" rx="9"/><rect x="566" y="250" width="60" height="96" rx="9"/>
-            <rect x="633" y="250" width="60" height="96" rx="9"/><rect x="700" y="250" width="60" height="96" rx="9"/>
-            <rect x="767" y="250" width="60" height="96" rx="9"/><rect x="834" y="250" width="60" height="96" rx="9"/>
-            <rect x="901" y="250" width="60" height="96" rx="9"/>
+            <rect x="102" y="250" width="64" height="96" rx="9"/>
+            <rect x="175" y="250" width="64" height="96" rx="9"/>
+            <rect x="247" y="250" width="64" height="96" rx="9"/>
+            <rect x="319" y="250" width="64" height="96" rx="9"/>
+            <rect x="391" y="250" width="64" height="96" rx="9"/>
+            <rect x="464" y="250" width="64" height="96" rx="9"/>
+            <rect x="536" y="250" width="64" height="96" rx="9"/>
+            <rect x="608" y="250" width="64" height="96" rx="9"/>
+            <rect x="680" y="250" width="64" height="96" rx="9"/>
+            <rect x="753" y="250" width="64" height="96" rx="9"/>
+            <rect x="825" y="250" width="64" height="96" rx="9"/>
+            <rect x="897" y="250" width="64" height="96" rx="9"/>
           </g>
           <g class="m" font-size="12" font-weight="700" text-anchor="middle" fill="#94A3B8">
-            <text x="60"  y="274" fill="#22D3EE">01</text><text x="127" y="274">02</text><text x="194" y="274">03</text>
-            <text x="261" y="274">04</text><text x="328" y="274">05</text><text x="395" y="274">06</text>
-            <text x="462" y="274">07</text><text x="529" y="274">08</text><text x="596" y="274">09</text>
-            <text x="663" y="274">10</text><text x="730" y="274">11</text><text x="797" y="274">12</text>
-            <text x="864" y="274">13</text><text x="931" y="274">14</text>
+            <text x="62" y="274" fill="#22D3EE">01</text> <text x="134" y="274">02</text> <text x="207" y="274">03</text> <text x="279" y="274">04</text> <text x="351" y="274">05</text> <text x="423" y="274">06</text> <text x="496" y="274">07</text> <text x="568" y="274">08</text> <text x="640" y="274">09</text> <text x="712" y="274">10</text> <text x="785" y="274">11</text> <text x="857" y="274">12</text> <text x="929" y="274">13</text>
           </g>
           <g font-size="8.2" text-anchor="middle" fill="#CBD5E1">
-            <text x="60"  y="296" fill="#FFFFFF">Founda-</text><text x="60"  y="306" fill="#FFFFFF">tions</text>
-            <text x="127" y="296">Browser</text><text x="127" y="306">runtime</text>
-            <text x="194" y="296">JavaScript</text><text x="194" y="306">deeply</text>
-            <text x="261" y="296">Type-</text><text x="261" y="306">Script</text>
-            <text x="328" y="296">React</text><text x="328" y="306">deeply</text>
-            <text x="395" y="296">React</text><text x="395" y="306">+ TS</text>
-            <text x="462" y="296">UI &amp;</text><text x="462" y="306">a11y</text>
-            <text x="529" y="296">Data &amp;</text><text x="529" y="306">state</text>
-            <text x="596" y="296">Next.js</text><text x="596" y="306">rendering</text>
-            <text x="663" y="296">Perf · test</text><text x="663" y="306">· security</text>
-            <text x="730" y="296">System</text><text x="730" y="306">design</text>
-            <text x="797" y="296">Capstone</text><text x="797" y="306">assemble</text>
-            <text x="864" y="296">Interview</text><text x="864" y="306">prep</text>
-            <text x="931" y="296">Mocks &amp;</text><text x="931" y="306">the offer</text>
+            <text x="62" y="296" fill="#FFFFFF">Founda-</text><text x="62" y="306" fill="#FFFFFF">tions</text>
+            <text x="134" y="296">Browser</text><text x="134" y="306">runtime</text>
+            <text x="207" y="296">JavaScript</text><text x="207" y="306">deeply</text>
+            <text x="279" y="296">Type-</text><text x="279" y="306">Script</text>
+            <text x="351" y="296">React</text><text x="351" y="306">deeply</text>
+            <text x="423" y="296">React</text><text x="423" y="306">+ TS</text>
+            <text x="496" y="296">UI &amp;</text><text x="496" y="306">a11y</text>
+            <text x="568" y="296">Data &amp;</text><text x="568" y="306">state</text>
+            <text x="640" y="296">Next.js</text><text x="640" y="306">rendering</text>
+            <text x="712" y="296">Perf · test</text><text x="712" y="306">· security</text>
+            <text x="785" y="296">System</text><text x="785" y="306">design</text>
+            <text x="857" y="296">Capstone</text><text x="857" y="306">assemble</text>
+            <text x="929" y="296">Interview</text><text x="929" y="306">prep</text>
           </g>
-          <g font-size="8" text-anchor="middle" fill="#94A3B8">
-            <text x="60"  y="330">the map</text>
-            <text x="127" y="330">Q1 Q2 Q3</text><text x="194" y="330">Q5 Q6</text><text x="261" y="330">Q7</text>
-            <text x="328" y="330">Q8 Q9</text><text x="395" y="330">Q7</text><text x="462" y="330">Q10</text>
-            <text x="529" y="330">Q11</text><text x="596" y="330">Q12</text><text x="663" y="330">Q4</text>
-            <text x="730" y="330">Q12</text><text x="797" y="330">—</text><text x="864" y="330">re-test</text><text x="931" y="330">the offer</text>
+          <g font-size="7.6" text-anchor="middle" fill="#94A3B8">
+            <text x="62" y="330">the map</text>
+            <text x="134" y="322">Q1 Q2 Q3</text><text x="134" y="332">Q4 Q5 Q7</text><text x="134" y="342">Q8 Q10 Q11</text>
+            <text x="207" y="326">Q6 Q9</text><text x="207" y="338">Q4</text>
+            <text x="279" y="330">—</text>
+            <text x="351" y="330">Q11</text>
+            <text x="423" y="330">Q12</text>
+            <text x="496" y="330">—</text>
+            <text x="568" y="330">—</text>
+            <text x="640" y="330">—</text>
+            <text x="712" y="326">Q5 Q7</text><text x="712" y="338">Q8 Q10</text>
+            <text x="785" y="330">—</text>
+            <text x="857" y="330">—</text>
+            <text x="929" y="330">re-test</text>
           </g>
-          <text class="m" x="60" y="362" fill="#22D3EE" font-size="8" text-anchor="middle" letter-spacing="1.2">◆ YOU ARE HERE</text>
+          <text class="m" x="62" y="362" fill="#22D3EE" font-size="8" text-anchor="middle" letter-spacing="1.2">◆ YOU ARE HERE</text>
 
           <!-- act labels -->
-          <text class="m" x="160" y="384" fill="#22D3EE" font-size="9.5" text-anchor="middle" letter-spacing="1.6">ACT I · THE PLATFORM</text>
-          <text class="m" x="495" y="384" fill="#22D3EE" font-size="9.5" text-anchor="middle" letter-spacing="1.6">ACT II · FROM COMPONENTS TO A PRODUCT</text>
-          <text class="m" x="830" y="384" fill="#22D3EE" font-size="9.5" text-anchor="middle" letter-spacing="1.6">ACT III · DESIGN IT · SHIP IT · GET THE OFFER</text>
+          <text class="m" x="170" y="384" fill="#22D3EE" font-size="9.5" text-anchor="middle" letter-spacing="1.6">ACT I · THE PLATFORM</text>
+          <text class="m" x="531" y="384" fill="#22D3EE" font-size="9.5" text-anchor="middle" letter-spacing="1.6">ACT II · FROM COMPONENTS TO A PRODUCT</text>
+          <text class="m" x="857" y="384" fill="#22D3EE" font-size="9.5" text-anchor="middle" letter-spacing="1.6">ACT III · SHIP IT · GET THE OFFER</text>
 
           <line x1="30" y1="398" x2="961" y2="398" stroke="rgba(255,255,255,.10)"/>
-          <text x="30" y="418" fill="#94A3B8" font-size="11">Twelve questions. Ten modules. Nothing in this program exists because it is on a syllabus — every module is on the map because a question in lesson 5 or 6 needs it.</text>
+          <text x="30" y="418" fill="#94A3B8" font-size="11">Nine of the twelve land on module 2. That is not a coincidence and it is not padding — it is the answer to &quot;why am I doing browser internals before React&quot;, drawn rather than argued.</text>
         </svg></div>
     <div class="key" style="margin-top:12px; padding:10px 18px; font-size:min(1.7vw,19px)">You are not starting a course. You are starting at <b>the module your score pointed at</b>.</div>
-    <aside class="notes"><div class="t">L7 · the closing thirty seconds — never cut this</div><p>Draw the lines one at a time, calling the question number as each one lands. This is the single most persuasive thirty seconds in the module: the syllabus stops being a list and becomes their route.</p></aside>
+    <aside class="notes"><div class="t">L5 · the closing thirty seconds — never cut this</div><p>Draw the lines one at a time, calling the question number as each one lands. This is the single most persuasive thirty seconds in the module: the syllabus stops being a list and becomes their route.</p><p>Stop when the module 2 column fills up. Nine of the twelve questions land there, and that picture is the entire argument for the order of this program — say it once and let the drawing do the rest.</p><p>End on the line as written — they are not starting a course, they are starting at the module their score pointed at.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>17</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>20</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Three acts</div>
     <h2>From "it renders" to<br>"I'm the senior in the room"</h2>
     <div class="three">
       <div class="card a"><h3 class="cy">Act I · Modules 1–4</h3><p>The platform under the framework. The browser, JavaScript, TypeScript. <b>Slow on purpose</b> — this is the act that wins the quiz round.</p></div>
       <div class="card g"><h3 class="g">Act II · Modules 5–10</h3><p>React actually understood, then components to a product: data, routing, rendering strategy, performance, tests, security.</p></div>
-      <div class="card w"><h3 class="w">Act III · Modules 11–14</h3><p>Design it, ship it, get the offer. System design with RADIO, the capstone, interview drills, recorded mocks.</p></div>
+      <div class="card w"><h3 class="w">Act III · Modules 11–13</h3><p>Design it, ship it, get the offer. System design with RADIO, the capstone, and all five interview formats drilled until they are routine.</p></div>
     </div>
-    <aside class="notes"><div class="t">L7 · close</div><p>Twenty seconds. They have already seen the map; this is just the shape of it.</p></aside>
+    <aside class="notes"><div class="t">L5 · close · the three acts</div><p>Twenty seconds. They have already seen the map; this is only the shape of it. Do not re-explain the modules.</p><p>Land on Act I being slow on purpose. It pre-empts the most common drop-off, which happens in module 2 when a React developer feels the browser material is beneath them.</p></aside>
   </section>
 
-  <!-- ============ L8 · HOW TO STUDY ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>18</b> / 28</div><!--/catalyst-brand:chrome-->
+
+  <!-- ============ L6 · HOW TO STUDY THIS PROGRAM ============ -->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>21</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">How to study this program</div>
     <h2 class="r">There is one way to take<br>this program that guarantees<br>you learn nothing</h2>
     <ul class="plist no" style="max-width:56ch; margin-top:18px">
@@ -728,202 +834,47 @@
       <li>Open <span class="mono">guided</span> before you have tried<small>the hint is worth almost nothing before the struggle</small></li>
       <li>Read the solution and move on<small>reading code is not writing code, and the interview asks you to write</small></li>
     </ul>
-    <aside class="notes"><div class="t">L8 · open on the anti-pattern</div><p>Describe the failure mode first. Students recognise themselves in it, which is what makes the next slide land as a rule rather than a scolding.</p></aside>
+    <aside class="notes"><div class="t">L6 · 0:00 — open on the anti-pattern</div><p>Describe the failure mode before you describe the method. Students recognise themselves in it, which is what makes the next slides land as a rule rather than a scolding.</p><p>Say it without contempt. The binge-watch failure mode is not laziness — it feels exactly like progress the entire time, which is precisely why it catches everyone.</p></aside>
   </section>
 
-  <section class="slide mid" data-chip="MODULE 01 · VIDEO 8" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>19</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide mid" data-chip="MODULE 01 · VIDEO 6" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>22</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="big">Twenty minutes stuck<br>is <span class="cy">the lesson</span>.<br>The hint is <span class="g">the reward</span>.</div>
     <div class="sub" style="max-width:56ch; margin-top:22px">Set a timer. Being stuck is not a sign you are behind — it is the part of the work that changes what you can do.</div>
-    <aside class="notes"><div class="t">L8 · the rule</div><p>Give the exact protocol: read the failing test, twenty minutes with no hints, then guided, then solution — and if you read the solution, delete it and redo it from start.</p></aside>
+    <aside class="notes"><div class="t">L6 · the rule, said once</div><p>Twenty minutes stuck is the lesson; the hint is the reward. Say it, pause, and do not justify it — the justification is the next slide's diff step.</p><p>If you want one sentence of backing: nobody in an interview hands you the guided branch.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>20</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The repo · one product, one slice per module</div>
-    <h2>Every exercise ships<br>as three branches</h2>
-    <div class="fig wide"><svg viewBox="0 0 940 352" role="img" aria-label="The three-branch git workflow: start, guided and solution, and the loop a student runs for every exercise">
-          <defs>
-            <marker id="a5" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#94A3B8"/></marker>
-          </defs>
-          
-
-          <rect x="20" y="38" rx="10" fill="rgba(59,130,246,.13)" stroke="rgba(59,130,246,.34)"/>
-          <text class="m" x="34" y="64" fill="#22D3EE" font-size="11">module-3/utils/</text>
-          <text class="m" x="34" y="82" fill="#FFFFFF" font-size="13" font-weight="700">start</text>
-          <rect x="224" y="38" width="696" height="64" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)"/>
-          <text x="240" y="62" fill="#FFFFFF" font-size="12">Scaffold plus failing tests. No hints, no TODOs, no comments telling you the answer.</text>
-          <text x="240" y="82" fill="#CBD5E1" font-size="11">This is the branch where the learning actually happens. <tspan class="m" fill="#94A3B8" font-size="10.5">pnpm test → 39 failing</tspan></text>
-
-          <rect x="20" y="110" width="190" height="64" rx="10" fill="rgba(245,158,11,.11)" stroke="rgba(245,158,11,.34)"/>
-          <text class="m" x="34" y="136" fill="#FBBF24" font-size="11">module-3/utils/</text>
-          <text class="m" x="34" y="154" fill="#FFFFFF" font-size="13" font-weight="700">guided</text>
-          <rect x="224" y="110" width="696" height="64" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)"/>
-          <text x="240" y="134" fill="#FFFFFF" font-size="12">The same failing tests, plus TODOs, hints, and the reasoning written into the comments.</text>
-          <text x="240" y="154" fill="#CBD5E1" font-size="11">Open it only after twenty minutes of being genuinely stuck. Not before. That is the whole rule.</text>
-
-          <rect x="20" y="182" width="190" height="64" rx="10" fill="rgba(52,211,153,.11)" stroke="rgba(52,211,153,.34)"/>
-          <text class="m" x="34" y="208" fill="#34D399" font-size="11">module-3/utils/</text>
-          <text class="m" x="34" y="226" fill="#FFFFFF" font-size="13" font-weight="700">solution</text>
-          <rect x="224" y="182" width="696" height="64" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.10)"/>
-          <text x="240" y="206" fill="#FFFFFF" font-size="12">Finished and commented — for diffing against yours, not for reading first.</text>
-          <text class="m" x="240" y="226" fill="#94A3B8" font-size="10.5">git diff module-3/utils/solution -- src/utils/debounce.ts</text>
-
-          <line x1="20" y1="262" x2="920" y2="262" stroke="rgba(255,255,255,.10)"/>
-
-          <g fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.11)">
-            <rect x="20"  y="278" width="160" height="48" rx="10"/>
-            <rect x="205" y="278" width="160" height="48" rx="10"/>
-            <rect x="390" y="278" width="160" height="48" rx="10"/>
-            <rect x="575" y="278" width="160" height="48" rx="10"/>
-            <rect x="760" y="278" width="160" height="48" rx="10"/>
-          </g>
-          <g font-size="10.6" fill="#CBD5E1" text-anchor="middle">
-            <text x="100" y="299">Read the failing</text><text x="100" y="313">test first</text>
-            <text x="285" y="299">Try for twenty</text><text x="285" y="313">minutes. No hints.</text>
-            <text x="470" y="299">Still stuck?</text><text x="470" y="313">Switch to guided.</text>
-            <text x="655" y="299">Still stuck?</text><text x="655" y="313">Read the solution.</text>
-            <text x="840" y="299">Delete it. Redo it</text><text x="840" y="313">from start.</text>
-          </g>
-          <g stroke="#94A3B8" stroke-opacity=".6" marker-end="url(#a5)">
-            <line x1="182" y1="302" x2="201" y2="302"/><line x1="367" y1="302" x2="386" y2="302"/>
-            <line x1="552" y1="302" x2="571" y2="302"/><line x1="737" y1="302" x2="756" y2="302"/>
-          </g>
-          <text x="20" y="346" fill="#94A3B8" font-size="11">The last box is the one people skip, and it is the only one that turns reading into knowing. Nobody in an interview will hand you the guided branch.</text>
-        </svg></div>
-    <aside class="notes"><div class="t">L8 · the branch model</div><p>The tests are byte-identical across the three. Only the amount of implementation changes — which is what makes red to green feel earned instead of granted.</p></aside>
-  </section>
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>21</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Do this now, on camera, with them</div>
-    <h2>The whole workflow<br>is three commands</h2>
-    <pre><code><span class="pr">$</span> git checkout module-3/utils/start
-<span class="pr">$</span> pnpm install
-<span class="pr">$</span> pnpm test:watch                              <span class="cmt"># red: 39 failing</span>
-
-<span class="cmt"># ...twenty minutes of work...</span>
-
-<span class="pr">$</span> git diff module-3/utils/solution -- src/     <span class="cmt"># compare, don't just check</span>
-
-<span class="cmt"># stuck on one function? pull only its hints:</span>
-<span class="pr">$</span> git checkout module-3/utils/guided -- src/utils/debounce.ts</code></pre>
-    <div class="key g">Taught once, here, and used for the rest of the program. It is also the git workflow you will use at work — branches, diffs, and comparing your approach against someone else's.</div>
-    <aside class="notes"><div class="t">L8 · run it live</div><p>Actually run it. Let the 39 red tests fill the terminal on camera — that image is the student's deliverable for this module, and it is the moment the program stops being videos.</p><p>The branch names follow the course convention: module, then the slice, then which of the three you want.</p></aside>
-  </section>
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>22</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Where every slice ends up</div>
-    <h2 style="font-size:min(4.4vw,50px)">You assemble —<br>you do not restart</h2>
-    <div class="fig wide" style="margin-top:12px"><svg viewBox="0 0 940 420" role="img" aria-label="The job board capstone — each module ships one piece that converges into a single deployed product in module 12">
-          <defs>
-            <marker id="a4" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#34D399" fill-opacity=".75"/></marker>
-          </defs>
-          <text class="m" x="20" y="20" fill="#94A3B8" font-size="11" letter-spacing="2.2">THE JOB BOARD — EVERY MODULE SHIPS ONE PIECE OF IT</text>
-
-          <g fill="rgba(255,255,255,.035)" stroke="rgba(255,255,255,.11)">
-            <rect x="20" y="44"  rx="10"/>
-            <rect x="20" y="96"  width="330" height="44" rx="10"/>
-            <rect x="20" y="148" width="330" height="44" rx="10"/>
-            <rect x="20" y="200" width="330" height="44" rx="10"/>
-            <rect x="20" y="252" width="330" height="44" rx="10"/>
-            <rect x="20" y="304" width="330" height="44" rx="10"/>
-            <rect x="20" y="356" width="330" height="44" rx="10"/>
-          </g>
-          <g class="m" font-size="9" fill="#22D3EE" letter-spacing="1.2">
-            <text x="34" y="61">M3 · THE UTILITY LIBRARY</text>
-            <text x="34" y="113">M4 · THE TYPED DOMAIN</text>
-            <text x="34" y="165">M5 + M6 · THE LISTINGS FEED</text>
-            <text x="34" y="217">M7 · THE COMPONENT GAUNTLET</text>
-            <text x="34" y="269">M8 · THE DATA LAYER</text>
-            <text x="34" y="321">M9 · THE RENDERING STRATEGY</text>
-            <text x="34" y="373">M10 · THE BUDGET &amp; GREEN CI</text>
-          </g>
-          <g font-size="10.5" fill="#CBD5E1">
-            <text x="34" y="78">debounce · throttle · deepClone · EventEmitter</text>
-            <text x="34" y="130">Job · Company · Application · Stage — one source of truth</text>
-            <text x="34" y="182">the feed and the job card, typed end to end</text>
-            <text x="34" y="234">filter drawer · dropdown · tabs · autocomplete · toast</text>
-            <text x="34" y="286">query cache · optimistic apply · filters live in the URL</text>
-            <text x="34" y="338">SSG marketing · ISR job pages · RSC company dashboard</text>
-            <text x="34" y="390">LCP &lt; 2.0 s · INP &lt; 200 ms · Vitest + Playwright green</text>
-          </g>
-
-          <g fill="none" stroke="#34D399" stroke-opacity=".38" stroke-width="1.4" marker-end="url(#a4)">
-            <path d="M350 66  C450 66,  460 222, 552 222"/>
-            <path d="M350 118 C450 118, 460 222, 552 222"/>
-            <path d="M350 170 C450 170, 460 222, 552 222"/>
-            <path d="M350 222 C450 222, 470 222, 552 222"/>
-            <path d="M350 274 C450 274, 460 222, 552 222"/>
-            <path d="M350 326 C450 326, 460 222, 552 222"/>
-            <path d="M350 378 C450 378, 460 222, 552 222"/>
-          </g>
-          <text x="452" y="34" fill="#94A3B8" font-size="10.5" text-anchor="middle">you assemble —</text>
-          <text x="452" y="48" fill="#94A3B8" font-size="10.5" text-anchor="middle">you do not restart</text>
-
-          <rect x="560" y="110" width="360" height="224" rx="14" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.34)"/>
-          <text class="m" x="580" y="138" fill="#34D399" font-size="9.5" letter-spacing="1.8">MODULE 12 · THE CAPSTONE</text>
-          <text x="580" y="163" fill="#FFFFFF" font-size="16" font-weight="700">One deployed job board</text>
-          <line x1="580" y1="176" x2="900" y2="176" stroke="rgba(255,255,255,.10)"/>
-          <g font-size="10.8" fill="#CBD5E1">
-            <text x="580" y="196">· Seekers browse, filter, save and apply</text>
-            <text x="580" y="215">· Companies post a role and track applicants</text>
-            <text x="580" y="234">· Auth, protected routes, real data, real errors</text>
-            <text x="580" y="253">· A live URL, CI green, E2E passing</text>
-            <text x="580" y="272">· A performance budget you can prove with numbers</text>
-            <text x="580" y="291">· An accessibility pass you can defend</text>
-          </g>
-          <line x1="580" y1="302" x2="900" y2="302" stroke="rgba(255,255,255,.10)"/>
-          <text x="580" y="320" fill="#94A3B8" font-size="10">M11 gives it the architecture story · M14 makes you tell it out loud</text>
-
-          <text x="20" y="416" fill="#94A3B8" font-size="11">Module 12 is an assembly week, not a build week. If you did the exercises, most of the product already exists on branches you wrote yourself.</text>
-        </svg></div>
-    <aside class="notes"><div class="t">L8 · the capstone</div><p>The debounce from module 3 is still running inside the autocomplete in module 7, and both are still in the app they deploy in module 12. Nothing here is a throwaway demo.</p></aside>
-  </section>
-
-  <!-- ============ L8 · THE PRODUCT ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>23</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The product you are building</div>
-    <h2>Rasmi — a job board,<br>engineered</h2>
-    <div class="fig" style="max-width:880px; margin-top:10px">
-      <img class="shot" src="../../assets/01-overview.jpg" alt="The Rasmi job board: listings feed with filters and a detail panel">
-      <div class="cap">Seekers browse, filter, save and apply · companies post a role and track applicants · one deployed URL, CI green, E2E passing</div>
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>23</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">One week in this program, concretely</div>
+    <h2>Six hours,<br>spent in this order</h2>
+    <div class="two">
+      <div>
+        <ul class="plist yes">
+          <li>Watch the module once, at speed<small>no pausing, no notes — you are buying the shape, not the detail</small></li>
+          <li>Check out the <span class="mono">start</span> branch and read the failing test first<small>the test tells you the contract before the video does</small></li>
+          <li>Three hours implementing, alone<small>twenty minutes stuck before you open <span class="mono">guided</span>. Not five.</small></li>
+          <li>Diff your version against <span class="mono">solution</span><small>this is the hour that moves you a level, and it is the one people skip</small></li>
+          <li>Write down the one thing you would say differently in an interview<small>one line, in the same notebook as your diagnostic score</small></li>
+        </ul>
+      </div>
+      <div class="card r">
+        <h3 class="r">The failure mode</h3>
+        <p>Watch four modules in a weekend, feel excellent, write nothing. Two weeks later you can name every concept and implement none of them.</p>
+        <p style="margin-top:10px">This is the single most common way to finish a program like this and be exactly where you started. It feels like progress the entire time, which is why it works on everyone.</p>
+        <p style="margin-top:10px"><b class="r">One module a week, with the exercise done, beats four modules watched.</b></p>
+      </div>
     </div>
-    <aside class="notes"><div class="t">L8 · why a job board</div><p>It earns its place: a feed that needs virtualization, search that needs debounce and race handling, filters that belong in the URL, applications that need optimistic updates, public pages that need SEO and a dashboard that must not be indexed. Every module has a real reason to exist inside it.</p></aside>
+    <aside class="notes"><div class="t">L6 · the week, concretely</div><p>This is the slide students screenshot. Read the five steps in order and put the emphasis on step four — the diff — because it is the one everybody skips and the one that actually moves a level.</p><p>Name the number: one module a week with the exercise done beats four modules watched. Say it as a trade, not as a scolding.</p><p>The right-hand card is the anti-pattern in full. Read it as a description of a person, not an accusation, and then move immediately to the contract.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>24</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Module 7 · the single most-asked UI question</div>
-    <h2>The search box, built<br>from scratch</h2>
-    <div class="shots g3">
-      <div><img class="shot" src="../../assets/02-autocomplete-open.jpg" alt="Autocomplete open with suggestions"><div class="cap"><b>Open</b> — suggestions on type</div></div>
-      <div><img class="shot" src="../../assets/03-keyboard-nav.jpg" alt="Keyboard navigation highlighting an option"><div class="cap"><b>Keyboard</b> — no mouse needed</div></div>
-      <div><img class="shot" src="../../assets/04-selected-result.jpg" alt="A selected search result"><div class="cap"><b>Selected</b> — committed to the query</div></div>
-    </div>
-    <div class="key">Debounce, race conditions, keyboard navigation, an ARIA combobox that a screen reader can actually drive. No library — that is the point.</div>
-    <aside class="notes"><div class="t">L8 · forward-link</div><p>Point back at the cold open: this is the same search box, fixed. They have now seen the bug and the finished version, and the module in between is the work.</p></aside>
-  </section>
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 8</div><div class="cx-page"><b>25</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Module 8 · filters, and applying</div>
-    <h2>Filter, then apply —<br>without lying to the user</h2>
-    <div class="shots g3" style="max-width:1140px">
-      <div><img class="shot" src="../../assets/rasmi-filters-apply.gif" alt="Filtering the listings and applying to a job with an optimistic update"><div class="cap"><b>Live</b> — filter, then apply</div></div>
-      <div><img class="shot" src="../../assets/05-filters.jpg" alt="Filters applied to the listings"><div class="cap"><b>Filters</b> — state in the URL, so the search is shareable</div></div>
-      <div><img class="shot" src="../../assets/06-applied.jpg" alt="An application submitted and confirmed"><div class="cap"><b>Applied</b> — optimistic, then the server confirms</div></div>
-    </div>
-    <div class="key">Stale requests abort the moment a newer filter lands. The apply button flips instantly and the server confirms after — optimistic UI is a promise, and module 8 is where you learn to keep it.</div>
-    <aside class="notes"><div class="t">L8 · close the product tour</div><p>Keep this short — it is a preview, not a lesson. The one sentence worth saying: optimistic UI is a promise to the user, and module 8 is where you learn to keep it.</p></aside>
-  </section>
-
-  <!-- ============ L9 · THE CONTRACT ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 9</div><div class="cx-page"><b>26</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>24</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Before module 2</div>
     <h2>What I owe you,<br>and what I don't</h2>
     <div class="two">
       <div class="card g">
         <h3 class="g">What you get</h3>
-        <p><b>Fourteen modules</b>, recorded in Arabic, new modules weekly.<br>
+        <p><b>Thirteen modules</b>, recorded in Arabic, new modules weekly.<br>
         <b>Twelve exercise stages</b> with failing tests, hints and worked solutions.<br>
         <b>One deployed product</b> you can defend line by line.<br>
-        <b>A recorded mock interview</b> in module 14, scored on six axes.<br>
         <b>Weekly live Q&amp;A</b> for anything a recording cannot answer.</p>
       </div>
       <div class="card r">
@@ -934,31 +885,86 @@
         <b>Not the AI workflow course</b> — that is <span class="mono">AI for Frontend</span>, and it is separate.</p>
       </div>
     </div>
-    <aside class="notes"><div class="t">L9 · 4:00</div><p>Say the "not a job guarantee" line plainly and without apology. It buys more trust than any promise on the page, and it is the reason the rest of the contract is believed.</p></aside>
+    <aside class="notes"><div class="t">L6 · 4:00 — the contract</div><p>Say the 'not a job guarantee' line plainly and without apology. It buys more trust than any promise on the page, and it is the reason the rest of the contract is believed.</p><p>Do not add hedging after it. The pause following that sentence is doing work.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 9</div><div class="cx-page"><b>27</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Module 14 · how this ends</div>
-    <h2>A recorded mock,<br>and a scorecard</h2>
-    <div class="three">
-      <div class="card a"><h3 class="cy">Communication</h3><p>Did you think out loud, and could the interviewer follow you?</p></div>
-      <div class="card b"><h3 class="b">Problem solving</h3><p>Did you clarify before building, and handle the edge case?</p></div>
-      <div class="card p"><h3 class="p">Technical depth</h3><p>Did you answer <b>why</b>, not just <b>what</b>?</p></div>
-      <div class="card g"><h3 class="g">Code quality</h3><p>Would this pass review, under time pressure?</p></div>
-      <div class="card w"><h3 class="w">Trade-offs</h3><p>Did you name the cost of your own choice before being asked?</p></div>
-      <div class="card"><h3>Delivery</h3><p>Did you finish something that works in the time you had?</p></div>
+
+
+  <!-- ============ L7 · WORKSPACE, GIT AND REPO CONVENTIONS ============ -->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>25</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Before anything else — check the four</div>
+    <h2>The workspace,<br>in four commands</h2>
+<pre><code><span class="pr">$</span> node -v      <span class="cmt"># v20.x or newer — the repo's CI runs 20 and 22</span>
+<span class="pr">$</span> pnpm -v      <span class="cmt"># 11.x   · corepack enable && corepack prepare pnpm@latest --activate</span>
+<span class="pr">$</span> git --version
+<span class="pr">$</span> code --version
+
+<span class="cmt"># VS Code, three extensions, nothing else:</span>
+<span class="pr">$</span> code --install-extension dbaeumer.vscode-eslint
+<span class="pr">$</span> code --install-extension esbenp.prettier-vscode
+<span class="pr">$</span> code --install-extension vitest.explorer</code></pre>
+    <div class="key">Every stage in this program runs on this exact toolchain. If one of these four is missing, fix it now — not in module 3 at midnight.</div>
+    <aside class="notes"><div class="t">L7 · 0:00 — check the four, live</div><p>Run all four commands on camera and let the version numbers appear. Students who watch this and do not run it will hit a pnpm error in module 3 and blame the repo.</p><p>If node is older than 20, stop and fix it here — say that the CI runs 20 and 22 and that a mismatch will produce failures that look like broken exercises.</p><p>The three extensions are the whole list. Say explicitly that they do not need a starter pack of forty.</p></aside>
+  </section>
+
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>26</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 7 · the repo you are about to clone</div>
+    <h2>Rasmi — a job board,<br>engineered</h2>
+    <div class="two" style="align-items:center">
+      <div class="fig" style="margin:0">
+        <img class="shot" src="../../assets/01-overview.jpg" alt="The Rasmi job board: listings feed with filters and a detail panel">
+        <div class="cap">Seekers browse, filter, save and apply · companies post a role and track applicants · one deployed URL, CI green, E2E passing</div>
+      </div>
+      <div>
+        <ul class="plist yes" style="max-width:none">
+          <li>Twelve stages, one product<small>each module ships a slice — module 12 assembles them, it does not start over</small></li>
+          <li>Every exercise exists three times<small><span class="mono">start</span>, <span class="mono">guided</span>, <span class="mono">solution</span> — generated from one source, so they can never drift apart</small></li>
+          <li>The debounce you write in module 3 is still running in module 12<small>nothing here is a throwaway kata</small></li>
+        </ul>
+        <a class="decklink" href="../../repo/jobboard-deck.html">
+          <span><span class="dl-n">Companion deck · the repo</span><span class="dl-t">One repo, thirty-seven branches</span><span class="dl-s">The full tour: the branch model, the CI that proves the starter fails, and every stage of the product.</span></span>
+          <span class="dl-go">&#8599;</span>
+        </a>
+      </div>
     </div>
-    <div class="key w">The same six axes a real design round is scored on. You will see them in module 11, drill them in 13, and sit them in 14.</div>
-    <aside class="notes"><div class="t">L9 · payoff</div><p>"In module 14 you sit a recorded mock and get a scorecard on six axes." That is the last promise of the module — concrete, checkable, and nobody else in the Arabic market ships it.</p></aside>
+    <aside class="notes"><div class="t">L7 · the product and the repo, in ninety seconds</div><p>Ten seconds on the screenshot. Do not tour the UI — they will build it. The only job of the image is to make twelve exercise stages feel like one product instead of twelve katas.</p><p>Three sentences on the branch model and stop: start, guided, solution, all generated from one source. The reason it matters is that the hint can never contradict the answer.</p><p>Then point at the companion deck and move on. Anyone who wants the branch naming, the CI rules and the stage-by-stage breakdown can watch that separately — repeating it here costs ten minutes and teaches nothing new.</p></aside>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 9</div><div class="cx-page"><b>28</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>27</b> / 28</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Do this now, on camera, with them</div>
+    <h2>Module 1's own exercise:<br>get to red</h2>
+<pre><code><span class="pr">$</span> git clone git@github.com:&lt;org&gt;/frontend-mastery-jobboard.git
+<span class="pr">$</span> cd frontend-mastery-jobboard
+
+<span class="pr">$</span> git checkout module-1/setup/start
+<span class="pr">$</span> pnpm install
+<span class="pr">$</span> pnpm test:watch
+
+  <span class="no">FAIL  src/diagnostic/score.test.ts</span>
+  <span class="no">  × scores a perfect run                    Error: Not implemented</span>
+  <span class="no">  × sends a 0–3 to the platform modules      Error: Not implemented</span>
+  <span class="no">  × sends a 7+ to the interview modules      Error: Not implemented</span>
+  <span class="cmt">  Tests  9 failed (9)</span></code></pre>
+    <div class="key g">That red terminal is your deliverable for module 1. Screenshot it. You will fix it with your own diagnostic score as the input.</div>
+    <aside class="notes"><div class="t">L7 · run it now — do not narrate this, do it</div><p>Actually run it. Let the failing tests fill the terminal on camera. That image is the student's deliverable for this module, and it is the moment the program stops being videos.</p><p>Say the branch name slowly as you type it — module-1, slash setup, slash start — because the convention is being taught here and used for the next thirteen modules.</p><p>Tell them to screenshot the red terminal. It is the checkable artefact of module 1, alongside the score.</p></aside>
+  </section>
+
+
+
+
+
+
+
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>28</b> / 28</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 01 · done</div>
     <h2>Your homework,<br>before module 2</h2>
     <div class="two">
       <div>
         <ul class="plist yes">
-          <li>Write your diagnostic score down<small>and the numbers of the questions you missed</small></li>
+          <li>Write your diagnostic score down<small>out of twelve, with the numbers of the questions you missed</small></li>
           <li>Clone the repo and get one test failing<small>that terminal full of red is the deliverable</small></li>
           <li>Read the module map once more<small>find the module your misses pointed at</small></li>
         </ul>
@@ -969,14 +975,14 @@
         <p style="margin-top:10px">It is the module that makes every React module afterwards make sense — and it answers Q1, Q2 and Q3 of the diagnostic outright.</p>
       </div>
     </div>
-    <aside class="notes"><div class="t">L9 · close</div><p>End on the homework, not on a summary. The student should close the video with something to type, not something to feel.</p></aside>
+    <aside class="notes"><div class="t">L7 · close — end on something to type</div><p>End on the homework, not on a summary. The student should close this video with something to type, not something to feel.</p><p>Three items, read as a checklist: the score and the missed question numbers written down, the repo cloned with one test failing, and the module map read once more.</p><p>Last line is module 2. Say what it answers — Q1, Q2 and Q3 of the diagnostic outright — so the next module already has a reason to exist.</p></aside>
   </section>
 
 </div>
 
 <button id="navToggle" aria-label="Slide menu">☰ slides</button>
 <div id="scrim"></div>
-<nav id="nav"><h4>Module 01 · nine lessons</h4><ol id="navList"></ol>
+<nav id="nav"><h4>Module 01 · seven lessons</h4><ol id="navList"></ol>
   <div class="navfoot"><kbd>←</kbd><kbd>→</kbd> move · <kbd>M</kbd> menu · <kbd>S</kbd> notes · <kbd>F</kbd> full · <kbd>P</kbd> print</div>
 </nav>
 <div id="dots"></div>
@@ -992,10 +998,19 @@
   const nav=document.getElementById('nav'), scrim=document.getElementById('scrim'),
         navToggle=document.getElementById('navToggle'), navList=document.getElementById('navList');
   slides.forEach((s,x)=>{
-    const h=s.querySelector('h1,h2,.big'); const t=((h&&(h.innerText||h.textContent))||('Slide '+(x+1))).replace(/\s+/g,' ').trim();
+    const h=s.querySelector('h1,h2,.big');
+    let t=s.dataset.nav||'';
+    if(!t && h){ const c=h.cloneNode(true); c.querySelectorAll('br').forEach(br=>br.replaceWith(' ')); t=c.textContent; }
+    t=(t||('Slide '+(x+1))).replace(/\s+/g,' ').trim();
     const lesson=(s.dataset.chip||'').replace('MODULE 01 · ','');
     const li=document.createElement('li');
-    li.innerHTML='<b>'+String(x+1).padStart(2,'0')+'</b><span>'+t+'</span>';
+    const kEl=s.querySelector('.kicker');
+    const k=(s.dataset.navKicker||(kEl?(kEl.innerText||kEl.textContent):'')).replace(/\s+/g,' ').trim();
+    const b=document.createElement('b'); b.textContent=String(x+1).padStart(2,'0');
+    const sp=document.createElement('span');
+    if(k && k.toLowerCase()!==t.toLowerCase()){ const em=document.createElement('em'); em.textContent=k; sp.appendChild(em); }
+    sp.appendChild(document.createTextNode(t));
+    li.append(b,sp);
     li.title=lesson;
     li.addEventListener('click',()=>{ i=x; step=0; render(); closeNav(); });
     navList.appendChild(li);
