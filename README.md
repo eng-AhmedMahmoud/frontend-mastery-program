@@ -35,9 +35,11 @@ python3 -m http.server 8000    # then open http://localhost:8000/modules/01-foun
 |---|---|
 | `→` `←` | next / previous slide — and inside an animated figure, one step at a time |
 | `M` | slide menu |
-| `S` | speaker notes |
 | `F` | fullscreen |
 | `P` | print — flattens every animation step so the PDF shows the finished figure |
+
+These decks carry no speaker notes. What is on the slide is the whole file — nothing is
+hidden behind a key or waiting in view-source.
 
 ---
 
@@ -46,6 +48,8 @@ python3 -m http.server 8000    # then open http://localhost:8000/modules/01-foun
 ```
 program/
   program-page.html       the program at a glance
+curriculum/
+  curriculum-page.html    every lesson, in order — 13 modules, 120 lessons
 modules/
   01-foundations/
     deck.html             what companies actually test — 28 slides
@@ -64,15 +68,18 @@ copying a single deck somewhere else.
 
 ### The modules
 
+Thirteen modules, 120 lessons, 13 build checkpoints. `curriculum/curriculum-page.html` lists
+every lesson; this is the shape of it.
+
 | # | Module | # | Module |
 |---:|---|---:|---|
-| 01 | Foundations — what companies actually test | 08 | Data, caching and the network layer |
-| 02 | The browser as a runtime | 09 | Rendering, routing and the meta-framework |
-| 03 | JavaScript, deeply | 10 | Performance, measured |
+| 01 | Foundations — what companies actually test | 08 | Data, state & routing |
+| 02 | The browser as a runtime | 09 | Next.js & rendering architecture |
+| 03 | JavaScript, deeply | 10 | Performance, testing & security |
 | 04 | TypeScript for frontend engineers | 11 | Frontend system design |
-| 05 | React, properly | 12 | The capstone |
-| 06 | Typed UI components | 13 | Drills, the loop and the offer |
-| 07 | UI engineering — the hard components | | |
+| 05 | React, deeply | 12 | The capstone |
+| 06 | React + TypeScript in production | 13 | Interview preparation |
+| 07 | UI engineering — components & accessibility | | |
 
 ---
 
