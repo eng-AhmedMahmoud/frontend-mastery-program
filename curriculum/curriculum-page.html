@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frontend Mastery — The Full Curriculum · Catalyst</title>
+<style>
+  :root{
+    --bg:#070a12;
+    --panel:#0d1220;
+    --line:rgba(255,255,255,.08);
+    --ink:#e9eefb;
+    --ink2:#b9c2d6;
+    --muted:#7f8aa3;
+    --blue:#3b82f6;
+    --blue2:#60a5fa;
+    --green:#34d399;
+    --sans:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --r:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(900px 500px at 80% -10%,rgba(59,130,246,.10),transparent 70%),radial-gradient(700px 420px at -5% 15%,rgba(59,130,246,.06),transparent 70%);
+    background-attachment:fixed}
+  a{color:inherit}
+  ::selection{background:rgba(59,130,246,.35)}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{scroll-margin-top:74px}
+
+  /* ---------- shared ---------- */
+  .card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));border:1px solid var(--line);border-radius:var(--r)}
+  .sec-head{display:flex;align-items:center;gap:12px;margin:0 0 6px}
+  .sec-head b.bar{width:3px;height:17px;border-radius:2px;background:var(--blue);display:block}
+  .sec-head .num{font:700 11px/1 var(--mono);letter-spacing:2px;color:var(--muted)}
+  .sec-head h2{font:700 20px/1.2 var(--sans);letter-spacing:-.3px}
+  .sec-sub{color:var(--muted);font-size:14.5px;margin:0 0 22px 15px}
+  .sec{padding:58px 0}
+
+  /* ---------- masthead ---------- */
+  .mast{padding:44px 30px 34px}
+  .mast .kick{font:700 11px/1 var(--mono);letter-spacing:2px;color:var(--blue2);text-transform:uppercase}
+  .mast h1{font:700 34px/1.15 var(--sans);letter-spacing:-.8px;margin:14px 0 12px}
+  .mast p{color:var(--ink2);font-size:15.5px;max-width:74ch}
+  .stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .stats div{border:1px solid var(--line);border-radius:11px;padding:11px 15px;background:rgba(255,255,255,.02)}
+  .stats .v{font:700 19px/1 var(--sans);letter-spacing:-.3px}
+  .stats .k{font:600 10.5px/1.5 var(--mono);letter-spacing:1.2px;color:var(--muted);text-transform:uppercase;margin-top:5px}
+
+  /* ---------- curriculum ---------- */
+  .curr{padding:26px 26px 10px}
+  details.mod{border-bottom:1px solid var(--line)}
+  details.mod:last-of-type{border-bottom:none}
+  details.mod > summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:16px 4px;position:relative}
+  details.mod > summary::-webkit-details-marker{display:none}
+  details.mod > summary::after{content:"⌄";margin-left:auto;color:var(--muted);font-size:16px;transform:translateY(-3px);transition:transform .2s}
+  details.mod[open] > summary::after{transform:rotate(180deg) translateY(2px)}
+  details.mod > summary:hover{background:rgba(255,255,255,.02)}
+  .mnum{font:700 11.5px/1.7 var(--mono);color:var(--muted);min-width:24px}
+  .mttl{font:600 15.5px/1.5 var(--sans)}
+  .mttl em{font-style:normal;color:var(--muted);font-weight:400;font-size:13px;display:block;margin-top:3px}
+  .count{font:600 10.5px/1.7 var(--mono);letter-spacing:.8px;color:var(--blue2);white-space:nowrap;margin-left:auto;padding-right:22px}
+  .mbody{padding:2px 4px 22px 42px}
+  .mbody .aim{color:var(--ink2);font-size:14px;border-left:2px solid rgba(59,130,246,.5);padding-left:12px;margin:0 0 14px}
+  .mbody .aim b{color:var(--ink);font-weight:600}
+  ol.lessons{counter-reset:l;list-style:none}
+  ol.lessons li{counter-increment:l;color:var(--ink2);font-size:14px;padding:5px 0 5px 34px;position:relative}
+  ol.lessons li::before{content:counter(l,decimal-leading-zero);position:absolute;left:0;top:6px;font:700 10.5px/1.6 var(--mono);color:var(--muted)}
+  .build{display:inline-block;font:700 9.5px/1.6 var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--green);border:1px solid rgba(52,211,153,.35);background:rgba(52,211,153,.08);border-radius:5px;padding:0 6px;margin-left:8px;vertical-align:1px}
+  .act-row{display:flex;align-items:center;gap:12px;padding:20px 4px 8px;border-bottom:1px solid var(--line)}
+  .act-row .t{font:700 11px/1 var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--blue2)}
+  .act-row .d{color:var(--muted);font-size:13px}
+
+  .foot{padding:26px 30px 34px;color:var(--muted);font-size:13.5px}
+  .foot b{color:var(--ink2);font-weight:600}
+
+  @media print{
+    body{background:#fff;color:#111}
+    .card{border-color:#ccc;background:#fff}
+    details .mbody{display:block!important}
+    .mbody .aim,ol.lessons li,.foot{color:#333}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap" style="padding-top:26px">
+
+  <!-- ================= MASTHEAD ================= -->
+  <section class="card mast">
+    <div class="kick">Frontend Mastery · the full curriculum</div>
+    <h1>Every lesson, in order.</h1>
+    <p>Thirteen modules, three acts, one job board you never stop building. This is the
+    complete list — not a summary. Each module opens on the outcome you can check for
+    yourself, and every lesson marked <span class="build">Build</span> is a branch you
+    write, starting from a failing test.</p>
+    <div class="stats">
+      <div><div class="v">13</div><div class="k">Modules</div></div>
+      <div><div class="v">120</div><div class="k">Lessons</div></div>
+      <div><div class="v">13</div><div class="k">Build checkpoints</div></div>
+      <div><div class="v">1</div><div class="k">Shipped product</div></div>
+    </div>
+  </section>
+
+  <!-- ================= CURRICULUM ================= -->
+  <section class="sec" id="curriculum">
+    <div class="card curr">
+      <div class="sec-head"><b class="bar"></b><span class="num">01</span><h2>Curriculum</h2></div>
+      <p class="sec-sub">13 modules · 120 lessons · click any module to expand</p>
+
+      <div class="act-row"><span class="t">Act I · Modules 1–4</span><span class="d">The platform under the framework</span></div>
+
+      <details class="mod">
+        <summary><span class="mnum">01</span><span class="mttl">Foundations — What Companies Actually Test<em>The map before the journey</em></span><span class="count">7 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you can name the five interview formats companies actually run, place your own answers on the junior/mid/senior ladder, know which module your diagnostic score sends you to first, and have the repo cloned with a failing test on screen.</p>
+          <ol class="lessons">
+            <li>The map before the journey</li>
+            <li>The frontend hiring map — who hires, for what, at which level</li>
+            <li>Junior vs mid vs senior — what actually changes in the questions</li>
+            <li>The five interview formats — quiz · JS utilities · UI coding · system design · behavioural</li>
+            <li>Diagnostic — twelve questions that show you what you don't know yet</li>
+            <li>How to study this program (and how not to)</li>
+            <li>Workspace, Git and repo conventions we'll use throughout<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">02</span><span class="mttl">The Browser as a Runtime<em>Everything a framework hides from you</em></span><span class="count">10 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you can explain what happens between an HTML tag and a lit pixel, and name which of your own CSS changes costs a layout. This is the module that makes every React module afterwards make sense.</p>
+          <ol class="lessons">
+            <li>From HTML to pixels: the five stages of a frame</li>
+            <li>The DOM API is a shovel — querying without thrashing layout</li>
+            <li>Semantic HTML is an API, and the accessibility tree is its output</li>
+            <li>The box model decides your maths — content-box vs border-box</li>
+            <li>Formatting contexts: why flex and grid are not magic</li>
+            <li>Stacking and containing blocks — why <code>z-index: 9999</code> did nothing</li>
+            <li>Reflow costs the CPU; compositing does not</li>
+            <li>Composition layers: what the GPU holds, and what it costs in VRAM</li>
+            <li>The event loop: tasks, microtasks, and the frame you just missed</li>
+            <li>Instrument a slow page and prove the fix<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">03</span><span class="mttl">JavaScript, Deeply<em>You rebuild the interview utility library from zero</em></span><span class="count">10 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you can implement the utilities an interviewer asks for from an empty file, and explain why each one is written the way it is — fluency under a shared editor, not recall.</p>
+          <ol class="lessons">
+            <li>Execution contexts and the scope chain, drawn</li>
+            <li>Closures are not a trick question — they are how callbacks remember</li>
+            <li><code>this</code> is decided at the call site, not the definition</li>
+            <li>Prototypes, and what <code>class</code> is hiding</li>
+            <li>Modules, bundling, and what <code>import</code> actually does at runtime</li>
+            <li>Callbacks → promises → async/await, and the states in between</li>
+            <li>Error handling across async boundaries</li>
+            <li>Memory, references and the leak your SPA has right now</li>
+            <li>Building the interview toolbelt, part 1: debounce and throttle</li>
+            <li>Building the interview toolbelt, part 2: deepClone, EventEmitter, promiseAll<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">04</span><span class="mttl">TypeScript for Frontend Engineers<em>Types that make the wrong state impossible</em></span><span class="count">9 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you model a domain with types that make the wrong state unrepresentable, and you know the point where more types stop paying for themselves.</p>
+          <ol class="lessons">
+            <li>Structural typing: TypeScript does not care what you named it</li>
+            <li>Generics are parameters for types, nothing more</li>
+            <li>Narrowing, and the difference between <code>unknown</code> and <code>any</code></li>
+            <li>Discriminated unions kill the five-boolean component</li>
+            <li>Utility and mapped types you will actually reach for</li>
+            <li>Typing async data, and where the lies get in</li>
+            <li>Schema validation at the boundary, types on the inside</li>
+            <li><code>tsconfig</code> strictness, flag by flag, and what each one catches</li>
+            <li>Model the job board's domain end to end<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="act-row"><span class="t">Act II · Modules 5–10</span><span class="d">From components to a product</span></div>
+
+      <details class="mod">
+        <summary><span class="mnum">05</span><span class="mttl">React, Deeply<em>The mental model, not the API tour</em></span><span class="count">11 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you can explain a re-render you did not expect, and fix it without reaching for <code>memo</code> first. The render model is the spine of this module.</p>
+          <ol class="lessons">
+            <li>The render model: what React does between your state and the DOM</li>
+            <li>Fiber, lanes, and why rendering can be interrupted</li>
+            <li>Anatomy of a re-render — the four reasons a component runs again</li>
+            <li>Keys, reconciliation, and state landing on the wrong row</li>
+            <li>Hooks: state, effects, refs, and the closure trap</li>
+            <li>You might not need an effect — deriving instead of synchronising</li>
+            <li>Context, and why it re-rendered everything</li>
+            <li>Composition patterns that beat prop drilling</li>
+            <li>Error boundaries and portals</li>
+            <li>Suspense and concurrent rendering, plainly</li>
+            <li>Build the listings feed, then profile it<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">06</span><span class="mttl">React + TypeScript in Production<em>The module a team lead will judge you on</em></span><span class="count">8 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you write components a reviewer can read — typed props, typed events, and state machines instead of boolean soup.</p>
+          <ol class="lessons">
+            <li>Typing props, children and refs without fighting the compiler</li>
+            <li>Typing events, forms and the handlers between them</li>
+            <li>Generic components: one <code>Select</code>, every option type</li>
+            <li>Polymorphic components and the <code>as</code> prop</li>
+            <li>Typed hooks and typed reducers</li>
+            <li>Discriminated state machines instead of five booleans</li>
+            <li>A typed API layer the UI can trust</li>
+            <li>Build the typed primitives the whole app will use<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">07</span><span class="mttl">UI Engineering — Components &amp; Accessibility<em>The highest-ROI module for the live-coding round</em></span><span class="count">11 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you build the components an interviewer asks for live — keyboard-driven, ARIA-correct, no library underneath.</p>
+          <ol class="lessons">
+            <li>Component API design: data, event, config, style and slot props</li>
+            <li>Controlled, uncontrolled, and the one you actually want</li>
+            <li>Design tokens and a design system small enough to finish</li>
+            <li>The accessibility tree, focus, and the keyboard path</li>
+            <li>Build the search autocomplete — debounce and race conditions<span class="build">Build</span></li>
+            <li>The ARIA combobox contract, attribute by attribute</li>
+            <li>Build the overlays — modal, dropdown, tabs, toast<span class="build">Build</span></li>
+            <li>Focus traps, portals and live regions</li>
+            <li>Forms and validation without a form library</li>
+            <li>Virtualization from scratch: windowing, pooling, recycling<span class="build">Build</span></li>
+            <li>Responsive behaviour that is not just breakpoints</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">08</span><span class="mttl">Data, State &amp; Routing<em>Whose state is it — the server's or yours?</em></span><span class="count">10 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you can say which state is the server's and which is yours — the distinction that decides mid versus senior — and defend where each piece lives.</p>
+          <ol class="lessons">
+            <li>Server state vs client state: the question most candidates fail</li>
+            <li>TanStack Query: the cache, and what invalidation really means</li>
+            <li>Optimistic updates, and the rollback everybody forgets</li>
+            <li>Race conditions in data fetching, and the two fixes</li>
+            <li>Type-safe routing and loaders</li>
+            <li>Search params are state — make the URL shareable</li>
+            <li>Normalization, and when a flat store earns its keep</li>
+            <li>Zustand, Redux Toolkit, and when each is the wrong choice</li>
+            <li>Real-time: polling, SSE and websockets compared</li>
+            <li>Rebuild the data layer on Query and Router<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">09</span><span class="mttl">Next.js &amp; Rendering Architecture<em>A strategy per route — and where Next.js is the wrong answer</em></span><span class="count">10 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you pick a rendering strategy per route and defend it out loud, including the routes where reaching for Next.js is the wrong call.</p>
+          <ol class="lessons">
+            <li>The App Router mental model</li>
+            <li>Server Components vs Client Components — where the boundary goes</li>
+            <li>CSR, SSR, SSG, ISR and streaming, chosen per route</li>
+            <li>Data fetching and the caching layers, in order</li>
+            <li>Server actions and mutations</li>
+            <li>Route handlers, middleware and the edge</li>
+            <li>Auth and session patterns that survive a refresh</li>
+            <li>SEO, metadata, and the dashboard that must not be indexed</li>
+            <li>When NOT to reach for Next.js</li>
+            <li>Port the job board: public pages vs authed dashboard<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">10</span><span class="mttl">Performance, Testing &amp; Security<em>Prove the before and after with numbers</em></span><span class="count">11 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you set a performance budget, prove a before and after with real measurements, and ship it with tests green in CI.</p>
+          <ol class="lessons">
+            <li>Core Web Vitals: LCP, INP, CLS, and which one users feel</li>
+            <li>Measuring properly: the Performance panel, lab vs field</li>
+            <li>Lighthouse, CrUX, RUM — what each one can and cannot tell you</li>
+            <li>Bundles: analysis, code splitting, and the import that cost 300 KB</li>
+            <li>Images, fonts and the layout shift they cause</li>
+            <li>Memoization that actually helps, and the profiler that proves it</li>
+            <li>The testing pyramid: what to unit test, what to E2E</li>
+            <li>Testing behaviour with Testing Library, not implementation</li>
+            <li>Playwright and MSW: the tests that catch real regressions</li>
+            <li>XSS, CSRF, CSP and where to put a token</li>
+            <li>Baseline → budget → fix, with CI green<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <div class="act-row"><span class="t">Act III · Modules 11–13</span><span class="d">Design it. Ship it. Prove it.</span></div>
+
+      <details class="mod">
+        <summary><span class="mnum">11</span><span class="mttl">Frontend System Design<em>A 45-minute design round, with a script</em></span><span class="count">9 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you run a 45-minute design round to a repeatable script — RADIO — and can defend the trade-offs of a codebase that has to scale past one team.</p>
+          <ol class="lessons">
+            <li>What a design round is actually scoring</li>
+            <li>RADIO: Requirements, Architecture, Data, Interface, Optimizations</li>
+            <li>Requirements: the questions that buy you the next twenty minutes</li>
+            <li>Component and data-flow architecture on a whiteboard</li>
+            <li>API and contract design from the client's side</li>
+            <li>Scaling the codebase 1 — the modular monolith</li>
+            <li>Scaling the codebase 2 — monorepos and what they actually fix</li>
+            <li>Scaling the codebase 3 — micro-frontends and their real cost</li>
+            <li>Six questions, walked: feed, autocomplete, chat, e-commerce, dashboard, editor</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">12</span><span class="mttl">The Capstone<em>Assembly week, not build week</em></span><span class="count">6 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you ship one deployed job board you can defend line by line — and discover that most of it already exists on branches you wrote yourself.</p>
+          <ol class="lessons">
+            <li>Assembly week, not build week — what you already have</li>
+            <li>Wiring auth and protected routes end to end</li>
+            <li>The architecture story: writing down why, not what</li>
+            <li>Deploy, and the CI gate that keeps it green</li>
+            <li>The accessibility and performance pass you can defend</li>
+            <li>Capstone review against the senior checklist<span class="build">Build</span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="mod">
+        <summary><span class="mnum">13</span><span class="mttl">Interview Preparation<em>Every format, drilled under time</em></span><span class="count">8 lessons</span></summary>
+        <div class="mbody">
+          <p class="aim"><b>By the end:</b> you have drilled every format against the clock, and you can think out loud without going quiet.</p>
+          <ol class="lessons">
+            <li>Thinking out loud: the skill nobody practises</li>
+            <li>The quiz round: 200 "why" questions, and how to answer in thirty seconds</li>
+            <li>The utilities round under time pressure</li>
+            <li>The UI round: clarify, scaffold, build, then polish</li>
+            <li>The design round, timed, with the RADIO script</li>
+            <li>Behavioural answers with STAR and a real trade-off</li>
+            <li>Take-home strategy: scope, README, and knowing when to stop</li>
+            <li>Building your own drill schedule from your module 1 score</li>
+          </ol>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <div class="card foot">
+    <b>13 build checkpoints.</b> Every lesson marked <span class="build">Build</span> is a
+    branch in the job board repository, and each one starts with a failing test rather than a
+    blank file. You clone the repo in module 1 and never leave it — so module 12 is assembly
+    week, not build week, and the product you deploy at the end is one you can defend line by
+    line.
+  </div>
+
+</div>
+
+<script>
+  // one open module at a time
+  document.querySelectorAll('details.mod').forEach(d=>{
+    d.addEventListener('toggle',()=>{
+      if(!d.open) return;
+      document.querySelectorAll('details.mod').forEach(o=>{ if(o!==d) o.open=false; });
+    });
+  });
+  // print: open everything
+  window.addEventListener('beforeprint',()=>document.querySelectorAll('details').forEach(d=>d.open=true));
+</script>
+</body>
+</html>
