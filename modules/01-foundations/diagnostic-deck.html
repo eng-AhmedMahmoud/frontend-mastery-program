@@ -217,8 +217,8 @@
   .frag.grow.on{transform:scaleX(1)}
   .frag.grow.slow{transition-duration:.9s}
   /* Cross out / retire an element. */
-  .frag.gone.on{opacity:.16}
-  .frag.gone{opacity:1; transform:none; transition:opacity .5s}
+  .frag.gone.on{opacity:0; pointer-events:none}
+  .frag.gone{opacity:1; transform:none; transition:opacity .3s}
 
   svg text{font-family:var(--mono)}
   svg .lbl{font-family:var(--sans)}
@@ -247,6 +247,28 @@
   .decklinks{display:grid; gap:13px; width:100%; max-width:920px; margin-top:20px}
   .decklinks .decklink{margin-top:0}
   @media print{ .decklink{break-inside:avoid} .decklink:hover{transform:none} }
+
+  /* ---- Q4 Event Loop Waiting Rooms Animation ---- */
+  .q4-runtime-wrap{margin:8px 0 0; width:100%; max-width:1160px}
+  .q4-svg{width:100%; height:auto; max-height:48vh; display:block; overflow:visible}
+  .q4-svg text{user-select:none}
+  .q4-bottom-strip{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:stretch; margin-top:10px; width:100%; max-width:1160px}
+  .q4-console-box{background:#080D18; border:1px solid var(--line2); border-radius:10px; padding:7px 18px; display:flex; align-items:center; gap:14px}
+  .q4-console-title{font:700 12px/1 var(--mono); color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; display:flex; align-items:center; gap:6px}
+  .q4-console-title i{color:var(--good); font-style:normal; font-size:15px}
+  .q4-console-slots{display:flex; gap:9px; align-items:center}
+  .q4-slot{display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; background:#121C30; border:1px solid #1E293B; font:700 16px/1 var(--mono); color:var(--grey3); transition:all .32s cubic-bezier(.34,1.56,.64,1); opacity:.35; transform:scale(.92)}
+  .q4-slot.logged{background:rgba(52,211,153,.18); border-color:rgba(52,211,153,.7); color:var(--good); opacity:1; transform:scale(1.08); box-shadow:0 0 16px rgba(52,211,153,.35)}
+  .q4-step-card{background:var(--panel2); border:1px solid var(--line2); border-left:4px solid var(--cy); border-radius:10px; padding:7px 18px; display:flex; flex-direction:column; justify-content:center; transition:border-color .3s, background .3s}
+  .q4-step-header{display:flex; align-items:baseline; gap:12px}
+  .q4-step-badge{font:700 11.5px/1 var(--mono); color:var(--cy); letter-spacing:1.3px; text-transform:uppercase; white-space:nowrap}
+  .q4-step-code{font:700 min(1.4vw,15px)/1.3 var(--mono); color:var(--ink)}
+  .q4-step-desc{font:500 min(1.3vw,14px)/1.35 var(--sans); color:var(--ink2); margin-top:3px}
+  .q4-step-desc b{color:var(--ochre); font-weight:700}
+  .q4-step-desc b.g{color:var(--good)}
+  .q4-step-desc b.r{color:var(--bad)}
+  .q4-step-desc b.p{color:var(--plum)}
+  .q4-step-desc em{font-style:normal; color:var(--cy)}
 </style>
 <!--catalyst-brand:style-->
 <style id="catalyst-brand">
@@ -323,32 +345,22 @@
 
 <div id="bar"></div>
 <div id="stage">
-
-  <!-- ============ L1 · THE MAP BEFORE THE JOURNEY ============ -->
-
-  
-  <!-- ============ OPENING ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>01</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The twelve, in the order you answered them</div>
-    <h2>What you just answered.</h2>
-    <ul class="qs">
-      <li><b class="n">Q1</b>Five script tags, one order<span class="to">M02</span><small><code>async</code>, <code>defer</code>, both, neither.</small></li>
-      <li><b class="n">Q2</b>Which statements about rendering are true<span class="to">M02</span><small>DOM, CSSOM, render tree, layout, paint, composite.</small></li>
-      <li><b class="n">Q3</b>Fill in the DNS chain<span class="to">M02</span><small>Resolver, root, TLD, authoritative.</small></li>
-      <li><b class="n">Q4</b>What gets logged<span class="to">M02 · M03</span><small>Tasks, microtasks, and a constructor that runs now.</small></li>
-      <li><b class="n">Q5</b>Match the resource hints<span class="to">M02 · M10</span><small><code>dns-prefetch</code>, <code>preconnect</code>, <code>prefetch</code>, <code>preload</code>.</small></li>
-      <li><b class="n">Q6</b>What is the output<span class="to">M03</span><small>Spread, and the copy that was not a copy.</small></li>
-      <li><b class="n">Q7</b>Match the Web Vitals<span class="to">M02 · M10</span><small><code>TTFB</code>, <code>FID</code>, <code>TTI</code>, <code>TBT</code>, <code>CLS</code>, <code>INP</code>.</small></li>
-      <li><b class="n">Q8</b>Match the caching directives<span class="to">M02 · M10</span><small><code>no-cache</code>, <code>must-revalidate</code>, <code>no-store</code>, <code>private</code>, <code>stale-while-revalidate</code>.</small></li>
-      <li><b class="n">Q9</b>What is true about this code block<span class="to">M03</span><small>Two objects pointing at each other, both set to null.</small></li>
-      <li><b class="n">Q10</b>Which rendering costs are listed correctly<span class="to">M02 · M10</span><small>Layout, paint, composite — per animated property.</small></li>
-      <li><b class="n">Q11</b>What gets logged when the button is clicked<span class="to">M02 · M05</span><small>Capture, target, bubble, and one <code>stopPropagation</code>.</small></li>
-      <li><b class="n">Q12</b>Order the selectors by specificity<span class="to">M06</span><small>Six selectors, one ordering.</small></li>
-    </ul>
+<section class="slide" data-chip="MODULE 01 · VIDEO 5" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>01</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Module 01 · Diagnostic Review</div>
+    <h1 style="font-size: clamp(38px, 5.2vw, 68px);">12 Questions.<br>12 Core Mechanisms.</h1>
+    <div class="cards two" style="margin-top:20px">
+      <div class="card c">
+        <h3 class="cy">Part 1 · Questions 1 – 6</h3>
+        <p>Scripts · Pipeline · DNS · Event Loop · Hints · Memory References</p>
+      </div>
+      <div class="card g">
+        <h3 class="g">Part 2 · Questions 7 – 12</h3>
+        <p>Web Vitals · Caching · GC · CSS Layers · Event Bubbling · Specificity</p>
+      </div>
+    </div>
   </section>
 
-  <!-- ============ Q1 · FIVE SCRIPT TAGS, ONE ORDER ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>02</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>02</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 1 · put them in execution order</div>
     <h2>Five script tags.<br>One order.</h2>
 <pre><code><span class="cmt">&lt;!-- every one of these is discovered by the parser at the same moment --&gt;</span>
@@ -359,20 +371,23 @@
 <span class="pr">E</span>  &lt;script <span class="st">async defer</span> src="e.js"&gt;&lt;/script&gt;   <span class="cmt">// downloads in  60ms</span></code></pre>
     <div class="say">Assume the HTML takes 320&nbsp;ms to parse and every download starts the moment the tag is seen.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>03</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>03</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 1 · the answer</div>
     <h2>D, E, A, B, C.</h2>
-    <div class="ansline">
-      <span class="pill w">D <span class="mut">async 50ms</span></span><span class="ar">→</span>
-      <span class="pill p">E <span class="mut">async defer 60ms</span></span><span class="ar">→</span>
-      <span class="pill w">A <span class="mut">async 300ms</span></span><span class="ar">→</span>
-      <span class="pill b">B <span class="mut">defer 200ms</span></span><span class="ar">→</span>
-      <span class="pill b">C <span class="mut">defer 300ms</span></span>
+    <div class="cards two">
+      <div class="card g">
+        <h3 class="g">The Rules</h3>
+        <p>• <b>async</b> executes immediately upon download (unpredictable order).<br>• <b>defer</b> waits for the HTML parser, preserving document order.</p>
+      </div>
+      <div class="card r">
+        <h3 class="r">The Trap: Script E</h3>
+        <p><b>Both keywords present? <code>async</code> wins.</b><br>E downloads in 80ms, so it executes right after D.</p>
+      </div>
     </div>
-    <div class="key">Two rules produce the whole order. <b>async runs the instant its download lands</b>, so the async scripts sort themselves by download time. <b>defer runs after parsing finishes</b>, and deferred scripts keep document order among themselves — which is why B beats C even though they both landed at different times.</div>
-    <div class="say"><b>E is the trap.</b> When a tag carries both keywords, <span class="p">async wins</span>. <code>defer</code> is only the fallback for browsers that do not support <code>async</code>, and every browser you are shipping to supports <code>async</code>.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>04</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>04</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q1 · why — the three loading strategies</div>
     <h2>What the parser does<br>in each case.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 340" role="img" aria-label="Three timelines comparing a classic script, an async script and a deferred script against HTML parsing">
@@ -398,9 +413,9 @@
         <text x="0" y="134" fill="#FBBF24" font-size="13" font-weight="700">async</text>
         <text x="0" y="152" fill="#64748B" font-size="11">fetch off-thread</text>
         <rect x="300" y="98" width="120" height="14" rx="4" fill="url(#q1fetch)"/>
-        <text x="308" y="109" fill="#CBD5E1" font-size="10">fetching, in parallel</text>
+        <text x="360" y="109" text-anchor="middle" fill="#CBD5E1" font-size="9.5">parallel fetch</text>
         <rect x="120" y="120" width="300" height="26" rx="5" fill="#1E293B"/>
-        <text x="128" y="138" fill="#94A3B8" font-size="11">parsing HTML — never stopped for the download</text>
+        <text x="128" y="138" fill="#94A3B8" font-size="10.5">parsing HTML — never stopped for fetch</text>
         <rect x="420" y="120" width="70" height="26" rx="5" fill="#FBBF24"/>
         <text x="428" y="138" fill="#070A14" font-size="11" font-weight="700">exec</text>
         <rect x="490" y="120" width="370" height="26" rx="5" fill="#1E293B"/>
@@ -412,7 +427,7 @@
         <text x="0" y="234" fill="#2196F3" font-size="13" font-weight="700">defer</text>
         <text x="0" y="252" fill="#64748B" font-size="11">wait for the parser</text>
         <rect x="300" y="198" width="120" height="14" rx="4" fill="url(#q1fetch)"/>
-        <text x="308" y="209" fill="#CBD5E1" font-size="10">fetching, in parallel</text>
+        <text x="360" y="209" text-anchor="middle" fill="#CBD5E1" font-size="9.5">parallel fetch</text>
         <rect x="120" y="220" width="670" height="26" rx="5" fill="#1E293B"/>
         <text x="128" y="238" fill="#94A3B8" font-size="11">parsing HTML — start to finish, uninterrupted</text>
         <rect x="795" y="220" width="70" height="26" rx="5" fill="#2196F3"/>
@@ -426,7 +441,8 @@
       </g>
     </svg></div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>05</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>05</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q1 · the race, run</div>
     <h2>All five,<br>on one timeline.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 350" role="img" aria-label="Timeline showing five scripts downloading and executing, producing the order D, E, A, B, C">
@@ -491,7 +507,8 @@
   </section>
 
   <!-- ============ Q2 · WHICH STATEMENTS ARE TRUE ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>06</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>06</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 2 · which statements are true</div>
     <h2>The rendering pipeline.<br>Pick every true line.</h2>
     <ul class="opts tight">
@@ -502,19 +519,9 @@
       <li><b>E</b>Elements that are not visible — <code>display: none</code>, for example — are not part of the DOM tree.</li>
     </ul>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>07</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 2 · the answer</div>
-    <h2>D only.</h2>
-    <ul class="opts tight">
-      <li class="wrong"><b>A</b>The render tree contains <s>all</s> the elements from the DOM and the CSSOM.<small>Only the <b>visual</b> ones. <code>&lt;head&gt;</code> and everything under <code>display: none</code> are excluded.</small></li>
-      <li class="wrong"><b>B</b>Compositing <s>separates</s> layers based on <code>z-index</code>.<small>Compositing <b>combines</b> layers. <code>z-index</code> affects their stacking order, but it is not what creates them.</small></li>
-      <li class="wrong"><b>C</b>The <s>layout</s> process assigns colours and images.<small>That is <b>paint</b>. Layout computes position, size and geometry — no pixels.</small></li>
-      <li class="right"><b>D</b>The compositing process happens on the compositor thread.<small>A separate thread, GPU-backed. This is exactly why compositor-only animations stay smooth while the main thread is busy.</small></li>
-      <li class="wrong"><b>E</b>Elements with <code>display: none</code> are not part of the <s>DOM</s> tree.<small>They <b>are</b> in the DOM tree. They are missing from the <b>render</b> tree. Two different trees.</small></li>
-    </ul>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>08</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q2 · why — the six stages</div>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>07</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 2 · the answer: D only</div>
     <h2>Nothing reaches a screen<br>without all six.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 390" role="img" aria-label="The rendering pipeline: HTML to DOM, CSS to CSSOM, merged into the render tree, then layout, paint and composite">
       <defs>
@@ -573,14 +580,15 @@
         <text x="942" y="328" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="700">compositor</text>
         <line x1="633" y1="184" x2="633" y2="300" stroke="#243349" stroke-dasharray="3 4"/>
         <line x1="794" y1="184" x2="794" y2="300" stroke="#243349" stroke-dasharray="3 4"/>
-        <line x1="942" y1="184" x2="942" y2="300" stroke="#A78BFA" stroke-dasharray="3 4"/>
-        <text x="572" y="366" fill="#64748B" font-size="11">Layout and paint block everything else you were about to run. Compositing does not.</text>
+        <text x="572" y="362" fill="#64748B" font-size="10.5">Layout and paint block everything else you were about to run.</text>
+        <text x="572" y="378" fill="#A78BFA" font-size="10.5" font-weight="700">Compositing does not.</text>
       </g>
     </svg></div>
   </section>
 
   <!-- ============ Q3 · FILL IN THE DNS CHAIN ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>09</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>08</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 3 · fill in the blanks</div>
     <h2>Six blanks,<br>five terms.</h2>
     <div class="say" style="max-width:74ch">Recursive DNS resolver · root name server · TLD name server · authoritative name server · IP address</div>
@@ -592,24 +600,10 @@ The <span class="no">________</span> responds with the <span class="no">________
 The recursive resolver queries the <span class="no">________</span>.
 The <span class="no">________</span> responds with the website's <span class="no">________</span>.</code></pre>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>10</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>09</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 3 · the answer</div>
     <h2>One resolver.<br>Three name servers.</h2>
-    <ol class="log">
-      <li><em>browser →</em> <b>recursive DNS resolver</b> — where is <code>website.com</code>?</li>
-      <li><em>resolver →</em> <b>root name server</b></li>
-      <li><em>root →</em> here is the <b>TLD name server</b>'s IP <em>(the one that knows <code>.com</code>)</em></li>
-      <li><em>resolver →</em> <b>TLD name server</b></li>
-      <li><em>TLD →</em> here is the <b>authoritative name server</b>'s IP</li>
-      <li><em>resolver →</em> <b>authoritative name server</b></li>
-      <li><em>authoritative →</em> here is the website's <b>IP address</b></li>
-      <li><em>browser →</em> now, finally, opens a TCP connection to that IP</li>
-    </ol>
-    <div class="key">Every name server answers one question and refers you onward. Only the <b>recursive resolver</b> chases the chain — which is why it is the only one of the four that keeps a cache.</div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>11</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q3 · why — watch it run</div>
-    <h2>Eight hops<br>before the first byte.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 400" role="img" aria-label="Animated DNS resolution: browser to resolver, then resolver to root, TLD and authoritative name servers in turn">
       <defs>
         <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#22D3EE"/></marker>
@@ -651,7 +645,8 @@ The <span class="no">________</span> responds with the website's <span class="no
   </section>
 
   <!-- ============ Q4 · WHAT GETS LOGGED ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>12</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>10</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 4 · what gets logged</div>
     <h2>Five logs.<br>One order.</h2>
 <pre><code><span class="fn">setTimeout</span>(() =&gt; <span class="fn">console.log</span>(<span class="st">1</span>))
@@ -668,83 +663,139 @@ The <span class="no">________</span> responds with the website's <span class="no
       <span class="pill">C · 2 4 1 5 3</span><span class="pill">D · 4 2 1 5 3</span>
     </div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>13</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 4 · the answer</div>
-    <h2>D — 4, 2, 1, 5, 3.</h2>
-    <div class="ansline">
-      <span class="pill g">4</span><span class="ar">→</span><span class="pill g">2</span><span class="ar">→</span>
-      <span class="pill g">1</span><span class="ar">→</span><span class="pill g">5</span><span class="ar">→</span><span class="pill g">3</span>
-    </div>
-    <div class="two">
-      <div class="card w"><h3 class="w">Why 4 is first</h3><p>The function you pass to <code>new Promise</code> — the <b>executor</b> — runs <b>synchronously</b>, right now, on the current call stack. <code>new Promise</code> returns a promise; it does not schedule one.</p></div>
-      <div class="card r"><h3 class="r">Why 3 is last</h3><p><code>setTimeout</code> for <code>3</code> is not called until its microtask runs — which is <b>after</b> the timers for <code>1</code> and <code>5</code> were already sitting in the task queue. It joins the back of a queue it was late to.</p></div>
-    </div>
-    <div class="key">The loop drains the <b>entire</b> microtask queue after each single task. Not one microtask — all of them, including any queued while draining.</div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>14</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q4 · why — the four places code waits</div>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5" id="slide-q4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>11</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 4 · the answer: 4, 2, 1, 5, 3</div>
     <h2>One thread.<br>Four waiting rooms.</h2>
-    <div class="fig wide"><svg viewBox="0 0 1000 372" role="img" aria-label="The call stack, Web APIs, microtask queue and task queue, with the event loop moving work between them">
-      <g class="frag">
-        <rect x="8" y="30" width="212" height="256" rx="12" fill="#0B1220" stroke="#22D3EE" stroke-width="2"/>
-        <text x="114" y="56" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">call stack</text>
-        <text x="114" y="76" text-anchor="middle" fill="#64748B" font-size="10">one frame at a time</text>
-        <rect x="26" y="228" width="176" height="34" rx="6" fill="#1E293B"/><text x="114" y="250" text-anchor="middle" fill="#94A3B8" font-size="11">global execution context</text>
-        <text x="114" y="304" text-anchor="middle" fill="#F8717A" font-size="11" font-weight="700">while anything is here,</text>
-        <text x="114" y="322" text-anchor="middle" fill="#F8717A" font-size="11" font-weight="700">nothing else runs at all</text>
-      </g>
-      <g class="frag">
-        <rect x="238" y="30" width="212" height="256" rx="12" fill="#0B1220" stroke="#243349"/>
-        <text x="344" y="56" text-anchor="middle" fill="#CBD5E1" font-size="13" font-weight="700">Web APIs</text>
-        <text x="344" y="76" text-anchor="middle" fill="#64748B" font-size="10">not JavaScript — the browser</text>
-        <g fill="#94A3B8" font-size="11.5"><text x="258" y="112">timers</text><text x="258" y="136">fetch</text><text x="258" y="160">DOM events</text><text x="258" y="184">geolocation, etc.</text></g>
-        <text x="258" y="230" fill="#64748B" font-size="10">A timer's delay decides when the</text>
-        <text x="258" y="246" fill="#64748B" font-size="10">callback is handed to the task queue —</text>
-        <text x="258" y="262" fill="#64748B" font-size="10">never when it runs.</text>
-      </g>
-      <g class="frag">
-        <rect x="468" y="30" width="270" height="118" rx="12" fill="#121C30" stroke="#34D399" stroke-width="2"/>
-        <text x="603" y="56" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">microtask queue</text>
-        <g fill="#94A3B8" font-size="11.5"><text x="486" y="80">promise callbacks · await</text><text x="486" y="100">queueMicrotask</text><text x="486" y="120">MutationObserver</text></g>
-        <text x="486" y="140" fill="#34D399" font-size="10.5" font-weight="700">drained completely, every time</text>
-      </g>
-      <g class="frag">
-        <rect x="468" y="168" width="270" height="118" rx="12" fill="#121C30" stroke="#FBBF24" stroke-width="2"/>
-        <text x="603" y="194" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="700">task queue</text>
-        <g fill="#94A3B8" font-size="11.5"><text x="486" y="218">setTimeout · setInterval</text><text x="486" y="238">user input · network events</text><text x="486" y="258">UI rendering</text></g>
-        <text x="486" y="278" fill="#FBBF24" font-size="10.5" font-weight="700">one per turn of the loop</text>
-      </g>
-      <g class="frag">
-        <circle cx="878" cy="158" r="74" fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-dasharray="7 6"/>
-        <text x="878" y="152" text-anchor="middle" fill="#A78BFA" font-size="14" font-weight="700">event loop</text>
-        <text x="878" y="174" text-anchor="middle" fill="#64748B" font-size="10">stack empty?</text>
-        <path d="M744 100 C 800 60 840 66 862 82" fill="none" stroke="#34D399" stroke-width="2" marker-end="url(#ar3)"/>
-        <path d="M744 226 C 800 250 840 244 862 232" fill="none" stroke="#FBBF24" stroke-width="2"/>
-        <text x="600" y="332" fill="#A78BFA" font-size="12" font-weight="700">microtasks first — all of them — then exactly one task. Repeat.</text>
-      </g>
-    </svg></div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>15</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q4 · why — run it line by line</div>
-    <h2>Eleven steps<br>to 4, 2, 1, 5, 3.</h2>
-    <ol class="log tight">
-      <li class="frag"><em>line 1 —</em> <code>setTimeout(…1)</code> called, callback handed to the <b>timer</b>, then straight to the <em>task queue</em></li>
-      <li class="frag"><em>line 2 —</em> <code>Promise.resolve()</code> is already settled, so <code>then(…2)</code> is queued as a <b>microtask</b></li>
-      <li class="frag"><em>line 3 —</em> same again — the callback that <em>will call</em> <code>setTimeout(…3)</code> is queued as a <b>microtask</b>. Nothing timed yet.</li>
-      <li class="frag"><em>line 4 —</em> <code>new Promise(executor)</code> — the executor runs <b>now, synchronously</b> &nbsp;→&nbsp; <b class="g">logs 4</b></li>
-      <li class="frag"><em>line 5 —</em> <code>setTimeout(…5)</code> — callback joins the <em>task queue</em>, behind 1</li>
-      <li class="frag"><em>script ends —</em> the call stack empties. Only now does the event loop get a turn.</li>
-      <li class="frag"><em>microtasks first —</em> run <code>then(…2)</code> &nbsp;→&nbsp; <b class="g">logs 2</b></li>
-      <li class="frag"><em>still draining —</em> run the second microtask: it calls <code>setTimeout(…3)</code>, which puts <b>3 at the back</b> of the task queue — behind 1 and 5</li>
-      <li class="frag"><em>microtasks empty —</em> take one task &nbsp;→&nbsp; <b class="g">logs 1</b></li>
-      <li class="frag"><em>next task —</em> &nbsp;→&nbsp; <b class="g">logs 5</b></li>
-      <li class="frag"><em>next task —</em> &nbsp;→&nbsp; <b class="g">logs 3</b></li>
-    </ol>
-    <div class="key g frag">Console: <b class="mono">4 &nbsp; 2 &nbsp; 1 &nbsp; 5 &nbsp; 3</b> — and 3 is last not because it was slow, but because it was <b>scheduled late</b>.</div>
+    <div class="fig wide q4-runtime-wrap">
+      <svg class="q4-svg" viewBox="0 0 1000 330" role="img" aria-label="The call stack, Web APIs, microtask queue and task queue, with five console logs animated between the stacks">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#22D3EE"/></marker>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#34D399"/></marker>
+          <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#FBBF24"/></marker>
+          <marker id="arp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#A78BFA"/></marker>
+        </defs>
+
+        <!-- CALL STACK -->
+        <g id="q4-box-callstack">
+          <rect x="8" y="16" width="204" height="236" rx="12" fill="#0B1220" stroke="#22D3EE" stroke-width="2"/>
+          <text x="110" y="42" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">call stack</text>
+          <text x="110" y="60" text-anchor="middle" fill="#64748B" font-size="10">one frame at a time</text>
+          
+          <rect id="q4-frame-global" x="22" y="212" width="176" height="30" rx="6" fill="#1E293B"/>
+          <text id="q4-frame-global-text" x="110" y="231" text-anchor="middle" fill="#94A3B8" font-size="11">global execution context</text>
+          
+          <rect id="q4-frame-active" x="22" y="168" width="176" height="36" rx="6" fill="#162942" stroke="#22D3EE" stroke-width="1.5" opacity="0"/>
+          <text id="q4-frame-active-text" x="110" y="190" text-anchor="middle" fill="#22D3EE" font-size="11" font-weight="700" opacity="0"></text>
+          
+          <text x="110" y="274" text-anchor="middle" fill="#F8717A" font-size="11" font-weight="700">while anything is here,</text>
+          <text x="110" y="292" text-anchor="middle" fill="#F8717A" font-size="11" font-weight="700">nothing else runs at all</text>
+        </g>
+
+        <!-- WEB APIS -->
+        <g id="q4-box-webapis">
+          <rect x="222" y="16" width="204" height="236" rx="12" fill="#0B1220" stroke="#243349" stroke-width="1.5"/>
+          <text x="324" y="42" text-anchor="middle" fill="#CBD5E1" font-size="13" font-weight="700">Web APIs</text>
+          <text x="324" y="60" text-anchor="middle" fill="#64748B" font-size="10">not JavaScript — the browser</text>
+          <g fill="#94A3B8" font-size="11"><text x="242" y="86">timers · fetch · DOM events</text></g>
+          
+          <rect id="q4-timer-slot" x="238" y="104" width="172" height="42" rx="6" fill="#1E1E28" stroke="#334155" opacity="0.3"/>
+          <text id="q4-timer-text" x="324" y="129" text-anchor="middle" fill="#FBBF24" font-size="11" font-weight="700" opacity="0">no active timer</text>
+
+          <text x="324" y="174" text-anchor="middle" fill="#64748B" font-size="9">A timer's delay decides when</text>
+          <text x="324" y="188" text-anchor="middle" fill="#64748B" font-size="9">callback reaches task queue —</text>
+          <text x="324" y="202" text-anchor="middle" fill="#64748B" font-size="9">never when it runs.</text>
+        </g>
+
+        <!-- MICROTASK QUEUE -->
+        <g id="q4-box-microtasks">
+          <rect x="436" y="16" width="276" height="110" rx="12" fill="#121C30" stroke="#34D399" stroke-width="2"/>
+          <text x="574" y="40" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">microtask queue</text>
+          <text x="574" y="56" text-anchor="middle" fill="#64748B" font-size="9.5">promise callbacks · await · queueMicrotask</text>
+          
+          <rect id="q4-micro-1" x="450" y="66" width="118" height="30" rx="6" fill="#0B2520" stroke="#34D399" opacity="0"/>
+          <text id="q4-micro-1-text" x="509" y="85" text-anchor="middle" fill="#34D399" font-size="10.5" font-weight="700" opacity="0">then(…2)</text>
+
+          <rect id="q4-micro-2" x="578" y="66" width="124" height="30" rx="6" fill="#0B2520" stroke="#34D399" opacity="0"/>
+          <text id="q4-micro-2-text" x="640" y="85" text-anchor="middle" fill="#34D399" font-size="10.5" font-weight="700" opacity="0">then(…timeout 3)</text>
+
+          <text x="574" y="114" text-anchor="middle" fill="#34D399" font-size="10" font-weight="700">drained completely, every time</text>
+        </g>
+
+        <!-- TASK QUEUE -->
+        <g id="q4-box-tasks">
+          <rect x="436" y="142" width="276" height="110" rx="12" fill="#121C30" stroke="#FBBF24" stroke-width="2"/>
+          <text x="574" y="166" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="700">task queue</text>
+          <text x="574" y="182" text-anchor="middle" fill="#64748B" font-size="9.5">setTimeout · setInterval · events</text>
+          
+          <rect id="q4-task-1" x="446" y="192" width="80" height="30" rx="6" fill="#2E220D" stroke="#FBBF24" opacity="0"/>
+          <text id="q4-task-1-text" x="486" y="211" text-anchor="middle" fill="#FBBF24" font-size="10.5" font-weight="700" opacity="0">cb: log(1)</text>
+
+          <rect id="q4-task-2" x="532" y="192" width="80" height="30" rx="6" fill="#2E220D" stroke="#FBBF24" opacity="0"/>
+          <text id="q4-task-2-text" x="572" y="211" text-anchor="middle" fill="#FBBF24" font-size="10.5" font-weight="700" opacity="0">cb: log(5)</text>
+
+          <rect id="q4-task-3" x="618" y="192" width="84" height="30" rx="6" fill="#2E220D" stroke="#FBBF24" opacity="0"/>
+          <text id="q4-task-3-text" x="660" y="211" text-anchor="middle" fill="#FBBF24" font-size="10.5" font-weight="700" opacity="0">cb: log(3)</text>
+
+          <text x="574" y="240" text-anchor="middle" fill="#FBBF24" font-size="10" font-weight="700">one per turn of the loop</text>
+        </g>
+
+        <!-- EVENT LOOP -->
+        <g id="q4-box-eventloop">
+          <circle id="q4-loop-circle" cx="845" cy="134" r="66" fill="none" stroke="#A78BFA" stroke-width="2.5" stroke-dasharray="6 5"/>
+          <text x="845" y="128" text-anchor="middle" fill="#A78BFA" font-size="14" font-weight="700">event loop</text>
+          <text id="q4-loop-status" x="845" y="150" text-anchor="middle" fill="#64748B" font-size="10.5">stack empty?</text>
+
+          <path d="M 712 70 C 768 46 804 56 824 74" fill="none" stroke="#34D399" stroke-width="2" marker-end="url(#ar3)"/>
+          <path d="M 712 196 C 768 220 804 212 824 194" fill="none" stroke="#FBBF24" stroke-width="2" marker-end="url(#arw)"/>
+
+
+          <text x="600" y="274" text-anchor="middle" fill="#A78BFA" font-size="11.5" font-weight="700">microtasks first — all of them — then exactly one task. Repeat.</text>
+        </g>
+
+        <!-- DYNAMIC TRANSFER INDICATOR BETWEEN STACKS -->
+        <g id="q4-transfer-layer">
+          <rect id="q4-transfer-pill" x="250" y="296" width="500" height="26" rx="6" fill="#121C30" stroke="#22D3EE" opacity="0"/>
+          <text id="q4-transfer-text" x="500" y="313" text-anchor="middle" fill="#22D3EE" font-size="11" font-weight="700" opacity="0"></text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- CONSOLE & STEP CONTROLS -->
+    <div class="q4-bottom-strip">
+      <div class="q4-console-box">
+        <div class="q4-console-title"><i>›</i> console</div>
+        <div class="q4-console-slots">
+          <span class="q4-slot" id="q4-c-4">4</span>
+          <span class="q4-slot" id="q4-c-2">2</span>
+          <span class="q4-slot" id="q4-c-1">1</span>
+          <span class="q4-slot" id="q4-c-5">5</span>
+          <span class="q4-slot" id="q4-c-3">3</span>
+        </div>
+      </div>
+
+      <div class="q4-step-card" id="q4-step-card">
+        <div class="q4-step-header">
+          <span class="q4-step-badge" id="q4-step-badge">OVERVIEW</span>
+          <span class="q4-step-code" id="q4-step-code">One thread · Four waiting rooms</span>
+        </div>
+        <div class="q4-step-desc" id="q4-step-desc">Press → on your keyboard to run the five logs line by line through the waiting rooms.</div>
+      </div>
+    </div>
+
+    <!-- 11 FRAGMENT STEPS FOR KEYBOARD SCRUBBING -->
+    <div class="q4-steps-holder" style="display:none">
+      <span class="frag"></span><span class="frag"></span><span class="frag"></span>
+      <span class="frag"></span><span class="frag"></span><span class="frag"></span>
+      <span class="frag"></span><span class="frag"></span><span class="frag"></span>
+      <span class="frag"></span><span class="frag"></span>
+    </div>
+
   </section>
 
   <!-- ============ Q5 · MATCH THE RESOURCE HINTS ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>16</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>12</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 5 · match them up</div>
     <h2>Four hints,<br>four definitions.</h2>
     <ul class="match">
@@ -755,24 +806,14 @@ The <span class="no">________</span> responds with the website's <span class="no
     </ul>
     <div class="say">The four terms are in one column, the four definitions in another. They are deliberately not aligned.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>17</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>13</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 5 · the answer</div>
-    <h2>Two are about the pipe.<br>Two are about the payload.</h2>
-    <ul class="match">
-      <li><span class="term cy">dns-prefetch</span><span class="def"><b>2</b> — resolves the domain name in the background. <em>Buys you the DNS chain from question 3.</em></span></li>
-      <li><span class="term cy">preconnect</span><span class="def"><b>3</b> — DNS <b>plus</b> the TCP and TLS handshakes. <em>The connection is open and waiting.</em></span></li>
-      <li><span class="term cy">prefetch</span><span class="def"><b>4</b> — downloads a resource you will probably need <b>next</b>, at low priority. <em>The browser is free to ignore it.</em></span></li>
-      <li><span class="term cy">preload</span><span class="def"><b>1</b> — downloads a resource you need <b>now</b>, at high priority. <em>The browser is not free to ignore it.</em></span></li>
-    </ul>
-    <div class="key w">The split that makes them memorable: <b>dns-prefetch and preconnect open a pipe</b> and fetch nothing. <b>prefetch and preload fetch a payload.</b> And of the second pair, only <code>preload</code> is about the page you are on right now.</div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>18</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q5 · why — what each hint pays for in advance</div>
-    <h2>Same request,<br>four starting lines.</h2>
+    <h2>Two open the pipe.<br>Two fetch the payload.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 340" role="img" aria-label="Four request waterfalls showing how each resource hint removes work from the critical path">
       <line x1="250" y1="14" x2="250" y2="298" stroke="#34D399" stroke-width="2" stroke-dasharray="5 4"/>
-      <text x="256" y="312" fill="#34D399" font-size="11" font-weight="700">the moment you actually need it</text>
-      <text x="30" y="312" fill="#64748B" font-size="11">← paid earlier, off the critical path</text>
+      <text x="240" y="312" text-anchor="end" fill="#64748B" font-size="10.5">← paid earlier, off the critical path</text>
+      <text x="260" y="312" fill="#34D399" font-size="10.5" font-weight="700">the moment you actually need it →</text>
 
       <g class="frag">
         <text x="30" y="42" fill="#F8717A" font-size="12" font-weight="700">no hint</text>
@@ -809,7 +850,8 @@ The <span class="no">________</span> responds with the website's <span class="no
   </section>
 
   <!-- ============ Q6 · WHAT IS THE OUTPUT ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>19</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>14</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 6 · what is the output</div>
     <h2>One spread,<br>two mutations.</h2>
 <pre><code><span class="kw">const</span> member = { name: <span class="st">'Jane'</span>, address: { street: <span class="st">'101 Main St'</span> } }
@@ -824,18 +866,9 @@ member.name = <span class="st">'Sarah'</span>
       <span class="pill">C · Sarah, 101 Main St</span><span class="pill">D · Sarah, 102 Main St</span>
     </div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>20</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 6 · the answer</div>
-    <h2>B — Jane, 102 Main St.</h2>
-    <div class="key g">Spread copies <b>one level deep</b>. <code>name</code> is a string, so <code>member2</code> got its own copy and the later reassignment cannot reach it. <code>address</code> is an object, so what got copied was the <b>reference</b> — both objects point at the same address in memory.</div>
-    <div class="say"><b>The phrase to keep:</b> a shallow copy duplicates the top-level properties. For anything that is not a primitive, the property <em>is</em> a reference, so duplicating it duplicates the arrow, not the thing the arrow points at.</div>
-    <div class="two">
-      <div class="card g"><h3 class="g">Fixes that work</h3><p><code>structuredClone(member)</code> for a real deep copy. Or copy the nested object explicitly: <code>{ ...member, address: { ...member.address } }</code>.</p></div>
-      <div class="card r"><h3 class="r">The bug this causes</h3><p>Two components hold what looks like separate state. One edits a nested field. The other re-renders with a value nobody assigned to it — and there is no line of code to blame.</p></div>
-    </div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>21</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q6 · why — one object was never copied</div>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>15</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 6 · the answer: B</div>
     <h2>Two objects.<br>One address.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 340" role="img" aria-label="Heap diagram showing member and member2 sharing the same nested address object">
       <text x="24" y="24" fill="#64748B" font-size="11" font-weight="700">SCOPE</text>
@@ -879,7 +912,8 @@ member.name = <span class="st">'Sarah'</span>
   </section>
 
   <!-- ============ Q7 · MATCH THE WEB VITALS ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>22</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>16</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 7 · match them up</div>
     <h2>Six vitals.<br>Six descriptions.</h2>
     <ul class="match">
@@ -892,21 +926,26 @@ member.name = <span class="st">'Sarah'</span>
     </ul>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>23</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>17</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 7 · the answer</div>
-    <h2>Four are clocks. One is<br>a sum. One is not time at all.</h2>
-    <ul class="match">
-      <li><span class="term cy">TTFB</span><span class="def"><b>4</b> — the server responds and the <b>first byte</b> lands. <em>Not the last byte. The response is still streaming.</em></span></li>
-      <li><span class="term cy">FID</span><span class="def"><b>1</b> — how long the <b>first</b> click waited for a busy main thread before it could even be processed.</span></li>
-      <li><span class="term cy">TTI</span><span class="def"><b>5</b> — the first moment the main thread stays quiet long enough to be <b>reliably</b> interactive.</span></li>
-      <li><span class="term cy">TBT</span><span class="def"><b>2</b> — every millisecond the thread ran <b>past 50</b>, added up. A total, not a timestamp.</span></li>
-      <li><span class="term cy">CLS</span><span class="def"><b>6</b> — how much the layout moved under the reader. <em>A score, with no unit and no clock.</em></span></li>
-      <li><span class="term cy">INP</span><span class="def"><b>3</b> — interaction to the frame that answers it, across <b>every</b> interaction, not just the first.</span></li>
-    </ul>
-    <div class="key">Four of these read a clock: TTFB, FID, TTI and INP. <b>TBT is a sum</b> of overruns, which is why it has no place on a timeline. <b>CLS is a score</b> — a fraction times a fraction — which is why it is the only one not measured in milliseconds.</div>
+    <h2>Four are clocks. One is a sum.<br>One is not time at all.</h2>
+    <div class="three" style="margin-top:20px">
+      <div class="card c">
+        <h3 class="cy">Clocks (ms)</h3>
+        <p>• <b>TTFB</b>: time to first byte<br>• <b>FCP</b>: first pixel painted<br>• <b>LCP</b>: main content visible<br>• <b>INP</b>: click to painted frame</p>
+      </div>
+      <div class="card y">
+        <h3 class="w">Sum (ms)</h3>
+        <p>• <b>TBT</b>: sum of all blocking tasks exceeding 50ms between FCP and TTI.</p>
+      </div>
+      <div class="card g">
+        <h3 class="g">Score (unitless)</h3>
+        <p>• <b>CLS</b>: visual stability score.<br>Distance fraction × Impact fraction.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>24</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>18</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — <code>TTFB</code>, and everything that happens before it</div>
     <h2>The <span class="cy">first</span> byte,<br>not the last one.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 300" role="img" aria-label="A network row showing DNS, TCP, TLS, request and response, with the Time To First Byte marker at the moment the response begins and HTML parsing starts">
@@ -945,7 +984,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">DNS, TCP and TLS all finish <b>before</b> the request is even sent — and all three are on the clock. TTFB stops at the moment the <b>first</b> byte of the response arrives, because that is the moment the parser can start work. The rest of the response is still on the wire behind it.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>25</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>19</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — <code>FID</code>, and the 50ms line</div>
     <h2>The click that arrives<br>while the thread is busy.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 300" role="img" aria-label="A main thread timeline where a user click lands inside a 325 millisecond long task and waits 200 milliseconds before it can be processed">
@@ -987,67 +1026,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">FID measures the wait, <b>not</b> the handler. And it is a fragile number: click a moment earlier and it is near zero, click a moment later and it is 300ms — <b>same page, same code</b>. If the user never interacts, there is no value at all. That fragility is exactly why INP replaced it.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>26</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q7 · why — <code>TTI</code> and <code>TBT</code> read the same timeline</div>
-    <h2>Five quiet seconds,<br>then the sum of the noise.</h2>
-    <div class="fig wide"><svg viewBox="0 0 1000 380" role="img" aria-label="One main thread timeline marked with First Contentful Paint, Time To Interactive after five quiet seconds, and the blocking overruns of forty, five and one hundred and four milliseconds totalling one hundred and forty-nine">
-      <text x="0" y="14" fill="#94A3B8" font-size="10.5" letter-spacing="2">EVERY MILLISECOND A TASK RAN PAST 50 — ADDED UP</text>
-      <g class="frag">
-        <rect x="26"  y="26" width="76"  height="34" rx="7" fill="#F26D5B"/>
-        <rect x="304" y="26" width="46"  height="34" rx="7" fill="#F26D5B"/>
-        <rect x="532" y="26" width="142" height="34" rx="7" fill="#F26D5B"/>
-        <g fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">
-          <text x="64" y="49">40ms</text><text x="327" y="49">5ms</text><text x="603" y="49">104ms</text>
-        </g>
-        <g fill="#64748B" font-size="15" font-weight="700" text-anchor="middle">
-          <text x="203" y="49">+</text><text x="441" y="49">+</text>
-        </g>
-      </g>
-      <g class="frag">
-        <text x="700" y="49" fill="#64748B" font-size="15" font-weight="700" text-anchor="middle">=</text>
-        <rect x="726" y="26" width="160" height="34" rx="7" fill="#F26D5B"/>
-        <text x="806" y="49" fill="#FFFFFF" font-size="13.5" font-weight="700" text-anchor="middle">TBT · 149ms</text>
-      </g>
-
-      <rect x="10" y="86" width="980" height="90" rx="12" fill="#0E1525" stroke="#243349"/>
-      <g>
-        <rect x="26"  y="108" width="170" height="46" rx="9" fill="#0B1220" stroke="#A78BFA" stroke-width="1.8"/>
-        <rect x="202" y="108" width="96"  height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <rect x="304" y="108" width="120" height="46" rx="9" fill="#0B1220" stroke="#A78BFA" stroke-width="1.8"/>
-        <rect x="430" y="108" width="96"  height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <rect x="532" y="108" width="210" height="46" rx="9" fill="#0B1220" stroke="#A78BFA" stroke-width="1.8"/>
-        <rect x="748" y="108" width="96"  height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <rect x="850" y="108" width="124" height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <g fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">
-          <text x="111" y="130">Long Task</text><text x="111" y="146">(90ms)</text>
-          <text x="250" y="137">Task</text>
-          <text x="364" y="130">Long Task</text><text x="364" y="146">(55ms)</text>
-          <text x="478" y="137">Task</text>
-          <text x="637" y="130">Long Task</text><text x="637" y="146">(154ms)</text>
-          <text x="796" y="137">Task</text><text x="912" y="137">Task</text>
-        </g>
-      </g>
-
-      <g class="frag">
-        <circle cx="26" cy="200" r="9" fill="#F472B6"/><circle cx="26" cy="200" r="3.5" fill="#FFFFFF"/>
-        <text class="lbl" x="26" y="230" fill="#FFFFFF" font-size="12.5" font-weight="700">First Contentful Paint</text>
-        <text class="lbl" x="26" y="248" fill="#94A3B8" font-size="11">TBT starts counting here</text>
-      </g>
-      <g class="frag">
-        <circle cx="742" cy="200" r="9" fill="#F472B6"/><circle cx="742" cy="200" r="3.5" fill="#FFFFFF"/>
-        <line x1="742" y1="200" x2="958" y2="200" stroke="#F472B6" stroke-dasharray="3 5"/>
-        <circle cx="958" cy="200" r="9" fill="#F472B6"/><circle cx="958" cy="200" r="3.5" fill="#FFFFFF"/>
-        <text class="lbl" x="742" y="230" fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">Time To Interactive</text>
-        <text class="lbl" x="850" y="188" fill="#F472B6" font-size="11" font-style="italic" text-anchor="middle">5 seconds without a long task</text>
-      </g>
-      <g class="frag">
-        <text class="lbl" x="0" y="298" fill="#CBD5E1" font-size="12">TTI is stamped at the <tspan fill="#FFFFFF" font-weight="700">start</tspan> of the quiet window, not the end of it — you look back five seconds and mark where the noise stopped.</text>
-        <text class="lbl" x="0" y="322" fill="#CBD5E1" font-size="12">TBT counts only the <tspan fill="#F26D5B" font-weight="700">overrun</tspan>: 90−50 = 40, 55−50 = 5, 154−50 = 104. The first 50ms of every task is free.</text>
-      </g>
-    </svg></div>
-  </section>
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>27</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>20</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — the number <code>TTI</code> hides</div>
     <h2>Same TTI.<br>700ms versus 15ms.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 410" role="img" aria-label="Two timelines with an identical Time To Interactive: one blocked by a single 750 millisecond task with a Total Blocking Time of 700, the other by three 55 millisecond tasks with a Total Blocking Time of 15">
@@ -1107,7 +1086,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">Both pages become reliably interactive at the same instant, so TTI scores them identically. On page A the user could do <b>nothing at all</b> for three quarters of a second; on page B they could act between every slice. <b>TBT is the metric that tells the two apart</b> — it measures how interactive the page was on the way to being interactive.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>28</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>21</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — <code>CLS</code>, the one with no clock</div>
     <h2>Distance × impact.<br>No unit, no milliseconds.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 442" role="img" aria-label="The layout shift formula, distance fraction times impact fraction, worked twice: a banner scoring 0.22 and a filter bar scoring 0.07">
@@ -1163,76 +1142,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">Same bug, two scores. The banner moved <b>everything</b>, so its impact fraction is 1 and the distance goes straight through. The filter bar left the header alone, so 40% of the screen never moved and the score drops by two thirds. <b>Reserve the box before the content arrives</b> — <code>width</code> and <code>height</code> on images, <code>min-height</code> on slots, <code>aspect-ratio</code> on embeds — and both scores go to zero.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>29</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q7 · why — <code>INP</code>, and what it fixed about <code>FID</code></div>
-    <h2>Click, to the frame<br>that answers it.</h2>
-    <div class="fig wide"><svg viewBox="0 0 1000 380" role="img" aria-label="A select box that stays closed while a long task runs, then the click event, layout, paint and compositing before the dropdown appears">
-      <g>
-        <rect x="30" y="10" width="250" height="120" rx="10" fill="#1E293B" stroke="#334155"/>
-        <rect x="52" y="34" width="206" height="30" rx="6" fill="#F1F5F9"/>
-        <text class="lbl" x="66" y="55" fill="#475569" font-size="12">Select country…</text>
-      </g>
-      <g class="frag">
-        <rect x="720" y="10" width="250" height="120" rx="10" fill="#1E293B" stroke="#334155"/>
-        <rect x="742" y="34" width="206" height="30" rx="6" fill="#F1F5F9"/>
-        <text class="lbl" x="756" y="55" fill="#475569" font-size="12">Select country…</text>
-        <rect x="742" y="68" width="206" height="52" rx="6" fill="#F8FAFC"/>
-        <text class="lbl" x="756" y="84" fill="#334155" font-size="10">United States of America</text>
-        <text class="lbl" x="756" y="98" fill="#334155" font-size="10">Canada</text>
-        <text class="lbl" x="756" y="112" fill="#334155" font-size="10">Australia</text>
-      </g>
-
-      <text x="0" y="164" fill="#94A3B8" font-size="10.5" letter-spacing="2">MAIN THREAD</text>
-      <rect x="10" y="176" width="980" height="90" rx="12" fill="#0E1525" stroke="#243349"/>
-      <g>
-        <rect x="26" y="198" width="340" height="46" rx="9" fill="#0B1220" stroke="#A78BFA" stroke-width="1.8"/>
-        <text x="196" y="226" fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">Long Task (325ms)</text>
-      </g>
-      <g class="frag">
-        <rect x="374" y="198" width="180" height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <text x="464" y="220" fill="#FFFFFF" font-size="12" font-weight="700" text-anchor="middle">Process click event</text>
-        <text x="464" y="236" fill="#64748B" font-size="10.5" text-anchor="middle">your handler, at last</text>
-      </g>
-      <g class="frag">
-        <rect x="562" y="198" width="110" height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <rect x="680" y="198" width="110" height="46" rx="9" fill="#0B1220" stroke="#34D399"/>
-        <rect x="798" y="198" width="150" height="46" rx="9" fill="#0B1220" stroke="#64748B" stroke-dasharray="4 4"/>
-        <g fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="middle">
-          <text x="617" y="226">Layout</text><text x="735" y="226">Paint</text>
-        </g>
-        <text x="873" y="226" fill="#94A3B8" font-size="12.5" font-style="italic" text-anchor="middle">Compositing</text>
-      </g>
-      <g class="frag">
-        <circle cx="26" cy="290" r="9" fill="#F472B6"/><circle cx="26" cy="290" r="3.5" fill="#FFFFFF"/>
-        <circle cx="948" cy="290" r="9" fill="#F472B6"/><circle cx="948" cy="290" r="3.5" fill="#FFFFFF"/>
-        <line x1="26" y1="290" x2="948" y2="290" stroke="#F472B6" stroke-dasharray="3 5"/>
-        <text class="lbl" x="26" y="320" fill="#FFFFFF" font-size="12.5" font-weight="700">User clicks the select</text>
-        <text class="lbl" x="948" y="320" fill="#FFFFFF" font-size="12.5" font-weight="700" text-anchor="end">The dropdown is on screen</text>
-        <text class="lbl" x="487" y="278" fill="#F472B6" font-size="12" font-style="italic" text-anchor="middle">Interaction to Next Paint — the whole bar</text>
-      </g>
-      <g class="frag">
-        <text class="lbl" x="0" y="356" fill="#CBD5E1" font-size="12">FID would score only the first segment. INP scores the wait, the handler, <tspan fill="#FFFFFF" font-weight="700">and</tspan> the rendering work — because that is what the user is looking at.</text>
-      </g>
-    </svg></div>
-    <div class="figcap frag">INP watches <b>every</b> click, tap and key press for the life of the page and reports roughly the worst one. It replaced FID as a Core Web Vital in <b>March 2024</b>, for the reason this figure shows: a fast handler that then triggers an expensive re-render is a slow interaction, and FID scored it as perfect.</div>
-  </section>
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>30</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q7 · the sentence to keep</div>
-    <h2>One load, six<br>different questions.</h2>
-    <ul class="opts tight">
-      <li style="padding-left:64px"><b>TTFB</b>“How long before the server said anything?” &nbsp;&nbsp;<b class="mono">ms</b><small>Network and server. A CDN, a warm cache and an early connection fix it — a smaller bundle does not.</small></li>
-      <li style="padding-left:64px"><b>FID</b>“How long did the <b>first</b> click sit in the queue?” &nbsp;&nbsp;<b class="mono">ms</b><small>Field-only, fragile, and retired as a Core Web Vital in March 2024. Still asked about.</small></li>
-      <li style="padding-left:64px"><b>TTI</b>“When did the thread finally stay quiet?” &nbsp;&nbsp;<b class="mono">ms</b><small>Lab-only. Needs five clean seconds after it to be knowable at all.</small></li>
-      <li style="padding-left:64px"><b>TBT</b>“How much of that time was the page frozen?” &nbsp;&nbsp;<b class="mono">ms, summed</b><small>The lab stand-in for INP. Cut long tasks into short ones and it falls.</small></li>
-      <li style="padding-left:64px"><b>CLS</b>“How much did the page move under me?” &nbsp;&nbsp;<b class="mono">a score</b><small>Distance × impact. Reserve the space before the content lands.</small></li>
-      <li class="right" style="padding-left:64px"><b>INP</b>“How long from <b>any</b> interaction to the frame that answers it?” &nbsp;&nbsp;<b class="mono">ms</b><small>The one Google scores you on today. Wait + handler + render, worst case, whole session.</small></li>
-    </ul>
-    <div class="key g">If you remember one thing: <b>TBT is what you can measure in the lab, INP is what the user actually feels</b> — and they move together, because both are killed by the same long tasks.</div>
-  </section>
-
-  <!-- ============ Q8 · MATCH THE CACHING DIRECTIVES ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>31</b> / 50</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>22</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 8 · match them up</div>
     <h2>Five directives,<br>five definitions.</h2>
     <ul class="match">
@@ -1243,21 +1153,10 @@ member.name = <span class="st">'Sarah'</span>
       <li><span class="term">stale-while-revalidate</span><span class="def"><em>5 ·</em> Prevents caching on shared caches.</span></li>
     </ul>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>32</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 8 · the answer</div>
-    <h2>The one with<br>the wrong name is <code>no-cache</code>.</h2>
-    <ul class="match">
-      <li><span class="term cy">no-cache</span><span class="def"><b>4</b> — revalidate before every use, <b>even while fresh</b>. <em>It caches. It just never trusts the cache on its own.</em></span></li>
-      <li><span class="term cy">must-revalidate</span><span class="def"><b>1</b> — use it freely until it goes stale; once stale, revalidate <b>before</b> serving.</span></li>
-      <li><span class="term cy">no-store</span><span class="def"><b>3</b> — never written down anywhere. <em>This is the one people mean when they say no-cache.</em></span></li>
-      <li><span class="term cy">private</span><span class="def"><b>5</b> — the browser may cache it, a CDN or proxy may not.</span></li>
-      <li><span class="term cy">stale-while-revalidate</span><span class="def"><b>2</b> — serve the stale copy <b>instantly</b>, refresh it in the background.</span></li>
-    </ul>
-    <div class="key r"><code>no-cache</code> does not mean do not cache. It means do not <b>use</b> the cache without asking first. If you want nothing written down, the directive is <code>no-store</code> — and that is the one you want for anything user-specific or financial.</div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>33</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q8 · why — <code>no-cache</code>, and the ETag handshake</div>
-    <h2>Two round trips,<br>one of them nearly free.</h2>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>23</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 8 · the answer: no-cache</div>
+    <h2>no-cache = always revalidate.<br>Two round trips, one nearly free.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 400" role="img" aria-label="Sequence diagram showing a first request, a revalidated 304 response, and a changed resource returning 200">
       <g fill="#94A3B8" font-size="12" font-weight="700"><text x="60" y="26">browser</text><text x="404" y="26">HTTP cache</text><text x="806" y="26">origin</text></g>
       <line x1="92" y1="38" x2="92" y2="388" stroke="#243349" stroke-dasharray="3 5"/>
@@ -1294,7 +1193,8 @@ member.name = <span class="st">'Sarah'</span>
     </svg></div>
     <div class="figcap">An <b>ETag</b> is a hash of the file. The browser sends the one it holds; the server compares and either says <b>nothing changed</b> in a few hundred bytes, or sends the new file.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>34</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>24</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q8 · why — who waits, and for how long</div>
     <h2>Fresh, stale,<br>and stale-but-served.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 340" role="img" aria-label="Freshness timelines comparing must-revalidate with stale-while-revalidate">
@@ -1325,7 +1225,8 @@ member.name = <span class="st">'Sarah'</span>
   </section>
 
   <!-- ============ Q9 · WHAT IS TRUE ABOUT THIS CODE BLOCK ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>35</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>25</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 9 · what is true about this code</div>
     <h2>Two objects,<br>pointing at each other.</h2>
 <pre><code><span class="kw">function</span> <span class="fn">addMember</span>(name) {
@@ -1347,18 +1248,10 @@ obj2 = <span class="kw">null</span></code></pre>
       <li><b>D</b>They can be collected on the next garbage collection cycle.</li>
     </ul>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>36</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 9 · the answer</div>
-    <h2>D — collected on<br>the next cycle.</h2>
-    <div class="two">
-      <div class="card r"><h3 class="r">Why not A</h3><p>A cycle only leaks under <b>reference counting</b>, which counts how many arrows point at an object. Two objects pointing at each other never reach zero. No engine you are shipping to uses that.</p></div>
-      <div class="card g"><h3 class="g">Why not B</h3><p>Setting a variable to <code>null</code> does not free anything. It removes one arrow. Collection happens when the garbage collector next runs, on its own schedule — which is why the answer says <b>can be</b>, not <b>is</b>.</p></div>
-    </div>
-    <div class="key">Modern engines use <b>mark and sweep</b>: start at the roots — the global object, the current call stack — and mark everything you can reach. Anything unmarked is swept, <b>cycle or no cycle</b>. Reachability from a root is the only test.</div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>37</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q9 · why — reachable, not referenced</div>
-    <h2>Same heap.<br>Two algorithms.<br>Two verdicts.</h2>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>26</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 9 · the answer: D</div>
+    <h2>Reachable, not referenced.<br>Two algorithms, two verdicts.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 370" role="img" aria-label="Heap showing two objects referencing each other, compared under reference counting and mark and sweep">
       <g class="frag">
         <rect x="24" y="130" width="150" height="70" rx="10" fill="#0B1220" stroke="#22D3EE" stroke-width="2"/>
@@ -1403,7 +1296,8 @@ obj2 = <span class="kw">null</span></code></pre>
   </section>
 
   <!-- ============ Q10 · WHICH RENDERING COSTS ARE LISTED CORRECTLY ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>38</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>27</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 10 · select every correct row</div>
     <h2>Animate these five.<br>Which costs are right?</h2>
     <ul class="opts tight">
@@ -1415,19 +1309,9 @@ obj2 = <span class="kw">null</span></code></pre>
     </ul>
     <div class="say">Multi-select. Defaults only — a browser may promote a layer earlier or later than this if it has a reason to.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>39</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 10 · the answer</div>
-    <h2>A and D.</h2>
-    <ul class="opts tight">
-      <li class="right"><b>A</b><code>width</code> → layout, paint, composite<small>Changing a box's size can move everything around it. The browser has to measure again.</small></li>
-      <li class="wrong"><b>B</b><code>opacity</code> → <s>paint,</s> composite<small><b>Composite only.</b> The element is promoted to its own layer and the layer's alpha is changed. No pixels are redrawn.</small></li>
-      <li class="wrong"><b>C</b><code>background-image</code> → <s>composite</s><small><b>Paint and composite.</b> Nothing moves, so no layout — but those pixels have to be drawn.</small></li>
-      <li class="right"><b>D</b><code>left</code> → layout, paint, composite<small>A positioned offset is still geometry. Same cost as width.</small></li>
-      <li class="wrong"><b>E</b><code>transform</code> → <s>paint,</s> composite<small><b>Composite only.</b> The layer is moved, not redrawn. This is why <code>translateX</code> and <code>left</code> look identical and cost nothing alike.</small></li>
-    </ul>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>40</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q10 · why — how far down the pipeline each one reaches</div>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>28</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 10 · the answer: A and D</div>
     <h2>Same pipeline.<br>Different entry point.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 350" role="img" aria-label="Matrix showing which of layout, paint and composite each animated property triggers">
       <g font-size="12" font-weight="700"><text x="340" y="30" fill="#FBBF24">LAYOUT</text><text x="546" y="30" fill="#FBBF24">PAINT</text><text x="742" y="30" fill="#A78BFA">COMPOSITE</text></g>
@@ -1465,10 +1349,11 @@ obj2 = <span class="kw">null</span></code></pre>
       </g>
     </svg></div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>41</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>29</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q10 · why — what a layer actually buys</div>
     <h2>Promote once,<br>then move it for free.</h2>
-    <div class="fig wide"><svg viewBox="0 0 1000 330" role="img" aria-label="Comparison of animating left, which repaints every frame, with transform, which moves an existing layer">
+    <div class="fig wide"><svg viewBox="0 0 1000 346" role="img" aria-label="Comparison of animating left, which repaints every frame, with transform, which moves an existing layer">
       <g class="frag">
         <text x="0" y="34" fill="#F8717A" font-size="13" font-weight="700">left: 0 → 200px</text>
         <rect x="230" y="16" width="740" height="112" rx="10" fill="#0B1220" stroke="#3F1A1E"/>
@@ -1489,14 +1374,16 @@ obj2 = <span class="kw">null</span></code></pre>
         <text x="660" y="262" fill="#94A3B8" font-size="11">and not on your thread</text>
       </g>
       <g class="frag">
-        <text x="0" y="322" fill="#FBBF24" font-size="11.5" font-weight="700">A layer costs memory.</text>
-        <text x="230" y="322" fill="#94A3B8" font-size="11.5">Promote a hundred elements with <tspan fill="#CBD5E1">will-change</tspan> and you have traded one problem for a worse one. DevTools → Layers shows you the bill.</text>
+        <text x="0" y="316" fill="#FBBF24" font-size="11.5" font-weight="700">A layer costs memory.</text>
+        <text x="230" y="316" fill="#94A3B8" font-size="11">Promote a hundred elements with <tspan fill="#CBD5E1">will-change</tspan> and you have traded one problem for a worse one.</text>
+        <text x="230" y="334" fill="#64748B" font-size="10.5">DevTools → Layers shows you the bill.</text>
       </g>
     </svg></div>
   </section>
 
   <!-- ============ Q11 · WHAT GETS LOGGED WHEN THE BUTTON IS CLICKED ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>42</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>30</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 11 · what gets logged on click</div>
     <h2>Seven listeners.<br>One click.</h2>
 <pre><code><span class="cmt">&lt;div id="outer"&gt; &lt;div id="middle"&gt; &lt;button id="btn"&gt;Click&lt;/button&gt; &lt;/div&gt; &lt;/div&gt;</span>
@@ -1510,22 +1397,9 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
 btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>, () =&gt; <span class="fn">log</span>(<span class="st">'F'</span>))</code></pre>
     <div class="say">The third argument is <code>capture</code>. Where it is missing, the listener runs on the way back up.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>43</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 11 · the answer</div>
-    <h2>A, C, G, F, D, E.</h2>
-    <div class="ansline">
-      <span class="pill g">A</span><span class="ar">→</span><span class="pill g">C</span><span class="ar">→</span>
-      <span class="pill g">G</span><span class="ar">→</span><span class="pill g">F</span><span class="ar">→</span>
-      <span class="pill g">D</span><span class="ar">→</span><span class="pill g">E</span>
-      <span class="pill r" style="margin-left:14px">B never runs</span>
-    </div>
-    <div class="two">
-      <div class="card a"><h3 class="cy">Three phases, not two</h3><p><b>Capture</b> down from the root, <b>target</b> at the element itself, <b>bubble</b> back up. Listeners default to the bubble phase, which is why the ones without <code>true</code> all fire on the way back.</p></div>
-      <div class="card w"><h3 class="w">Why E still runs</h3><p><code>stopPropagation</code> stops the event moving to the <b>next element</b>. Every remaining listener on the <b>current</b> element still fires. To stop those too you need <code>stopImmediatePropagation</code>.</p></div>
-    </div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>44</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q11 · why — down, then back up</div>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>31</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 11 · the answer: A, C, G, F, D, E</div>
     <h2>The event visits<br>every ancestor twice.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 360" role="img" aria-label="Nested elements showing the capture phase descending, the target, and the bubble phase ascending until stopPropagation">
       <rect x="150" y="20" width="700" height="300" rx="14" fill="#0B1220" stroke="#243349"/>
@@ -1545,21 +1419,22 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
       <g class="frag"><circle cx="890" cy="172" r="14" fill="#FBBF24"/><text x="890" y="177" text-anchor="middle" fill="#070A14" font-size="13" font-weight="700">F</text><text x="912" y="177" fill="#64748B" font-size="10">button, bubble</text></g>
       <g class="frag"><circle cx="890" cy="222" r="14" fill="#FBBF24"/><text x="890" y="227" text-anchor="middle" fill="#070A14" font-size="13" font-weight="700">D</text><text x="912" y="227" fill="#64748B" font-size="10">middle, bubble</text>
         <text x="248" y="248" fill="#F8717A" font-size="12" font-weight="700">e.stopPropagation()</text></g>
-      <g class="frag"><circle cx="890" cy="258" r="14" fill="#FBBF24"/><text x="890" y="263" text-anchor="middle" fill="#070A14" font-size="13" font-weight="700">E</text><text x="912" y="263" fill="#34D399" font-size="10">same element — still runs</text></g>
+      <g class="frag"><circle cx="890" cy="258" r="14" fill="#FBBF24"/><text x="890" y="263" text-anchor="middle" fill="#070A14" font-size="13" font-weight="700">E</text><text x="912" y="263" fill="#34D399" font-size="9.5">still runs</text></g>
       <g class="frag">
         <line x1="776" y1="276" x2="856" y2="276" stroke="#F8717A" stroke-width="2.5"/>
         <line x1="846" y1="268" x2="856" y2="276" stroke="#F8717A" stroke-width="2.5"/>
         <line x1="846" y1="284" x2="856" y2="276" stroke="#F8717A" stroke-width="2.5"/>
-        <text x="600" y="270" fill="#F8717A" font-size="11" font-weight="700">the event stops travelling here</text>
+        <text x="764" y="270" text-anchor="end" fill="#F8717A" font-size="11" font-weight="700">the event stops travelling here</text>
         <circle cx="890" cy="308" r="14" fill="none" stroke="#F8717A" stroke-width="2"/><text x="890" y="313" text-anchor="middle" fill="#F8717A" font-size="13" font-weight="700">B</text>
         <line x1="878" y1="320" x2="902" y2="296" stroke="#F8717A" stroke-width="2.5"/>
-        <text x="912" y="313" fill="#F8717A" font-size="10">outer, bubble — never reached</text>
+        <text x="912" y="313" fill="#F8717A" font-size="9.5">never reached</text>
       </g>
     </svg></div>
   </section>
 
   <!-- ============ Q12 · ORDER THE SELECTORS BY SPECIFICITY ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>45</b> / 50</div><!--/catalyst-brand:chrome-->
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>32</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 12 · order them, strongest first</div>
     <h2>Six selectors.<br>One winner.</h2>
 <pre><code><span class="pr">A</span>  <span class="kw">div</span> <span class="kw">h1</span><span class="fn">.large-text</span><span class="st">::before</span>
@@ -1570,44 +1445,33 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
 <span class="pr">F</span>  <span class="kw">h1</span><span class="fn">.large-text</span><span class="no">#main-title</span></code></pre>
     <div class="say">Every one of them can match the same <code>&lt;h1&gt;</code>. Only one of them wins.</div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>46</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Question 12 · the answer</div>
-    <h2>F, E, D, A, B, C.</h2>
-    <ul class="opts tight">
-      <li class="right"><b>F</b><code>h1.large-text#main-title</code> &nbsp;&nbsp;<b class="mono">1 · 1 · 1</b><small>One ID. Nothing below it can catch up.</small></li>
-      <li><b>E</b><code>h1.large-text[data-size]</code> &nbsp;&nbsp;<b class="mono">0 · 2 · 1</b><small>An attribute selector counts in the <b>class</b> column.</small></li>
-      <li><b>D</b><code>.large-text:nth-child(2)</code> &nbsp;&nbsp;<b class="mono">0 · 2 · 0</b><small>A pseudo-<b>class</b> counts in the class column. Same middle count as E, but no tag to break the tie.</small></li>
-      <li><b>A</b><code>div h1.large-text::before</code> &nbsp;&nbsp;<b class="mono">0 · 1 · 3</b><small>A pseudo-<b>element</b> counts in the <b>type</b> column. Three tags cannot out-vote a second class.</small></li>
-      <li><b>B</b><code>div h1:first-child</code> &nbsp;&nbsp;<b class="mono">0 · 1 · 2</b><small>Two tags, one pseudo-class.</small></li>
-      <li><b>C</b><code>h1 :where(.promo) .small-text</code> &nbsp;&nbsp;<b class="mono">0 · 1 · 1</b><small><code>:where()</code> contributes <b>zero</b>. Its contents are invisible to the counter.</small></li>
-    </ul>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>47</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q12 · why — how the counter actually counts</div>
-    <h2>Three columns.<br>Left beats right,<br>always.</h2>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>33</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Question 12 · the answer: F wins</div>
+    <h2>Three columns.<br>Left beats right, always.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 350" role="img" aria-label="Specificity counter incrementing as parts are added to a selector">
-      <g font-size="12" font-weight="700"><text x="640" y="28" fill="#F8717A">ID</text><text x="740" y="28" fill="#FBBF24">CLASS</text><text x="860" y="28" fill="#22D3EE">TYPE</text></g>
-      <text x="640" y="46" fill="#64748B" font-size="9.5">#id</text><text x="740" y="46" fill="#64748B" font-size="9.5">.class · [attr] · :hover</text><text x="860" y="46" fill="#64748B" font-size="9.5">tag · ::before</text>
+      <g font-size="12" font-weight="700" text-anchor="middle"><text x="646" y="28" fill="#F8717A">ID</text><text x="766" y="28" fill="#FBBF24">CLASS</text><text x="896" y="28" fill="#22D3EE">TYPE</text></g>
+      <g font-size="9.5" fill="#64748B" text-anchor="middle"><text x="646" y="46">#id</text><text x="766" y="46">.class · [attr] · :hover</text><text x="896" y="46">tag · ::before</text></g>
       <g class="frag"><text x="0" y="86" fill="#CBD5E1" font-size="14">ul</text>
         <rect x="626" y="66" width="40" height="28" rx="5" fill="#1E293B"/><text x="646" y="86" text-anchor="middle" fill="#64748B" font-size="13">0</text>
-        <rect x="736" y="66" width="40" height="28" rx="5" fill="#1E293B"/><text x="756" y="86" text-anchor="middle" fill="#64748B" font-size="13">0</text>
-        <rect x="846" y="66" width="40" height="28" rx="5" fill="#122B45"/><text x="866" y="86" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">1</text></g>
+        <rect x="746" y="66" width="40" height="28" rx="5" fill="#1E293B"/><text x="766" y="86" text-anchor="middle" fill="#64748B" font-size="13">0</text>
+        <rect x="876" y="66" width="40" height="28" rx="5" fill="#122B45"/><text x="896" y="86" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">1</text></g>
       <g class="frag"><text x="0" y="126" fill="#CBD5E1" font-size="14"><tspan fill="#F8717A">#main</tspan> ul</text>
         <rect x="626" y="106" width="40" height="28" rx="5" fill="#3F1A1E"/><text x="646" y="126" text-anchor="middle" fill="#F8717A" font-size="13" font-weight="700">1</text>
-        <rect x="736" y="106" width="40" height="28" rx="5" fill="#1E293B"/><text x="756" y="126" text-anchor="middle" fill="#64748B" font-size="13">0</text>
-        <rect x="846" y="106" width="40" height="28" rx="5" fill="#122B45"/><text x="866" y="126" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">1</text></g>
+        <rect x="746" y="106" width="40" height="28" rx="5" fill="#1E293B"/><text x="766" y="126" text-anchor="middle" fill="#64748B" font-size="13">0</text>
+        <rect x="876" y="106" width="40" height="28" rx="5" fill="#122B45"/><text x="896" y="126" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">1</text></g>
       <g class="frag"><text x="0" y="166" fill="#CBD5E1" font-size="14"><tspan fill="#F8717A">#main</tspan> ul li</text>
         <rect x="626" y="146" width="40" height="28" rx="5" fill="#3F1A1E"/><text x="646" y="166" text-anchor="middle" fill="#F8717A" font-size="13" font-weight="700">1</text>
-        <rect x="736" y="146" width="40" height="28" rx="5" fill="#1E293B"/><text x="756" y="166" text-anchor="middle" fill="#64748B" font-size="13">0</text>
-        <rect x="846" y="146" width="40" height="28" rx="5" fill="#122B45"/><text x="866" y="166" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">2</text></g>
+        <rect x="746" y="146" width="40" height="28" rx="5" fill="#1E293B"/><text x="766" y="166" text-anchor="middle" fill="#64748B" font-size="13">0</text>
+        <rect x="876" y="146" width="40" height="28" rx="5" fill="#122B45"/><text x="896" y="166" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">2</text></g>
       <g class="frag"><text x="0" y="206" fill="#CBD5E1" font-size="14"><tspan fill="#F8717A">#main</tspan> ul li<tspan fill="#FBBF24">.item</tspan></text>
         <rect x="626" y="186" width="40" height="28" rx="5" fill="#3F1A1E"/><text x="646" y="206" text-anchor="middle" fill="#F8717A" font-size="13" font-weight="700">1</text>
-        <rect x="736" y="186" width="40" height="28" rx="5" fill="#3F3218"/><text x="756" y="206" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="700">1</text>
-        <rect x="846" y="186" width="40" height="28" rx="5" fill="#122B45"/><text x="866" y="206" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">2</text></g>
+        <rect x="746" y="186" width="40" height="28" rx="5" fill="#3F3218"/><text x="766" y="206" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="700">1</text>
+        <rect x="876" y="186" width="40" height="28" rx="5" fill="#122B45"/><text x="896" y="206" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">2</text></g>
       <g class="frag"><text x="0" y="246" fill="#CBD5E1" font-size="14"><tspan fill="#F8717A">#main</tspan> ul li<tspan fill="#FBBF24">.item</tspan> a<tspan fill="#FBBF24">:hover</tspan></text>
         <rect x="626" y="226" width="40" height="28" rx="5" fill="#3F1A1E"/><text x="646" y="246" text-anchor="middle" fill="#F8717A" font-size="13" font-weight="700">1</text>
-        <rect x="736" y="226" width="40" height="28" rx="5" fill="#3F3218"/><text x="756" y="246" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="700">2</text>
-        <rect x="846" y="226" width="40" height="28" rx="5" fill="#122B45"/><text x="866" y="246" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">3</text></g>
+        <rect x="746" y="226" width="40" height="28" rx="5" fill="#3F3218"/><text x="766" y="246" text-anchor="middle" fill="#FBBF24" font-size="13" font-weight="700">2</text>
+        <rect x="876" y="226" width="40" height="28" rx="5" fill="#122B45"/><text x="896" y="246" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">3</text></g>
       <g class="frag">
         <line x1="0" y1="272" x2="960" y2="272" stroke="#243349"/>
         <text x="0" y="300" fill="#A78BFA" font-size="14" font-weight="700">style="…" on the element</text>
@@ -1616,45 +1480,28 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
       </g>
     </svg></div>
   </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>48</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Q12 · the trap, stated properly</div>
+
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>34</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Q12 · the trap</div>
     <h2 class="w">Only one of these<br>brackets is free.</h2>
-    <div class="three">
-      <div class="card g"><h3 class="g"><code>:where(…)</code></h3><p>Always <b>zero</b>. Whatever is inside it, however specific, contributes nothing. This is the whole reason it exists — it is the escape hatch for library defaults that must be easy to override.</p></div>
-      <div class="card r"><h3 class="r"><code>:not(…)</code></h3><p>The colon itself is free, but its <b>argument counts</b>. <code>:not(.promo)</code> adds one to the class column, exactly as <code>.promo</code> would.</p></div>
-      <div class="card r"><h3 class="r"><code>:has(…)</code></h3><p>Same rule as <code>:not()</code>. Free bracket, and the most specific thing inside it counts in full.</p></div>
+    <div class="three" style="margin-top:20px">
+      <div class="card g"><h3 class="g"><code>:where(…)</code></h3><p><b>Always 0.</b><br>Adds zero specificity, perfect for library defaults.</p></div>
+      <div class="card r"><h3 class="r"><code>:not(…)</code></h3><p><b>Not free.</b><br>Takes the specificity of its highest argument.</p></div>
+      <div class="card r"><h3 class="r"><code>:has(…)</code></h3><p><b>Not free.</b><br>Same rule — most specific argument counts.</p></div>
     </div>
-    <div class="key w">If you have heard that <code>:not()</code> is ignored by the specificity counter, that is worth unlearning today. <b>It takes the specificity of its most specific argument.</b> <code>:where()</code> is the only one of the three that is genuinely free, and knowing that difference is a real answer to a real interview question.</div>
+    <div class="key w" style="margin-top:20px">Wrap resets and defaults in <code>:where()</code> so consumers can easily override them without fighting <code>!important</code>.</div>
   </section>
 
-  <!-- ============ CLOSE · SCORE AND WHAT TO DO WITH IT ============ -->
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>49</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Now score it</div>
-    <h2>Twelve answered.<br>Write the number down.</h2>
-    <div class="four">
-      <div class="card r"><h3 class="r">0 – 3</h3><p><b>Starting fresh.</b> Nothing here is a character flaw — you have simply not met this layer yet. Open <b>module 2</b> and go in order.</p></div>
-      <div class="card w"><h3 class="w">4 – 6</h3><p><b>The common score.</b> You can build; the runtime underneath is still fuzzy. <b>Modules 2 and 3</b>, in order, no skipping.</p></div>
-      <div class="card b"><h3 class="b">7 – 9</h3><p><b>Mid-level shaped.</b> The gaps are specific rather than broad. Start at <b>module 8</b> and use your wrong answers to pick the detours.</p></div>
-      <div class="card g"><h3 class="g">10 – 12</h3><p><b>Senior shaped.</b> You are not here to learn the mechanisms — you are here to learn to defend them out loud. <b>Module 8</b>, then 11 and 13.</p></div>
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>35</b> / 35</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Diagnostic Complete</div>
+    <h2>Twelve answered.<br>Find your address.</h2>
+    <div class="cards four" style="margin-top:20px">
+      <div class="card r"><h3 class="r">0 – 3</h3><p><b>Foundations</b><br>Start at Module 1 &amp; 2 (Runtime &amp; Pipeline).</p></div>
+      <div class="card y"><h3 class="w">4 – 6</h3><p><b>Mid-level</b><br>Module 3 (Memory/Closures) and Module 6 (CSS Specificity).</p></div>
+      <div class="card c"><h3 class="cy">7 – 9</h3><p><b>Advanced</b><br>Module 8 (Vitals) and Module 10 (Caching &amp; Rendering).</p></div>
+      <div class="card g"><h3 class="g">10 – 12</h3><p><b>Senior</b><br>Module 11 &amp; 13 (Architecture &amp; System Design).</p></div>
     </div>
-    <div class="key">Be generous about wording and strict about mechanism. If you knew <em>why</em> and said it clumsily, mark it right. If you knew the letter and not the why, mark it wrong — that is the mark that would have cost you the offer.</div>
-  </section>
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>50</b> / 50</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">What this deck was actually for</div>
-    <h2>You now know<br>where the floor is.</h2>
-    <div class="say" style="max-width:70ch">Every mechanism in these twelve questions comes back as something you build. The rendering pipeline and the event loop are module 2. References, closures and garbage in module 3. Specificity and the cascade in module 6. Caching, hints and animation cost in module 10.</div>
-    <div class="key g">Nothing here was trivia. Each of these is a question someone was asked in a real interview, and the ones you missed are the reason the module order in this program is what it is.</div>
-    <div class="say" style="max-width:70ch; margin-top:14px">These twelve are the scored set. The rest of the question bank — including the WeakMap question, which is question 9 asked a second way — is written up in the module workbook rather than filmed, so you can research and argue about them at your own pace.</div>
-    <div class="decklinks">
-      <a class="decklink" href="deck.html">
-        <span><span class="dl-n">Back · Module 01</span><span class="dl-t">The module deck — lessons 1 to 7</span><span class="dl-s">Why this module exists, what the five interview formats are, and where this diagnostic sits in the week.</span></span>
-        <span class="dl-go">&#8599;</span>
-      </a>
-      <a class="decklink" href="../../repo/jobboard-deck.html">
-        <span><span class="dl-n">Companion · Lesson 7</span><span class="dl-t">The repo — Rasmi, and forty branches</span><span class="dl-s">The job board you build a slice at a time, and the three-branch workflow behind every exercise.</span></span>
-        <span class="dl-go">&#8599;</span>
-      </a>
-    </div>
+    <div class="key g" style="margin-top:20px">The score is not a grade — it is an address telling you exactly where to begin.</div>
   </section>
 
 
@@ -1702,14 +1549,357 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
   function toggleNav(){ nav.classList.contains('open')?closeNav():openNav(); }
   navToggle.addEventListener('click',toggleNav); scrim.addEventListener('click',closeNav);
   function frags(){ return [...slides[i].querySelectorAll('.frag')]; }
-  function applyFrags(){ frags().forEach((el,x)=> el.classList.toggle('on', x<step)); }
+  /* ---- Question 4 Interactive Event Loop Runtime Data & Controller ---- */
+  const Q4_DATA = [
+    {
+      badge: 'OVERVIEW',
+      code: 'One thread · Four waiting rooms',
+      desc: 'Press → on your keyboard to run the five logs line by line through the waiting rooms.',
+      frame: null,
+      global: 1,
+      timer: null,
+      microtasks: [],
+      tasks: [],
+      status: 'stack empty?',
+      statusColor: '#64748B',
+      transfer: null,
+      logs: [],
+      accent: 'var(--cy)'
+    },
+    {
+      badge: 'STEP 1 / 11 · LINE 1',
+      code: 'setTimeout(() => console.log(1))',
+      desc: '<code>setTimeout(…1)</code> called on Call Stack → timer registers in Web APIs, callback goes straight to the <b>task queue</b>.',
+      frame: 'setTimeout(…1)',
+      frameColor: '#22D3EE',
+      global: 1,
+      timer: 'timer(0ms) → log(1)',
+      microtasks: [],
+      tasks: ['cb: log(1)'],
+      status: 'call stack active',
+      statusColor: '#64748B',
+      transfer: 'Call Stack ➔ Web APIs ➔ Task Queue: [ cb: log(1) ]',
+      logs: [],
+      accent: 'var(--ochre)'
+    },
+    {
+      badge: 'STEP 2 / 11 · LINE 2',
+      code: 'Promise.resolve().then(() => console.log(2))',
+      desc: '<code>Promise.resolve()</code> is already settled, so <code>then(…2)</code> callback is queued to the <b>microtask queue</b>.',
+      frame: 'Promise.resolve(…2)',
+      frameColor: '#22D3EE',
+      global: 1,
+      timer: null,
+      microtasks: ['then: log(2)'],
+      tasks: ['cb: log(1)'],
+      status: 'call stack active',
+      statusColor: '#64748B',
+      transfer: 'Call Stack ➔ Microtask Queue: [ then: log(2) ]',
+      logs: [],
+      accent: 'var(--good)'
+    },
+    {
+      badge: 'STEP 3 / 11 · LINE 3',
+      code: 'Promise.resolve().then(() => setTimeout(...3))',
+      desc: 'Promise settled → callback that <em>will call</em> <code>setTimeout(…3)</code> is queued as a <b>microtask</b>. Nothing timed yet.',
+      frame: 'Promise.resolve(…3)',
+      frameColor: '#22D3EE',
+      global: 1,
+      timer: null,
+      microtasks: ['then: log(2)', 'then: setTimeout(…3)'],
+      tasks: ['cb: log(1)'],
+      status: 'call stack active',
+      statusColor: '#64748B',
+      transfer: 'Call Stack ➔ Microtask Queue: [ then: setTimeout(…3) ]',
+      logs: [],
+      accent: 'var(--good)'
+    },
+    {
+      badge: 'STEP 4 / 11 · LINE 4',
+      code: 'new Promise(() => console.log(4))',
+      desc: '<code>new Promise(executor)</code> — the executor runs <b>now, synchronously on the Call Stack</b> &nbsp;→&nbsp; <b class="g">logs 4</b>',
+      frame: 'executor: log(4)',
+      frameColor: '#34D399',
+      global: 1,
+      timer: null,
+      microtasks: ['then: log(2)', 'then: setTimeout(…3)'],
+      tasks: ['cb: log(1)'],
+      status: 'call stack active',
+      statusColor: '#64748B',
+      transfer: 'Call Stack (synchronous executor) ➔ Console: LOG 4',
+      logs: ['4'],
+      accent: 'var(--good)'
+    },
+    {
+      badge: 'STEP 5 / 11 · LINE 5',
+      code: 'setTimeout(() => console.log(5))',
+      desc: '<code>setTimeout(…5)</code> called → timer hands callback to <b>task queue</b>, placed <em>behind 1</em>.',
+      frame: 'setTimeout(…5)',
+      frameColor: '#22D3EE',
+      global: 1,
+      timer: 'timer(0ms) → log(5)',
+      microtasks: ['then: log(2)', 'then: setTimeout(…3)'],
+      tasks: ['cb: log(1)', 'cb: log(5)'],
+      status: 'call stack active',
+      statusColor: '#64748B',
+      transfer: 'Call Stack ➔ Web APIs ➔ Task Queue: [ cb: log(5) behind 1 ]',
+      logs: ['4'],
+      accent: 'var(--ochre)'
+    },
+    {
+      badge: 'STEP 6 / 11 · SCRIPT ENDS',
+      code: 'Call stack empties · Event Loop wakes up',
+      desc: 'Top-level script finishes and Call Stack empties. <b>Only now does the Event Loop get a turn.</b> Microtasks checked first!',
+      frame: null,
+      frameColor: '#22D3EE',
+      global: 0.15,
+      timer: null,
+      microtasks: ['then: log(2)', 'then: setTimeout(…3)'],
+      tasks: ['cb: log(1)', 'cb: log(5)'],
+      status: 'stack empty! draining microtasks',
+      statusColor: '#34D399',
+      transfer: 'Event Loop: Stack Empty ➔ Draining Microtask Queue!',
+      logs: ['4'],
+      accent: 'var(--plum)'
+    },
+    {
+      badge: 'STEP 7 / 11 · MICROTASKS (1/2)',
+      code: 'run then(…2) → console.log(2)',
+      desc: '<b>Microtasks first</b> — run <code>then(…2)</code> on Call Stack &nbsp;→&nbsp; <b class="g">logs 2</b>',
+      frame: 'then: log(2)',
+      frameColor: '#34D399',
+      global: 0.15,
+      timer: null,
+      microtasks: ['then: setTimeout(…3)'],
+      tasks: ['cb: log(1)', 'cb: log(5)'],
+      status: 'draining microtasks...',
+      statusColor: '#34D399',
+      transfer: 'Microtask Queue ➔ Event Loop ➔ Call Stack: LOG 2',
+      logs: ['4', '2'],
+      accent: 'var(--good)'
+    },
+    {
+      badge: 'STEP 8 / 11 · MICROTASKS (2/2)',
+      code: 'run second microtask: calls setTimeout(…3)',
+      desc: '<b>Still draining</b> — run second microtask: it calls <code>setTimeout(…3)</code>, which puts <b>3 at the back</b> of task queue — behind 1 and 5!',
+      frame: 'microtask: setTimeout(…3)',
+      frameColor: '#FBBF24',
+      global: 0.15,
+      timer: 'timer(0ms) → log(3)',
+      microtasks: [],
+      tasks: ['cb: log(1)', 'cb: log(5)', 'cb: log(3)'],
+      status: 'microtasks now empty!',
+      statusColor: '#34D399',
+      transfer: 'Call Stack ➔ Web APIs ➔ Task Queue: [ 3 joins BACK of task queue ]',
+      logs: ['4', '2'],
+      accent: 'var(--ochre)'
+    },
+    {
+      badge: 'STEP 9 / 11 · TASK QUEUE (1/3)',
+      code: 'event loop takes first task: console.log(1)',
+      desc: '<b>Microtasks empty</b> — take one task: <code>log(1)</code> moves to Call Stack &nbsp;→&nbsp; <b class="g">logs 1</b>',
+      frame: 'task: log(1)',
+      frameColor: '#34D399',
+      global: 0.15,
+      timer: null,
+      microtasks: [],
+      tasks: ['cb: log(5)', 'cb: log(3)'],
+      status: 'take 1 task (one per turn)',
+      statusColor: '#FBBF24',
+      transfer: 'Task Queue ➔ Event Loop ➔ Call Stack: LOG 1',
+      logs: ['4', '2', '1'],
+      accent: 'var(--ochre)'
+    },
+    {
+      badge: 'STEP 10 / 11 · TASK QUEUE (2/3)',
+      code: 'event loop takes next task: console.log(5)',
+      desc: 'Microtasks checked (empty) → <b>next task</b>: <code>log(5)</code> moves to Call Stack &nbsp;→&nbsp; <b class="g">logs 5</b>',
+      frame: 'task: log(5)',
+      frameColor: '#34D399',
+      global: 0.15,
+      timer: null,
+      microtasks: [],
+      tasks: ['cb: log(3)'],
+      status: 'take next task',
+      statusColor: '#FBBF24',
+      transfer: 'Task Queue ➔ Event Loop ➔ Call Stack: LOG 5',
+      logs: ['4', '2', '1', '5'],
+      accent: 'var(--ochre)'
+    },
+    {
+      badge: 'STEP 11 / 11 · TASK QUEUE (3/3)',
+      code: 'event loop takes final task: console.log(3)',
+      desc: '<b>Final task</b>: <code>log(3)</code> runs &nbsp;→&nbsp; <b class="g">logs 3</b>. Console: <b class="g">4 &nbsp; 2 &nbsp; 1 &nbsp; 5 &nbsp; 3</b> — 3 is last because it was <b>scheduled late</b>!',
+      frame: 'task: log(3)',
+      frameColor: '#34D399',
+      global: 0.15,
+      timer: null,
+      microtasks: [],
+      tasks: [],
+      status: 'queues empty · loop idle',
+      statusColor: '#A78BFA',
+      transfer: 'Task Queue ➔ Event Loop ➔ Call Stack: LOG 3 (final log)',
+      logs: ['4', '2', '1', '5', '3'],
+      accent: 'var(--good)'
+    }
+  ];
+
+  function updateQ4(st){
+    const d = Q4_DATA[Math.max(0, Math.min(st, Q4_DATA.length - 1))];
+    if(!d) return;
+
+    const bEl = document.getElementById('q4-step-badge'),
+          cEl = document.getElementById('q4-step-code'),
+          dEl = document.getElementById('q4-step-desc'),
+          card = document.getElementById('q4-step-card');
+    if(bEl) bEl.textContent = d.badge;
+    if(cEl) cEl.innerHTML = d.code;
+    if(dEl) dEl.innerHTML = d.desc;
+    if(card){
+      card.style.borderLeftColor = d.accent;
+      if(st === 11) card.style.background = 'rgba(52,211,153,.10)';
+      else card.style.background = 'var(--panel2)';
+    }
+
+    // Call stack frames
+    const fAct = document.getElementById('q4-frame-active'),
+          fActT = document.getElementById('q4-frame-active-text'),
+          fGlob = document.getElementById('q4-frame-global'),
+          fGlobT = document.getElementById('q4-frame-global-text');
+    if(fGlob && fGlobT){
+      fGlob.style.opacity = d.global;
+      fGlobT.style.opacity = d.global;
+    }
+    if(fAct && fActT){
+      if(d.frame){
+        fAct.style.opacity = '1';
+        fAct.setAttribute('stroke', d.frameColor);
+        fActT.style.opacity = '1';
+        fActT.setAttribute('fill', d.frameColor);
+        fActT.textContent = d.frame;
+      } else {
+        fAct.style.opacity = '0';
+        fActT.style.opacity = '0';
+      }
+    }
+
+    // Web APIs timer slot
+    const tSlot = document.getElementById('q4-timer-slot'),
+          tText = document.getElementById('q4-timer-text');
+    if(tSlot && tText){
+      if(d.timer){
+        tSlot.style.opacity = '0.9';
+        tSlot.setAttribute('stroke', '#FBBF24');
+        tText.style.opacity = '1';
+        tText.textContent = d.timer;
+      } else {
+        tSlot.style.opacity = '0.2';
+        tSlot.setAttribute('stroke', '#334155');
+        tText.style.opacity = '0';
+      }
+    }
+
+    // Microtask queue items
+    const m1 = document.getElementById('q4-micro-1'),
+          m1T = document.getElementById('q4-micro-1-text'),
+          m2 = document.getElementById('q4-micro-2'),
+          m2T = document.getElementById('q4-micro-2-text');
+    const hasM1 = d.microtasks.includes('then: log(2)');
+    const hasM2 = d.microtasks.includes('then: setTimeout(…3)');
+    if(m1 && m1T){
+      m1.style.opacity = hasM1 ? '1' : '0';
+      m1T.style.opacity = hasM1 ? '1' : '0';
+    }
+    if(m2 && m2T){
+      m2.style.opacity = hasM2 ? '1' : '0';
+      m2T.style.opacity = hasM2 ? '1' : '0';
+    }
+
+    // Task queue items
+    const t1 = document.getElementById('q4-task-1'),
+          t1T = document.getElementById('q4-task-1-text'),
+          t2 = document.getElementById('q4-task-2'),
+          t2T = document.getElementById('q4-task-2-text'),
+          t3 = document.getElementById('q4-task-3'),
+          t3T = document.getElementById('q4-task-3-text');
+    const hasT1 = d.tasks.includes('cb: log(1)');
+    const hasT2 = d.tasks.includes('cb: log(5)');
+    const hasT3 = d.tasks.includes('cb: log(3)');
+    if(t1 && t1T){
+      t1.style.opacity = hasT1 ? '1' : '0';
+      t1T.style.opacity = hasT1 ? '1' : '0';
+    }
+    if(t2 && t2T){
+      t2.style.opacity = hasT2 ? '1' : '0';
+      t2T.style.opacity = hasT2 ? '1' : '0';
+    }
+    if(t3 && t3T){
+      t3.style.opacity = hasT3 ? '1' : '0';
+      t3T.style.opacity = hasT3 ? '1' : '0';
+    }
+
+    // Event loop status
+    const lStat = document.getElementById('q4-loop-status'),
+          lCirc = document.getElementById('q4-loop-circle');
+    if(lStat){
+      lStat.textContent = d.status;
+      lStat.setAttribute('fill', d.statusColor);
+    }
+    if(lCirc){
+      if(st >= 6 && st <= 11){
+        lCirc.setAttribute('stroke', d.statusColor);
+        lCirc.setAttribute('stroke-width', '3');
+      } else {
+        lCirc.setAttribute('stroke', '#A78BFA');
+        lCirc.setAttribute('stroke-width', '2.5');
+      }
+    }
+
+    // Transfer indicator pill
+    const xPill = document.getElementById('q4-transfer-pill'),
+          xText = document.getElementById('q4-transfer-text');
+    if(xPill && xText){
+      if(d.transfer){
+        xPill.style.opacity = '1';
+        xPill.setAttribute('stroke', d.accent);
+        xText.style.opacity = '1';
+        xText.setAttribute('fill', d.accent);
+        xText.textContent = d.transfer;
+      } else {
+        xPill.style.opacity = '0';
+        xText.style.opacity = '0';
+      }
+    }
+
+    // Console output slots
+    ['4','2','1','5','3'].forEach(num => {
+      const slot = document.getElementById('q4-c-' + num);
+      if(slot) slot.classList.toggle('logged', d.logs.includes(num));
+    });
+  }
+
+  function applyFrags(){
+    frags().forEach((el,x)=> el.classList.toggle('on', x<step));
+    if(slides[i] && (slides[i].id === 'slide-q4' || slides[i].querySelector('#slide-q4'))){
+      updateQ4(step);
+    }
+  }
   function render(){
     slides.forEach((s,x)=>s.classList.toggle('on',x===i));
     dotEls.forEach((d,x)=>d.classList.toggle('on',x===i));
     bar.style.width=((i+1)/slides.length*100)+'%';
     applyFrags(); updateNavCur();
+    try{ history.replaceState(null, '', '#' + (i + 1)); }catch(_){}
     const n=slides[i].querySelector('.notes'); nb.innerHTML=n?n.innerHTML:'<p>—</p>';
   }
+  const _hash = parseInt(location.hash.replace(/\D/g, ''), 10);
+  if(!isNaN(_hash) && _hash >= 1 && _hash <= slides.length){ i = _hash - 1; }
+  const _params = new URLSearchParams(location.search);
+  if(_params.has('step')){ step = parseInt(_params.get('step'), 10) || 0; }
+  window.addEventListener('hashchange', ()=>{
+    const h = parseInt(location.hash.replace(/\D/g, ''), 10);
+    if(!isNaN(h) && h >= 1 && h <= slides.length){ i = h - 1; step = 0; render(); }
+  });
   function next(){ const f=frags(); if(step<f.length){ step++; applyFrags(); } else if(i<slides.length-1){ i++; step=0; render(); } }
   function prev(){ if(step>0){ step--; applyFrags(); } else if(i>0){ i--; step=slides[i].querySelectorAll('.frag').length; render(); } }
   document.addEventListener('keydown',e=>{
@@ -1721,7 +1911,11 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
     else if(e.key==='Escape'){closeNav();}
     
     else if(k==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
-    else if(k==='p'){slides.forEach(s=>s.querySelectorAll('.frag').forEach(el=>el.classList.add('on')));window.print();}
+    else if(k==='p'){
+      slides.forEach(s=>s.querySelectorAll('.frag').forEach(el=>el.classList.add('on')));
+      updateQ4(11);
+      window.print();
+    }
   });
   document.getElementById('stage').addEventListener('click',e=>{ e.clientX>innerWidth/2?next():prev(); });
   render();
