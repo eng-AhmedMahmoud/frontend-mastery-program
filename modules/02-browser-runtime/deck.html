@@ -70,6 +70,14 @@
   .key.g{background:rgba(52,211,153,.10); border-color:var(--good)}
   .key.r{background:rgba(248,113,122,.10); border-color:var(--bad)}
 
+  .ex{display:inline-flex; align-items:center; gap:14px; margin-top:20px; text-decoration:none;
+      background:var(--panel2); border:1px solid var(--line2); border-left:4px solid var(--good);
+      border-radius:0 12px 12px 0; padding:11px 18px; font-size:min(1.6vw,17.5px); color:var(--ink2)}
+  .ex:hover{border-color:var(--good)}
+  .ex b{color:var(--good); font:700 12px/1 var(--mono); letter-spacing:1.6px; text-transform:uppercase; white-space:nowrap}
+  .ex .br{font-family:var(--mono); color:var(--ink); font-weight:600}
+  .ex i{color:var(--muted); font-style:normal; font-size:.86em}
+
   .plist{list-style:none; margin-top:10px; max-width:44ch}
   .plist li{font:600 min(2vw,22px)/1.35 var(--sans); color:var(--ink); padding:9px 0 9px 32px; position:relative}
   .plist li::before{content:"▷"; position:absolute; left:0; top:11px; color:var(--cy); font-size:15px}
@@ -276,7 +284,7 @@
         </ul>
       </div>
     </div>
-    <div class="key">Lessons 1, 7, 8 and 9 are one story told four times, at four zoom levels. If a lesson feels repetitive, that is the point — it is the same pipeline, closer up.</div>
+    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard" target="_blank" rel="noopener"><b>The repo</b><span class="br">frontend-mastery-jobboard</span><i>every exercise in this module · open on GitHub ↗</i></a>
   </section>
 
   <!-- MODULE 02 · VIDEO 1 · 14 -->
@@ -454,6 +462,7 @@ container.appendChild(clone);</code></pre>
         </ul>
       </div>
     </div>
+    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-2/dom-api" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-2/dom-api</span><i>dom-api.ts — the query and batching costs, measured · open on GitHub ↗</i></a>
   </section>
 
   <!-- MODULE 02 · VIDEO 3 · v3-1 -->
@@ -850,6 +859,7 @@ boxes.forEach((el, i) =&gt;
       </div>
     </div>
     <div class="say">Properties that force the flush: <code>offsetWidth/Height/Top</code>, <code>clientWidth</code>, <code>scrollTop</code>, <code>getBoundingClientRect()</code>, <code>getComputedStyle()</code>, <code>focus()</code>. <b>Reading geometry is not free after a write.</b></div>
+    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-2/browser-lab/start" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-2/browser-lab/start</span><i>batch-layout.ts — read all, then write all · open on GitHub ↗</i></a>
   </section>
 
   <!-- MODULE 02 · VIDEO 7 · 16 -->
@@ -1072,6 +1082,7 @@ console.log(<span class="st">'6 · script end'</span>)</code></pre>
       </div>
     </div>
     <div class="key">"The main thread runs my JavaScript, my layout and my paint. A frame only happens between tasks, so a single 80ms handler is three dropped frames — and the fix is never a faster loop, it is a shorter task."</div>
+    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-2/browser-lab/start" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-2/browser-lab/start</span><i>raf-schedule.ts — one handler run per frame · open on GitHub ↗</i></a>
   </section>
 
   <!-- MODULE 02 · VIDEO 10 · v10-1 -->
@@ -1085,15 +1096,17 @@ console.log(<span class="st">'6 · script end'</span>)</code></pre>
   <section class="slide" data-chip="MODULE 02 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 10</div><div class="cx-page"><b>42</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The exercise · Rasmi's results list, deliberately broken</div>
     <h2>Measure, name the stage, fix, measure again</h2>
-<pre><code><span class="g">$</span> git checkout module-2/perf/start
-<span class="g">$</span> pnpm dev
+<pre style="font-size:min(1.3vw,15px)"><code><span class="g">$</span> git checkout module-2/browser-lab/start
+<span class="g">$</span> pnpm test:watch
 
-<span class="cmt"># 600 job cards. Scrolling stutters. Filtering takes ~400ms to repaint.</span>
-<span class="cmt"># Three separate problems are planted in this branch:</span>
-<span class="no">  1. a scroll handler that reads offsetTop inside the loop     → forced layout</span>
-<span class="no">  2. a filter pass that animates height and top                → layout on every frame</span>
-<span class="no">  3. will-change: transform on every card in the list          → VRAM, not speed</span></code></pre>
-    <div class="key">Your deliverable is not green tests — it is <b>two Performance recordings and four sentences</b>: what you measured, which stage it landed in, what you changed, what the number became.</div>
+<span class="cmt"># 600 job cards. Four empty functions, one per stage of the pipeline:</span>
+<span class="no">  visibleRange   render the twelve rows on screen, not six hundred   → do less</span>
+<span class="no">  rafSchedule    one handler run per frame, newest arguments win     → do it once</span>
+<span class="no">  batchLayout    every read, then every write                        → one layout, not 600</span>
+<span class="no">  measure        a labelled band in the Performance panel            → prove it</span>
+<span class="cmt">#  35 failing tests. That red is where you start.</span></code></pre>
+    <div class="key">Green tests are half of it. The other half is <b>two Performance recordings and four sentences</b>: what you measured, which stage it landed in, what you changed, what the number became.</div>
+    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-2/browser-lab/start" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-2/browser-lab/start</span><i>four functions, 35 failing tests · /guided, /solution · open on GitHub ↗</i></a>
   </section>
 
   <!-- MODULE 02 · VIDEO 10 · v10-3 -->
