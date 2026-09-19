@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Module 02 · Video 1 — From HTML to Pixels · Frontend Mastery</title>
+<title>Module 02 — The Browser as a Runtime · Frontend Mastery</title>
 <style>
   :root{
     --bg:#070A14; --panel:#0E1525; --panel2:#121C30; --code:#0B1220;
@@ -204,8 +204,8 @@
 <div id="bar"></div>
 <div id="stage">
 
-  <!-- 1 · TITLE -->
-  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>01</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 1 · 01 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>01</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 02 · The browser as a runtime</div>
     <h1>From HTML<br>to pixels</h1>
     <div class="sub">Five stages between the tag you wrote and the light on the screen. Two of them are where your app gets slow.</div>
@@ -235,8 +235,8 @@
     </div>
   </section>
 
-  <!-- 2 · WHY -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>02</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 1 · 02 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>02</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Why this video exists</div>
     <h2>Two questions, one answer</h2>
     <div class="two">
@@ -252,15 +252,291 @@
     <div class="key">Both answers come from the same five boxes. Learn the pipeline once, answer both.</div>
   </section>
 
-  <!-- 3 · SECTION: THE BOX -->
-  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>03</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Part 1 of 4</div>
+  <!-- MODULE 02 · VIDEO 1 · v1-route -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>03</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Module 02 · the route through this module</div>
+    <h2>Ten lessons, and what<br>each one hands you</h2>
+    <div class="two tight">
+      <div>
+        <ul class="plist">
+          <li><b>1 ·</b> From HTML to pixels<small>the five stages, and the vocabulary for the rest</small></li>
+          <li><b>2 ·</b> The DOM API is a shovel<small>querying and mutating without thrashing layout</small></li>
+          <li><b>3 ·</b> Semantic HTML is an API<small>the accessibility tree your markup returns</small></li>
+          <li><b>4 ·</b> The box model decides your maths<small>content-box vs border-box, settled</small></li>
+          <li><b>5 ·</b> Formatting contexts<small>why flex and grid are not magic</small></li>
+        </ul>
+      </div>
+      <div>
+        <ul class="plist">
+          <li><b>6 ·</b> Stacking and containing blocks<small>why <code>z-index: 9999</code> did nothing</small></li>
+          <li><b>7 ·</b> Reflow costs the CPU<small>compositing does not</small></li>
+          <li><b>8 ·</b> Composition layers<small>what the GPU holds, and the VRAM bill</small></li>
+          <li><b>9 ·</b> The event loop<small>tasks, microtasks, and the frame you missed</small></li>
+          <li><b>10 ·</b> Instrument a slow page<small>and prove the fix — the build</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="key">Lessons 1, 7, 8 and 9 are one story told four times, at four zoom levels. If a lesson feels repetitive, that is the point — it is the same pipeline, closer up.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 1 · 14 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>04</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Where the render tree comes from</div>
+    <h2>Two trees, merged</h2>
+    <div class="fig" style="max-width:900px">
+      <svg viewBox="0 0 900 180" role="img" aria-label="DOM plus CSSOM produce the render tree">
+        <rect x="30" y="16" width="230" height="58" rx="10" fill="#0C2733" stroke="#22D3EE"/>
+        <text x="145" y="42" text-anchor="middle" class="lbl b" font-size="15">DOM</text>
+        <text x="145" y="62" text-anchor="middle" class="lbl s">your HTML, as objects</text>
+        <rect x="30" y="104" width="230" height="58" rx="10" fill="#1A1832" stroke="#A78BFA"/>
+        <text x="145" y="130" text-anchor="middle" class="lbl b" font-size="15">CSSOM</text>
+        <text x="145" y="150" text-anchor="middle" class="lbl s">every rule that matched</text>
+        <path class="draw" pathLength="1" d="M266 45 L360 76" stroke="#64748B" stroke-width="2"/>
+        <path class="draw" pathLength="1" d="M266 133 L360 102" stroke="#64748B" stroke-width="2"/>
+        <rect x="368" y="60" width="250" height="58" rx="10" fill="#0C2A22" stroke="#34D399"/>
+        <text x="493" y="86" text-anchor="middle" class="lbl b" font-size="15">render tree</text>
+        <text x="493" y="106" text-anchor="middle" class="lbl s">only what is actually visible</text>
+        <path class="draw" pathLength="1" d="M624 89 L700 89" stroke="#64748B" stroke-width="2"/>
+        <rect x="708" y="60" width="170" height="58" rx="10" fill="#121C30" stroke="#243349"/>
+        <text x="793" y="94" text-anchor="middle" class="lbl b" font-size="15">pixels</text>
+      </svg>
+    </div>
+    <div class="say"><b>Reflow</b> is what happens when JavaScript changes the DOM or the styles after this is already built — a "load more" button, a React re-render, a class toggle. The browser has to redo the work.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 1 · 15 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>05</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The five phases, and what they cost</div>
+    <h2>Where the frame budget goes</h2>
+    <table class="grid">
+      <tr><th>phase</th><th>what happens</th><th>runs on</th><th>blocks the main thread?</th></tr>
+      <tr><td><b>JavaScript</b></td><td>you change the DOM or a style</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
+      <tr><td><b>Style</b></td><td>re-match selectors, rebuild the subtree</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
+      <tr><td><b>Layout</b></td><td>recompute position and size of every affected box</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
+      <tr><td><b>Paint</b></td><td>draw pixels into bitmaps</td><td><b class="g">GPU</b></td><td>no</td></tr>
+      <tr><td><b>Composite</b></td><td>stack the bitmaps in the right order</td><td><b class="g">GPU</b></td><td>no</td></tr>
+    </table>
+    <div class="key r">You have ~16ms for a 60fps frame. Style and Layout are the two that spend it — and they are the two you can avoid.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 2 · 25 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 2</div><div class="cx-page"><b>06</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Module 02 · Video 2 · DOM Architecture</div>
+    <h2>The DOM class hierarchy: why methods live where they do</h2>
+    <div class="two">
+      <div class="fig">
+        <svg viewBox="0 0 460 250" role="img" aria-label="DOM class hierarchy diagram">
+          <rect x="10" y="10" width="190" height="38" rx="8" fill="#0E1525" stroke="#22D3EE" stroke-width="2"/>
+          <text x="105" y="34" text-anchor="middle" class="lbl b" fill="#22D3EE">Window (Viewport)</text>
+
+          <rect x="250" y="10" width="190" height="38" rx="8" fill="#0E1525" stroke="#A78BFA" stroke-width="2"/>
+          <text x="345" y="34" text-anchor="middle" class="lbl b" fill="#A78BFA">HTMLDocument</text>
+
+          <path class="draw" pathLength="1" d="M345 48 L345 76" stroke="#64748B" stroke-width="2"/>
+          <rect x="135" y="76" width="200" height="38" rx="8" fill="#0E1525" stroke="#FBBF24" stroke-width="2"/>
+          <text x="235" y="100" text-anchor="middle" class="lbl b" fill="#FBBF24">Node (Tree Leaf / Traversal)</text>
+
+          <path class="draw" pathLength="1" d="M180 114 L110 144" stroke="#64748B" stroke-width="2"/>
+          <path class="draw" pathLength="1" d="M280 114 L350 144" stroke="#64748B" stroke-width="2"/>
+
+          <rect x="10" y="144" width="180" height="36" rx="6" fill="#121C30" stroke="#243349"/>
+          <text x="100" y="167" text-anchor="middle" class="lbl s">TextNode (Raw Text)</text>
+
+          <rect x="250" y="144" width="200" height="36" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="350" y="167" text-anchor="middle" class="lbl b" fill="#22D3EE">Element (Core DOM API)</text>
+
+          <path class="draw" pathLength="1" d="M350 180 L350 204" stroke="#64748B" stroke-width="2"/>
+          <rect x="220" y="204" width="120" height="34" rx="6" fill="#121C30" stroke="#34D399"/>
+          <text x="280" y="226" text-anchor="middle" class="lbl s" fill="#34D399">HTMLElement</text>
+
+          <rect x="350" y="204" width="105" height="34" rx="6" fill="#121C30" stroke="#plum"/>
+          <text x="402" y="226" text-anchor="middle" class="lbl s" fill="#A78BFA">SVGElement</text>
+        </svg>
+      </div>
+      <div>
+        <div class="card a">
+          <h3 class="cy">Why Element.prototype, not HTMLElement?</h3>
+          <p>The DOM API governs <b>SVG</b> and <b>XML</b> nodes, not just HTML. Placing methods on <code>Element.prototype</code> gives <code>&lt;svg&gt;</code> and <code>&lt;path&gt;</code> full query and attribute capabilities without duplicating APIs.</p>
+        </div>
+        <div class="card p" style="margin-top:12px">
+          <h3 class="p">Tree Primitives &amp; Document</h3>
+          <p><code>Node</code> represents tree leaves; text inside tags is wrapped in a <code>TextNode</code>. <code>HTMLDocument</code> extends <code>Node</code> directly while exposing querying methods on its own prototype.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 2 · 26 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 2</div><div class="cx-page"><b>07</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Querying Performance · Time &amp; Read Cost</div>
+    <h2>Querying without thrashing: O(1) hashmaps vs O(N²) live loops</h2>
+    <div class="two">
+      <div class="card r">
+        <h3 class="r">The Trap: Reading a Live HTMLCollection</h3>
+        <pre style="margin-top:8px; font-size:13px"><code><span class="cmt">// getElementsByClassName returns a LIVE collection!</span>
+<span class="kw">const</span> cards = document.getElementsByClassName(<span class="st">'card'</span>);
+
+<span class="kw">for</span> (<span class="kw">let</span> i = 0; i &lt; cards.length; i++) {
+  <span class="cmt">// Every read re-verifies tree position! Total: O(N²)</span>
+  process(cards[i]);
+}</code></pre>
+        <p style="margin-top:8px"><b>The Fix:</b> Use <code>querySelectorAll('.card')</code> (static <code>NodeList</code> with O(1) reads) or snapshot with <code>Array.from()</code>.</p>
+      </div>
+      <div class="card g">
+        <h3 class="g">Query Performance Matrix &amp; Scoped Traversal</h3>
+        <table class="grid" style="margin-top:6px; font-size:13.5px">
+          <tr><th>Method</th><th>Complexity</th><th>Return Type</th></tr>
+          <tr><td><code>getElementById</code></td><td><b class="g">O(1) query &amp; read</b></td><td>Single (Hashmap Cache)</td></tr>
+          <tr><td><code>getElementsByClassName</code></td><td>O(N) search, <b class="r">O(N) read</b></td><td>Live HTMLCollection</td></tr>
+          <tr><td><code>querySelectorAll</code></td><td>O(compile + DFS), <b class="g">O(1) read</b></td><td>Static NodeList (Copy refs)</td></tr>
+        </table>
+        <div class="key cy" style="font-size:13.5px; margin-top:10px"><b>Scoped Subtree Queries:</b> In a 10,000-node tree, never query <code>document</code>! Run <code>const grid = document.getElementById('grid'); grid.querySelectorAll('.row');</code> to bound DFS traversal to just 12 children.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 2 · 27 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 2</div><div class="cx-page"><b>08</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">DOM Mutation &amp; Templating</div>
+    <h2>Zero-reflow batching: &lt;template&gt; &amp; DocumentFragment</h2>
+    <div class="two">
+      <div>
+        <div class="card r">
+          <h3 class="r">innerHTML Parser Penalty</h3>
+          <p>Passing raw strings (<code>el.innerHTML += ...</code>) destroys existing children, removes attached listeners, invokes the HTML tokenizer at runtime, and forces full reflow.</p>
+        </div>
+        <div class="card g" style="margin-top:12px">
+          <h3 class="g">insertAdjacentElement: Pre-Compiled DOM</h3>
+          <div style="background:var(--code); border:1px solid var(--line2); border-radius:8px; padding:10px; margin-top:6px; font-family:var(--mono); font-size:13px; line-height:1.7">
+            <span class="st">'beforebegin'</span> &rarr; &lt;div class="target"&gt;<br>
+            &nbsp;&nbsp;<span class="ok">'afterbegin'</span> ... <span class="ok">'beforeend'</span><br>
+            &lt;/div&gt; &rarr; <span class="st">'afterend'</span>
+          </div>
+        </div>
+      </div>
+      <div class="card a">
+        <h3 class="cy">In-Memory Batching: 100 Mutations = 1 Reflow</h3>
+        <pre style="margin-top:8px; font-size:13px"><code><span class="cmt">// 1. Clone lightweight fragment from &lt;template&gt;</span>
+<span class="kw">const</span> clone = template.content.cloneNode(<span class="kw">true</span>);
+<span class="kw">const</span> card = clone.firstElementChild;
+
+<span class="cmt">// 2. Mutate in memory — ZERO layout pass!</span>
+card.querySelector(<span class="st">'.title'</span>).textContent = datum.title;
+
+<span class="cmt">// 3. Exactly ONE reflow pass on final append:</span>
+container.appendChild(clone);</code></pre>
+        <div class="key g" style="font-size:13.5px; margin-top:8px"><code>&lt;template&gt;</code> is shielded from the CSS render tree and invisible to external DOM queries. Mutations in memory never wake the layout pipeline.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 2 · 28 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 2</div><div class="cx-page"><b>09</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 2 · the DOM playbook</div>
+    <h2>Native observers, and when not to touch the DOM at all</h2>
+    <div class="two">
+      <div class="card g">
+        <h3 class="g">Observers replace polling</h3>
+        <p>Polling coordinates with <code>setInterval</code> or <code>window.onresize</code> fills the task queue and reads geometry on every tick. Observers are driven by the engine itself, fire off the critical path, and read nothing you have to force:</p>
+        <div class="row" style="margin-top:10px">
+          <div class="chip" style="font-size:13.5px; padding:8px 12px"><b class="cy">Intersection</b><small>Visibility, lazy loading, infinite feeds</small></div>
+          <div class="chip" style="font-size:13.5px; padding:8px 12px"><b class="p">Mutation</b><small>Subtree changes, editors, third-party DOM</small></div>
+          <div class="chip" style="font-size:13.5px; padding:8px 12px"><b class="g">Resize</b><small>Element dimensions without a layout read</small></div>
+        </div>
+      </div>
+      <div class="card a">
+        <h3 class="cy">The four rules from this lesson</h3>
+        <ul class="plist" style="margin-top:4px">
+          <li><b>Hierarchy:</b> methods live on <code>Element.prototype</code>, not <code>HTMLElement</code>, so SVG and XML get them too.</li>
+          <li><b>Querying:</b> <code>getElementById</code> is a hashmap lookup; live <code>HTMLCollection</code>s re-query on every access — never loop one.</li>
+          <li><b>Batching:</b> build in a <code>DocumentFragment</code> or a <code>&lt;template&gt;</code>, append once, pay one reflow.</li>
+          <li><b>Reading:</b> geometry reads after a write force layout — batch reads, then writes.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 3 · v3-1 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 3</div><div class="cx-page"><b>10</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 3 of 10</div>
+    <h1 class="cy">Semantic<br>HTML</h1>
+    <div class="sub">The tag you choose is a function call. The accessibility tree is what it returns.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 3 · v3-2 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 3</div><div class="cx-page"><b>11</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The tree nobody shows you in DevTools by default</div>
+    <h2>One document, two trees</h2>
+    <div class="fig" style="max-width:960px">
+      <svg viewBox="0 0 960 200" role="img" aria-label="HTML produces both a DOM tree and an accessibility tree">
+        <rect x="0" y="34" width="150" height="46" rx="9" fill="#121C30" stroke="#243349"/>
+        <text x="75" y="62" text-anchor="middle" class="lbl b" font-size="14">HTML</text>
+        <path class="draw" pathLength="1" d="M156 57 L206 30" stroke="#64748B" stroke-width="2"/>
+        <path class="draw" pathLength="1" d="M156 57 L206 130" stroke="#64748B" stroke-width="2"/>
+        <rect x="212" y="4" width="200" height="52" rx="9" fill="#0C2733" stroke="#22D3EE"/>
+        <text x="312" y="27" text-anchor="middle" class="lbl b" font-size="14">DOM tree</text>
+        <text x="312" y="45" text-anchor="middle" class="lbl s">what your JS queries</text>
+        <rect x="212" y="104" width="200" height="52" rx="9" fill="#0C2A22" stroke="#34D399"/>
+        <text x="312" y="127" text-anchor="middle" class="lbl b" font-size="14">Accessibility tree</text>
+        <text x="312" y="145" text-anchor="middle" class="lbl s">role · name · state</text>
+        <path class="draw" pathLength="1" d="M418 130 L470 130" stroke="#64748B" stroke-width="2"/>
+        <rect x="476" y="88" width="230" height="84" rx="9" fill="#121C30" stroke="#243349"/>
+        <text x="591" y="112" text-anchor="middle" class="lbl b" font-size="13">Screen readers</text>
+        <text x="591" y="132" text-anchor="middle" class="lbl b" font-size="13">Voice control · switch access</text>
+        <text x="591" y="152" text-anchor="middle" class="lbl b" font-size="13">Testing Library queries</text>
+        <path class="draw" pathLength="1" d="M712 130 L764 130" stroke="#64748B" stroke-width="2"/>
+        <rect x="770" y="104" width="180" height="52" rx="9" fill="#0C2733" stroke="#22D3EE"/>
+        <text x="860" y="135" text-anchor="middle" class="lbl b" font-size="14">Your user</text>
+      </svg>
+    </div>
+    <div class="key">Every element you write is pushed through the same mapping table. <code>&lt;button&gt;</code> arrives with a role, a name, a focus stop and keyboard behaviour already attached. <code>&lt;div&gt;</code> arrives with none of it.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 3 · v3-3 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 3</div><div class="cx-page"><b>12</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The same widget, twice</div>
+    <h2>What the element was already doing for you</h2>
+    <div class="two tight">
+      <div>
+        <pre><code><span class="cmt">// the version that ships in most codebases</span>
+&lt;<span class="kw">div</span> class=<span class="st">"btn"</span> onclick=<span class="st">"save()"</span>&gt;
+  Save
+&lt;/<span class="kw">div</span>&gt;</code></pre>
+        <div class="key r">No role. No name in the tree. Not in the tab order. Enter and Space do nothing. Voice control cannot address it.</div>
+      </div>
+      <div>
+        <pre><code><span class="cmt">// the version that needs no JavaScript at all</span>
+&lt;<span class="kw">button</span> type=<span class="st">"button"</span> onclick=<span class="st">"save()"</span>&gt;
+  Save
+&lt;/<span class="kw">button</span>&gt;</code></pre>
+        <div class="key g">Role <code>button</code>, accessible name "Save", a focus stop, Enter and Space fire click, and <code>:disabled</code> stops the event instead of just greying it.</div>
+      </div>
+    </div>
+    <div class="say">The div version is <b>five extra attributes and a keydown handler</b> away from parity — <code>role</code>, <code>tabindex</code>, <code>aria-disabled</code>, Enter, Space — and every one of them is a thing you can get wrong later.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 3 · v3-4 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 3</div><div class="cx-page"><b>13</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Say this in the interview</div>
+    <h2>Name, role, state — the three questions</h2>
+    <table class="grid">
+      <tr><th>Question</th><th>Where it comes from</th><th>How it breaks</th></tr>
+      <tr><td><b>Role</b> — what is this?</td><td>The tag itself, or <code>role="…"</code> overriding it</td><td><code>&lt;div&gt;</code> used as a control; a <code>role</code> that contradicts the tag</td></tr>
+      <tr><td><b>Name</b> — what is it called?</td><td>Content, <code>&lt;label&gt;</code>, <code>aria-label</code>, <code>aria-labelledby</code></td><td>Icon-only buttons; placeholder used as a label</td></tr>
+      <tr><td><b>State</b> — what is it doing?</td><td><code>disabled</code>, <code>checked</code>, <code>aria-expanded</code>, <code>aria-selected</code></td><td>State held in a CSS class only, so the tree never changes</td></tr>
+    </table>
+    <div class="key">"Semantic HTML is an API. The tag is the call, the accessibility tree is the return value, and assistive tech is the consumer. When I pick <code>&lt;button&gt;</code> over <code>&lt;div&gt;</code> I am not decorating — I am getting role, name, focus and keyboard behaviour for free, and those are the four things I would otherwise have to write and test myself."</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 4 · 03 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 4</div><div class="cx-page"><b>14</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 4 of 10</div>
     <h1 class="cy">Everything<br>is a box</h1>
     <div class="sub">Before layout, before layers — the browser only knows rectangles.</div>
   </section>
 
-  <!-- 4 · PROVE IT -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>04</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 4 · 04 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 4</div><div class="cx-page"><b>15</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Prove it yourself</div>
     <h2>One CSS rule shows the truth</h2>
     <pre><code><span class="cmt">// paste this in the console on any website</span>
@@ -287,8 +563,8 @@
     <div class="say">A "beautiful" landing page is a set of rectangles with different paddings. That is not a simplification — it is the browser's actual data model.</div>
   </section>
 
-  <!-- 5 · BOX ANATOMY -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>05</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 4 · 05 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 4</div><div class="cx-page"><b>16</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Anatomy</div>
     <h2>Four layers, from the inside out</h2>
     <div class="fig" style="max-width:960px">
@@ -316,8 +592,8 @@
     <div class="key">Every layer except content is optional. Most layout bugs are one of these four measured in the wrong place.</div>
   </section>
 
-  <!-- 6 · BOX SIZE -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>06</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 4 · 06 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 4</div><div class="cx-page"><b>17</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Property 1 of 2 · size</div>
     <h2>Who decides how big the box is?</h2>
     <div class="two">
@@ -333,8 +609,8 @@
     <div class="say">Most "why is my layout broken on mobile" bugs are an intrinsic box that someone made restricted, in one breakpoint, and forgot.</div>
   </section>
 
-  <!-- 7 · BOX MATH -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>07</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 4 · 07 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 4</div><div class="cx-page"><b>18</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Property 1 of 2 · size</div>
     <h2>The same box, two widths</h2>
     <div class="two">
@@ -360,67 +636,15 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key g">This is why every real codebase starts with <code>*{ box-sizing:border-box }</code>. It turns layout math into one number instead of five.</div>
   </section>
 
-  <!-- 8 · BLOCK BOX -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>08</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Property 2 of 2 · type</div>
-    <h2>Block-level boxes</h2>
-    <div class="two">
-      <div>
-        <ul class="plist">
-          <li>Takes 100% of the parent's width<small>always — even with one short word in it</small></li>
-          <li>Height comes from the content<small>intrinsic, unless you restrict it</small></li>
-          <li>Stacks top to bottom</li>
-          <li>Creates or joins a <b class="cy">block formatting context</b></li>
-        </ul>
-      </div>
-      <div class="fig" style="margin-top:0">
-        <svg viewBox="0 0 420 220" role="img" aria-label="Block boxes stack vertically and fill the parent width">
-          <rect x="6" y="6" width="408" height="208" rx="8" fill="none" stroke="#243349" stroke-dasharray="5 5"/>
-          <rect x="22" y="24" width="376" height="44" rx="6" fill="#0C2733" stroke="#22D3EE"/>
-          <text x="210" y="51" text-anchor="middle" class="lbl b" font-size="13">&lt;h1&gt;</text>
-          <rect x="22" y="80" width="376" height="44" rx="6" fill="#0C2733" stroke="#22D3EE"/>
-          <text x="210" y="107" text-anchor="middle" class="lbl b" font-size="13">&lt;p&gt;</text>
-          <rect x="22" y="136" width="376" height="60" rx="6" fill="#0C2733" stroke="#22D3EE"/>
-          <text x="210" y="171" text-anchor="middle" class="lbl b" font-size="13">&lt;div&gt;</text>
-          <text x="210" y="212" text-anchor="middle" class="lbl s">parent width</text>
-        </svg>
-      </div>
-    </div>
-    <div class="key w">Loose text that is not inside a tag still gets a box — the browser wraps it in an <b>anonymous block box</b>. There is no such thing as unboxed content.</div>
-  </section>
-
-  <!-- 9 · INLINE BOX -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>09</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Property 2 of 2 · type</div>
-    <h2>Inline boxes behave like text</h2>
-    <div class="three">
-      <div class="card r"><h3 class="r">width / height</h3><p><b>Ignored.</b> Setting them does nothing.</p></div>
-      <div class="card r"><h3 class="r">vertical margin</h3><p><b>Ignored.</b> Horizontal margin still works.</p></div>
-      <div class="card w"><h3 class="w">vertical padding</h3><p>Paints, but does <b>not</b> change the line's height.</p></div>
-    </div>
-    <div class="fig" style="max-width:900px">
-      <svg viewBox="0 0 900 118" role="img" aria-label="Inline padding paints outside the line box but does not add height">
-        <rect x="20" y="34" width="860" height="50" rx="4" fill="#0E1525" stroke="#243349" stroke-dasharray="5 4"/>
-        <text x="30" y="28" class="lbl s" fill="#94A3B8">line-height — the only height that counts</text>
-        <rect x="40" y="18" width="150" height="82" rx="4" fill="#0C2733" stroke="#22D3EE" stroke-width="1.6"/>
-        <text x="115" y="64" text-anchor="middle" class="lbl b" font-size="13">&lt;span&gt;</text>
-        <text x="230" y="64" class="lbl" font-size="13">flows left → right, then wraps — like a word does</text>
-        <path class="draw" pathLength="1" d="M40 18 L190 18" stroke="#F8717A" stroke-width="2"/>
-        <path class="draw" pathLength="1" d="M40 100 L190 100" stroke="#F8717A" stroke-width="2"/>
-        <text x="700" y="112" class="lbl s" fill="#F8717A">red = painted, but invisible to layout</text>
-      </svg>
-    </div>
-  </section>
-
-  <!-- 10 · SECTION: FORMATTING CONTEXT -->
-  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>10</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Part 2 of 4</div>
+  <!-- MODULE 02 · VIDEO 5 · 10 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 5</div><div class="cx-page"><b>19</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 5 of 10</div>
     <h1 class="cy">Formatting<br>context</h1>
     <div class="sub">A region with its own rules. Enter it and the outside stops applying to you.</div>
   </section>
 
-  <!-- 11 · WHAT IS A CONTEXT -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>11</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 5 · 11 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 5</div><div class="cx-page"><b>20</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The idea</div>
     <h2>A realm, and the rules inside it</h2>
     <div class="fig" style="max-width:940px">
@@ -449,8 +673,60 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key">Flexbox and Grid are not magic. They are two more sets of rules, applied to whoever enters the realm.</div>
   </section>
 
-  <!-- 12 · BECOME THE BROWSER 1 -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>12</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 5 · 08 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 5</div><div class="cx-page"><b>21</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Property 2 of 2 · type</div>
+    <h2>Block-level boxes</h2>
+    <div class="two">
+      <div>
+        <ul class="plist">
+          <li>Takes 100% of the parent's width<small>always — even with one short word in it</small></li>
+          <li>Height comes from the content<small>intrinsic, unless you restrict it</small></li>
+          <li>Stacks top to bottom</li>
+          <li>Creates or joins a <b class="cy">block formatting context</b></li>
+        </ul>
+      </div>
+      <div class="fig" style="margin-top:0">
+        <svg viewBox="0 0 420 220" role="img" aria-label="Block boxes stack vertically and fill the parent width">
+          <rect x="6" y="6" width="408" height="208" rx="8" fill="none" stroke="#243349" stroke-dasharray="5 5"/>
+          <rect x="22" y="24" width="376" height="44" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="210" y="51" text-anchor="middle" class="lbl b" font-size="13">&lt;h1&gt;</text>
+          <rect x="22" y="80" width="376" height="44" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="210" y="107" text-anchor="middle" class="lbl b" font-size="13">&lt;p&gt;</text>
+          <rect x="22" y="136" width="376" height="60" rx="6" fill="#0C2733" stroke="#22D3EE"/>
+          <text x="210" y="171" text-anchor="middle" class="lbl b" font-size="13">&lt;div&gt;</text>
+          <text x="210" y="212" text-anchor="middle" class="lbl s">parent width</text>
+        </svg>
+      </div>
+    </div>
+    <div class="key w">Loose text that is not inside a tag still gets a box — the browser wraps it in an <b>anonymous block box</b>. There is no such thing as unboxed content.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 5 · 09 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 5</div><div class="cx-page"><b>22</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Property 2 of 2 · type</div>
+    <h2>Inline boxes behave like text</h2>
+    <div class="three">
+      <div class="card r"><h3 class="r">width / height</h3><p><b>Ignored.</b> Setting them does nothing.</p></div>
+      <div class="card r"><h3 class="r">vertical margin</h3><p><b>Ignored.</b> Horizontal margin still works.</p></div>
+      <div class="card w"><h3 class="w">vertical padding</h3><p>Paints, but does <b>not</b> change the line's height.</p></div>
+    </div>
+    <div class="fig" style="max-width:900px">
+      <svg viewBox="0 0 900 118" role="img" aria-label="Inline padding paints outside the line box but does not add height">
+        <rect x="20" y="34" width="860" height="50" rx="4" fill="#0E1525" stroke="#243349" stroke-dasharray="5 4"/>
+        <text x="30" y="28" class="lbl s" fill="#94A3B8">line-height — the only height that counts</text>
+        <rect x="40" y="18" width="150" height="82" rx="4" fill="#0C2733" stroke="#22D3EE" stroke-width="1.6"/>
+        <text x="115" y="64" text-anchor="middle" class="lbl b" font-size="13">&lt;span&gt;</text>
+        <text x="230" y="64" class="lbl" font-size="13">flows left → right, then wraps — like a word does</text>
+        <path class="draw" pathLength="1" d="M40 18 L190 18" stroke="#F8717A" stroke-width="2"/>
+        <path class="draw" pathLength="1" d="M40 100 L190 100" stroke="#F8717A" stroke-width="2"/>
+        <text x="700" y="112" class="lbl s" fill="#F8717A">red = painted, but invisible to layout</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 5 · 12 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 5</div><div class="cx-page"><b>23</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Exercise · read it like the browser does</div>
     <h2>Line by line, context by context</h2>
     <div class="two tight" style="grid-template-columns:1.05fr 1fr">
@@ -479,55 +755,105 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key w">The rule: an explicit <code>display</code> creates a context. Everything else just joins the one it is standing in.</div>
   </section>
 
-  <!-- 13 · SECTION: REFLOW -->
-  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>13</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Part 3 of 4</div>
+  <!-- MODULE 02 · VIDEO 6 · v6-1 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 6</div><div class="cx-page"><b>24</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 6 of 10</div>
+    <h1 class="cy">Stacking &amp;<br>containing blocks</h1>
+    <div class="sub">Two invisible hierarchies that decide who paints on top, and what "fixed" is fixed to.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 6 · v6-2 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 6</div><div class="cx-page"><b>25</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Why <span class="mono">z-index: 9999</span> did nothing</div>
+    <h2>z-index is local, not global</h2>
+    <div class="two tight">
+      <div>
+        <pre><code>&lt;<span class="kw">header</span> style=<span class="st">"opacity:.99"</span>&gt;   <span class="cmt">// ← creates a context</span>
+  ...
+&lt;/<span class="kw">header</span>&gt;
+
+&lt;<span class="kw">div</span> class=<span class="st">"dropdown"</span> style=<span class="st">"z-index:9999"</span>&gt;
+  <span class="cmt">// still paints under the header</span>
+&lt;/<span class="kw">div</span>&gt;</code></pre>
+        <div class="key r">9999 only ranks the element against its <b>siblings inside its own stacking context</b>. It can never lift it out of that context.</div>
+      </div>
+      <div>
+        <h3 class="w">What creates a stacking context</h3>
+        <ul class="plist">
+          <li><code>position</code> + any <code>z-index</code> but <code>auto</code></li>
+          <li><code>opacity</code> below 1<small>yes — <code>.99</code> counts</small></li>
+          <li><code>transform</code>, <code>filter</code>, <code>backdrop-filter</code>, <code>perspective</code></li>
+          <li><code>will-change</code> of any of the above</li>
+          <li><code>isolation: isolate</code>, <code>contain: paint</code>, <code>mix-blend-mode</code></li>
+          <li>A flex or grid <b>child</b> with a <code>z-index</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 6 · v6-3 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 6</div><div class="cx-page"><b>26</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The second hierarchy</div>
+    <h2>The containing block decides what percentages mean</h2>
+    <table class="grid">
+      <tr><th>Element</th><th>Its containing block is</th><th>The trap</th></tr>
+      <tr><td><code>position: static</code> / <code>relative</code></td><td>The content box of the nearest block ancestor</td><td>Percentage heights collapse when the parent has no height</td></tr>
+      <tr><td><code>position: absolute</code></td><td>The padding box of the nearest <b>positioned</b> ancestor</td><td>Forget <code>position:relative</code> on the parent and it escapes to the page</td></tr>
+      <tr><td><code>position: fixed</code></td><td>The viewport — <b>unless</b> an ancestor has <code>transform</code>, <code>filter</code>, <code>perspective</code>, <code>contain</code> or <code>will-change</code></td><td>A CSS animation on a wrapper silently un-fixes every fixed child inside it</td></tr>
+    </table>
+    <div class="key w">This is the bug that looks like a browser bug: the modal is <code>position: fixed</code>, it works in isolation, and it scrolls away inside the app — because a parent somewhere has <code>transform: translateZ(0)</code> on it.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 6 · v6-4 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 6</div><div class="cx-page"><b>27</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The recipe, and the sentence</div>
+    <h2>Diagnose in two steps, every time</h2>
+    <div class="two">
+      <div class="card a">
+        <h3 class="cy">1 · Walk up, not down</h3>
+        <p>Select the element. Climb the ancestor chain and read <code>opacity</code>, <code>transform</code>, <code>filter</code>, <code>will-change</code>, <code>contain</code>, <code>position</code>. <b>The first hit is your ceiling</b> — for painting order and for <code>fixed</code> alike.</p>
+      </div>
+      <div class="card g">
+        <h3 class="g">2 · Move the element, not the number</h3>
+        <p>Render it in a portal at the <code>&lt;body&gt;</code>, or delete the property that created the context. Raising <code>z-index</code> inside the same context is the one thing that cannot work.</p>
+      </div>
+    </div>
+    <div class="key">"z-index only orders siblings within a stacking context, and lots of ordinary properties — <code>opacity</code>, <code>transform</code>, <code>filter</code>, <code>will-change</code> — create one. Those same properties also become the containing block for <code>position: fixed</code> descendants. So when a dropdown paints underneath or a fixed modal scrolls away, I go looking for the ancestor that made a context, instead of raising the number."</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 7 · 13 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 7</div><div class="cx-page"><b>28</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 7 of 10</div>
     <h1 class="cy">Reflow</h1>
     <div class="sub">What it actually costs to change something after the page has loaded.</div>
   </section>
 
-  <!-- 14 · TWO TREES -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>14</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Where the render tree comes from</div>
-    <h2>Two trees, merged</h2>
-    <div class="fig" style="max-width:900px">
-      <svg viewBox="0 0 900 180" role="img" aria-label="DOM plus CSSOM produce the render tree">
-        <rect x="30" y="16" width="230" height="58" rx="10" fill="#0C2733" stroke="#22D3EE"/>
-        <text x="145" y="42" text-anchor="middle" class="lbl b" font-size="15">DOM</text>
-        <text x="145" y="62" text-anchor="middle" class="lbl s">your HTML, as objects</text>
-        <rect x="30" y="104" width="230" height="58" rx="10" fill="#1A1832" stroke="#A78BFA"/>
-        <text x="145" y="130" text-anchor="middle" class="lbl b" font-size="15">CSSOM</text>
-        <text x="145" y="150" text-anchor="middle" class="lbl s">every rule that matched</text>
-        <path class="draw" pathLength="1" d="M266 45 L360 76" stroke="#64748B" stroke-width="2"/>
-        <path class="draw" pathLength="1" d="M266 133 L360 102" stroke="#64748B" stroke-width="2"/>
-        <rect x="368" y="60" width="250" height="58" rx="10" fill="#0C2A22" stroke="#34D399"/>
-        <text x="493" y="86" text-anchor="middle" class="lbl b" font-size="15">render tree</text>
-        <text x="493" y="106" text-anchor="middle" class="lbl s">only what is actually visible</text>
-        <path class="draw" pathLength="1" d="M624 89 L700 89" stroke="#64748B" stroke-width="2"/>
-        <rect x="708" y="60" width="170" height="58" rx="10" fill="#121C30" stroke="#243349"/>
-        <text x="793" y="94" text-anchor="middle" class="lbl b" font-size="15">pixels</text>
-      </svg>
+  <!-- MODULE 02 · VIDEO 7 · v7-2 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 7</div><div class="cx-page"><b>29</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Forced synchronous layout · the loop that costs 60 reflows</div>
+    <h2>Read, write, read — and the frame dies</h2>
+    <div class="two tight">
+      <div>
+        <pre><code><span class="cmt">// 60 elements → 60 forced layouts</span>
+boxes.forEach(el =&gt; {
+  <span class="kw">const</span> w = el.offsetWidth;   <span class="no">// read → flush</span>
+  el.style.width = w + <span class="st">10</span> + <span class="st">'px'</span>; <span class="no">// write</span>
+})</code></pre>
+        <div class="key r">Each write invalidates layout. The next read must be accurate, so the browser recomputes the whole tree <b>before</b> it can answer. That is a forced synchronous layout, once per element.</div>
+      </div>
+      <div>
+        <pre><code><span class="cmt">// 60 elements → 1 layout</span>
+<span class="kw">const</span> widths = boxes.map(el =&gt; el.offsetWidth); <span class="ok">// read all</span>
+boxes.forEach((el, i) =&gt;
+  el.style.width = widths[i] + <span class="st">10</span> + <span class="st">'px'</span>)   <span class="ok">// write all</span></code></pre>
+        <div class="key g">Same work, same result, one reflow. Batch the reads, then batch the writes — the pattern every virtualized list and animation library uses.</div>
+      </div>
     </div>
-    <div class="say"><b>Reflow</b> is what happens when JavaScript changes the DOM or the styles after this is already built — a "load more" button, a React re-render, a class toggle. The browser has to redo the work.</div>
+    <div class="say">Properties that force the flush: <code>offsetWidth/Height/Top</code>, <code>clientWidth</code>, <code>scrollTop</code>, <code>getBoundingClientRect()</code>, <code>getComputedStyle()</code>, <code>focus()</code>. <b>Reading geometry is not free after a write.</b></div>
   </section>
 
-  <!-- 15 · THE PIPELINE COST -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>15</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The five phases, and what they cost</div>
-    <h2>Where the frame budget goes</h2>
-    <table class="grid">
-      <tr><th>phase</th><th>what happens</th><th>runs on</th><th>blocks the main thread?</th></tr>
-      <tr><td><b>JavaScript</b></td><td>you change the DOM or a style</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
-      <tr><td><b>Style</b></td><td>re-match selectors, rebuild the subtree</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
-      <tr><td><b>Layout</b></td><td>recompute position and size of every affected box</td><td><b class="r">CPU</b></td><td><b class="r">yes</b></td></tr>
-      <tr><td><b>Paint</b></td><td>draw pixels into bitmaps</td><td><b class="g">GPU</b></td><td>no</td></tr>
-      <tr><td><b>Composite</b></td><td>stack the bitmaps in the right order</td><td><b class="g">GPU</b></td><td>no</td></tr>
-    </table>
-    <div class="key r">You have ~16ms for a 60fps frame. Style and Layout are the two that spend it — and they are the two you can avoid.</div>
-  </section>
-
-  <!-- 16 · BEFORE / AFTER -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>16</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 7 · 16 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 7</div><div class="cx-page"><b>30</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Same animation · two lines of CSS</div>
     <h2>2,000 rectangles, moving</h2>
     <div class="two">
@@ -549,8 +875,8 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key g">Identical motion on screen. The difference is which phase of the pipeline you woke up.</div>
   </section>
 
-  <!-- 17 · RULE OF THUMB -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>17</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 7 · 17 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 7</div><div class="cx-page"><b>31</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The rule to carry out of this video</div>
     <h2>Animate <span class="cy">transform</span> and <span class="cy">opacity</span>. Nothing else.</h2>
     <div class="three">
@@ -561,15 +887,15 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="say">Not sure about a property? <b class="cy">csstriggers.com</b> lists exactly which phases each one wakes. There is never a good reason to trigger the full pipeline sixty times a second.</div>
   </section>
 
-  <!-- 18 · SECTION: LAYERS -->
-  <section class="slide" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>18</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Part 4 of 4</div>
+  <!-- MODULE 02 · VIDEO 8 · 18 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 8</div><div class="cx-page"><b>32</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 8 of 10</div>
     <h1 class="cy">Composition<br>layers</h1>
     <div class="sub">How the browser hands work to the GPU — and what that costs you.</div>
   </section>
 
-  <!-- 19 · THREE TREES -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>19</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 8 · 19 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 8</div><div class="cx-page"><b>33</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Three trees the DOM never shows you</div>
     <h2>From one node to one bitmap</h2>
     <div class="fig" style="max-width:1000px">
@@ -613,8 +939,8 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key">A hundred absolutely-positioned divs is a hundred render layers — and still <b>one</b> graphic layer, unless you ask for more.</div>
   </section>
 
-  <!-- 20 · LAYERS COST -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>20</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 8 · 20 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 8</div><div class="cx-page"><b>34</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The bill · measured in Chrome DevTools · Layers panel</div>
     <h2>Every promoted layer costs VRAM</h2>
     <div class="three">
@@ -626,8 +952,8 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="say">Add <code>will-change: transform</code> to a list item and it looks free in DevTools on a desktop. It is not free on the phone the student is being interviewed about.</div>
   </section>
 
-  <!-- 21 · WHEN TO PROMOTE -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>21</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 8 · 21 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 8</div><div class="cx-page"><b>35</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The judgement call</div>
     <h2>Promote a widget. Never promote a page.</h2>
     <div class="two">
@@ -643,8 +969,8 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key w">Both mistakes exist. Using the CPU when you could use the GPU drops frames instantly. Using the GPU everywhere runs you out of memory slowly. <b>Prefer the GPU — but count the layers.</b></div>
   </section>
 
-  <!-- 22 · BECOME THE BROWSER 2 -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>22</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 8 · 22 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 8</div><div class="cx-page"><b>36</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Exercise · everything at once</div>
     <h2>One document, five trees</h2>
     <table class="grid">
@@ -659,8 +985,143 @@ on screen: <span class="ok">300px</span></code></pre>
     <div class="key">Read the last row again. <b>One extra CSS function</b> is the difference between sharing the page's bitmap and owning your own.</div>
   </section>
 
-  <!-- 23 · THE ANSWER -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>23</b> / 24</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 02 · VIDEO 9 · v9-1 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 9</div><div class="cx-page"><b>37</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 9 of 10</div>
+    <h1 class="cy">The event<br>loop</h1>
+    <div class="sub">One thread does your JavaScript, your layout and your paint. The queue order is the whole story.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 9 · v9-2 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 9</div><div class="cx-page"><b>38</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">One stack, two queues, one rule</div>
+    <h2>Microtasks drain completely; tasks take one at a time</h2>
+    <div class="fig" style="max-width:980px">
+      <svg viewBox="0 0 980 210" role="img" aria-label="Call stack, microtask queue, task queue and the render step">
+        <rect x="0" y="20" width="180" height="70" rx="10" fill="#121C30" stroke="#243349"/>
+        <text x="90" y="48" text-anchor="middle" class="lbl b" font-size="14">Call stack</text>
+        <text x="90" y="68" text-anchor="middle" class="lbl s">must be empty first</text>
+        <path class="draw" pathLength="1" d="M186 55 L232 55" stroke="#64748B" stroke-width="2"/>
+        <rect x="238" y="4" width="230" height="102" rx="10" fill="#0C2733" stroke="#22D3EE"/>
+        <text x="353" y="30" text-anchor="middle" class="lbl b" font-size="14">Microtask queue</text>
+        <text x="353" y="52" text-anchor="middle" class="lbl s">promise callbacks · queueMicrotask</text>
+        <text x="353" y="72" text-anchor="middle" class="lbl s">MutationObserver</text>
+        <text x="353" y="94" text-anchor="middle" class="lbl s" fill="#22D3EE">drained to empty, every time</text>
+        <path class="draw" pathLength="1" d="M474 55 L520 55" stroke="#64748B" stroke-width="2"/>
+        <rect x="526" y="4" width="200" height="102" rx="10" fill="#0C2A22" stroke="#34D399"/>
+        <text x="626" y="30" text-anchor="middle" class="lbl b" font-size="14">Render step</text>
+        <text x="626" y="52" text-anchor="middle" class="lbl s">rAF callbacks</text>
+        <text x="626" y="72" text-anchor="middle" class="lbl s">style · layout · paint</text>
+        <text x="626" y="94" text-anchor="middle" class="lbl s" fill="#34D399">~every 16.7ms, if there is time</text>
+        <path class="draw" pathLength="1" d="M732 55 L778 55" stroke="#64748B" stroke-width="2"/>
+        <rect x="784" y="20" width="196" height="70" rx="10" fill="#121C30" stroke="#243349"/>
+        <text x="882" y="48" text-anchor="middle" class="lbl b" font-size="14">Next task</text>
+        <text x="882" y="68" text-anchor="middle" class="lbl s">setTimeout · events · fetch</text>
+        <path class="draw" pathLength="1" d="M882 96 L882 150 L90 150 L90 96" stroke="#64748B" stroke-width="2" fill="none"/>
+        <text x="486" y="172" text-anchor="middle" class="lbl s">one turn of the loop — exactly one task, then every microtask it produced</text>
+      </svg>
+    </div>
+    <div class="key">A task runs to completion, then <b>the entire</b> microtask queue drains — including microtasks queued by microtasks. Only then may the browser render. An infinite microtask chain freezes the page; an infinite task chain does not.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 9 · v9-3 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 9</div><div class="cx-page"><b>39</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Exercise · call the order before you run it</div>
+    <h2>Five logs, one thread</h2>
+    <div class="two tight">
+      <div>
+        <pre><code>console.log(<span class="st">'1 · script'</span>)
+
+setTimeout(() =&gt; console.log(<span class="st">'2 · timeout'</span>), <span class="st">0</span>)
+
+Promise.resolve().then(() =&gt; {
+  console.log(<span class="st">'3 · microtask'</span>)
+  queueMicrotask(() =&gt; console.log(<span class="st">'4 · nested'</span>))
+})
+
+requestAnimationFrame(() =&gt; console.log(<span class="st">'5 · rAF'</span>))
+
+console.log(<span class="st">'6 · script end'</span>)</code></pre>
+      </div>
+      <div>
+        <ul class="plist">
+          <li><b>1 · script</b><small>synchronous, on the stack</small></li>
+          <li><b>6 · script end</b><small>still the same task — the stack has to empty first</small></li>
+          <li><b>3 · microtask</b><small>the queue drains the moment the stack is empty</small></li>
+          <li><b>4 · nested</b><small>queued during the drain, so it runs in the same drain</small></li>
+          <li><b>5 · rAF</b><small>the render step, before paint</small></li>
+          <li><b>2 · timeout</b><small>a new task — last, even at 0ms</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="key w"><code>setTimeout(fn, 0)</code> does not mean "now". It means "a whole turn of the loop from now, after everything already queued, including a frame."</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 9 · v9-4 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 9</div><div class="cx-page"><b>40</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The frame you just missed</div>
+    <h2>16.7ms, and your task took 80</h2>
+    <div class="two">
+      <div class="card r">
+        <h3 class="r">The long task</h3>
+        <p>One handler that sorts 20,000 rows blocks the render step entirely. No rAF, no paint, no click handled — the page is <b>frozen</b>, not slow. Anything over <b>50ms</b> is a long task and shows up as a red-cornered block in the Performance panel.</p>
+      </div>
+      <div class="card g">
+        <h3 class="g">The three ways out</h3>
+        <p><b>Chunk it</b> — slice the work and yield with <code>setTimeout</code> or <code>scheduler.yield()</code>. <b>Move it</b> — a Web Worker, off the main thread entirely. <b>Skip it</b> — virtualize so only the visible rows are ever touched.</p>
+      </div>
+    </div>
+    <div class="key">"The main thread runs my JavaScript, my layout and my paint. A frame only happens between tasks, so a single 80ms handler is three dropped frames — and the fix is never a faster loop, it is a shorter task."</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 10 · v10-1 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 02 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 10</div><div class="cx-page"><b>41</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Lesson 10 of 10 · Build</div>
+    <h1 class="cy">Instrument a slow page,<br>and prove the fix</h1>
+    <div class="sub">A number before, a number after, and a one-paragraph explanation of which of the five stages you moved.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 10 · v10-2 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 10</div><div class="cx-page"><b>42</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The exercise · Rasmi's results list, deliberately broken</div>
+    <h2>Measure, name the stage, fix, measure again</h2>
+<pre><code><span class="g">$</span> git checkout module-2/perf/start
+<span class="g">$</span> pnpm dev
+
+<span class="cmt"># 600 job cards. Scrolling stutters. Filtering takes ~400ms to repaint.</span>
+<span class="cmt"># Three separate problems are planted in this branch:</span>
+<span class="no">  1. a scroll handler that reads offsetTop inside the loop     → forced layout</span>
+<span class="no">  2. a filter pass that animates height and top                → layout on every frame</span>
+<span class="no">  3. will-change: transform on every card in the list          → VRAM, not speed</span></code></pre>
+    <div class="key">Your deliverable is not green tests — it is <b>two Performance recordings and four sentences</b>: what you measured, which stage it landed in, what you changed, what the number became.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 10 · v10-3 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 10</div><div class="cx-page"><b>43</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">The loop you will run for the rest of your career</div>
+    <h2>Four steps, one flame chart</h2>
+    <div class="two">
+      <div>
+        <ul class="plist">
+          <li><b>Record</b> six seconds of the interaction<small>Performance panel, 4× CPU throttle on — your laptop is not your user</small></li>
+          <li><b>Find the long task</b><small>the red-cornered block; everything else is noise until that is gone</small></li>
+          <li><b>Read the colour</b><small>purple is layout, green is paint, yellow is your JavaScript</small></li>
+          <li><b>Fix one thing, re-record</b><small>two changes at once and you have learned nothing</small></li>
+        </ul>
+      </div>
+      <div class="card a">
+        <h3 class="cy">The colour tells you the stage</h3>
+        <p><b>Yellow, wide</b> — a long task. Chunk it, worker it, or do less.</p>
+        <p><b>Purple, repeating</b> — layout every frame. You are animating a geometry property, or reading geometry after a write.</p>
+        <p><b>Green, huge</b> — paint area. Large repainted regions, shadows, filters.</p>
+        <p><b>Warning triangle</b> — forced synchronous layout. Go straight there.</p>
+      </div>
+    </div>
+    <div class="key g">Before and after, same recording length, same throttle. That pair of screenshots is what you put in the PR — and what you describe in the interview.</div>
+  </section>
+
+  <!-- MODULE 02 · VIDEO 10 · 23 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 10</div><div class="cx-page"><b>44</b> / 45</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Say this in the interview</div>
     <h2>Four sentences that end the question</h2>
     <div class="say" style="max-width:60ch; font-size:min(2.2vw,24px)">
@@ -671,22 +1132,24 @@ on screen: <span class="ok">300px</span></code></pre>
     </div>
   </section>
 
-  <!-- 24 · RECAP -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 1</div><div class="cx-page"><b>24</b> / 24</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Video 1 of Module 02 · done</div>
+  <!-- MODULE 02 · VIDEO 10 · 24 -->
+  <section class="slide" data-chip="MODULE 02 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 02 · VIDEO 10</div><div class="cx-page"><b>45</b> / 45</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Module 02 · done</div>
     <h2>What you can now explain</h2>
     <div class="two">
       <div>
         <ul class="plist">
-          <li>Why every element is a box<small>and why border-box is not a preference</small></li>
-          <li>What a formatting context isolates<small>and why flex and grid are just two of them</small></li>
-          <li>What reflow costs<small>and which properties trigger it</small></li>
-          <li>What a graphic layer buys, and what it bills you<small>in megabytes, not opinions</small></li>
+          <li>The five stages between a tag and a pixel<small>and which two of them your code keeps paying for</small></li>
+          <li>How to touch the DOM without thrashing layout<small>and why the accessibility tree is the second output of your markup</small></li>
+          <li>Boxes, formatting contexts, stacking contexts<small>and why <code>z-index: 9999</code> could never have worked</small></li>
+          <li>What reflow costs and what compositing does not<small>in megabytes and milliseconds, not opinions</small></li>
+          <li>Why a frame is missed<small>one task, every microtask, then maybe a render</small></li>
         </ul>
       </div>
       <div class="card b">
-        <h3 class="b">Next · Video 2</h3>
-        <p><b>The DOM API, properly.</b> Querying without thrashing layout, batching writes, document fragments, and the measure-then-mutate rule that makes the pipeline in this video actually stay cheap.</p>
+        <h3 class="b">Next · Module 03</h3>
+        <p><b>JavaScript, deeply.</b> Execution contexts, closures, <code>this</code>, prototypes, modules, promises and the memory model — ending with the interview toolbelt written from an empty file.</p>
+        <p style="margin-top:10px">You now know what a frame costs. Module 3 is the language that spends it.</p>
       </div>
     </div>
   </section>

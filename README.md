@@ -55,7 +55,11 @@ modules/
     deck.html             what companies actually test — 28 slides
     diagnostic-deck.html  the diagnostic, answered and animated — 50 slides
   02-browser-runtime/
-    deck.html             from HTML to pixels — 24 slides
+    deck.html             the browser as a runtime — 45 slides, one video per lesson
+  03-javascript-deeply/
+    deck.html             the language under the framework — 52 slides, one video per lesson
+  07-ui-engineering/
+    deck.html             components, observers and virtualization — 28 slides
   …                       one folder per module, added as it is written
 repo/
   jobboard-deck.html      the exercise repo, explained end to end
