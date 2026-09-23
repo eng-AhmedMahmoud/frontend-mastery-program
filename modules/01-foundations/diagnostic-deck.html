@@ -322,6 +322,10 @@
   .chip,.card{box-shadow:none; background:var(--panel2)}
   pre{border:1px solid var(--line2)}
   code{border:1px solid rgba(34,211,238,.22)}
+  /* Inline code earns a hairline box. A <code> inside a <pre> is the whole snippet,
+     so the same rule drew a frame around every code block — and, once lines wrapped,
+     a stray rule between them. The block already has its own border. */
+  pre code{border:0}
   .shot{box-shadow:0 20px 50px rgba(0,0,0,.6)}
   .copy{color:#CBD5E1}
   .copy:hover{background:#243349; color:#fff}
@@ -913,7 +917,7 @@ member.name = <span class="st">'Sarah'</span>
 
   <!-- ============ Q7 · MATCH THE WEB VITALS ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>16</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>16</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 7 · match them up</div>
     <h2>Six vitals.<br>Six descriptions.</h2>
     <ul class="match">
@@ -926,7 +930,7 @@ member.name = <span class="st">'Sarah'</span>
     </ul>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>17</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>17</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 7 · the answer</div>
     <h2>Four are clocks. One is a sum.<br>One is not time at all.</h2>
     <div class="three" style="margin-top:20px">
@@ -945,7 +949,7 @@ member.name = <span class="st">'Sarah'</span>
     </div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>18</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>18</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — <code>TTFB</code>, and everything that happens before it</div>
     <h2>The <span class="cy">first</span> byte,<br>not the last one.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 300" role="img" aria-label="A network row showing DNS, TCP, TLS, request and response, with the Time To First Byte marker at the moment the response begins and HTML parsing starts">
@@ -984,7 +988,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">DNS, TCP and TLS all finish <b>before</b> the request is even sent — and all three are on the clock. TTFB stops at the moment the <b>first</b> byte of the response arrives, because that is the moment the parser can start work. The rest of the response is still on the wire behind it.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>19</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>19</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — <code>FID</code>, and the 50ms line</div>
     <h2>The click that arrives<br>while the thread is busy.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 300" role="img" aria-label="A main thread timeline where a user click lands inside a 325 millisecond long task and waits 200 milliseconds before it can be processed">
@@ -1026,7 +1030,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">FID measures the wait, <b>not</b> the handler. And it is a fragile number: click a moment earlier and it is near zero, click a moment later and it is 300ms — <b>same page, same code</b>. If the user never interacts, there is no value at all. That fragility is exactly why INP replaced it.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>20</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>20</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — the number <code>TTI</code> hides</div>
     <h2>Same TTI.<br>700ms versus 15ms.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 410" role="img" aria-label="Two timelines with an identical Time To Interactive: one blocked by a single 750 millisecond task with a Total Blocking Time of 700, the other by three 55 millisecond tasks with a Total Blocking Time of 15">
@@ -1086,7 +1090,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">Both pages become reliably interactive at the same instant, so TTI scores them identically. On page A the user could do <b>nothing at all</b> for three quarters of a second; on page B they could act between every slice. <b>TBT is the metric that tells the two apart</b> — it measures how interactive the page was on the way to being interactive.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>21</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>21</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q7 · why — <code>CLS</code>, the one with no clock</div>
     <h2>Distance × impact.<br>No unit, no milliseconds.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 442" role="img" aria-label="The layout shift formula, distance fraction times impact fraction, worked twice: a banner scoring 0.22 and a filter bar scoring 0.07">
@@ -1142,7 +1146,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap frag">Same bug, two scores. The banner moved <b>everything</b>, so its impact fraction is 1 and the distance goes straight through. The filter bar left the header alone, so 40% of the screen never moved and the score drops by two thirds. <b>Reserve the box before the content arrives</b> — <code>width</code> and <code>height</code> on images, <code>min-height</code> on slots, <code>aspect-ratio</code> on embeds — and both scores go to zero.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>22</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>22</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 8 · match them up</div>
     <h2>Five directives,<br>five definitions.</h2>
     <ul class="match">
@@ -1154,7 +1158,7 @@ member.name = <span class="st">'Sarah'</span>
     </ul>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>23</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>23</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 8 · the answer: no-cache</div>
     <h2>no-cache = always revalidate.<br>Two round trips, one nearly free.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 400" role="img" aria-label="Sequence diagram showing a first request, a revalidated 304 response, and a changed resource returning 200">
@@ -1194,7 +1198,7 @@ member.name = <span class="st">'Sarah'</span>
     <div class="figcap">An <b>ETag</b> is a hash of the file. The browser sends the one it holds; the server compares and either says <b>nothing changed</b> in a few hundred bytes, or sends the new file.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>24</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>24</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q8 · why — who waits, and for how long</div>
     <h2>Fresh, stale,<br>and stale-but-served.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 340" role="img" aria-label="Freshness timelines comparing must-revalidate with stale-while-revalidate">
@@ -1226,7 +1230,7 @@ member.name = <span class="st">'Sarah'</span>
 
   <!-- ============ Q9 · WHAT IS TRUE ABOUT THIS CODE BLOCK ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>25</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>25</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 9 · what is true about this code</div>
     <h2>Two objects,<br>pointing at each other.</h2>
 <pre><code><span class="kw">function</span> <span class="fn">addMember</span>(name) {
@@ -1249,7 +1253,7 @@ obj2 = <span class="kw">null</span></code></pre>
     </ul>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>26</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>26</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 9 · the answer: D</div>
     <h2>Reachable, not referenced.<br>Two algorithms, two verdicts.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 370" role="img" aria-label="Heap showing two objects referencing each other, compared under reference counting and mark and sweep">
@@ -1297,7 +1301,7 @@ obj2 = <span class="kw">null</span></code></pre>
 
   <!-- ============ Q10 · WHICH RENDERING COSTS ARE LISTED CORRECTLY ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>27</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>27</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 10 · select every correct row</div>
     <h2>Animate these five.<br>Which costs are right?</h2>
     <ul class="opts tight">
@@ -1310,7 +1314,7 @@ obj2 = <span class="kw">null</span></code></pre>
     <div class="say">Multi-select. Defaults only — a browser may promote a layer earlier or later than this if it has a reason to.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>28</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>28</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 10 · the answer: A and D</div>
     <h2>Same pipeline.<br>Different entry point.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 350" role="img" aria-label="Matrix showing which of layout, paint and composite each animated property triggers">
@@ -1350,7 +1354,7 @@ obj2 = <span class="kw">null</span></code></pre>
     </svg></div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>29</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>29</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q10 · why — what a layer actually buys</div>
     <h2>Promote once,<br>then move it for free.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 346" role="img" aria-label="Comparison of animating left, which repaints every frame, with transform, which moves an existing layer">
@@ -1383,7 +1387,7 @@ obj2 = <span class="kw">null</span></code></pre>
 
   <!-- ============ Q11 · WHAT GETS LOGGED WHEN THE BUTTON IS CLICKED ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>30</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>30</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 11 · what gets logged on click</div>
     <h2>Seven listeners.<br>One click.</h2>
 <pre><code><span class="cmt">&lt;div id="outer"&gt; &lt;div id="middle"&gt; &lt;button id="btn"&gt;Click&lt;/button&gt; &lt;/div&gt; &lt;/div&gt;</span>
@@ -1398,7 +1402,7 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
     <div class="say">The third argument is <code>capture</code>. Where it is missing, the listener runs on the way back up.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>31</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>31</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 11 · the answer: A, C, G, F, D, E</div>
     <h2>The event visits<br>every ancestor twice.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 360" role="img" aria-label="Nested elements showing the capture phase descending, the target, and the bubble phase ascending until stopPropagation">
@@ -1434,7 +1438,7 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
 
   <!-- ============ Q12 · ORDER THE SELECTORS BY SPECIFICITY ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>32</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>32</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 12 · order them, strongest first</div>
     <h2>Six selectors.<br>One winner.</h2>
 <pre><code><span class="pr">A</span>  <span class="kw">div</span> <span class="kw">h1</span><span class="fn">.large-text</span><span class="st">::before</span>
@@ -1446,7 +1450,7 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
     <div class="say">Every one of them can match the same <code>&lt;h1&gt;</code>. Only one of them wins.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>33</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>33</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Question 12 · the answer: F wins</div>
     <h2>Three columns.<br>Left beats right, always.</h2>
     <div class="fig wide"><svg viewBox="0 0 1000 350" role="img" aria-label="Specificity counter incrementing as parts are added to a selector">
@@ -1481,18 +1485,30 @@ btn   .<span class="fn">addEventListener</span>(<span class="st">'click'</span>,
     </svg></div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>34</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>34</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Q12 · the trap</div>
     <h2 class="w">Only one of these<br>brackets is free.</h2>
-    <div class="three" style="margin-top:20px">
+    <div class="three" style="margin-top:16px">
       <div class="card g"><h3 class="g"><code>:where(…)</code></h3><p><b>Always 0.</b><br>Adds zero specificity, perfect for library defaults.</p></div>
       <div class="card r"><h3 class="r"><code>:not(…)</code></h3><p><b>Not free.</b><br>Takes the specificity of its highest argument.</p></div>
       <div class="card r"><h3 class="r"><code>:has(…)</code></h3><p><b>Not free.</b><br>Same rule — most specific argument counts.</p></div>
     </div>
-    <div class="key w" style="margin-top:20px">Wrap resets and defaults in <code>:where()</code> so consumers can easily override them without fighting <code>!important</code>.</div>
+    <div class="two" style="margin-top:16px">
+      <div>
+        <pre style="margin-top:0; font-size:min(1.3vw,14.5px)"><code><span class="cmt">/* the library ships this */</span>
+<span class="kw">:where(</span><span class="fn">.button</span><span class="kw">)</span> { padding: <span class="st">8px 16px</span> }   <span class="cmt">0-0-0</span></code></pre>
+        <div class="cap">It <b>offers</b> a default — it never insists.</div>
+      </div>
+      <div>
+        <pre style="margin-top:0; font-size:min(1.3vw,14.5px)"><code><span class="cmt">/* you ship this */</span>
+<span class="fn">.my-button</span> { margin: <span class="st">20px</span> }          <span class="cmt">0-1-0 → wins</span></code></pre>
+        <div class="cap">One plain class overrides it. No <code>!important</code>.</div>
+      </div>
+    </div>
+    <div class="key w" style="margin-top:16px">Wrap resets and defaults in <code>:where()</code> so consumers can easily override them without fighting <code>!important</code>.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>35</b> / 35</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 6" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>35</b> / 35</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Diagnostic Complete</div>
     <h2>Twelve answered.<br>Find your address.</h2>
     <div class="cards four" style="margin-top:20px">

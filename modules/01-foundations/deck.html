@@ -207,6 +207,10 @@
   .chip,.card{box-shadow:none; background:var(--panel2)}
   pre{border:1px solid var(--line2)}
   code{border:1px solid rgba(34,211,238,.22)}
+  /* Inline code earns a hairline box. A <code> inside a <pre> is the whole snippet,
+     so the same rule drew a frame around every code block — and, once lines wrapped,
+     a stray rule between them. The block already has its own border. */
+  pre code{border:0}
   .shot{box-shadow:0 20px 50px rgba(0,0,0,.6)}
   .copy{color:#CBD5E1}
   .copy:hover{background:#243349; color:#fff}
@@ -233,7 +237,7 @@
 
   <!-- ============ L1 · THE MAP BEFORE THE JOURNEY ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 1" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>01</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 1" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>01</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 01 · Act I — the platform under the framework</div>
     <h1>What companies<br>actually test</h1>
     <div class="sub">Seven lessons. By the end you will know exactly which of the thirteen modules is yours — and why.</div>
@@ -245,7 +249,7 @@
     </div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>02</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>02</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Before I introduce myself — watch this</div>
     <h2 style="font-size:min(4.4vw,50px)">Type <span class="cy">"react engineer"</span>. Watch the results.</h2>
     <div class="fig" style="max-width:840px; margin-top:10px">
@@ -254,7 +258,7 @@
     </div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>03</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>03</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The bug most candidates do not see</div>
     <h2>The newest request<br>answered <span class="r">first</span></h2>
     <div class="fig" style="max-width:1000px">
@@ -283,7 +287,7 @@
     <div class="key r">Debounce sends <b>fewer</b> requests. It does not stop them arriving in the <b>wrong order</b>.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>04</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>04</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Three problems, three modules</div>
     <h2>One broken search box</h2>
     <div class="three">
@@ -294,7 +298,7 @@
     <div class="key">Every lesson in this program is attached to something that breaks. That is the whole design.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>05</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 1</div><div class="cx-page"><b>05</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 01 · the route through this module</div>
     <h2>Seven lessons, and what<br>each one hands you</h2>
     <ul class="lmap">
@@ -302,9 +306,9 @@
       <li><b class="n">L2</b><span>The frontend hiring map — who hires, for what, at which level</span><span class="m">→ where to apply</span></li>
       <li><b class="n">L3</b><span>Junior vs mid vs senior — what actually changes in the questions</span><span class="m">→ your band</span></li>
       <li><b class="n">L4</b><span>The five interview formats</span><span class="m">→ what to drill</span></li>
-      <li><b class="n">L5</b><span>Diagnostic — twelve questions</span><span class="m">→ your score</span></li>
-      <li><b class="n">L6</b><span>How to study this program (and how not to)</span><span class="m">→ the loop</span></li>
-      <li><b class="n">L7</b><span>Workspace, Git and repo conventions</span><span class="m">→ red tests</span></li>
+      <li><b class="n">L5</b><span>Diagnostic — questions 1 to 6</span><span class="m">→ half your score</span></li>
+      <li><b class="n">L6</b><span>Diagnostic — questions 7 to 12</span><span class="m">→ your score</span></li>
+      <li><b class="n">L7</b><span>How to study it, the workspace, and the repo</span><span class="m">→ red tests</span></li>
     </ul>
     <div class="key">You leave this module with three things: a number, the module that number points at, and a terminal full of failing tests you are about to fix.</div>
   </section>
@@ -312,7 +316,7 @@
 
   <!-- ============ L2 · THE FRONTEND HIRING MAP ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>06</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>06</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Who hires frontend, and for what</div>
     <h2>Four companies.<br>Same job title.</h2>
     <div class="four">
@@ -324,7 +328,7 @@
     <div class="key">Same title on the job ad. Four different interviews. Preparing for "frontend" in general prepares you for none of them.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>07</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>07</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">A job description is a test spec in disguise</div>
     <h2>What each line<br>actually tests</h2>
 <pre><code><span class="cmt">Senior Frontend Engineer · Product          — a real posting, lightly trimmed</span>
@@ -339,7 +343,7 @@
     <div class="key">Read the posting backwards from the loop. Each bullet is a room you will sit in — and this program has a module for each one.</div>
   </section>
 
-  <section class="slide mid" data-chip="MODULE 01 · VIDEO 2" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>08</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide mid" data-chip="MODULE 01 · VIDEO 2" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 2</div><div class="cx-page"><b>08</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="big">Your level is decided by <span class="cy">the loop</span>,<br>not by your CV.</div>
     <div class="sub" style="max-width:56ch; margin-top:22px">The same engineer gets a junior offer at one company and a senior one at another, because the two companies score different rounds. Learn the rounds.</div>
   </section>
@@ -347,13 +351,13 @@
 
   <!-- ============ L3 · JUNIOR vs MID vs SENIOR ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>09</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>09</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">One question, three levels</div>
     <h2>"The search box feels slow.<br>What do you do?"</h2>
     <div class="say" style="max-width:62ch">I am going to answer this three times. Same question, same candidate, same fifteen seconds. The only thing that changes is which layer the answer lives on — and that is what decides the offer.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>10</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>10</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The same question, scored three ways</div>
     <h2>The ladder</h2>
     <div class="fig wide"><svg viewBox="0 0 940 412" role="img" aria-label="The junior, mid and senior ladder — the same question answered at three levels">
@@ -417,7 +421,7 @@
         </svg></div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>11</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>11</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The same bug, answered at three levels</div>
     <h2>One search box.<br>Three different engineers.</h2>
 <pre><code><span class="cmt">// JUNIOR — "add a debounce"</span>
@@ -438,7 +442,7 @@
     <div class="key w">All three "work" on a fast laptop. Only the third one survives a reviewer asking what happens on a slow connection.</div>
   </section>
 
-  <section class="slide mid" data-chip="MODULE 01 · VIDEO 3" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>12</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide mid" data-chip="MODULE 01 · VIDEO 3" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 3</div><div class="cx-page"><b>12</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="big">Junior answers <span class="mut">what</span>.<br>Mid answers <span class="cy">why</span>.<br>Senior answers <span class="w">what it costs</span>.</div>
     <div class="sub" style="max-width:58ch; margin-top:22px">Every module in this program is built to move one of your answers up a row.</div>
   </section>
@@ -446,7 +450,7 @@
 
   <!-- ============ L4 · THE FIVE INTERVIEW FORMATS ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>13</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>13</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The mid / senior frontend loop</div>
     <h2 style="max-width:26ch">Five formats. We train all five.</h2>
     <div class="fig wide"><svg viewBox="0 0 940 330" role="img" aria-label="The five interview formats, each with a real example question and the module that trains it">
@@ -538,7 +542,7 @@
         </svg></div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>14</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>14</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Format 2 · the JavaScript utilities round</div>
     <h2>Empty file.<br>Forty-five minutes.</h2>
 <pre><code><span class="cmt">// "Write debounce. Then add cancel. Then tell me what happens to `this`."
@@ -559,7 +563,7 @@
     <div class="key g">This exact function is module 3, exercise 1. You will write it from an empty file with the tests already red — which is the only rehearsal that transfers.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>15</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>15</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Format 3 · the UI coding round</div>
     <h2>They are not grading<br>the CSS</h2>
 <pre><code><span class="cmt">// "Build an autocomplete." Ninety minutes. Here is what is really scored:</span>
@@ -580,7 +584,7 @@
     <div class="key">Module 7 is this round, drilled: dropdown, tabs, filter drawer, toast, autocomplete — each one keyboard-first.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>16</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>16</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Formats 4 and 5 · the two rounds nobody rehearses</div>
     <h2>Both are scored<br>on structure, out loud</h2>
     <div class="two">
@@ -604,7 +608,7 @@
     <div class="key">Write four stories now, before you need them. You cannot invent a number under pressure — you can only recall one.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>17</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 4</div><div class="cx-page"><b>17</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Where the preparation actually goes</div>
     <h2>React is tested in <span class="cy">one and a half</span> of these five</h2>
     <div class="fig" style="max-width:1020px">
@@ -635,7 +639,7 @@
 
   <!-- ============ L5 · DIAGNOSTIC — TWELVE QUESTIONS ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>18</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>18</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 5 · the diagnostic</div>
     <h2>Pen and paper.<br>No pausing to search.</h2>
     <div class="two">
@@ -666,7 +670,7 @@
 
 
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>19</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>19</b> / 26</div><!--/catalyst-brand:chrome-->
     <h2 style="font-size:min(3.6vw,41px); max-width:none; margin-bottom:4px">Thirteen modules, <span class="cy">twelve lines drawn</span></h2>
     <div class="fig wide" style="margin-top:8px; max-width:1200px"><svg viewBox="0 0 1000 430" role="img" aria-label="The thirteen module map with act boundaries, module one highlighted, and a line from each diagnostic question to the module that answers it">
           <defs>
@@ -796,7 +800,7 @@
     <div class="key" style="margin-top:12px; padding:10px 18px; font-size:min(1.7vw,19px)">You are not starting a course. You are starting at <b>the module your score pointed at</b>.</div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>20</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 5</div><div class="cx-page"><b>20</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Three acts</div>
     <h2>From "it renders" to<br>"I'm the senior in the room"</h2>
     <div class="three">
@@ -807,9 +811,9 @@
   </section>
 
 
-  <!-- ============ L6 · HOW TO STUDY THIS PROGRAM ============ -->
+  <!-- ============ L7 · HOW TO STUDY, THE WORKSPACE AND THE REPO ============ -->
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>21</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>21</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">How to study this program</div>
     <h2 class="r">There is one way to take<br>this program that guarantees<br>you learn nothing</h2>
     <ul class="plist no" style="max-width:56ch; margin-top:18px">
@@ -819,12 +823,8 @@
     </ul>
   </section>
 
-  <section class="slide mid" data-chip="MODULE 01 · VIDEO 6" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>22</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="big">Twenty minutes stuck<br>is <span class="cy">the lesson</span>.<br>The hint is <span class="g">the reward</span>.</div>
-    <div class="sub" style="max-width:56ch; margin-top:22px">Set a timer. Being stuck is not a sign you are behind — it is the part of the work that changes what you can do.</div>
-  </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>23</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>22</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">One week in this program, concretely</div>
     <h2>Six hours,<br>spent in this order</h2>
     <div class="two">
@@ -846,32 +846,10 @@
     </div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 6</div><div class="cx-page"><b>24</b> / 28</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Before module 2</div>
-    <h2>What I owe you,<br>and what I don't</h2>
-    <div class="two">
-      <div class="card g">
-        <h3 class="g">What you get</h3>
-        <p><b>Thirteen modules</b>, recorded in Arabic, released as they land.<br>
-        <b>Thirteen exercise stages</b> with failing tests, hints and worked solutions.<br>
-        <b>One deployed product</b> you can defend line by line.<br>
-        <b>A private community and WhatsApp support</b> for anything a recording cannot answer.</p>
-      </div>
-      <div class="card r">
-        <h3 class="r">What this is not</h3>
-        <p><b>Not a job guarantee.</b> Nobody can sell you that honestly.<br>
-        <b>Not a tutorial marathon.</b> If you want ten finished projects to copy, this is the wrong program.<br>
-        <b>Not passive.</b> The exercises are the program; the videos are the explanation of the exercises.<br>
-        <b>Not the AI workflow course</b> — that is <span class="mono">AI for Frontend</span>, and it is separate.</p>
-      </div>
-    </div>
-  </section>
 
+  <!-- ---- L7 · workspace, git and repo conventions ---- -->
 
-
-  <!-- ============ L7 · WORKSPACE, GIT AND REPO CONVENTIONS ============ -->
-
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>25</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>23</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Before anything else — check the four</div>
     <h2>The workspace,<br>in four commands</h2>
 <pre><code><span class="pr">$</span> node -v      <span class="cmt"># v20.x or newer — the repo's CI runs 20 and 22</span>
@@ -887,7 +865,7 @@
   </section>
 
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>26</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>24</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 7 · the repo you are about to clone</div>
     <h2>Rasmi — a job board,<br>engineered</h2>
     <div class="two" style="align-items:center">
@@ -902,14 +880,14 @@
           <li>The debounce you write in module 3 is still running in module 12<small>nothing here is a throwaway kata</small></li>
         </ul>
         <a class="decklink" href="../../repo/jobboard-deck.html">
-          <span><span class="dl-n">Companion deck · the repo</span><span class="dl-t">One repo, forty branches</span><span class="dl-s">The full tour: the branch model, the CI that proves the starter fails, and every stage of the product.</span></span>
+          <span><span class="dl-n">Companion deck · the repo</span><span class="dl-t">One repo, three branches per exercise</span><span class="dl-s">The full tour: the branch model, the CI that proves the starter fails, and every stage of the product.</span></span>
           <span class="dl-go">&#8599;</span>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>27</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>25</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Do this now, on camera, with them</div>
     <h2>Module 1's own exercise:<br>get to red</h2>
 <pre><code><span class="pr">$</span> git clone https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard.git
@@ -934,7 +912,7 @@
 
 
 
-  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>28</b> / 28</div><!--/catalyst-brand:chrome-->
+  <section class="slide" data-chip="MODULE 01 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 01 · VIDEO 7</div><div class="cx-page"><b>26</b> / 26</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 01 · done</div>
     <h2>Your homework,<br>before module 2</h2>
     <div class="two">

@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Module 01 · Lesson 7 — The Repo: Rasmi, and forty branches · Frontend Mastery</title>
+<title>Module 01 · Lesson 7 — The Repo: Rasmi, and the branch model · Frontend Mastery</title>
 <style>
   :root{
     --bg:#070A14; --panel:#0E1525; --ink:#FFFFFF; --ink2:#CBD5E1; --muted:#94A3B8; --line:#1E293B;
@@ -120,6 +120,14 @@
   .decklink .dl-s{display:block; font:400 min(1.35vw,15px)/1.45 var(--sans); color:var(--muted);
     margin-top:6px; max-width:58ch}
   .decklink .dl-go{font:700 min(2.3vw,26px)/1 var(--sans); color:var(--cy)}
+  /* The repo itself, linked once on the title slide. Mono, understated, clickable
+     in the browser and readable as a URL when the deck is printed. */
+  .repolink{display:inline-flex; align-items:center; gap:10px; text-decoration:none; margin-top:24px;
+    font:600 min(1.5vw,17px)/1 var(--mono); color:var(--cy); letter-spacing:.2px;
+    background:rgba(34,211,238,.07); border:1px solid rgba(34,211,238,.34);
+    border-radius:999px; padding:11px 20px; transition:border-color .2s, background .2s}
+  .repolink:hover{background:rgba(34,211,238,.13); border-color:var(--cy)}
+  .repolink svg{width:1.15em; height:1.15em; flex:0 0 auto; fill:currentColor}
   .decklinks{display:grid; gap:13px; width:100%; max-width:920px; margin-top:20px}
   .decklinks .decklink{margin-top:0}
   @media print{ .decklink{break-inside:avoid} .decklink:hover{transform:none} }
@@ -176,6 +184,10 @@
   .chip,.card{box-shadow:none; background:var(--panel2)}
   pre{border:1px solid var(--line2)}
   code{border:1px solid rgba(34,211,238,.22)}
+  /* Inline code earns a hairline box. A <code> inside a <pre> is the whole snippet,
+     so the same rule drew a frame around every code block — and, once lines wrapped,
+     a stray rule between them. The block already has its own border. */
+  pre code{border:0}
   .shot{box-shadow:0 20px 50px rgba(0,0,0,.6)}
   .copy{color:#CBD5E1}
   .copy:hover{background:#243349; color:#fff}
@@ -199,23 +211,16 @@
 
 <div id="bar"></div>
 <div id="stage">
-
   <!-- 1 · TITLE -->
-  <section class="slide center" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>01</b> / 17</div><!--/catalyst-brand:chrome-->
+  <section class="slide center" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>01</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 01 · lesson 7 — the companion deck</div>
-    <h1>One repo.<br>Forty branches.</h1>
-    <p class="sub" style="max-width:46ch">A job board the students build a slice at a time — and the tooling that keeps the starter, the hints and the answer from ever drifting apart.</p>
-    <p class="say" style="max-width:60ch; text-align:center">Lesson 7 of module 1 introduces this repo and stops. Everything past that introduction — the branch model, the CI rules and every stage of the product — is here, so the module deck never has to say it twice.</p>
-    <div class="row" style="justify-content:center; margin-top:26px">
-      <div class="chip a">13 stages</div>
-      <div class="chip g">3 branches each</div>
-      <div class="chip w">54 tests</div>
-      <div class="chip t">1 product</div>
-    </div>
+    <h1>One repo.</h1>
+    <p class="sub" style="max-width:40ch">A job board the students build a slice at a time — every exercise in three branches.</p>
+    <a class="repolink" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>github.com/eng-AhmedMahmoud/frontend-mastery-jobboard</a>
   </section>
 
   <!-- 2 · THE SHAPE -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>02</b> / 17</div><!--/catalyst-brand:chrome-->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>02</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The shape</div>
     <h2>Mini-projects that add up to a product</h2>
     <div class="fig">
@@ -249,183 +254,83 @@
         </g>
       </svg>
     </div>
-    <p class="key">Module 12 isn't a new project. It's the assembly of twelve things the student already built — which is why finishing it is realistic.</p>
+    <p class="key">Module 12 isn't a new project. It's the assembly of twelve things they already built.</p>
   </section>
 
   <!-- 3 · THE APP -->
-  <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>03</b> / 17</div><!--/catalyst-brand:chrome-->
+  <section class="slide center" style="justify-content:center; padding:4vh 4vw" data-nav="Rasmi — the product" data-nav-kicker="The app"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>03</b> / 10</div><!--/catalyst-brand:chrome-->
     <span class="tag">Rasmi · the product</span>
     <img class="shot" src="../assets/01-overview.jpg" alt="The Rasmi job board: filter rail, job listings and a detail panel">
-    <p class="cap"><b>Rasmi</b> — a frontend job board for Egypt &amp; the Gulf. Filter rail, listings feed, detail panel, optimistic apply. Every part of it is somebody's homework.</p>
+    <p class="cap"><b>Rasmi</b> — a frontend job board for Egypt &amp; the Gulf. Every part of it is somebody's homework.</p>
   </section>
 
-  <!-- 4 · STACK -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>04</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">What it's built on</div>
-    <h2>Boring tools, sharp standards</h2>
-    <div class="row">
-      <div class="chip a">React 19<small>no UI kit — components are the syllabus</small></div>
-      <div class="chip a">TypeScript<small><code>strict</code> + <code>noUncheckedIndexedAccess</code></small></div>
-      <div class="chip g">Vite<small>honours <code>PORT</code>/<code>HOST</code> from the environment</small></div>
-      <div class="chip g">Vitest<small>node for logic, jsdom for components</small></div>
-      <div class="chip arch">Testing Library<small>tests the behaviour, not the implementation</small></div>
-      <div class="chip w">GitHub Actions<small>enforces the branch contract</small></div>
-    </div>
-    <p class="key g">No component library on purpose. If a student can install a combobox, they never learn what a combobox is.</p>
-  </section>
-
-  <!-- 5 · BRANCH MODEL -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>05</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 4 · BRANCH MODEL -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>04</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The model</div>
     <h2>Every exercise exists three times</h2>
     <div class="row" style="margin-top:22px">
-      <div class="chip a" style="max-width:26ch; text-align:left"><span class="mono">&lt;stage&gt;/start</span><small>Scaffold, types, fixtures and the failing tests. Bodies throw <code>Not implemented</code>. No hints. This is where the student begins.</small></div>
-      <div class="chip w" style="max-width:26ch; text-align:left"><span class="mono">&lt;stage&gt;/guided</span><small>The same tests, plus numbered TODOs and the reasoning behind each. The escape hatch — not the answer key.</small></div>
-      <div class="chip g" style="max-width:26ch; text-align:left"><span class="mono">&lt;stage&gt;/solution</span><small>Finished, green, with <code>NOTES.md</code> on the trade-offs and what an interviewer will push on.</small></div>
+      <div class="chip a" style="max-width:24ch; text-align:left"><span class="mono">&lt;stage&gt;/start</span><small>Failing tests, empty bodies, no hints.</small></div>
+      <div class="chip w" style="max-width:24ch; text-align:left"><span class="mono">&lt;stage&gt;/guided</span><small>Same tests, numbered TODOs. The escape hatch.</small></div>
+      <div class="chip g" style="max-width:24ch; text-align:left"><span class="mono">&lt;stage&gt;/solution</span><small>Green, with <code>NOTES.md</code> on the trade-offs.</small></div>
     </div>
-    <p class="key">The tests are <b>byte-identical</b> across all three. Only the amount of implementation changes — that's what makes red → green feel earned.</p>
-    <p class="say" style="margin-top:14px"><b>Named by module and video</b>, the same way every repo in the course is: <span class="mono">module-3/v4-utils/start</span>, with <span class="mono">m3-v4-end</span> tagging the solution so a student who fell behind can jump straight to it.</p>
+    <p class="key">The tests are <b>byte-identical</b> across all three. Only the implementation changes.</p>
   </section>
 
-  <!-- 6 · GENERATION -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>06</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 5 · GENERATION + CI -->
+  <section class="slide" data-nav="One branch by hand, the rest by machine"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>05</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">How they stay in sync</div>
-    <h2>Only one branch is written by hand</h2>
+    <h2>Written once, generated, then checked</h2>
     <pre><code><span class="cmt">// in the solution — ordinary comments, no build step</span>
-<span class="cmt">// #hint 1</span> The timer id lives in the closure — that's what lets one call cancel the previous one.
-<span class="cmt">// #region solution</span>
-  <span class="kw">let</span> timeout: <span class="ty">ReturnType</span>&lt;<span class="kw">typeof</span> setTimeout&gt; | <span class="kw">undefined</span>
-  <span class="cmt">…the real implementation…</span>
-<span class="cmt">// #endregion</span>
+<span class="cmt">// #hint 1</span> The timer id lives in the closure.
+<span class="cmt">// #region solution</span> … <span class="cmt">// #endregion</span>
 
-<span class="cmt">$</span> pnpm stage:publish module-3/utils   <span class="cmt"># solution → guided → start</span>
-<span class="cmt">$</span> pnpm stage:verify  module-3/utils   <span class="cmt"># prove all three behave</span></code></pre>
-    <p class="key w">Hand-editing a derived branch is how three versions silently diverge. Here you can't: they're regenerated and force-pushed every time.</p>
-  </section>
-
-  <!-- 7 · SCOPING -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>07</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The bug that shaped the tooling</div>
-    <h2>A stage must not un-teach the last one</h2>
-    <p class="say" style="max-width:60ch">Stage 7 branches from stage 3's solution, so the first run of the stripper blanked the utilities too — and <span class="mono">m07/start</span> shipped with a broken <code>debounce</code>. The tests failed, but for the wrong reason.</p>
-    <pre><code><span class="cmt">// stage.config.json — on every stage branch</span>
-{ <span class="st">"stage"</span>: <span class="st">"module-7/autocomplete"</span>, <span class="st">"strip"</span>: [<span class="st">"src/components/autocomplete"</span>] }
-
-<span class="cmt">$</span> git checkout module-7/autocomplete/start &amp;&amp; pnpm test
-<span class="ok">PASS (39)</span>  <span class="cmt">← the utilities, still solved from m03</span>
-<span class="no">FAIL (15)</span>  <span class="cmt">← the autocomplete, the actual work</span></code></pre>
-  </section>
-
-  <!-- 8 · CI -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>08</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The guardrail</div>
-    <h2>CI checks the starter <span class="accent">fails</span></h2>
-    <pre><code><span class="cmt">$</span> pnpm stage:verify module-7/autocomplete
-<span class="ok">✓</span> module-7/autocomplete/solution     expected pass, got pass
-<span class="ok">✓</span> module-7/autocomplete/guided       expected fail, got fail
-<span class="ok">✓</span> module-7/autocomplete/start        expected fail, got fail
+<span class="cmt">$</span> pnpm stage:publish module-3/utils   <span class="cmt"># → guided, start</span>
+<span class="cmt">$</span> pnpm stage:verify  module-3/utils
+<span class="ok">✓</span> solution  expected pass, got pass
+<span class="ok">✓</span> guided / start  expected fail, got fail
 <span class="ok">✓</span> test files identical across all three</code></pre>
-    <p class="key">A starter branch whose tests accidentally pass is a lesson with nothing to do in it. That gets caught by a machine, not by a student's support message three weeks after launch.</p>
+    <p class="key w">A starter whose tests accidentally pass is a lesson with nothing to do in it. A machine catches that, not a support message three weeks after launch.</p>
   </section>
 
-  <!-- 9 · STAGE 3 -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>09</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Stage · module-3/utils</div>
-    <h2>The library they get asked to write live</h2>
-    <table class="grid">
-      <tr><th>Function</th><th>The follow-up question</th></tr>
-      <tr><td><b>debounce</b> + cancel / flush</td><td>“What happens to <code>this</code>?” · “Add a leading edge.”</td></tr>
-      <tr><td><b>throttle</b> (leading / trailing)</td><td>“How is it different from debounce? Which for infinite scroll?”</td></tr>
-      <tr><td><b>deepClone</b></td><td>“Dates? Maps? Cycles? Why not <code>JSON.parse(JSON.stringify(x))</code>?”</td></tr>
-      <tr><td><b>EventEmitter</b></td><td>“What if a listener unsubscribes during emit?”</td></tr>
-      <tr><td><b>promiseAll</b></td><td>“Why is result order preserved? Now write <code>allSettled</code>.”</td></tr>
-    </table>
-    <p class="key g">39 tests, ordered from the obvious case to the one that catches people out.</p>
-  </section>
-
-  <!-- 10 · AUTOCOMPLETE GIF -->
-  <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>10</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 6 · AUTOCOMPLETE GIF -->
+  <section class="slide center" style="justify-content:center; padding:4vh 4vw" data-nav="The autocomplete gauntlet" data-nav-kicker="Stage · module-7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>06</b> / 10</div><!--/catalyst-brand:chrome-->
     <span class="tag">Stage · module-7/autocomplete</span>
     <img class="shot" src="../assets/rasmi-autocomplete.gif" alt="Typing in the search box, arrowing through suggestions and selecting one with Enter">
-    <p class="cap">Type → debounce → suggestions → <b>arrow keys</b> → Enter. Focus never leaves the input; <code>aria-activedescendant</code> does the moving.</p>
+    <p class="cap">Debounce · race conditions · keyboard · ARIA combobox · honest states. <b>Five skills in one question</b> — the most-asked build-it-live in frontend interviews.</p>
   </section>
 
-  <!-- 11 · WHAT IT TESTS -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>11</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Why this component</div>
-    <h2>Five skills, one question</h2>
-    <table class="grid">
-      <tr><th>#</th><th>Skill</th><th>How candidates fail it</th></tr>
-      <tr><td class="mono">1</td><td><b>Debouncing</b></td><td>A request per keystroke</td></tr>
-      <tr><td class="mono">2</td><td><b>Race conditions</b></td><td>The older response lands last and overwrites the newer results</td></tr>
-      <tr><td class="mono">3</td><td><b>Keyboard</b></td><td>No wrapping, Enter submits the form, the caret jumps</td></tr>
-      <tr><td class="mono">4</td><td><b>ARIA combobox</b></td><td>Moving real focus into the list — breaks typing entirely</td></tr>
-      <tr><td class="mono">5</td><td><b>State honesty</b></td><td>Loading, empty and error all rendered as “nothing happened”</td></tr>
-    </table>
-    <p class="key">Number 2 is the one that separates mid from senior — and the one that ships to production and then produces a bug nobody can reproduce.</p>
-  </section>
-
-  <!-- 12 · RACE TEST -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>12</b> / 17</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The test that matters</div>
-    <h2>Two responses, out of order</h2>
-    <pre><code><span class="fn">it</span>(<span class="st">'ignores a slow response that arrives after a newer one'</span>, <span class="kw">async</span> () =&gt; {
-  <span class="kw">const</span> slow = <span class="fn">deferred</span>&lt;JobSuggestion[]&gt;()   <span class="cmt">// resolved by hand</span>
-  <span class="kw">const</span> fast = <span class="fn">deferred</span>&lt;JobSuggestion[]&gt;()
-
-  <span class="kw">await</span> user.<span class="fn">type</span>(input, <span class="st">'react'</span>)          <span class="cmt">// request 1 → slow</span>
-  <span class="kw">await</span> user.<span class="fn">type</span>(input, <span class="st">' engineer'</span>)      <span class="cmt">// request 2 → fast</span>
-
-  fast.<span class="fn">resolve</span>([reactEngineer])            <span class="cmt">// newer answers first</span>
-  slow.<span class="fn">resolve</span>([senior, midweight])        <span class="cmt">// older lands last…</span>
-
-  <span class="fn">expect</span>(screen.<span class="fn">getAllByRole</span>(<span class="st">'option'</span>)).<span class="fn">toHaveLength</span>(1)  <span class="cmt">// …and is ignored</span>
-})</code></pre>
-    <p class="key t">Sequence numbers keep the UI correct. <code>AbortController</code> stops the wasted network. Interviewers want both — they solve different problems.</p>
-  </section>
-
-  <!-- 13 · KEYBOARD SHOT -->
-  <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>13</b> / 17</div><!--/catalyst-brand:chrome-->
-    <span class="tag">Accessibility</span>
-    <img class="shot" src="../assets/03-keyboard-nav.jpg" alt="The suggestion list with the second option highlighted via aria-activedescendant">
-    <p class="cap">The highlighted option is <code>aria-selected</code>; the input points at it with <code>aria-activedescendant</code>. Nothing about this needs a mouse.</p>
-  </section>
-
-  <!-- 14 · FILTERS GIF -->
-  <section class="slide center" style="justify-content:center; padding:4vh 4vw"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>14</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 7 · FILTERS GIF -->
+  <section class="slide center" style="justify-content:center; padding:4vh 4vw" data-nav="Filters &amp; optimistic apply" data-nav-kicker="The data layer"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>07</b> / 10</div><!--/catalyst-brand:chrome-->
     <span class="tag">Filters &amp; optimistic apply</span>
     <img class="shot" src="../assets/rasmi-filters-apply.gif" alt="Toggling filters, the list narrowing, then applying to a job and seeing the applied state">
-    <p class="cap">Filter → the list refetches and stale requests abort → <b>Apply</b> flips instantly, then confirms. Optimistic UI, without lying to the user.</p>
+    <p class="cap">Filter → the list refetches and stale requests abort → <b>Apply</b> flips instantly, then confirms.</p>
   </section>
 
-  <!-- 15 · STUDENT WORKFLOW -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>15</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 8 · STUDENT WORKFLOW -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>08</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Day one, module one</div>
     <h2>The whole workflow is three commands</h2>
     <pre><code><span class="cmt">$</span> git checkout module-3/utils/start        <span class="cmt"># red: 39 failing</span>
-<span class="cmt">$</span> pnpm test:watch                     <span class="cmt"># work until green</span>
-<span class="cmt">$</span> git diff module-3/utils/solution -- src/ <span class="cmt"># compare, don't just check</span>
-
-<span class="cmt"># stuck on one function? pull only its hints:</span>
-<span class="cmt">$</span> git checkout module-3/utils/guided -- src/utils/debounce.ts</code></pre>
-    <p class="key">Taught once in module 1, used for the rest of the program. It's also the git workflow they'll use at work — branches, diffs, and comparing your approach against someone else's.</p>
+<span class="cmt">$</span> pnpm test:watch                          <span class="cmt"># work until green</span>
+<span class="cmt">$</span> git diff module-3/utils/solution -- src/ <span class="cmt"># compare, don't just check</span></code></pre>
+    <p class="key">Taught once in module 1, used for the rest of the program — and it's the git workflow they'll use at work.</p>
   </section>
 
-  <!-- 16 · WHAT EXISTS -->
-  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>16</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 9 · WHAT EXISTS -->
+  <section class="slide"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>09</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Status</div>
     <h2>Built, and what's next</h2>
     <ul class="plist">
-      <li class="frag"><span class="mono">main</span> — the assembled product, 54 tests green <small>domain model · fake API with latency, abort and out-of-order responses · the Rasmi UI</small></li>
-      <li class="frag"><span class="mono">module-1/setup</span> ×3 — the workspace and the diagnostic scorer <small>9 tests · tagged <span class="mono">m1-v7-end</span></small></li>
-      <li class="frag"><span class="mono">module-3/utils</span> ×3 — the utility library <small>39 tests · verified: solution passes, guided and start fail</small></li>
-      <li class="frag"><span class="mono">module-7/autocomplete</span> ×3 — the search box <small>15 tests · reuses the module-3 debounce, keeps it solved</small></li>
-      <li class="frag" style="color:var(--muted)"><span class="mono">next</span> — browser lab, domain types, feed UI, typed primitives, overlays, virtual list, data layer, Next.js port, perf &amp; tests, capstone <small>10 of 13 stages left · the tooling is done and the pattern is proven on three stages</small></li>
+      <li class="frag"><span class="mono">main</span> — the assembled product, 54 tests green</li>
+      <li class="frag"><span class="mono">module-1/setup</span> ×3 — the workspace and the diagnostic scorer <small>9 tests</small></li>
+      <li class="frag"><span class="mono">module-3/utils</span> ×3 — the utility library <small>39 tests</small></li>
+      <li class="frag"><span class="mono">module-7/autocomplete</span> ×3 — the search box <small>15 tests</small></li>
+      <li class="frag" style="color:var(--muted)"><span class="mono">next</span> — the remaining stages <small>the tooling is done; the pattern is proven on three stages</small></li>
     </ul>
   </section>
 
-  <!-- 17 · CLOSE -->
-  <section class="slide center" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>17</b> / 17</div><!--/catalyst-brand:chrome-->
+  <!-- 10 · CLOSE -->
+  <section class="slide center" style="justify-content:center"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">PROGRAM · THE REPO</div><div class="cx-page"><b>10</b> / 10</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Close</div>
     <h2 style="max-width:26ch">A repo that teaches, then proves it taught</h2>
     <p class="say" style="max-width:52ch">Three branches per exercise, one product at the end, and a machine that checks the starter still has work left in it.</p>
