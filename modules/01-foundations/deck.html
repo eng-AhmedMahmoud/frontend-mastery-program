@@ -205,15 +205,26 @@
 
   /* ---- dark-surface repairs the palette map can't infer -------------------------- */
   .chip,.card{box-shadow:none; background:var(--panel2)}
-  pre{border:1px solid var(--line2)}
+  pre{border:1px solid var(--line2); position:relative}
   code{border:1px solid rgba(34,211,238,.22)}
   /* Inline code earns a hairline box. A <code> inside a <pre> is the whole snippet,
      so the same rule drew a frame around every code block — and, once lines wrapped,
      a stray rule between them. The block already has its own border. */
   pre code{border:0}
   .shot{box-shadow:0 20px 50px rgba(0,0,0,.6)}
-  .copy{color:#CBD5E1}
-  .copy:hover{background:#243349; color:#fff}
+  /* ---- copy button, one per code block; the script that adds it closes the page -- */
+  /* The button rides the top edge of the block rather than sitting inside it — a
+     snippet's first line is often its longest, and a button over it hides the thing
+     the viewer came to read. `pre` scrolls, so the anchor is the wrapper, not the
+     `pre`: an absolute child of a scrolling box gets clipped at its border. */
+  .codewrap{position:relative; display:inline-block; max-width:100%}
+  .copy{position:absolute; top:-11px; right:16px; z-index:2; cursor:pointer;
+    font:700 10.5px/1 var(--mono); letter-spacing:1.5px; text-transform:uppercase;
+    color:#CBD5E1; background:#121C30; border:1px solid #243349; border-radius:7px;
+    padding:6px 11px; opacity:0; transition:opacity .18s, background .18s, color .18s}
+  .codewrap:hover .copy,.copy:focus-visible{opacity:1}
+  .copy:hover{opacity:1; background:#243349; color:#fff}
+  .copy.ok{opacity:1; color:#22D3EE; border-color:#22D3EE}
   #nav,#notes,#code{box-shadow:0 0 60px rgba(0,0,0,.7)}
   #nav li:hover{background:rgba(34,211,238,.10)}
   #nav li.cur{background:rgba(34,211,238,.16)}
@@ -225,7 +236,7 @@
     .cx-logo,.cx-chip,.cx-page{position:absolute !important}
     /* Presenter controls are not part of the deck. Now that the slide menu sits beside
        the chip, leaving it in would stamp it on every printed page. */
-    #navToggle,#nav,#scrim,#codeToggle{display:none !important}
+    #navToggle,#nav,#scrim,#codeToggle,.copy{display:none !important}
   }
 </style>
 <!--/catalyst-brand:style-->
@@ -999,5 +1010,104 @@
   document.getElementById('stage').addEventListener('click',e=>{ e.clientX>innerWidth/2?next():prev(); });
   render();
 </script>
+<!--catalyst-brand:copy-->
+<script>
+/* A copy button on every code block. Injected here rather than written into each deck
+   so a new snippet gets one for free. The text is read once, at build-of-the-DOM time,
+   before the button joins the block — otherwise the word "copy" copies with it.
+
+   Shell blocks mark their prompts with `$`. When a block has any, only those lines are
+   copied, prompt stripped: a student pasting a terminal transcript wants the commands,
+   not the output that came back. Blocks with no prompt copy whole. */
+(function(){
+  var PROMPT = /^\s*\$\s?/;
+  document.querySelectorAll('pre').forEach(function(pre){
+    if (pre.parentNode.classList.contains('codewrap')) return;
+    var lines = pre.innerText.replace(/\u00a0/g, ' ').split('\n');
+    var cmds = lines.filter(function(l){ return PROMPT.test(l); })
+                    .map(function(l){ return l.replace(PROMPT, '').replace(/\s+$/, ''); });
+    var text = (cmds.length ? cmds : lines).join('\n').trim();
+    if (!text) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'codewrap';
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+
+    var b = document.createElement('button');
+    b.className = 'copy';
+    b.type = 'button';
+    b.textContent = 'copy';
+    b.setAttribute('aria-label', 'Copy this code');
+    b.addEventListener('click', function(e){
+      e.stopPropagation();            // the stage advances on click; the button must not
+      var done = function(){
+        b.textContent = 'copied';
+        b.classList.add('ok');
+        clearTimeout(b._t);
+        b._t = setTimeout(function(){ b.textContent = 'copy'; b.classList.remove('ok'); }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        ta.remove();
+      }
+    });
+    wrap.appendChild(b);
+  });
+})();
+</script>
+<!--/catalyst-brand:copy-->
+<!--catalyst-brand:arrows-->
+<script>
+/* Connectors in the diagrams were drawn as bare line segments, which reads as a rule
+   rather than a direction. Every stroked, unfilled path in an inline SVG gets an
+   arrowhead here, once, rather than each diagram carrying its own <defs>. The head
+   takes the colour of the line it ends (`context-stroke`), so a green path keeps its
+   green point; browsers without that keyword fall back to the grey the lines use. */
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  document.querySelectorAll('svg').forEach(function(svg, n){
+    var paths = [].filter.call(svg.querySelectorAll('path'), function(p){
+      var fill = p.getAttribute('fill');
+      return (!fill || fill === 'none') && p.getAttribute('stroke')
+        && !p.hasAttribute('marker-end') && !p.classList.contains('nohead');
+    });
+    if (!paths.length) return;
+
+    var id = 'cxArrow' + n;
+    var marker = document.createElementNS(NS, 'marker');
+    marker.setAttribute('id', id);
+    marker.setAttribute('viewBox', '0 0 10 10');
+    marker.setAttribute('refX', '8.5');
+    marker.setAttribute('refY', '5');
+    marker.setAttribute('markerWidth', '5.5');
+    marker.setAttribute('markerHeight', '5.5');
+    marker.setAttribute('markerUnits', 'strokeWidth');
+    marker.setAttribute('orient', 'auto-start-reverse');
+    var head = document.createElementNS(NS, 'path');
+    head.setAttribute('d', 'M0.5 1 L9 5 L0.5 9 Z');
+    head.setAttribute('fill', 'context-stroke');
+    head.setAttribute('stroke', 'none');
+    marker.appendChild(head);
+    var defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS(NS, 'defs'), svg.firstChild);
+    defs.appendChild(marker);
+
+    paths.forEach(function(p){
+      p.setAttribute('marker-end', 'url(#' + id + ')');
+      p.setAttribute('stroke-linecap', 'round');
+    });
+  });
+})();
+</script>
+<!--/catalyst-brand:arrows-->
 </body>
 </html>

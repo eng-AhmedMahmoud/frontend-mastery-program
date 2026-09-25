@@ -98,6 +98,167 @@
   .frag{opacity:0; transform:translateY(8px); transition:opacity .35s, transform .35s}
   .frag.on{opacity:1; transform:none}
 
+  /* ---- `this`, by call site -------------------------------------------------------
+     Each button runs the real call and prints what the engine bound, so the answer is
+     the engine's, not the slide's. */
+  .ths{display:flex; flex-direction:column; gap:14px}
+  .ths-seg{display:flex; flex-wrap:wrap; gap:6px}
+  .ths-b{cursor:pointer; font:700 11.5px/1 var(--mono); color:var(--grey2); background:var(--panel2);
+    border:1px solid var(--line2); border-radius:8px; padding:9px 11px;
+    transition:background .18s, color .18s, border-color .18s}
+  .ths-b.on{background:rgba(34,211,238,.16); color:var(--cy); border-color:var(--cy)}
+  .ths-out{display:flex; align-items:baseline; gap:12px; background:var(--code);
+    border:1px solid var(--line2); border-radius:10px; padding:16px 18px}
+  .ths-lab{font:700 12px/1 var(--mono); color:var(--grey3)}
+  .ths-out b{font:700 min(2.1vw,23px)/1.2 var(--mono); color:var(--cy)}
+  .ths-say{font:600 min(1.35vw,15px)/1.45 var(--sans); color:var(--grey2); min-height:2.8em}
+
+  /* ---- the combinators, run ------------------------------------------------------- */
+  table.grid.tight-t{max-width:760px; font-size:min(1.4vw,16px)}
+  table.grid.tight-t td{padding:7px 10px}
+  .cmb{display:flex; flex-direction:column; gap:10px; width:100%; max-width:760px; margin-top:16px}
+  .cmb-seg{display:flex; gap:6px}
+  .cmb-b{cursor:pointer; font:700 12px/1 var(--mono); color:var(--grey2); background:var(--panel2);
+    border:1px solid var(--line2); border-radius:8px; padding:9px 13px;
+    transition:background .18s, color .18s, border-color .18s}
+  .cmb-b.on{background:rgba(34,211,238,.16); color:var(--cy); border-color:var(--cy)}
+  .cmb-rows{display:flex; flex-direction:column; gap:7px}
+  .cmb-row{display:grid; grid-template-columns:80px 150px 1fr; align-items:center; gap:14px;
+    background:var(--panel2); border:1px solid var(--line2); border-radius:9px; padding:9px 14px;
+    font:600 12.5px/1 var(--mono); color:var(--grey2); transition:border-color .25s, background .25s}
+  .cmb-row b{color:var(--ink)}
+  .cmb-row i{height:5px; border-radius:3px; background:var(--line2); width:0; font-style:normal}
+  .cmb-row.live i{width:100%; background:var(--cy); transition:width var(--ms) linear}
+  .cmb-row.ok{border-color:var(--good)} .cmb-row.ok i{background:var(--good)}
+  .cmb-row.no{border-color:var(--bad)} .cmb-row.no i{background:var(--bad)}
+  .cmb-row.moot{opacity:.45}
+  .cmb-bar{display:flex; align-items:center; gap:14px}
+  .cmb-run{cursor:pointer; font:700 12px/1 var(--mono); color:var(--grey1); background:var(--panel2);
+    border:1px solid var(--line2); border-radius:8px; padding:9px 16px}
+  .cmb-run:hover{background:var(--line2); color:#fff; border-color:var(--cy)}
+  .cmb-out{font:600 min(1.4vw,16px)/1.4 var(--sans); color:var(--grey2)}
+  .cmb-out b.ok{color:var(--good)} .cmb-out b.no{color:var(--bad)}
+
+  /* ---- debounce / throttle timeline ----------------------------------------------
+     The same event stream runs on both slides; only the rule that decides when the
+     second row lights changes. Simulated from the real definitions rather than drawn
+     by hand, so the marks land where the function would actually fire. */
+  .tl{width:100%; max-width:900px; margin-top:24px}
+  .tl-row{display:grid; grid-template-columns:104px 1fr; align-items:center; gap:16px; margin-bottom:16px}
+  .tl-lab{font:700 12.5px/1 var(--mono); letter-spacing:1.3px; text-transform:uppercase; color:var(--grey3)}
+  .tl-lab.cy{color:var(--cy)} .tl-lab.g{color:var(--good)}
+  .tl-track{position:relative; height:34px; border-radius:8px; background:var(--panel2);
+    border:1px solid var(--line2); overflow:hidden}
+  .tl-track::after{content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+    background:var(--line2)}
+  .tl-dot{position:absolute; top:50%; width:11px; height:11px; margin:-5.5px 0 0 -5.5px;
+    border-radius:50%; background:var(--grey3); transform:scale(0); animation:tlPop .26s cubic-bezier(.2,1.4,.4,1) forwards}
+  .tl-dot.fire{width:15px; height:15px; margin:-7.5px 0 0 -7.5px}
+  .tl-dot.cy{background:var(--cy); box-shadow:0 0 0 0 rgba(34,211,238,.5); animation:tlPop .26s cubic-bezier(.2,1.4,.4,1) forwards, tlPing .7s ease-out forwards}
+  .tl-dot.g{background:var(--good); box-shadow:0 0 0 0 rgba(52,211,153,.5); animation:tlPop .26s cubic-bezier(.2,1.4,.4,1) forwards, tlPingG .7s ease-out forwards}
+  @keyframes tlPop{to{transform:scale(1)}}
+  @keyframes tlPing{to{box-shadow:0 0 0 16px rgba(34,211,238,0)}}
+  @keyframes tlPingG{to{box-shadow:0 0 0 16px rgba(52,211,153,0)}}
+  .tl-head{position:absolute; top:0; bottom:0; width:2px; background:rgba(148,163,184,.55)}
+  .tl-bar{display:flex; align-items:center; gap:14px; margin-top:4px}
+  .tl-btn{cursor:pointer; background:var(--panel2); border:1px solid var(--line2); color:var(--grey1);
+    border-radius:8px; padding:7px 13px; font:700 12px/1 var(--mono);
+    transition:background .18s, color .18s, border-color .18s}
+  .tl-btn:hover{background:var(--line2); color:#fff; border-color:var(--cy)}
+  .tl-say{font:600 min(1.4vw,16px)/1.4 var(--sans); color:var(--grey2)}
+  /* Columns of cards line up at the bottom edge too: stretch the row, then let the
+     code block inside each card take up the slack. Cards are sometimes wrapped in a
+     plain div, so the stretch has to travel one level down as well. */
+  .two,.three{align-items:stretch}
+  .two > *,.three > *{min-width:0}
+  .two > :not(.card),.three > :not(.card){display:flex; flex-direction:column}
+  .two > .card,.three > .card,
+  .two > * > .card,.three > * > .card{display:flex; flex-direction:column; flex:1}
+  .two > .card > pre,.three > .card > pre,
+  .two > * > .card > pre,.three > * > .card > pre{margin-top:auto}
+
+  /* ---- the call stack, stepped -----------------------------------------------------
+     Frames push and pop with the code line that caused them. The scope-chain step walks
+     inner → outer → global, because that walk is the whole lesson: lookup is a chain of
+     pointers fixed where the function was written. */
+  .stk-code span[data-l]{display:block; border-radius:6px; padding:0 6px; margin:0 -6px;
+    transition:background .25s, opacity .25s; opacity:.45}
+  .stk-code span[data-l].on{opacity:1; background:rgba(34,211,238,.14)}
+  .stk-code span[data-l].dim{opacity:.45; background:none}
+  .stk-stage{display:flex; flex-direction:column; gap:10px; justify-content:flex-end;
+    min-height:230px; width:100%; max-width:430px}
+  .stk-frame{background:var(--panel2); border:1px solid var(--line2); border-radius:10px;
+    padding:12px 16px; opacity:0; transform:translateY(16px) scale(.97);
+    transition:opacity .3s cubic-bezier(.22,.72,.28,1), transform .3s cubic-bezier(.22,.72,.28,1),
+      border-color .3s, background .3s}
+  .stk-frame b{display:block; font:700 15px/1.2 var(--mono); color:var(--ink)}
+  .stk-frame small{display:block; margin-top:5px; font:400 12.5px/1.3 var(--mono); color:var(--grey3)}
+  .stk-frame.in{opacity:1; transform:none}
+  .stk-frame.live{border-color:var(--cy); background:#0C2733}
+  .stk-frame.live small{color:var(--grey2)}
+  .stk-frame.walk{border-color:var(--ochre); background:#2A2213}
+  .stk-bar{display:flex; align-items:center; gap:10px; margin-top:16px; max-width:430px}
+  .stk-btn{cursor:pointer; background:var(--panel2); border:1px solid var(--line2);
+    color:var(--grey1); border-radius:8px; padding:7px 12px; font:700 12px/1 var(--mono);
+    transition:background .18s, color .18s, border-color .18s}
+  .stk-btn:hover{background:var(--line2); color:#fff; border-color:var(--cy)}
+  .stk-say{flex:1; font:600 min(1.35vw,15px)/1.4 var(--sans); color:var(--grey2)}
+  /* An inline code chip is one token: never let it break across two lines. A <code>
+     inside a <pre> is a whole snippet and must keep its own line breaks. */
+  :not(pre) > code{white-space:nowrap}
+  .slide .draw{stroke-dasharray:1; stroke-dashoffset:1}
+  .slide.on .draw{animation:draw 1.1s ease forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .flow{stroke-dasharray:6 7; animation:flow 1.1s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-13}}
+
+  /* ---- entrance motion ------------------------------------------------------------
+     Every slide deals its own content: heading first, then the figure, then the line
+     that lands the point. The brand chrome (logo, chip, page number) is excluded — it
+     belongs to the deck, not the slide, and re-animating it makes it look loose.
+     `.frag` keeps its own click-driven reveal, so it opts out too. */
+  @keyframes cxRise{from{opacity:0; transform:translateY(15px)} to{opacity:1; transform:none}}
+  @keyframes cxFade{from{opacity:0} to{opacity:1}}
+  @keyframes cxBar{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+  .slide.on > :not(.cx-logo):not(.cx-chip):not(.cx-page):not(.notes):not(.frag){
+    animation:cxRise .44s cubic-bezier(.22,.72,.28,1) both}
+  /* the chrome occupies the first three child slots, so content starts at 4 */
+  .slide.on > :nth-child(4){animation-delay:.02s}
+  .slide.on > :nth-child(5){animation-delay:.10s}
+  .slide.on > :nth-child(6){animation-delay:.18s}
+  .slide.on > :nth-child(7){animation-delay:.26s}
+  .slide.on > :nth-child(n+8){animation-delay:.32s}
+
+  /* Lists, table rows and columns deal themselves in turn, inside their parent's slot. */
+  .slide.on .plist li:not(.frag){animation:cxRise .38s cubic-bezier(.22,.72,.28,1) both}
+  .slide.on .plist li:nth-child(1){animation-delay:.20s}
+  .slide.on .plist li:nth-child(2){animation-delay:.28s}
+  .slide.on .plist li:nth-child(3){animation-delay:.36s}
+  .slide.on .plist li:nth-child(4){animation-delay:.44s}
+  .slide.on .plist li:nth-child(5){animation-delay:.52s}
+  .slide.on .plist li:nth-child(n+6){animation-delay:.60s}
+  .slide.on table.grid tr{animation:cxFade .4s ease both}
+  .slide.on table.grid tr:nth-child(1){animation-delay:.18s}
+  .slide.on table.grid tr:nth-child(2){animation-delay:.26s}
+  .slide.on table.grid tr:nth-child(3){animation-delay:.34s}
+  .slide.on table.grid tr:nth-child(4){animation-delay:.42s}
+  .slide.on table.grid tr:nth-child(n+5){animation-delay:.50s}
+  .slide.on .two > *:nth-child(2),
+  .slide.on .three > *:nth-child(2){animation:cxRise .44s cubic-bezier(.22,.72,.28,1) .10s both}
+  .slide.on .three > *:nth-child(3){animation:cxRise .44s cubic-bezier(.22,.72,.28,1) .18s both}
+
+  /* The accent bar on a key line draws down rather than appearing whole. */
+  .key{position:relative; overflow:hidden}
+  .key::after{content:""; position:absolute; left:0; top:0; bottom:0; width:4px;
+    background:currentColor; opacity:.9; transform-origin:top;
+    animation:cxBar .5s cubic-bezier(.22,.72,.28,1) .12s both}
+  .slide .card{transition:border-color .25s, transform .25s}
+
+  @media (prefers-reduced-motion: reduce){
+    .slide.on *{animation:none !important}
+    .slide .draw{stroke-dashoffset:0 !important}
+  }
+
   #bar{position:fixed; left:0; top:0; height:5px; background:var(--cy); width:0; transition:width .3s; z-index:10}
   #navToggle{position:fixed; top:15px; left:15px; z-index:31; background:var(--panel); border:1px solid var(--line2); color:var(--ink); font:600 13px/1 var(--mono); padding:9px 13px; border-radius:9px; cursor:pointer; opacity:.82}
   #navToggle:hover{opacity:1}
@@ -128,6 +289,7 @@
     #stage{position:static; display:block}
     .slide{position:relative; display:flex !important; opacity:1 !important; page-break-after:always; min-height:100vh; border-bottom:1px solid var(--line)}
     .frag{opacity:1 !important; transform:none !important}
+    *{animation:none !important}
   }
 </style>
 <!--catalyst-brand:style-->
@@ -180,15 +342,26 @@
 
   /* ---- dark-surface repairs the palette map can't infer -------------------------- */
   .chip,.card{box-shadow:none; background:var(--panel2)}
-  pre{border:1px solid var(--line2)}
+  pre{border:1px solid var(--line2); position:relative}
   code{border:1px solid rgba(34,211,238,.22)}
   /* Inline code earns a hairline box. A <code> inside a <pre> is the whole snippet,
      so the same rule drew a frame around every code block — and, once lines wrapped,
      a stray rule between them. The block already has its own border. */
   pre code{border:0}
   .shot{box-shadow:0 20px 50px rgba(0,0,0,.6)}
-  .copy{color:#CBD5E1}
-  .copy:hover{background:#243349; color:#fff}
+  /* ---- copy button, one per code block; the script that adds it closes the page -- */
+  /* The button rides the top edge of the block rather than sitting inside it — a
+     snippet's first line is often its longest, and a button over it hides the thing
+     the viewer came to read. `pre` scrolls, so the anchor is the wrapper, not the
+     `pre`: an absolute child of a scrolling box gets clipped at its border. */
+  .codewrap{position:relative; display:inline-block; max-width:100%}
+  .copy{position:absolute; top:-11px; right:16px; z-index:2; cursor:pointer;
+    font:700 10.5px/1 var(--mono); letter-spacing:1.5px; text-transform:uppercase;
+    color:#CBD5E1; background:#121C30; border:1px solid #243349; border-radius:7px;
+    padding:6px 11px; opacity:0; transition:opacity .18s, background .18s, color .18s}
+  .codewrap:hover .copy,.copy:focus-visible{opacity:1}
+  .copy:hover{opacity:1; background:#243349; color:#fff}
+  .copy.ok{opacity:1; color:#22D3EE; border-color:#22D3EE}
   #nav,#notes,#code{box-shadow:0 0 60px rgba(0,0,0,.7)}
   #nav li:hover{background:rgba(34,211,238,.10)}
   #nav li.cur{background:rgba(34,211,238,.16)}
@@ -200,7 +373,7 @@
     .cx-logo,.cx-chip,.cx-page{position:absolute !important}
     /* Presenter controls are not part of the deck. Now that the slide menu sits beside
        the chip, leaving it in would stamp it on every printed page. */
-    #navToggle,#nav,#scrim,#codeToggle{display:none !important}
+    #navToggle,#nav,#scrim,#codeToggle,.copy{display:none !important}
   }
 </style>
 <!--/catalyst-brand:style-->
@@ -210,8 +383,8 @@
 <div id="bar"></div>
 <div id="stage">
 
-  <!-- MODULE 03 · VIDEO 1 · 01 -->
-  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>01</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 1 -->
+  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>01</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 03 · JavaScript, Deeply</div>
     <h1>The language<br>under the framework</h1>
     <div class="sub">Execution contexts, closures, <span class="mono">this</span>, prototypes, modules, promises and memory — ending with the interview toolbelt written from an empty file.</div>
@@ -235,88 +408,57 @@
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 1 · 02 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>02</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The interview bar</div>
-    <h2>Syntax recall vs architectural judgement</h2>
-    <div class="two">
-      <div class="card r">
-        <h3 class="r">The mid-level candidate</h3>
-        <p>Has memorised <code>debounce</code> as a snippet. Knows closures "capture variables". Can recite that <code>class</code> is syntactic sugar — but cannot say what it is sugar <b>for</b>, or what it costs at ten thousand instances.</p>
-      </div>
-      <div class="card g">
-        <h3 class="g">The senior engineer</h3>
-        <p>Writes the utility from the mechanism, not from memory. Knows which of scope, <code>this</code>, prototypes and the microtask queue is responsible for the bug on screen, and can defend the trade-off out loud while typing.</p>
-      </div>
-    </div>
-    <div class="key">Every question in this module has the same shape: not "what does this do", but "what is the engine doing, and what did that cost".</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 1 · 03 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>03</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 1 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>02</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 03 · the route through this module</div>
-    <h2>Ten lessons, and what<br>each one hands you</h2>
-    <div class="two tight">
-      <div>
-        <ul class="plist">
-          <li><b>1 ·</b> Execution contexts and the scope chain<small>drawn, not described</small></li>
-          <li><b>2 ·</b> Closures<small>how a callback remembers, and what it keeps alive</small></li>
-          <li><b>3 ·</b> <code>this</code><small>decided at the call site, not the definition</small></li>
-          <li><b>4 ·</b> Prototypes<small>and what <code>class</code> is hiding</small></li>
-          <li><b>5 ·</b> Modules and bundling<small>what <code>import</code> actually does at runtime</small></li>
-        </ul>
-      </div>
-      <div>
-        <ul class="plist">
-          <li><b>6 ·</b> Callbacks → promises → async/await<small>and the states in between</small></li>
-          <li><b>7 ·</b> Error handling across async boundaries<small>the <code>try</code> that catches nothing</small></li>
-          <li><b>8 ·</b> Memory, references and the leak<small>your SPA has right now</small></li>
-          <li><b>9 ·</b> The toolbelt, part 1<small>debounce and throttle, from zero</small></li>
-          <li><b>10 ·</b> The toolbelt, part 2<small>deepClone, EventEmitter, promiseAll — the build</small></li>
-        </ul>
-      </div>
-    </div>
+    <h2>Six lessons</h2>
+    <ul class="plist">
+      <li><b>1 ·</b> Execution contexts and scope<small>drawn, not described</small></li>
+      <li><b>2 ·</b> Closures<small>how a callback remembers, and what it keeps alive</small></li>
+      <li><b>3 ·</b> <code>this</code> and prototypes<small>the call site, and what <code>class</code> hides</small></li>
+      <li><b>4 ·</b> Modules and async<small><code>import</code> at runtime, promises, combinators</small></li>
+      <li><b>5 ·</b> Errors and memory<small>the <code>try</code> that catches nothing, and the leak</small></li>
+      <li><b>6 ·</b> The toolbelt<small>debounce, throttle, EventEmitter — from an empty file</small></li>
+    </ul>
     <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard" target="_blank" rel="noopener"><b>The repo</b><span class="br">frontend-mastery-jobboard</span><i>every exercise in this module · open on GitHub ↗</i></a>
   </section>
 
-  <!-- MODULE 03 · VIDEO 1 · v1-4 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>04</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 1 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>03</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 1 · what a call actually costs</div>
     <h2>Every function call pushes a context</h2>
-    <div class="two tight">
+    <div class="two tight stk" id="stk">
       <div>
-        <pre><code><span class="kw">const</span> app = <span class="st">'rasmi'</span>
+        <pre class="stk-code"><code><span data-l="1"><span class="kw">const</span> app = <span class="st">'rasmi'</span></span>
 
-<span class="kw">function</span> <span class="fn">outer</span>() {
-  <span class="kw">const</span> user = <span class="st">'ahmed'</span>
-  <span class="kw">function</span> <span class="fn">inner</span>() {
-    <span class="kw">const</span> page = <span class="st">2</span>
-    <span class="kw">return</span> [app, user, page]   <span class="cmt">// ← all three resolve</span>
+<span data-l="2"><span class="kw">function</span> <span class="fn">outer</span>() {</span>
+<span data-l="3">  <span class="kw">const</span> user = <span class="st">'ahmed'</span></span>
+<span data-l="4">  <span class="kw">function</span> <span class="fn">inner</span>() {</span>
+<span data-l="5">    <span class="kw">const</span> page = <span class="st">2</span></span>
+<span data-l="6">    <span class="kw">return</span> [app, user, page]</span>
   }
-  <span class="kw">return</span> <span class="fn">inner</span>()
+<span data-l="7">  <span class="kw">return</span> <span class="fn">inner</span>()</span>
 }</code></pre>
       </div>
       <div>
-        <div class="fig" style="max-width:420px; margin-top:0">
-          <svg viewBox="0 0 420 210" role="img" aria-label="Call stack with global, outer and inner execution contexts">
-            <rect x="10" y="4" width="400" height="56" rx="9" fill="#0C2733" stroke="#22D3EE"/>
-            <text x="30" y="28" class="lbl b" font-size="14">inner()</text>
-            <text x="30" y="48" class="lbl s">page · [[Environment]] → outer</text>
-            <rect x="10" y="70" width="400" height="56" rx="9" fill="#121C30" stroke="#243349"/>
-            <text x="30" y="94" class="lbl b" font-size="14">outer()</text>
-            <text x="30" y="114" class="lbl s">user · [[Environment]] → global</text>
-            <rect x="10" y="136" width="400" height="56" rx="9" fill="#121C30" stroke="#243349"/>
-            <text x="30" y="160" class="lbl b" font-size="14">global</text>
-            <text x="30" y="180" class="lbl s">app · [[Environment]] → null</text>
-          </svg>
+        <div class="stk-stage">
+          <div class="stk-frame" data-f="inner"><b>inner()</b><small>page · [[Environment]] → outer</small></div>
+          <div class="stk-frame" data-f="outer"><b>outer()</b><small>user · [[Environment]] → global</small></div>
+          <div class="stk-frame" data-f="global"><b>global</b><small>app · [[Environment]] → null</small></div>
+        </div>
+        <div class="stk-bar">
+          <button type="button" class="stk-btn" data-act="prev">‹</button>
+          <span class="stk-say" id="stkSay"></span>
+          <button type="button" class="stk-btn" data-act="next">›</button>
+          <button type="button" class="stk-btn" data-act="play">replay</button>
         </div>
       </div>
     </div>
-    <div class="key">Two things are created per call: an <b>environment record</b> holding that call's own bindings, and a pointer to the environment where the function was <b>defined</b>. The pointer is the scope chain — and it is set at definition time, not call time.</div>
+    <div class="key">Per call: an <b>environment record</b>, plus a pointer to where the function was <b>defined</b>. That pointer is the scope chain — set at definition, not at call.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 1 · v1-5 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>05</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 1 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 1"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 1</div><div class="cx-page"><b>04</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 1 · proof, in six lines</div>
     <h2>Lexical, not dynamic</h2>
     <div class="two tight">
@@ -344,15 +486,8 @@
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 2 · v2-1 -->
-  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>06</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 2 of 10</div>
-    <h1 class="cy">Closures</h1>
-    <div class="sub">Not a trick question. The mechanism by which a callback still knows what it was holding when it was created.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 2 · v2-2 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>07</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 2 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>05</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The definition that survives an interview</div>
     <h2>A function plus the environment it was born in</h2>
     <div class="two tight">
@@ -365,7 +500,7 @@
 <span class="kw">const</span> a = <span class="fn">counter</span>(), b = <span class="fn">counter</span>()
 <span class="fn">a</span>(); <span class="fn">a</span>()   <span class="ok">// 1, 2</span>
 <span class="fn">b</span>()        <span class="ok">// 1  — a separate record</span></code></pre>
-        <div class="key"><code>counter</code> returned and its stack frame popped — but its <b>environment record did not die</b>, because the returned function still points at it. That is the whole trick.</div>
+        <div class="key">The frame popped; the <b>environment record did not die</b>, because the returned function still points at it.</div>
       </div>
       <div>
         <h3 class="w">The classic, and why it changed</h3>
@@ -380,8 +515,8 @@
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 2 · v2-3 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>08</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 2 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>06</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Where you already rely on it</div>
     <h2>Three shapes, one mechanism</h2>
     <div class="three">
@@ -410,66 +545,8 @@ store.state  <span class="no">// undefined</span></code></pre>
     <div class="key g">If you can explain the counter on the last slide, you can already write <code>debounce</code>. Lesson 9 adds the timer, not the idea.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 2 · 17 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>09</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 2 · closures as a creation strategy</div>
-    <h2>Object creation without constructor coupling</h2>
-    <div class="two tight">
-      <div>
-        <div class="sub" style="font-size:min(2vw,22px); margin-top:0">A function that manufactures objects without exposing instantiation logic.</div>
-        <pre><code><span class="kw">const</span> <span class="fn">createUser</span> = ({ name, role, permissions = [] }) =&gt; {
-  <span class="cmt">// private state hidden in closure</span>
-  <span class="kw">const</span> createdAt = <span class="kw">new</span> <span class="ty">Date</span>();
-
-  <span class="kw">return</span> {
-    name,
-    role,
-    <span class="fn">can</span>(action) {
-      <span class="kw">return</span> permissions.includes(action) || role === <span class="st">'admin'</span>;
-    },
-    <span class="fn">getCreatedDate</span>() { <span class="kw">return</span> createdAt; }
-  };
-};
-
-<span class="kw">const</span> admin = <span class="fn">createUser</span>({ name: <span class="st">'Sara'</span>, role: <span class="st">'admin'</span> });
-admin.can(<span class="st">'delete_user'</span>); <span class="cmt">// true</span></code></pre>
-      </div>
-      <div class="card b">
-        <h3 class="b">When Factory Functions Excel</h3>
-        <p><b>1 · No <code>new</code> Keyword:</b> Callers can't accidentally invoke without <code>new</code> and pollute <code>window</code>.</p>
-        <p style="margin-top:10px"><b>2 · Dynamic Typing:</b> Can return completely different object shapes based on input parameters.</p>
-        <p style="margin-top:10px"><b>3 · Pure Composition:</b> Objects can be created by spreading mixins rather than deep class inheritance hierarchies.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 2 · 18 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>10</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 2 · closures vs prototypes</div>
-    <h2>Factory functions vs ES6 Classes</h2>
-    <div class="two">
-      <div class="card b">
-        <h3 class="b">Factory Functions</h3>
-        <ul class="plist">
-          <li>No <code>this</code> headaches<small>Methods are arrow functions or bound closures; never lose context when passed as callbacks</small></li>
-          <li>Real encapsulation<small>Variables in scope are truly private without needing `#` syntax</small></li>
-          <li>Easy composition<small>Compose behavior with <code>Object.assign</code> or spread</small></li>
-        </ul>
-      </div>
-      <div class="card p">
-        <h3 class="p">ES6 Classes</h3>
-        <ul class="plist">
-          <li>Memory efficient<small>Methods live on <code>prototype</code>, shared across millions of instances</small></li>
-          <li>Native engine fast-path<small>V8 optimizes shape transitions and prototype lookups</small></li>
-          <li><code>instanceof</code> checks<small>Clear type hierarchy in runtime introspection</small></li>
-        </ul>
-      </div>
-    </div>
-    <div class="key">If you need 10 instances with bulletproof callbacks: <b>Factory</b>. If you need 100,000 instances with high throughput: <b>Class</b>.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 2 · v2-4 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>11</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 2 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>07</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The other edge of the same knife</div>
     <h2>What the closure keeps alive</h2>
     <div class="two">
@@ -494,34 +571,8 @@ admin.can(<span class="st">'delete_user'</span>); <span class="cmt">// true</spa
     <div class="key w">"A memory leak is a closure that remembered something nobody asked it to." Lesson 8 measures exactly this.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 2 · 19 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 2"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 2</div><div class="cx-page"><b>12</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 2 · what the closure costs</div>
-    <h2>The hidden memory cost of closures</h2>
-    <div class="sub">Creating methods inside factory functions duplicates function closures in V8 heap memory.</div>
-    <div class="two">
-      <div class="card w">
-        <h3 class="w">Factory: Methods Recreated Per Instance</h3>
-        <p>If <code>createWidget()</code> creates 10,000 widgets and defines <code>render()</code> and <code>update()</code> inside, V8 creates <b>20,000 distinct function instances</b> in memory, each with its own lexical scope closure.</p>
-      </div>
-      <div class="card g">
-        <h3 class="g">Prototype: Methods Shared on Class Prototype</h3>
-        <p>If <code>class Widget</code> defines <code>render()</code> and <code>update()</code>, V8 creates <b>2 function instances total</b> on <code>Widget.prototype</code>. All 10,000 instances only hold a pointer to the prototype.</p>
-      </div>
-    </div>
-    <div class="say">In frontend applications, this rarely matters for 20 UI controls. But for data tables, virtualized lists, or canvas nodes with 50,000 items, closures can exhaust browser VRAM and heap.</div>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/factory" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/factory</span><i>factory.ts — closure privacy vs prototype memory · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 3 · v3-1 -->
-  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>13</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 3 of 10</div>
-    <h1 class="cy">this</h1>
-    <div class="sub">Not the object it lives in. Not the file it was written in. The way it was called, one call at a time.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 3 · v3-2 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>14</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 3 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>08</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Read the call, not the definition</div>
     <h2>Four rules, checked in this order</h2>
     <div class="two tight">
@@ -532,23 +583,28 @@ admin.can(<span class="st">'delete_user'</span>); <span class="cmt">// true</spa
 obj.<span class="fn">who</span>()                  <span class="cmt">// 2 · implicit</span>
 <span class="fn">who</span>.call(other)            <span class="cmt">// 3 · explicit</span>
 <span class="kw">new</span> <span class="fn">Who</span>()                  <span class="cmt">// 4 · construction</span></code></pre>
-        <div class="key w">Arrow functions are not on this list. They have no <code>this</code> of their own — they read it from the enclosing scope, like any other variable. That is why they cannot be used as methods, and why they are perfect as callbacks.</div>
+        <div class="key w">Arrows are not on this list: no <code>this</code> of their own, read from the enclosing scope. Bad methods, perfect callbacks.</div>
       </div>
-      <div>
-        <table class="grid">
-          <tr><th>Call shape</th><th><code>this</code> is</th></tr>
-          <tr><td><code>new Fn()</code></td><td><b>The new object</b> — wins over everything</td></tr>
-          <tr><td><code>fn.call(x)</code> / <code>.apply</code> / <code>.bind</code></td><td><b>x</b> — explicit beats implicit</td></tr>
-          <tr><td><code>obj.fn()</code></td><td><b>obj</b> — whatever is left of the dot</td></tr>
-          <tr><td><code>fn()</code></td><td><b><code>undefined</code></b> in modules and strict mode; the global object in sloppy scripts</td></tr>
-          <tr><td><code>() =&gt; this</code></td><td>Whatever <code>this</code> was <b>where the arrow was written</b></td></tr>
-        </table>
+      <div class="ths" id="ths">
+        <div class="ths-seg">
+          <button type="button" class="ths-b on" data-k="plain">who()</button>
+          <button type="button" class="ths-b" data-k="method">obj.who()</button>
+          <button type="button" class="ths-b" data-k="torn">const f = obj.who; f()</button>
+          <button type="button" class="ths-b" data-k="call">who.call(other)</button>
+          <button type="button" class="ths-b" data-k="new">new Who()</button>
+          <button type="button" class="ths-b" data-k="arrow">obj.arrow()</button>
+        </div>
+        <div class="ths-out">
+          <span class="ths-lab">this &rarr;</span>
+          <b id="thsVal">undefined</b>
+        </div>
+        <div class="ths-say" id="thsSay"></div>
       </div>
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 3 · v3-3 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>15</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 3 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>09</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The bug you have shipped at least once</div>
     <h2>A method passed by reference loses its dot</h2>
     <div class="two tight">
@@ -575,67 +631,8 @@ input.addEventListener(<span class="st">'input'</span>, s.handle)
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 3 · 10 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>16</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 3 · the receiver, at the object-model level</div>
-    <h2>Why Proxy without Reflect is broken</h2>
-    <div class="sub">The trap most developers fall into: using <code>target[prop]</code> inside a Proxy.</div>
-    <div class="two tight">
-      <pre><code><span class="kw">const</span> parent = {
-  _val: 10,
-  <span class="kw">get</span> <span class="fn">val</span>() { <span class="kw">return</span> <span class="kw">this</span>._val; }
-};
-
-<span class="kw">const</span> proxy = <span class="kw">new</span> <span class="ty">Proxy</span>(parent, {
-  <span class="fn">get</span>(target, prop, receiver) {
-    <span class="cmt">// BUG: target[prop] executes getter with 'this === parent'</span>
-    <span class="cmt">// FIX: Reflect.get passes 'receiver' so 'this === child'</span>
-    <span class="kw">return</span> <span class="ty">Reflect</span>.get(target, prop, receiver);
-  }
-});
-
-<span class="kw">const</span> child = <span class="ty">Object</span>.create(proxy);
-child._val = 42;
-console.log(child.val); <span class="cmt">// 42 with Reflect! (10 without it!)</span></code></pre>
-      <div class="card w">
-        <h3 class="w">The Receiver Invariant</h3>
-        <p>If an object has a getter method, the getter refers to <code>this</code>. When accessing the getter on a derived object, <code>this</code> MUST bind to the derived object (the receiver), not the proxy target!</p>
-        <div class="key w" style="font-size:15px; margin-top:14px">Always pair <code>Proxy</code> with <code>Reflect</code>. Every Proxy trap has an identically named <code>Reflect</code> method that handles internal binding correctly.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 4 · 20 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>17</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 4 of 10</div>
-    <h2>How JavaScript actually inherits</h2>
-    <div class="sub">JavaScript is not a class-based language; it is a prototype delegation engine.</div>
-    <div class="fig" style="max-width:960px">
-      <svg viewBox="0 0 960 160" role="img" aria-label="Prototype delegation chain diagram">
-        <rect x="20" y="50" width="220" height="60" rx="8" fill="#121C30" stroke="#A78BFA" stroke-width="2"/>
-        <text x="130" y="78" text-anchor="middle" class="lbl b" font-size="15">user1 Instance</text>
-        <text x="130" y="98" text-anchor="middle" class="lbl s">name: 'Ali'</text>
-
-        <path d="M242 80 L358 80" stroke="#A78BFA" stroke-width="2"/>
-        <text x="300" y="72" text-anchor="middle" class="lbl s" fill="#A78BFA">[[Prototype]]</text>
-
-        <rect x="360" y="50" width="240" height="60" rx="8" fill="#121C30" stroke="#A78BFA" stroke-width="2"/>
-        <text x="480" y="78" text-anchor="middle" class="lbl b" font-size="15">User.prototype</text>
-        <text x="480" y="98" text-anchor="middle" class="lbl s">login(), logout()</text>
-
-        <path d="M602 80 L718 80" stroke="#A78BFA" stroke-width="2"/>
-        <text x="660" y="72" text-anchor="middle" class="lbl s" fill="#A78BFA">[[Prototype]]</text>
-
-        <rect x="720" y="50" width="220" height="60" rx="8" fill="#0E1525" stroke="#243349"/>
-        <text x="830" y="78" text-anchor="middle" class="lbl b" font-size="15">Object.prototype</text>
-        <text x="830" y="98" text-anchor="middle" class="lbl s">toString(), hasOwnProperty()</text>
-      </svg>
-    </div>
-    <div class="key p">When reading <code>user1.login()</code>, V8 checks <code>user1</code>. Property missing? It walks up <code>[[Prototype]]</code> to <code>User.prototype</code> and finds it. Only if the chain hits <code>null</code> does it return <code>undefined</code>.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 4 · 21 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>18</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 3 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>10</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 4 · delegation, without classes</div>
     <h2>Inheritance without classes or constructors</h2>
     <div class="two tight">
@@ -656,13 +653,13 @@ console.log(<span class="ty">Object</span>.getPrototypeOf(userA) === protoUser);
       <div class="card p">
         <h3 class="p">Differential Inheritance</h3>
         <p><code>userA</code> only stores what makes it unique (<code>name</code>, <code>role</code>). All behavioral methods reside on <code>protoUser</code>.</p>
-        <div class="say" style="margin-top:14px">This is the essence of the <b>Prototype Pattern</b> from the Gang of Four book: creating new objects by cloning or delegating to a prototype archetype rather than invoking heavy constructor classes.</div>
+        <div class="say" style="margin-top:14px">The <b>Prototype Pattern</b>: new objects by delegating to an archetype, not by invoking a constructor.</div>
       </div>
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 4 · 22 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>19</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 3 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>11</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 4 · what <code>class</code> is hiding</div>
     <h2>What 'class' is actually hiding</h2>
     <div class="two tight">
@@ -689,36 +686,11 @@ console.log(<span class="ty">Object</span>.getPrototypeOf(userA) === protoUser);
 console.log(<span class="kw">typeof</span> <span class="ty">User</span>); <span class="cmt">// 'function'</span></code></pre>
       </div>
     </div>
-    <div class="key">Interview question: "Does JavaScript have true classes?"<br>
-    <b>Answer:</b> No. Classes in JS are syntactic sugar over constructor functions and prototypal delegation chains. They introduce strict mode and block invocation without <code>new</code>, but the runtime inheritance model is 100% prototypal.</div>
+    <div class="key">"Does JavaScript have true classes?" No — sugar over constructor functions and prototype chains. The runtime model is prototypal.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 4 · 23 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>20</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 4 · measured, not argued</div>
-    <h2>Memory benchmark: 10,000 instances measured</h2>
-    <div class="two">
-      <table class="grid">
-        <thead>
-          <tr><th>Approach</th><th>10,000 Objects Heap</th><th>Function Instances</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><b>Factory with Closures</b></td><td><b class="r">~18.2 MB</b></td><td>30,000 closures</td></tr>
-          <tr><td><b>Class / Prototype</b></td><td><b class="g">~1.8 MB</b></td><td>3 prototype methods</td></tr>
-          <tr><td><b>Object.create(proto)</b></td><td><b class="g">~1.4 MB</b></td><td>3 prototype methods</td></tr>
-        </tbody>
-      </table>
-      <div class="card g">
-        <h3 class="g">The 90% Heap Reduction</h3>
-        <p>By placing functions on the prototype instead of in instance closures, you reduce the heap allocation by an order of magnitude.</p>
-        <p style="margin-top:10px">When an interviewer asks: <i>"Why would I ever use prototype methods when closures are simpler to write?"</i> — this table is your senior answer.</p>
-      </div>
-    </div>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/prototype" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/prototype</span><i>prototype.ts — delegation, and the 10,000-instance benchmark · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 4 · 09 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>21</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 3 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 3"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 3</div><div class="cx-page"><b>12</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 4 · intercepting the object model</div>
     <h2>Intercept and control property access</h2>
     <div class="two tight">
@@ -757,90 +729,8 @@ userProxy.age = <span class="st">'thirty'</span>; <span class="cmt">// throws Ty
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 4 · 11 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>22</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 4 · where interception ships</div>
-    <h2>How Vue 3 and MobX build reactivity</h2>
-    <div class="two">
-      <div>
-        <div class="sub" style="font-size:min(2vw,22px); margin-top:0">A reactive system in 12 lines of code:</div>
-        <pre><code><span class="kw">let</span> activeEffect = <span class="kw">null</span>;
-<span class="kw">const</span> targetMap = <span class="kw">new</span> <span class="ty">WeakMap</span>();
-
-<span class="kw">function</span> <span class="fn">reactive</span>(obj) {
-  <span class="kw">return</span> <span class="kw">new</span> <span class="ty">Proxy</span>(obj, {
-    <span class="fn">get</span>(target, key, receiver) {
-      <span class="fn">track</span>(target, key); <span class="cmt">// collect activeEffect</span>
-      <span class="kw">return</span> <span class="ty">Reflect</span>.get(target, key, receiver);
-    },
-    <span class="fn">set</span>(target, key, val, receiver) {
-      <span class="kw">const</span> res = <span class="ty">Reflect</span>.set(target, key, val, receiver);
-      <span class="fn">trigger</span>(target, key); <span class="cmt">// re-run subscribers!</span>
-      <span class="kw">return</span> res;
-    }
-  });
-}</code></pre>
-      </div>
-      <div class="card a">
-        <h3 class="cy">Why Vue 3 Ditched Object.defineProperty</h3>
-        <p><b>1 · Dynamic Keys:</b> <code>defineProperty</code> had to walk all existing keys on boot. Adding a new key required <code>Vue.set()</code>. Proxies intercept dynamically added keys instantly.</p>
-        <p style="margin-top:10px"><b>2 · Array Mutations:</b> Proxies intercept <code>arr.push()</code> and index access without monkey-patching prototype methods.</p>
-        <p style="margin-top:10px"><b>3 · Lazy Evaluation:</b> Nested objects are only proxied when accessed, not all at initialization.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 4 · 12 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>23</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 4 · the cost of interception</div>
-    <h2>The performance cost of interception</h2>
-    <div class="two">
-      <div class="card r">
-        <h3 class="r">The V8 Optimization Barrier</h3>
-        <p>V8 optimizes object access using <b>Inline Caches (IC)</b> and hidden classes (shapes). When a property access is trapped by a Proxy, V8 cannot generate fast-path machine code.</p>
-        <p style="margin-top:8px">Accessing properties through a Proxy can be <b>5x to 15x slower</b> than direct object access. Never put a Proxy inside an animation frame or a math loop.</p>
-      </div>
-      <div class="card w">
-        <h3 class="w">Identity &amp; Equality Pitfalls</h3>
-        <p><code>proxy !== target</code>. If a map uses objects as keys, setting the target and getting by the proxy returns <code>undefined</code>.</p>
-        <p style="margin-top:8px">Private class fields (<code>#private</code>) throw a <code>TypeError</code> when accessed through a proxy unless bound explicitly.</p>
-      </div>
-    </div>
-    <div class="key">Use Proxies at architectural boundaries (API client, state store, schema validation), never inside hot arithmetic or rendering loops.</div>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/proxy" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/proxy</span><i>proxy.ts — traps, Reflect, and the validation suite · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 5 · 04 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>24</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 5 of 10</div>
-    <h2>Encapsulation before the platform had it</h2>
-    <div class="two tight">
-      <div>
-        <div class="sub" style="font-size:min(2.1vw,23px); margin-top:0">For 20 years, closures were JavaScript's only tool for true private state.</div>
-        <pre><code><span class="cmt">// The Revealing Module Pattern (IIFE)</span>
-<span class="kw">const</span> <span class="ty">CartModule</span> = (<span class="kw">function</span>() {
-  <span class="kw">let</span> items = []; <span class="cmt">// private state in closure</span>
-
-  <span class="kw">function</span> <span class="fn">add</span>(item) { items.push(item); }
-  <span class="kw">function</span> <span class="fn">count</span>() { <span class="kw">return</span> items.length; }
-
-  <span class="kw">return</span> { add, count }; <span class="cmt">// public API</span>
-})();
-
-<span class="ty">CartModule</span>.add(<span class="st">'Laptop'</span>);
-<span class="ty">CartModule</span>.items; <span class="cmt">// undefined! completely private</span></code></pre>
-      </div>
-      <div class="card a">
-        <h3 class="cy">The Mechanics of IIFE</h3>
-        <p><b>1 · Global Namespace Isolation:</b> Variables stay off <code>window</code>.</p>
-        <p style="margin-top:10px"><b>2 · Closure Memory Retention:</b> The returned object maintains a reference to the enclosing lexical environment.</p>
-        <p style="margin-top:10px"><b>3 · Selective Exposure:</b> Implementation details remain strictly internal.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 5 · 05 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>25</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 4 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>13</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 5 · at runtime</div>
     <h2>What 'import' actually does at runtime</h2>
     <div class="two tight">
@@ -864,68 +754,11 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
         </ul>
       </div>
     </div>
-    <div class="key">CommonJS copies values; ESM links <b>live bindings</b> during instantiation — which is why circular imports resolve safely there and return half-built objects in CommonJS.</div>
+    <div class="key">CommonJS copies values; ESM links <b>live bindings</b> — which is why circular imports resolve there and half-build in CommonJS.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 5 · 06 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>26</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 5 · what the bundler does with it</div>
-    <h2>Tree-shaking &amp; static vs dynamic import</h2>
-    <div class="two">
-      <div class="card a">
-        <h3 class="cy">Static Import: <code>import { x } from './m'</code></h3>
-        <p>Must be at the top level. Evaluated before code execution. Because the AST knows every import statically, bundlers (Rollup, Vite, Webpack) can safely eliminate unused exports (<b>tree-shaking</b>).</p>
-      </div>
-      <div class="card b">
-        <h3 class="b">Dynamic Import: <code>import('./m')</code></h3>
-        <p>Returns a Promise. Evaluated on demand at runtime. Allows route-based code splitting, but cannot be analyzed for dead code before runtime.</p>
-      </div>
-    </div>
-    <div class="say"><b>Rule of thumb:</b> Use static imports for core domain logic and shared types. Use dynamic <code>import()</code> for route chunks, heavy chart libraries, or conditional user flows.</div>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/module-live-bindings" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/module-live-bindings</span><i>live-bindings.ts — ESM bindings vs CommonJS copies · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 5 · 07 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>27</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 5 · a module instance is a singleton</div>
-    <h2>Only one instance, accessible everywhere</h2>
-    <div class="two tight">
-      <pre><code><span class="cmt">// Implementation via ES Class + Object.freeze</span>
-<span class="kw">let</span> instance = <span class="kw">null</span>;
-
-<span class="kw">class</span> <span class="ty">DBConnection</span> {
-  <span class="kw">constructor</span>(uri) {
-    <span class="kw">if</span> (instance) {
-      <span class="kw">throw</span> <span class="kw">new</span> <span class="ty">Error</span>(<span class="st">'Use DBConnection.getInstance()'</span>);
-    }
-    <span class="kw">this</span>.uri = uri;
-    instance = <span class="kw">this</span>;
-    <span class="ty">Object</span>.freeze(<span class="kw">this</span>);
-  }
-
-  <span class="kw">static</span> <span class="fn">getInstance</span>(uri) {
-    <span class="kw">if</span> (!instance) instance = <span class="kw">new</span> <span class="ty">DBConnection</span>(uri);
-    <span class="kw">return</span> instance;
-  }
-}</code></pre>
-      <div>
-        <div class="card w">
-          <h3 class="w">In Node/Browser Modules:</h3>
-          <p>An exported object literal from an ES Module is <b>already a singleton</b> by default:</p>
-          <pre style="margin-top:10px; font-size:13.5px"><code><span class="cmt">// logger.js</span>
-<span class="kw">export</span> <span class="kw">const</span> logger = {
-  logs: [],
-  <span class="fn">log</span>(msg) { <span class="kw">this</span>.logs.push(msg); }
-};
-<span class="ty">Object</span>.freeze(logger);</code></pre>
-        </div>
-        <div class="say" style="margin-top:14px">Because Node and browsers cache imported module instances, importing <code>logger</code> in 10 files gives all 10 files the exact same object reference.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 5 · 08 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>28</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 4 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>14</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 5 · why that bites on the server</div>
     <h2>Why senior engineers call it an anti-pattern</h2>
     <div class="three">
@@ -946,15 +779,8 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
     <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/singleton" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/singleton</span><i>singleton.ts — module instances, and where they leak · open on GitHub ↗</i></a>
   </section>
 
-  <!-- MODULE 03 · VIDEO 6 · v6-1 -->
-  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>29</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 6 of 10</div>
-    <h1 class="cy">Callbacks →<br>promises → async</h1>
-    <div class="sub">Three syntaxes over one mechanism. The states in between are what interviews actually probe.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 6 · v6-2 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>30</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 4 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>15</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">One object, three states, one transition</div>
     <h2>A promise settles once, and never moves again</h2>
     <div class="fig" style="max-width:920px">
@@ -978,11 +804,11 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
         <text x="761" y="112" text-anchor="middle" class="lbl s">stored result, on the microtask queue</text>
       </svg>
     </div>
-    <div class="key">Two consequences people miss: a promise <b>starts executing the moment it is created</b>, not when you await it — and attaching <code>.then</code> to an already-settled promise still defers to a microtask, never runs synchronously.</div>
+    <div class="key">A promise <b>starts the moment it is created</b>, not when you await it — and <code>.then</code> on a settled promise still defers to a microtask.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 6 · v6-3 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>31</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 4 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>16</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The same fetch, written three ways</div>
     <h2>await is a <span class="cy">.then</span> you can read top to bottom</h2>
     <div class="two tight">
@@ -1005,64 +831,43 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
     <span class="fn">render</span>(jobs)
   } <span class="kw">catch</span> (e) { <span class="fn">fail</span>(e) }
 }</code></pre>
-        <div class="key r">These two <code>await</code>s are dependent, so serial is correct. Two <b>independent</b> awaits written this way cost the sum of both round trips for nothing — start them together instead: <code>await Promise.all([getJobs(), getFilters()])</code>.</div>
+        <div class="key r">Dependent awaits belong in series. Independent ones cost both round trips for nothing — <code>await Promise.all([getJobs(), getFilters()])</code>.</div>
       </div>
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 6 · v6-4 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>32</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 4 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 4"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 4</div><div class="cx-page"><b>17</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">The four combinators, and when each is right</div>
     <h2>Pick by what failure should mean</h2>
-    <table class="grid">
-      <tr><th>Combinator</th><th>Settles when</th><th>Use it for</th></tr>
-      <tr><td><code class="g">Promise.all</code></td><td>All fulfil — or <b>the first rejects</b></td><td>Data the page cannot render without. One failure should fail the screen.</td></tr>
-      <tr><td><code class="cy">Promise.allSettled</code></td><td>Every promise finishes, whatever the outcome</td><td>A dashboard of independent widgets. One dead endpoint must not blank the rest.</td></tr>
-      <tr><td><code class="w">Promise.race</code></td><td>The first to <b>settle</b>, fulfilled or rejected</td><td>Timeouts: race the request against a rejecting timer.</td></tr>
-      <tr><td><code class="p">Promise.any</code></td><td>The first to <b>fulfil</b>; rejects only if all do</td><td>Mirrors and fallbacks — take whichever source answers first.</td></tr>
+    <table class="grid tight-t">
+      <tr><td><code class="g">Promise.all</code></td><td>All fulfil — or <b>the first rejects</b></td></tr>
+      <tr><td><code class="cy">Promise.allSettled</code></td><td>Every promise finishes, whatever the outcome</td></tr>
+      <tr><td><code class="w">Promise.race</code></td><td>The first to <b>settle</b>, either way</td></tr>
+      <tr><td><code class="p">Promise.any</code></td><td>The first to <b>fulfil</b>; rejects only if all do</td></tr>
     </table>
-    <div class="key w"><code>Promise.all</code> rejects on the first failure but <b>does not cancel</b> the others — they keep running and their results are discarded. Cancellation is <code>AbortController</code>, and it is a separate decision.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 7 · v7-1 -->
-  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 7</div><div class="cx-page"><b>33</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 7 of 10</div>
-    <h1 class="cy">Errors across<br>async boundaries</h1>
-    <div class="sub">Every <span class="mono">try</span> that catches nothing is the same mistake: the throw happened in a different turn of the loop.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 7 · v7-2 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 7</div><div class="cx-page"><b>34</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The try that catches nothing</div>
-    <h2>A callback throws into an empty stack</h2>
-    <div class="two tight">
-      <div>
-        <pre><code><span class="kw">try</span> {
-  setTimeout(() =&gt; {
-    <span class="kw">throw new</span> <span class="ty">Error</span>(<span class="st">'boom'</span>)
-  }, <span class="st">0</span>)
-} <span class="kw">catch</span> (e) {
-  <span class="no">// never runs</span>
-}</code></pre>
-        <div class="key r">By the time the callback runs, the <code>try</code> block has returned and its frame is gone. The throw lands on a fresh, empty stack and becomes an uncaught error on <code>window</code>.</div>
+    <div class="cmb" id="cmb">
+      <div class="cmb-seg">
+        <button type="button" class="cmb-b on" data-k="all">all</button>
+        <button type="button" class="cmb-b" data-k="allSettled">allSettled</button>
+        <button type="button" class="cmb-b" data-k="race">race</button>
+        <button type="button" class="cmb-b" data-k="any">any</button>
       </div>
-      <div>
-        <pre><code><span class="cmt">// the async version — this one works</span>
-<span class="kw">try</span> {
-  <span class="kw">await</span> <span class="fn">save</span>()      <span class="ok">// ✓ caught</span>
-} <span class="kw">catch</span> (e) { <span class="fn">report</span>(e) }
-
-<span class="cmt">// but this one does not</span>
-<span class="kw">try</span> {
-  <span class="fn">save</span>()            <span class="no">// no await → unhandled rejection</span>
-} <span class="kw">catch</span> (e) { <span class="fn">report</span>(e) }</code></pre>
-        <div class="key g"><code>await</code> is what re-attaches the rejection to your stack. Drop the <code>await</code> and you have dropped the <code>catch</code> with it — the single most common version of this bug.</div>
+      <div class="cmb-rows">
+        <div class="cmb-row" data-p="0"><b>fast</b><span>120ms · rejects</span><i></i></div>
+        <div class="cmb-row" data-p="1"><b>slow</b><span>900ms · fulfils</span><i></i></div>
+        <div class="cmb-row" data-p="2"><b>middle</b><span>500ms · fulfils</span><i></i></div>
+      </div>
+      <div class="cmb-bar">
+        <button type="button" class="cmb-run">run</button>
+        <span class="cmb-out" id="cmbOut">Pick a combinator, then run it.</span>
       </div>
     </div>
+    <div class="key w"><code>Promise.all</code> rejects on the first failure but <b>cancels nothing</b> — watch the other two keep going.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 7 · v7-3 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 7</div><div class="cx-page"><b>35</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 5 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>18</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">fetch · the rejection that never comes</div>
     <h2>A 500 is a successful request</h2>
     <div class="two tight">
@@ -1085,11 +890,11 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
         <div class="key g">One wrapper, used everywhere. Now a 404 and a dropped connection arrive at the same <code>catch</code>, carrying enough information to tell them apart.</div>
       </div>
     </div>
-    <div class="say">The same asymmetry bites in the other direction: <code>res.json()</code> on an empty 204 body throws, and an aborted request rejects with an <code>AbortError</code> you almost always want to <b>swallow</b>, not report.</div>
+    <div class="say">It bites the other way too: <code>res.json()</code> on a 204 throws, and an abort rejects with an <code>AbortError</code> you want to swallow.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 7 · v7-4 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 7"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 7</div><div class="cx-page"><b>36</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 5 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>19</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Where to catch, and what to say</div>
     <h2>Three boundaries, three jobs</h2>
     <div class="three">
@@ -1106,47 +911,11 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
         <p><code>unhandledrejection</code> and <code>window.onerror</code> feed your telemetry. This is a smoke alarm, not a fire extinguisher — anything reaching here is a bug in the two above.</p>
       </div>
     </div>
-    <div class="key">"Async errors only reach a <code>try</code> if the throw happens in the same turn of the loop — which for promises means I have to <code>await</code> them. So I put one boundary per feature, wrap <code>fetch</code> so an HTTP status becomes a real rejection, and let anything past that reach telemetry rather than the user."</div>
+    <div class="key">"A <code>try</code> only catches a throw in the same turn of the loop — so I <code>await</code>, wrap <code>fetch</code> so a status becomes a rejection, and give each feature one boundary."</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 8 · v8-1 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 8</div><div class="cx-page"><b>37</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 8 of 10 · the only rule the collector has</div>
-    <h2>Garbage collection is reachability, not scope</h2>
-    <div class="two tight">
-      <div>
-        <div class="fig" style="max-width:440px; margin-top:0">
-          <svg viewBox="0 0 440 180" role="img" aria-label="Roots reach some objects; unreachable objects are collected">
-            <rect x="0" y="66" width="120" height="48" rx="9" fill="#0C2733" stroke="#22D3EE"/>
-            <text x="60" y="88" text-anchor="middle" class="lbl b" font-size="13">GC roots</text>
-            <text x="60" y="105" text-anchor="middle" class="lbl s">globals · stack</text>
-            <path class="draw" pathLength="1" d="M126 80 L186 44" stroke="#64748B" stroke-width="2"/>
-            <path class="draw" pathLength="1" d="M126 96 L186 132" stroke="#64748B" stroke-width="2"/>
-            <rect x="192" y="20" width="120" height="44" rx="9" fill="#121C30" stroke="#34D399"/>
-            <text x="252" y="47" text-anchor="middle" class="lbl b" font-size="13">kept</text>
-            <rect x="192" y="110" width="120" height="44" rx="9" fill="#121C30" stroke="#34D399"/>
-            <text x="252" y="137" text-anchor="middle" class="lbl b" font-size="13">kept</text>
-            <rect x="330" y="64" width="110" height="52" rx="9" fill="#2A1014" stroke="#F8717A" stroke-dasharray="5 5"/>
-            <text x="385" y="86" text-anchor="middle" class="lbl b" font-size="13">unreachable</text>
-            <text x="385" y="104" text-anchor="middle" class="lbl s">collected</text>
-          </svg>
-        </div>
-        <div class="key">"Out of scope" collects nothing. <b>Unreferenced</b> does. A leak in JavaScript is always the same thing: a reference you forgot you were still holding.</div>
-      </div>
-      <div>
-        <h3 class="r">The four that cause almost all of them</h3>
-        <ul class="plist">
-          <li><b>Listeners never removed</b><small>the handler holds the closure, the closure holds the component</small></li>
-          <li><b>Timers never cleared</b><small><code>setInterval</code> is a root until you clear it</small></li>
-          <li><b>Detached DOM nodes</b><small>removed from the document, still held by an array or a closure</small></li>
-          <li><b>Unbounded caches</b><small>a <code>Map</code> that only ever grows — use <code>WeakMap</code> when the key owns the lifetime</small></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 8 · 16 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 8</div><div class="cx-page"><b>38</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 5 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>20</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 8 · the leak your SPA has right now</div>
     <h2>The #1 memory leak in single-page applications</h2>
     <div class="sub">Forgetting to unsubscribe holds entire component trees hostage from Garbage Collection.</div>
@@ -1168,8 +937,8 @@ console.log(count); <span class="cmt">// 1 — live binding reflects update!</sp
     <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/observer" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/observer</span><i>observer.ts — subscribe, unsubscribe, and the leak test · open on GitHub ↗</i></a>
   </section>
 
-  <!-- MODULE 03 · VIDEO 8 · v8-3 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 8</div><div class="cx-page"><b>39</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 5 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 5"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 5</div><div class="cx-page"><b>21</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 8 · the two weak collections</div>
     <h2>When the key should own the lifetime</h2>
     <div class="two tight">
@@ -1193,65 +962,46 @@ node.remove()
           <tr><td><code>Map</code> / <code>Set</code></td><td><b class="r">Yes</b> — strongly</td><td>Yes</td></tr>
           <tr><td><code>WeakMap</code> / <code>WeakSet</code></td><td><b class="g">No</b></td><td>No — and that is the price</td></tr>
         </table>
-        <div class="key">Reach for <code>WeakMap</code> when you are <b>annotating</b> something you do not own: per-node metadata, per-instance private state, a memo keyed by an object argument. Reach for <code>Map</code> when the cache itself is the owner — and then give it a bound.</div>
-        <div class="say"><code>WeakRef</code> and <code>FinalizationRegistry</code> exist too. Both run at the collector's convenience, not yours — worth naming in an interview, worth avoiding in application code.</div>
+        <div class="key"><code>WeakMap</code> when you are <b>annotating</b> something you do not own. <code>Map</code> when the cache is the owner — and then bound it.</div>
+        <div class="say"><code>WeakRef</code> and <code>FinalizationRegistry</code> run at the collector's convenience — name them in an interview, avoid them in app code.</div>
       </div>
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 8 · v8-4 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 8"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 8</div><div class="cx-page"><b>40</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Say this in the interview</div>
-    <h2>Three sentences, and the recipe behind them</h2>
-    <div class="say" style="max-width:62ch; font-size:min(2.15vw,23px)">
-      <p style="margin-bottom:14px"><b class="cy">1 ·</b> JavaScript collects by reachability, so a leak is never "out of scope" — it is a reference I am still holding from a root.</p>
-      <p style="margin-bottom:14px"><b class="cy">2 ·</b> In an SPA the four usual holders are listeners, timers, detached DOM nodes and caches that only grow — so every subscription in my code returns an unsubscribe, and cleanup calls it.</p>
-      <p><b class="cy">3 ·</b> I confirm it rather than guess: baseline snapshot, repeat the interaction ten times, snapshot again, filter for detached nodes and read the retainer chain to the exact closure holding them.</p>
-    </div>
-    <div class="key g">The deliverable for this lesson is a screenshot of a retainer chain from your own app — yours, not mine. Everybody who looks, finds one.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 9 · v9-1 -->
-  <section class="slide" style="justify-content:center" data-chip="MODULE 03 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 9</div><div class="cx-page"><b>41</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 9 of 10 · the toolbelt, part 1</div>
-    <h1 class="cy">debounce<br>&amp; throttle</h1>
-    <div class="sub">The two most-asked utilities in frontend interviews. Both are one closure and one timer — and confusing them is the thing that gets marked.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 9 · v9-2 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 9</div><div class="cx-page"><b>42</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Say the difference before you write a line</div>
-    <h2>Wait for quiet, or allow one per window</h2>
-    <div class="two">
-      <div class="card a">
-        <h3 class="cy">debounce(fn, wait)</h3>
-        <p>Every call <b>resets</b> the timer. <code>fn</code> runs once, <code>wait</code> ms after the last call. Bursty input collapses to a single run.</p>
-        <p style="margin-top:8px"><b>Use for:</b> search-as-you-type, autosave, resize-settled, validating a field after typing stops.</p>
-      </div>
-      <div class="card g">
-        <h3 class="g">throttle(fn, limit)</h3>
-        <p>The first call runs <b>immediately</b>, then further calls are ignored until the window expires. A steady stream becomes a steady rate.</p>
-        <p style="margin-top:8px"><b>Use for:</b> scroll position, mousemove, drag, analytics pings, infinite-scroll checks.</p>
+    <!-- MODULE 03 · VIDEO 6 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>22</b> / 27</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Utility 1 · wait for quiet</div>
+    <h2><span class="cy">debounce</span>(fn, wait)</h2>
+    <p class="say">Every call <b>resets</b> the timer. <code>fn</code> runs once, <code>wait</code> ms after the last call — a burst collapses to a single run.</p>
+    <div class="tl" data-mode="debounce">
+      <div class="tl-row"><span class="tl-lab">events</span><div class="tl-track" data-track="ev"></div></div>
+      <div class="tl-row"><span class="tl-lab cy">debounce</span><div class="tl-track" data-track="out"></div></div>
+      <div class="tl-bar">
+        <button type="button" class="tl-btn">replay</button>
+        <span class="tl-say">Nothing fires until the typing stops.</span>
       </div>
     </div>
-    <div class="fig" style="max-width:940px">
-      <svg viewBox="0 0 940 112" role="img" aria-label="Timeline comparing raw events, debounced and throttled output">
-        <text x="0" y="16" class="lbl s">events</text>
-        <g fill="#94A3B8">
-          <circle cx="90" cy="12" r="4"/><circle cx="118" cy="12" r="4"/><circle cx="146" cy="12" r="4"/><circle cx="174" cy="12" r="4"/><circle cx="240" cy="12" r="4"/><circle cx="268" cy="12" r="4"/><circle cx="296" cy="12" r="4"/><circle cx="324" cy="12" r="4"/><circle cx="352" cy="12" r="4"/><circle cx="470" cy="12" r="4"/><circle cx="498" cy="12" r="4"/><circle cx="526" cy="12" r="4"/>
-        </g>
-        <text x="0" y="60" class="lbl s">debounce</text>
-        <g fill="#22D3EE"><circle cx="234" cy="56" r="5"/><circle cx="412" cy="56" r="5"/><circle cx="586" cy="56" r="5"/></g>
-        <text x="600" y="60" class="lbl s" fill="#22D3EE">only after the burst stops</text>
-        <text x="0" y="104" class="lbl s">throttle</text>
-        <g fill="#34D399"><circle cx="90" cy="100" r="5"/><circle cx="240" cy="100" r="5"/><circle cx="390" cy="100" r="5"/><circle cx="470" cy="100" r="5"/></g>
-        <text x="600" y="104" class="lbl s" fill="#34D399">at most one per window, starting at once</text>
-      </svg>
-    </div>
+    <div class="key">Search-as-you-type, autosave, resize-settled, validating a field after typing stops.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 9 · v9-3 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 9</div><div class="cx-page"><b>43</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 6 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>23</b> / 27</div><!--/catalyst-brand:chrome-->
+    <div class="kicker">Utility 2 · allow one per window</div>
+    <h2><span class="g">throttle</span>(fn, limit)</h2>
+    <p class="say">The first call runs <b>immediately</b>, then everything is ignored until the window expires — a steady stream becomes a steady rate.</p>
+    <div class="tl" data-mode="throttle">
+      <div class="tl-row"><span class="tl-lab">events</span><div class="tl-track" data-track="ev"></div></div>
+      <div class="tl-row"><span class="tl-lab g">throttle</span><div class="tl-track" data-track="out"></div></div>
+      <div class="tl-bar">
+        <button type="button" class="tl-btn">replay</button>
+        <span class="tl-say">Fires at once, then at most once per window.</span>
+      </div>
+    </div>
+    <div class="key g">Scroll position, mousemove, drag, analytics pings, infinite-scroll checks.</div>
+  </section>
+
+  <!-- MODULE 03 · VIDEO 6 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>24</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Live coding · from an empty file</div>
     <h2>Both, in nine lines each</h2>
     <div class="two tight">
@@ -1285,53 +1035,11 @@ node.remove()
 }</code></pre>
       </div>
     </div>
-    <div class="key w">Never write these as arrow functions at the top level — an arrow has no <code>this</code> of its own, so <code>debounce(obj.method)</code> silently loses its receiver. That is lesson 3, cashed in.</div>
+    <div class="key w">Not an arrow at the top level: <code>debounce(obj.method)</code> would silently lose its receiver. Lesson 3, cashed in.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 9 · v9-4 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 9"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 9</div><div class="cx-page"><b>44</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">The follow-up questions · have the answers ready</div>
-    <h2>Four things they ask after it works</h2>
-    <table class="grid">
-      <tr><th>Question</th><th>The answer</th></tr>
-      <tr><td>"What happens on unmount?"</td><td>A pending timer still fires and touches a dead component. Return <code>cancel</code> and call it in cleanup — this is why the utility exposes one.</td></tr>
-      <tr><td>"Leading or trailing edge?"</td><td>Debounce is trailing by default; throttle is leading. Say which you chose and why the other would feel wrong to the user.</td></tr>
-      <tr><td>"Why not <code>requestAnimationFrame</code>?"</td><td>For anything painting per frame — scroll position, drag — rAF is the better throttle: it is aligned to the frame instead of a wall-clock guess.</td></tr>
-      <tr><td>"Does this fix the race?"</td><td><b>No.</b> Debounce reduces the number of requests; out-of-order responses still need an abort or a request id. That is module 7's autocomplete.</td></tr>
-    </table>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/utils/start" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/utils/start</span><i>failing tests for debounce and throttle · /guided, /solution · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 10 · 13 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>45</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 10 of 10 · the toolbelt, part 2</div>
-    <h2>One-to-many decoupled event notifications</h2>
-    <div class="sub">The Subject holds a list of Observers and broadcasts state changes automatically.</div>
-    <div class="fig" style="max-width:940px">
-      <svg viewBox="0 0 940 160" role="img" aria-label="Observer Pattern diagram: Subject notifying multiple observers">
-        <rect x="20" y="40" width="220" height="80" rx="10" fill="#121C30" stroke="#22D3EE" stroke-width="2"/>
-        <text x="130" y="74" text-anchor="middle" class="lbl b" font-size="16">Subject (State)</text>
-        <text x="130" y="98" text-anchor="middle" class="lbl s" fill="#94A3B8">observers: [obs1, obs2, obs3]</text>
-
-        <path d="M245 80 L355 40" stroke="#22D3EE" stroke-width="2" stroke-dasharray="4 4"/>
-        <path d="M245 80 L355 80" stroke="#22D3EE" stroke-width="2" stroke-dasharray="4 4"/>
-        <path d="M245 80 L355 120" stroke="#22D3EE" stroke-width="2" stroke-dasharray="4 4"/>
-
-        <rect x="360" y="20" width="180" height="40" rx="8" fill="#0E1525" stroke="#34D399"/>
-        <text x="450" y="45" text-anchor="middle" class="lbl b">Observer A (.update)</text>
-
-        <rect x="360" y="60" width="180" height="40" rx="8" fill="#0E1525" stroke="#34D399"/>
-        <text x="450" y="85" text-anchor="middle" class="lbl b">Observer B (.update)</text>
-
-        <rect x="360" y="100" width="180" height="40" rx="8" fill="#0E1525" stroke="#34D399"/>
-        <text x="450" y="125" text-anchor="middle" class="lbl b">Observer C (.update)</text>
-      </svg>
-    </div>
-    <div class="say"><b>Decoupling:</b> The Subject doesn't care what Observer A or B do with the data. It only guarantees that <code>update()</code> will be called.</div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 10 · 14 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>46</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 6 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>25</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Lesson 10 · the distinction they probe</div>
     <h2>Observer vs Publish-Subscribe: The crucial difference</h2>
     <div class="two">
@@ -1346,156 +1054,23 @@ node.remove()
         <p style="margin-top:8px">Can easily bridge asynchronous boundaries, WebSockets, or separate micro-frontends.</p>
       </div>
     </div>
-    <div class="key">Interviewers love to ask: "Is Pub-Sub just the Observer pattern?" — The correct answer is: "Pub-Sub adds an independent broker channel so publishers and subscribers have zero knowledge of each other."</div>
+    <div class="key">"Is Pub-Sub just Observer?" — Pub-Sub adds a broker, so publisher and subscriber never know each other.</div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 10 · 15 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>47</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 10 · live coding, utility 1 of 3</div>
-    <h2>Building EventEmitter from scratch</h2>
-    <div class="two tight">
-      <pre style="font-size:min(1.35vw,14.5px)"><code><span class="kw">class</span> <span class="ty">EventEmitter</span> {
-  #events = <span class="kw">new</span> <span class="ty">Map</span>();
-
-  <span class="fn">on</span>(event, listener) {
-    <span class="kw">if</span> (!<span class="kw">this</span>.#events.has(event))
-      <span class="kw">this</span>.#events.set(event, <span class="kw">new</span> <span class="ty">Set</span>());
-    <span class="kw">this</span>.#events.get(event).add(listener);
-    <span class="cmt">// senior touch: hand back the cleanup</span>
-    <span class="kw">return</span> () =&gt; <span class="kw">this</span>.off(event, listener);
-  }
-
-  <span class="fn">emit</span>(event, ...args) {
-    <span class="kw">const</span> listeners = <span class="kw">this</span>.#events.get(event);
-    <span class="kw">if</span> (listeners) listeners.forEach(fn =&gt; fn(...args));
-  }</code></pre>
-      <pre style="font-size:min(1.35vw,14.5px)"><code>  <span class="fn">off</span>(event, listener) {
-    <span class="kw">const</span> listeners = <span class="kw">this</span>.#events.get(event);
-    <span class="kw">if</span> (listeners) listeners.delete(listener);
-  }
-
-  <span class="fn">once</span>(event, listener) {
-    <span class="kw">const</span> unsub = <span class="kw">this</span>.on(event, (...args) =&gt; {
-      unsub();
-      listener(...args);
-    });
-    <span class="kw">return</span> unsub;
-  }
-}
-
-<span class="cmt">// Map + Set: no duplicate listeners, O(1) off()</span>
-<span class="cmt">// #events: private — no one can mutate the registry</span></code></pre>
-    </div>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/patterns/observer" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/patterns/observer</span><i>observer.ts — the EventEmitter you are about to write · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 10 · v10-deepclone -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>48</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 10 · live coding, utility 2 of 3</div>
-    <h2>deepClone — and the four things that break it</h2>
-    <div class="two tight">
-      <div>
-        <pre><code><span class="kw">function</span> <span class="fn">deepClone</span>(value, seen = <span class="kw">new</span> <span class="ty">WeakMap</span>()) {
-  <span class="kw">if</span> (value === <span class="kw">null</span> || <span class="kw">typeof</span> value !== <span class="st">'object'</span>)
-    <span class="kw">return</span> value                    <span class="cmt">// primitives, functions</span>
-  <span class="kw">if</span> (seen.has(value)) <span class="kw">return</span> seen.get(value)
-
-  <span class="kw">if</span> (value <span class="kw">instanceof</span> <span class="ty">Date</span>) <span class="kw">return new</span> <span class="ty">Date</span>(value)
-  <span class="kw">if</span> (value <span class="kw">instanceof</span> <span class="ty">Map</span>) { <span class="cmt">/* clone entries */</span> }
-
-  <span class="kw">const</span> out = Array.isArray(value) ? [] : {}
-  seen.set(value, out)                   <span class="cmt">// before recursing</span>
-  <span class="kw">for</span> (<span class="kw">const</span> k <span class="kw">of</span> Reflect.ownKeys(value))
-    out[k] = <span class="fn">deepClone</span>(value[k], seen)
-  <span class="kw">return</span> out
-}</code></pre>
-      </div>
-      <div>
-        <ul class="plist">
-          <li><b>Circular references</b><small>the <code>WeakMap</code>, set <b>before</b> the recursion — otherwise infinite</small></li>
-          <li><b>Non-plain objects</b><small><code>Date</code>, <code>Map</code>, <code>Set</code>, <code>RegExp</code> all become <code>{}</code> if you only spread</small></li>
-          <li><b>Symbols and non-enumerables</b><small><code>Reflect.ownKeys</code> catches what <code>Object.keys</code> drops</small></li>
-        </ul>
-        <div class="key w">In production: <code>structuredClone()</code> is built in, handles cycles, <code>Map</code>, <code>Set</code> and typed arrays — and throws on functions and DOM nodes. You write the manual one to prove you know what it does.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 10 · v10-promiseall -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>49</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Lesson 10 · live coding, utility 3 of 3</div>
-    <h2>promiseAll — a counter and an index</h2>
-    <div class="two tight">
-      <div>
-        <pre><code><span class="kw">function</span> <span class="fn">promiseAll</span>(items) {
-  <span class="kw">return new</span> <span class="ty">Promise</span>((resolve, reject) =&gt; {
-    <span class="kw">const</span> out = []
-    <span class="kw">let</span> pending = <span class="st">0</span>, started = <span class="st">0</span>
-
-    <span class="kw">for</span> (<span class="kw">const</span> item <span class="kw">of</span> items) {
-      <span class="kw">const</span> i = started++
-      pending++
-      <span class="ty">Promise</span>.resolve(item).then(v =&gt; {   <span class="cmt">// non-promises too</span>
-        out[i] = v                          <span class="cmt">// index, not push</span>
-        <span class="kw">if</span> (--pending === <span class="st">0</span>) resolve(out)
-      }, reject)                            <span class="cmt">// first failure wins</span>
-    }
-    <span class="kw">if</span> (started === <span class="st">0</span>) resolve([])       <span class="cmt">// empty input</span>
-  })
-}</code></pre>
-      </div>
-      <div>
-        <ul class="plist">
-          <li><b><code>out[i] = v</code>, never <code>push</code></b><small>results must keep input order, not completion order — this is the point of the question</small></li>
-          <li><b><code>Promise.resolve(item)</code></b><small>the real one accepts any iterable of values, not only promises</small></li>
-          <li><b>Reject on the first failure</b><small>and note out loud that the others keep running — rejecting is not cancelling</small></li>
-          <li><b>The empty array resolves</b><small>the case that fails half of all submitted answers</small></li>
-        </ul>
-        <div class="key g">From here <code>allSettled</code>, <code>race</code> and <code>any</code> are three-line variations. If they ask for one, change the settle condition and say which you changed.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 10 · 24 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>50</b> / 52</div><!--/catalyst-brand:chrome-->
-    <div class="kicker">Synthesis · the toolbelt is the module</div>
-    <h2>Five utilities, five mechanics from this module</h2>
-    <div class="two">
-      <div class="card a">
-        <h3 class="cy">debounce &amp; throttle</h3>
-        <p>Lesson 2's <b>closure</b> — a slot that survives between calls — plus lesson 3's <code>this</code>, forwarded with <code>apply</code> so a method keeps its receiver.</p>
-      </div>
-      <div class="card g">
-        <h3 class="g">EventEmitter</h3>
-        <p>A <code>Map</code> of listener arrays and an unsubscribe. Lesson 8 is why the unsubscribe is not optional.</p>
-      </div>
-      <div class="card p">
-        <h3 class="p">deepClone</h3>
-        <p>Lesson 4's <b>object model</b> — own keys, prototypes, exotic built-ins — plus a <code>WeakMap</code> for cycles, straight out of lesson 8.</p>
-      </div>
-      <div class="card b">
-        <h3 class="b">promiseAll</h3>
-        <p>Lesson 6's <b>state machine</b>: one settle, results by index, first rejection wins, and the empty case that everyone forgets.</p>
-      </div>
-    </div>
-    <div class="key">Nothing in lessons 9 and 10 is new: every utility is one of the first eight lessons, applied under time pressure.</div>
-    <a class="ex" href="https://github.com/eng-AhmedMahmoud/frontend-mastery-jobboard/tree/module-3/utils/solution" target="_blank" rel="noopener"><b>Exercise</b><span class="br">module-3/utils/solution</span><i>all five utilities, green, with NOTES.md on each trade-off · open on GitHub ↗</i></a>
-  </section>
-
-  <!-- MODULE 03 · VIDEO 10 · 25 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>51</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 6 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>26</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Say this in the interview</div>
     <h2>Four sentences that win the architecture question</h2>
     <div class="say" style="max-width:62ch; font-size:min(2.15vw,23px)">
-      <p style="margin-bottom:14px"><b class="cy">1 ·</b> I treat ES Modules as the standard module pattern — relying on static imports for tree-shaking and dynamic <code>import()</code> for route splitting.</p>
-      <p style="margin-bottom:14px"><b class="cy">2 ·</b> I avoid module singletons in modern React and SSR applications because they create testing friction and leak state across concurrent server requests.</p>
-      <p style="margin-bottom:14px"><b class="cy">3 ·</b> I use Proxies paired with Reflect for schema validation and reactive state tracking at system boundaries, while keeping them out of high-frequency loops.</p>
-      <p><b class="cy">4 ·</b> When creating thousands of data records, I prefer prototype delegation and classes to avoid closure heap duplication and unlock V8 hidden-class optimizations.</p>
+      <p style="margin-bottom:14px"><b class="cy">1 ·</b> Static imports for tree-shaking, dynamic <code>import()</code> for route splitting.</p>
+      <p style="margin-bottom:14px"><b class="cy">2 ·</b> No module singletons in SSR — they leak state across concurrent requests.</p>
+      <p style="margin-bottom:14px"><b class="cy">3 ·</b> Proxy with Reflect at boundaries, never in a hot loop.</p>
+      <p><b class="cy">4 ·</b> Thousands of records: prototype delegation, not closures per instance.</p>
     </div>
   </section>
 
-  <!-- MODULE 03 · VIDEO 10 · 26 -->
-  <section class="slide" data-chip="MODULE 03 · VIDEO 10"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 10</div><div class="cx-page"><b>52</b> / 52</div><!--/catalyst-brand:chrome-->
+  <!-- MODULE 03 · VIDEO 6 -->
+  <section class="slide" data-chip="MODULE 03 · VIDEO 6"><!--catalyst-brand:chrome--><i class="cx-logo" role="img" aria-label="Catalyst"></i><div class="cx-chip">MODULE 03 · VIDEO 6</div><div class="cx-page"><b>27</b> / 27</div><!--/catalyst-brand:chrome-->
     <div class="kicker">Module 03 · done</div>
     <h2>What you can now explain &amp; defend</h2>
     <div class="two">
@@ -1574,5 +1149,360 @@ node.remove()
   document.getElementById('stage').addEventListener('click',e=>{ e.clientX>innerWidth/2?next():prev(); });
   render();
 </script>
+<script>
+/* The call-stack slide steps itself. Clicks inside the widget are swallowed so the
+   deck does not advance underneath the controls. */
+(function(){
+  var root = document.getElementById('stk');
+  if (!root) return;
+  var say = document.getElementById('stkSay');
+  var frames = {};
+  root.querySelectorAll('.stk-frame').forEach(function(f){ frames[f.dataset.f] = f; });
+  var lines = {};
+  root.querySelectorAll('[data-l]').forEach(function(l){ lines[l.dataset.l] = l; });
+
+  var STEPS = [
+    { line:'1', stack:['global'], live:'global', text:'Global context: app lives here.' },
+    { line:'7', stack:['global','outer'], live:'outer', text:'outer() called — a new record, pointing at global.' },
+    { line:'5', stack:['global','outer','inner'], live:'inner', text:'inner() called — its record points at outer.' },
+    { line:'6', stack:['global','outer','inner'], live:'inner', walk:['inner','outer','global'],
+      text:'page here, user one link up, app two — the chain, walked.' },
+    { line:'6', stack:['global','outer'], live:'outer', text:'inner returns. Its frame pops.' },
+    { line:'2', stack:['global'], live:'global', text:'outer returns. Only global is left.' }
+  ];
+  var at = -1, timer = null;
+
+  function render(i){
+    var s = STEPS[i];
+    Object.keys(frames).forEach(function(k){
+      var f = frames[k];
+      f.classList.toggle('in', s.stack.indexOf(k) > -1);
+      f.classList.toggle('live', k === s.live && !s.walk);
+      f.classList.remove('walk');
+    });
+    Object.keys(lines).forEach(function(k){ lines[k].classList.toggle('on', k === s.line); });
+    say.textContent = s.text;
+    if (s.walk) s.walk.forEach(function(k, n){
+      setTimeout(function(){ if (at === i) frames[k].classList.add('walk'); }, n * 260);
+    });
+  }
+  function go(i){
+    clearTimeout(timer);
+    at = Math.max(0, Math.min(STEPS.length - 1, i));
+    render(at);
+  }
+  function play(){
+    go(0);
+    (function tick(){
+      timer = setTimeout(function(){
+        if (at < STEPS.length - 1) { go(at + 1); tick(); }
+      }, at === 3 ? 1900 : 1200);
+    })();
+  }
+  root.querySelectorAll('.stk-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      var a = b.dataset.act;
+      if (a === 'play') play(); else { clearTimeout(timer); go(at + (a === 'next' ? 1 : -1)); }
+    });
+  });
+  ['click','pointerdown','keydown'].forEach(function(t){
+    root.addEventListener(t, function(e){ e.stopPropagation(); });
+  });
+
+  var slide = root.closest('.slide');
+  new MutationObserver(function(){
+    if (slide.classList.contains('on')) play(); else clearTimeout(timer);
+  }).observe(slide, { attributes:true, attributeFilter:['class'] });
+  go(0);
+})();
+</script>
+
+<script>
+/* Debounce and throttle, simulated on a shared event stream. The marks are computed
+   from the definitions, not positioned by hand, so the picture cannot drift from the
+   behaviour the exercise tests. */
+(function(){
+  var TOTAL = 5200, WAIT = 620;
+  var EVENTS = [260,380,500,620, 1500,1620,1740,1860,1980, 3100,3220,3340,3460];
+
+  function debounceFires(){
+    var out = [], i;
+    for (i = 0; i < EVENTS.length; i++){
+      var next = EVENTS[i + 1];
+      if (next === undefined || next - EVENTS[i] > WAIT) out.push(EVENTS[i] + WAIT);
+    }
+    return out;
+  }
+  function throttleFires(){
+    var out = [], last = -Infinity;
+    EVENTS.forEach(function(t){ if (t - last >= WAIT){ out.push(t); last = t; } });
+    return out;
+  }
+
+  document.querySelectorAll('.tl').forEach(function(tl){
+    var mode = tl.dataset.mode;
+    var ev = tl.querySelector('[data-track=ev]'), out = tl.querySelector('[data-track=out]');
+    var colour = mode === 'debounce' ? 'cy' : 'g';
+    var fires = mode === 'debounce' ? debounceFires() : throttleFires();
+    var timers = [], heads = [];
+
+    function dot(track, t, cls){
+      var d = document.createElement('i');
+      d.className = 'tl-dot' + (cls ? ' fire ' + cls : '');
+      d.style.left = (t / TOTAL * 100) + '%';
+      track.appendChild(d);
+    }
+    function head(track){
+      var h = document.createElement('i');
+      h.className = 'tl-head';
+      h.style.left = '0%';
+      track.appendChild(h);
+      h.animate([{ left:'0%' }, { left:'100%' }], { duration:TOTAL, easing:'linear' });
+      heads.push(h);
+      return h;
+    }
+    function stop(){
+      timers.forEach(clearTimeout); timers = [];
+      heads.forEach(function(h){ h.remove(); }); heads = [];
+      ev.querySelectorAll('.tl-dot').forEach(function(d){ d.remove(); });
+      out.querySelectorAll('.tl-dot').forEach(function(d){ d.remove(); });
+    }
+    function run(){
+      stop();
+      head(ev); head(out);
+      EVENTS.forEach(function(t){ timers.push(setTimeout(function(){ dot(ev, t); }, t)); });
+      fires.forEach(function(t){ timers.push(setTimeout(function(){ dot(out, t, colour); }, t)); });
+      timers.push(setTimeout(run, TOTAL + 900));
+    }
+
+    tl.querySelector('.tl-btn').addEventListener('click', run);
+    ['click','pointerdown'].forEach(function(t){
+      tl.addEventListener(t, function(e){ e.stopPropagation(); });
+    });
+
+    var slide = tl.closest('.slide');
+    new MutationObserver(function(){
+      if (slide.classList.contains('on')) run(); else stop();
+    }).observe(slide, { attributes:true, attributeFilter:['class'] });
+    if (slide.classList.contains('on')) run();
+  });
+})();
+</script>
+
+<script>
+/* `this`, evaluated. Every button below performs the call it names and reports what the
+   engine bound — module code, so the default binding really is undefined. */
+(function(){
+  'use strict';                    // the callee decides: strict `who()` binds undefined
+  var root = document.getElementById('ths');
+  if (!root) return;
+  var val = document.getElementById('thsVal'), say = document.getElementById('thsSay');
+
+  function who(){ return this; }
+  var obj = { tag:'obj', who: who };
+  obj.arrow = (function(){ var self = obj; return function(){ return (function(){ return self; })(); }; })();
+  var other = { tag:'other' };
+  function Who(){ this.tag = 'the new object'; }
+
+  var CASES = {
+    plain:  { run:function(){ return who(); },
+              text:'Nothing left of the dot, so nothing is bound. In a module or strict mode that is <code>undefined</code> — in a sloppy script it would be <code>window</code>.' },
+    method: { run:function(){ return obj.who(); },
+              text:'Implicit binding: whatever sits left of the dot at the moment of the call.' },
+    torn:   { run:function(){ var f = obj.who; return f(); },
+              text:'The same function, torn off its object. The dot was where the binding lived — passing the method as a callback loses it. This is the bug on the next slide.' },
+    call:   { run:function(){ return who.call(other); },
+              text:'Explicit binding beats implicit. <code>call</code>, <code>apply</code> and <code>bind</code> all do this.' },
+    'new':  { run:function(){ return new Who(); },
+              text:'Construction wins over everything: <code>this</code> is the fresh object, and it is what the constructor returns.' },
+    arrow:  { run:function(){ return obj.arrow(); },
+              text:'An arrow has no <code>this</code> of its own — it reads the one where it was written, which is why the call site cannot change it.' }
+  };
+  function show(k){
+    var r = CASES[k].run();
+    val.textContent = r === undefined ? 'undefined'
+      : (r && r.tag ? '{ tag: "' + r.tag + '" }' : String(r));
+    say.innerHTML = CASES[k].text;
+  }
+  root.querySelectorAll('.ths-b').forEach(function(b){
+    b.addEventListener('click', function(){
+      root.querySelectorAll('.ths-b').forEach(function(x){ x.classList.toggle('on', x === b); });
+      show(b.dataset.k);
+    });
+  });
+  ['click','pointerdown'].forEach(function(t){
+    root.addEventListener(t, function(e){ e.stopPropagation(); });
+  });
+  show('plain');
+})();
+
+/* The combinators, run against three real promises: a fast rejection, a slow fulfil and
+   one in between. The rows keep animating after `all` has rejected — that is the point. */
+(function(){
+  var root = document.getElementById('cmb');
+  if (!root) return;
+  var out = document.getElementById('cmbOut'), rows = [].slice.call(root.querySelectorAll('.cmb-row'));
+  var kind = 'all', timers = [];
+  var SPEC = [
+    { ms:120, ok:false, name:'fast' },
+    { ms:900, ok:true,  name:'slow' },
+    { ms:500, ok:true,  name:'middle' }
+  ];
+
+  function reset(){
+    timers.forEach(clearTimeout); timers = [];
+    rows.forEach(function(r){ r.className = 'cmb-row'; r.style.removeProperty('--ms'); r.querySelector('i').style.width = ''; });
+  }
+  function run(){
+    reset();
+    var promises = SPEC.map(function(s, i){
+      var row = rows[i];
+      row.style.setProperty('--ms', s.ms + 'ms');
+      requestAnimationFrame(function(){ row.classList.add('live'); });
+      return new Promise(function(res, rej){
+        timers.push(setTimeout(function(){
+          row.classList.add(s.ok ? 'ok' : 'no');
+          s.ok ? res(s.name) : rej(new Error(s.name));
+        }, s.ms));
+      });
+    });
+    promises.forEach(function(p){ p.catch(function(){}); });   // no unhandled rejections
+
+    out.textContent = 'running…';
+    var started = performance.now();
+    var done = function(text){
+      out.innerHTML = text + ' &nbsp;·&nbsp; settled at ' + Math.round(performance.now() - started) + 'ms';
+    };
+    if (kind === 'all')
+      Promise.all(promises).then(function(v){ done('fulfilled <b class="ok">[' + v + ']</b>'); },
+        function(e){ done('rejected <b class="no">' + e.message + '</b> — the other two keep running'); });
+    else if (kind === 'allSettled')
+      Promise.allSettled(promises).then(function(v){
+        done('every promise reported: <b class="ok">' + v.map(function(r){ return r.status[0]; }).join(' ') + '</b>'); });
+    else if (kind === 'race')
+      Promise.race(promises).then(function(v){ done('first to settle: <b class="ok">' + v + '</b>'); },
+        function(e){ done('first to settle was a rejection: <b class="no">' + e.message + '</b>'); });
+    else
+      Promise.any(promises).then(function(v){ done('first to <b>fulfil</b>: <b class="ok">' + v + '</b> — the rejection is ignored'); },
+        function(){ done('<b class="no">all rejected</b>'); });
+  }
+
+  root.querySelectorAll('.cmb-b').forEach(function(b){
+    b.addEventListener('click', function(){
+      kind = b.dataset.k;
+      root.querySelectorAll('.cmb-b').forEach(function(x){ x.classList.toggle('on', x === b); });
+      run();
+    });
+  });
+  root.querySelector('.cmb-run').addEventListener('click', run);
+  ['click','pointerdown'].forEach(function(t){
+    root.addEventListener(t, function(e){ e.stopPropagation(); });
+  });
+
+  var slide = root.closest('.slide');
+  new MutationObserver(function(){ if (slide.classList.contains('on')) run(); else reset(); })
+    .observe(slide, { attributes:true, attributeFilter:['class'] });
+})();
+</script>
+
+<!--catalyst-brand:copy-->
+<script>
+/* A copy button on every code block. Injected here rather than written into each deck
+   so a new snippet gets one for free. The text is read once, at build-of-the-DOM time,
+   before the button joins the block — otherwise the word "copy" copies with it.
+
+   Shell blocks mark their prompts with `$`. When a block has any, only those lines are
+   copied, prompt stripped: a student pasting a terminal transcript wants the commands,
+   not the output that came back. Blocks with no prompt copy whole. */
+(function(){
+  var PROMPT = /^\s*\$\s?/;
+  document.querySelectorAll('pre').forEach(function(pre){
+    if (pre.parentNode.classList.contains('codewrap')) return;
+    var lines = pre.innerText.replace(/\u00a0/g, ' ').split('\n');
+    var cmds = lines.filter(function(l){ return PROMPT.test(l); })
+                    .map(function(l){ return l.replace(PROMPT, '').replace(/\s+$/, ''); });
+    var text = (cmds.length ? cmds : lines).join('\n').trim();
+    if (!text) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'codewrap';
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+
+    var b = document.createElement('button');
+    b.className = 'copy';
+    b.type = 'button';
+    b.textContent = 'copy';
+    b.setAttribute('aria-label', 'Copy this code');
+    b.addEventListener('click', function(e){
+      e.stopPropagation();            // the stage advances on click; the button must not
+      var done = function(){
+        b.textContent = 'copied';
+        b.classList.add('ok');
+        clearTimeout(b._t);
+        b._t = setTimeout(function(){ b.textContent = 'copy'; b.classList.remove('ok'); }, 1400);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, fallback);
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (err) {}
+        ta.remove();
+      }
+    });
+    wrap.appendChild(b);
+  });
+})();
+</script>
+<!--/catalyst-brand:copy-->
+<!--catalyst-brand:arrows-->
+<script>
+/* Connectors in the diagrams were drawn as bare line segments, which reads as a rule
+   rather than a direction. Every stroked, unfilled path in an inline SVG gets an
+   arrowhead here, once, rather than each diagram carrying its own <defs>. The head
+   takes the colour of the line it ends (`context-stroke`), so a green path keeps its
+   green point; browsers without that keyword fall back to the grey the lines use. */
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  document.querySelectorAll('svg').forEach(function(svg, n){
+    var paths = [].filter.call(svg.querySelectorAll('path'), function(p){
+      var fill = p.getAttribute('fill');
+      return (!fill || fill === 'none') && p.getAttribute('stroke')
+        && !p.hasAttribute('marker-end') && !p.classList.contains('nohead');
+    });
+    if (!paths.length) return;
+
+    var id = 'cxArrow' + n;
+    var marker = document.createElementNS(NS, 'marker');
+    marker.setAttribute('id', id);
+    marker.setAttribute('viewBox', '0 0 10 10');
+    marker.setAttribute('refX', '8.5');
+    marker.setAttribute('refY', '5');
+    marker.setAttribute('markerWidth', '5.5');
+    marker.setAttribute('markerHeight', '5.5');
+    marker.setAttribute('markerUnits', 'strokeWidth');
+    marker.setAttribute('orient', 'auto-start-reverse');
+    var head = document.createElementNS(NS, 'path');
+    head.setAttribute('d', 'M0.5 1 L9 5 L0.5 9 Z');
+    head.setAttribute('fill', 'context-stroke');
+    head.setAttribute('stroke', 'none');
+    marker.appendChild(head);
+    var defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS(NS, 'defs'), svg.firstChild);
+    defs.appendChild(marker);
+
+    paths.forEach(function(p){
+      p.setAttribute('marker-end', 'url(#' + id + ')');
+      p.setAttribute('stroke-linecap', 'round');
+    });
+  });
+})();
+</script>
+<!--/catalyst-brand:arrows-->
 </body>
 </html>
